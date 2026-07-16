@@ -138,6 +138,14 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 .checkin-form select,.checkin-form input{padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;background:#fff}
 .checkin-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
 .checkin-list{margin:10px 0}
+.checkin-item-v2{background:#fff;border-radius:8px;padding:10px 14px;margin:6px 0;border:1px solid #e0e0e0;font-size:12px}
+.ci2-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.ci2-subj{font-weight:700;color:#283593;font-size:13px}
+.ci2-action{color:#546e7a;font-size:12px}
+.ci2-time{color:#bbb;font-size:10px;margin-left:auto}
+.ci2-quality{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;white-space:nowrap}
+.ci2-takeaway{color:#37474f;line-height:1.6;margin:4px 0;padding:6px 8px;background:#fafafa;border-radius:4px;font-size:12px}
+.ci2-analysis{font-size:11px;line-height:1.5;margin-top:2px;padding:4px 8px;background:#f5f5f5;border-radius:4px}
 .checkin-item{background:#fff;border-radius:6px;padding:8px 12px;margin:4px 0;border:1px solid #e0e0e0;font-size:12px;display:flex;justify-content:space-between;align-items:center}
 .checkin-item .ci-subj{font-weight:600;color:#283593}
 .checkin-item .ci-action{color:#546e7a}
@@ -206,7 +214,8 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
   .batch-table input{width:60px}
   .checkin-row{gap:4px}
   .checkin-row select{min-width:60px;font-size:12px}
-  .checkin-row input{width:70px;font-size:12px}
+  .ci2-takeaway{font-size:11px}
+  .ci2-analysis{font-size:10px}
   .goal-row select{min-width:60px;font-size:12px}
   .goal-row input{width:80px;font-size:12px}
 }
@@ -395,9 +404,13 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
   <div class="checkin-row">
     <select id="ciSubject" onchange="updateCheckinActions()"><option value="">选择科目</option><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option></select>
     <select id="ciAction"><option value="">— 先选科目 —</option></select>
-    <input type="number" id="ciDuration" placeholder="时长(分钟)" style="width:90px;">
-    <select id="ciEval"><option value="good">👍 有收获</option><option value="ok">😐 一般</option><option value="bad">👎 无收获</option></select>
-    <button class="btn btn-primary btn-sm" onclick="addCheckin()">打卡</button>
+  </div>
+  <div style="margin-top:6px;">
+    <input type="text" id="ciTakeaway" placeholder="打卡收获：写下今天学到了什么、发现了什么问题（100字以内）" maxlength="100" style="width:100%;padding:8px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+    <div style="font-size:10px;color:#bbb;text-align:right;margin-top:2px;"><span id="charCount">0</span>/100</div>
+  </div>
+  <div style="margin-top:6px;">
+    <button class="btn btn-primary btn-sm" onclick="addCheckin()">✅ 打卡</button>
   </div>
   <div id="checkinMatHint" style="font-size:11px;color:#78909c;margin-top:4px;"></div>
 </div>
@@ -926,6 +939,53 @@ function renderModule3() {
 }
 
 /* === Training Checkin (NEW) === */
+function analyzeCheckinQuality(subj, action, takeaway) {
+  if (!takeaway || takeaway.trim().length < 5) {
+    return {level:'weak',label:'记录不足',color:'#e74c3c',analysis:'打卡收获过于简略，无法判断理解程度。建议具体写明学到了什么知识点或方法。'};
+  }
+  var text=takeaway.trim();var len=text.length;var score=0;var points=[];
+  /* 1. Length */
+  if(len>=30){score+=2;points.push('记录详细具体');}
+  else if(len>=15){score+=1;}
+  /* 2. Subject-specific keywords */
+  var kwMap={
+    '语文':['中心','主题','结构','修辞','表达','描写','论证','论据','论点','段落','主旨','情感','手法','阅读','作文','古诗文','病句','标点'],
+    '数学':['坐标','方程','不等式','函数','证明','辅助线','分类','讨论','图形','角度','平行','垂直','变量','代入','消元','绝对值','数轴'],
+    '英语':['时态','搭配','语法','从句','词汇','句型','语态','主谓','冠词','阅读','完形','写作'],
+    '生物':['细胞','光合','呼吸','系统','器官','组织','循环','消化','神经','蒸腾','根茎','叶片'],
+    '道法':['观点','依据','结论','材料','课本','原理','法律','道德','权利','义务','国情'],
+    '历史':['史实','时间','事件','原因','影响','意义','朝代','制度','变革','人物'],
+    '地理':['经纬','气候','地形','地图','读图','区域','洋流','降水','等高线','方向','比例尺']
+  };
+  var keywords=kwMap[subj]||[];
+  var matched=keywords.filter(function(k){return text.indexOf(k)>=0;});
+  if(matched.length>=2){score+=3;points.push('涉及多个学科知识点('+matched.slice(0,3).join('、')+')');}
+  else if(matched.length>=1){score+=2;points.push('涉及学科知识点('+matched[0]+')');}
+  /* 3. Training type alignment */
+  if(action.indexOf('解码')>=0&&(text.indexOf('题目')>=0||text.indexOf('审题')>=0||text.indexOf('关键词')>=0||text.indexOf('条件')>=0)){score+=2;points.push('体现了题目解码意识');}
+  if(action.indexOf('激活')>=0&&(text.indexOf('条件反射')>=0||text.indexOf('关联')>=0||text.indexOf('联想')>=0||text.indexOf('联系')>=0)){score+=2;points.push('体现了知识激活过程');}
+  if(action.indexOf('表达')>=0&&(text.indexOf('模板')>=0||text.indexOf('格式')>=0||text.indexOf('术语')>=0||text.indexOf('结构')>=0)){score+=2;points.push('关注了答题表达规范');}
+  if(action.indexOf('知识梳理')>=0&&(text.indexOf('梳理')>=0||text.indexOf('框架')>=0||text.indexOf('体系')>=0||text.indexOf('整理')>=0)){score+=2;points.push('进行了知识结构化');}
+  if(action.indexOf('压轴')>=0&&(text.indexOf('思路')>=0||text.indexOf('方法')>=0||text.indexOf('分类')>=0||text.indexOf('突破口')>=0)){score+=2;points.push('总结了压轴题思路');}
+  if(action.indexOf('读图')>=0&&(text.indexOf('读图')>=0||text.indexOf('等高线')>=0||text.indexOf('方向')>=0||text.indexOf('图例')>=0)){score+=2;points.push('强化了读图技能');}
+  if(action.indexOf('固定搭配')>=0&&(text.indexOf('搭配')>=0||text.indexOf('辨析')>=0||text.indexOf('区别')>=0)){score+=2;points.push('关注了搭配辨析');}
+  /* 4. Metacognition */
+  var metaWords=['发现','意识到','之前','原来','容易错','误区','盲区','之前不会','搞懂了','明白了','弄清了','区分','混淆','漏掉','卡在'];
+  var metaMatch=metaWords.filter(function(w){return text.indexOf(w)>=0;});
+  if(metaMatch.length>=1){score+=2;points.push('展现了反思意识('+metaMatch[0]+')');}
+  /* 5. Generic penalty */
+  var generic=['学会了','懂了','会了','看完了','做完了','写完了','练习了','复习了','背了'];
+  var genMatch=generic.filter(function(p){return text.indexOf(p)>=0;});
+  if(genMatch.length>0&&matched.length===0){score-=1;points.push('注意：表述偏笼统，建议补充具体内容');}
+  /* Determine level */
+  var level,label,color;
+  if(score>=6){level='excellent';label='高质量';color='#2e7d32';}
+  else if(score>=3){level='good';label='有效';color='#1565c0';}
+  else if(score>=1){level='fair';label='一般';color='#f39c12';}
+  else{level='weak';label='需改进';color='#e74c3c';}
+  var analysis=points.length>0?points.join('；'):'记录内容较少，建议写明具体学到了什么知识点或解题方法';
+  return {level:level,label:label,color:color,analysis:analysis};
+}
 /* Subject-action mapping: each subject only shows its applicable training types */
 var SUBJ_ACTIONS = {
   '语文': ['解码训练(题目解码三步法)','解码训练(阅读深读法)','表达训练(答题模板)','表达训练(作文深写法)','知识梳理(古诗文)','知识梳理(病句标点)','测试题验收'],
@@ -963,16 +1023,18 @@ function updateCheckinActions() {
 function addCheckin() {
   var subj=document.getElementById('ciSubject').value;
   var action=document.getElementById('ciAction').value;
-  var duration=document.getElementById('ciDuration').value;
-  var eval=document.getElementById('ciEval').value;
+  var takeaway=document.getElementById('ciTakeaway').value.trim();
   if(!subj){toast('请选择科目','error');return;}
   if(!action){toast('请选择训练内容','error');return;}
-  checkins.push({subject:subj,action:action,duration:duration?parseInt(duration):null,eval:eval,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
-  saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！');
+  if(!takeaway){toast('请填写打卡收获','error');return;}
+  var qa=analyzeCheckinQuality(subj,action,takeaway);
+  checkins.push({subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityAnalysis:qa.analysis,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
+  saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！质量：'+qa.label);
   document.getElementById('ciSubject').value='';
-  document.getElementById('ciAction').value='';
-  document.getElementById('ciDuration').value='';
-  document.getElementById('ciEval').value='good';
+  document.getElementById('ciAction').innerHTML='<option value="">— 先选科目 —</option>';
+  document.getElementById('ciTakeaway').value='';
+  document.getElementById('charCount').textContent='0';
+  document.getElementById('checkinMatHint').innerHTML='';
 }
 function renderCheckinModule() {
   renderStreak();
@@ -1019,36 +1081,39 @@ function renderWeekSummary() {
 }
 function renderCheckinList() {
   var el=document.getElementById('checkinList');
-  /* Show today's + recent checkins */
   var today=new Date().toLocaleDateString();
   var todayList=checkins.filter(function(c){return c.date===today;});
   var recentList=checkins.filter(function(c){return c.date!==today;}).slice(-10);
   var h='';
   if(todayList.length>0){
     h+='<div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:4px;">今日打卡</div>';
-    todayList.forEach(function(c,i){
-      var evalClass=c.eval==='good'?'ci-good':c.eval==='ok'?'ci-ok':'ci-bad';
-      var evalText=c.eval==='good'?'👍 有收获':c.eval==='ok'?'😐 一般':'👎 无收获';
-      h+='<div class="checkin-item"><span class="ci-subj">'+c.subject+'</span><span class="ci-action">'+c.action+'</span><span class="ci-time">'+(c.duration?c.duration+'min':'')+' · '+c.time+'</span><span class="ci-eval '+evalClass+'">'+evalText+'</span><span style="cursor:pointer;color:#e74c3c;font-size:11px;" onclick="delCheckin('+i+')">✕</span></div>';
+    todayList.forEach(function(c){
+      var qColor=c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c';
+      h+='<div class="checkin-item-v2">';
+      h+='<div class="ci2-header"><span class="ci2-subj">'+c.subject+'</span><span class="ci2-action">'+c.action+'</span><span class="ci2-time">'+c.time+'</span><span class="ci2-quality" style="background:'+qColor+'1a;color:'+qColor+';">'+(c.qualityLabel||'未分析')+'</span><span style="cursor:pointer;color:#e74c3c;font-size:11px;" onclick="delCheckinById(\''+c.date+'_'+c.time+'\')">✕</span></div>';
+      h+='<div class="ci2-takeaway">📝 '+escapeHtml(c.takeaway||'')+'</div>';
+      if(c.qualityAnalysis){h+='<div class="ci2-analysis" style="color:'+qColor+';">📊 '+escapeHtml(c.qualityAnalysis)+'</div>';}
+      h+='</div>';
     });
   }
   if(recentList.length>0){
-    h+='<div style="font-size:13px;font-weight:600;color:#546e7a;margin:8px 0 4px;">历史打卡（最近10条）</div>';
+    h+='<div style="font-size:13px;font-weight:600;color:#546e7a;margin:10px 0 4px;">历史打卡（最近10条）</div>';
     recentList.forEach(function(c){
-      var evalClass=c.eval==='good'?'ci-good':c.eval==='ok'?'ci-ok':'ci-bad';
-      var evalText=c.eval==='good'?'👍':c.eval==='ok'?'😐':'👎';
-      h+='<div class="checkin-item" style="opacity:0.7;"><span class="ci-subj">'+c.subject+'</span><span class="ci-action">'+c.action+'</span><span class="ci-time">'+c.date+'</span><span class="ci-eval '+evalClass+'">'+evalText+'</span></div>';
+      var qColor=c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c';
+      h+='<div class="checkin-item-v2" style="opacity:0.85;">';
+      h+='<div class="ci2-header"><span class="ci2-subj">'+c.subject+'</span><span class="ci2-action">'+c.action+'</span><span class="ci2-time">'+c.date+'</span><span class="ci2-quality" style="background:'+qColor+'1a;color:'+qColor+';">'+(c.qualityLabel||'未分析')+'</span></div>';
+      h+='<div class="ci2-takeaway">📝 '+escapeHtml(c.takeaway||'')+'</div>';
+      if(c.qualityAnalysis){h+='<div class="ci2-analysis" style="color:'+qColor+';">📊 '+escapeHtml(c.qualityAnalysis)+'</div>';}
+      h+='</div>';
     });
   }
-  if(checkins.length===0)h='<p style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无打卡记录</p>';
+  if(checkins.length===0)h='<p style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无打卡记录，完成训练后打卡记录收获吧</p>';
   el.innerHTML=h;
 }
-function delCheckin(todayIdx) {
-  var today=new Date().toLocaleDateString();
-  var todayList=checkins.filter(function(c){return c.date===today;});
-  var target=todayList[todayIdx];
-  var idx=checkins.indexOf(target);
-  if(idx>=0){checkins.splice(idx,1);saveCheckins();renderCheckinModule();toast('已删除打卡');}
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function delCheckinById(id){
+  var parts=id.split('_');var d=parts[0];var t=parts.slice(1).join('_');
+  for(var i=0;i<checkins.length;i++){if(checkins[i].date===d&&checkins[i].time===t){checkins.splice(i,1);saveCheckins();renderCheckinModule();toast('已删除打卡');return;}}
 }
 
 /* === Exam Analysis (AI bridge) === */
@@ -1238,5 +1303,7 @@ document.getElementById('headerSub').innerHTML = '玉溪市红塔中学 · <span
 loadData(); loadGoals(); loadCheckins(); loadExamAnalysis();
 initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3(); renderExamList();
 renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements();
+/* char count listener */
+document.getElementById('ciTakeaway').addEventListener('input',function(){document.getElementById('charCount').textContent=this.value.length;});
 
 </script></body></html>
