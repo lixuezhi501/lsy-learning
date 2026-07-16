@@ -941,12 +941,14 @@ function renderModule3() {
 /* === Training Checkin (NEW) === */
 function analyzeCheckinQuality(subj, action, takeaway) {
   if (!takeaway || takeaway.trim().length < 5) {
-    return {level:'weak',label:'记录不足',color:'#e74c3c',analysis:'打卡收获过于简略，无法判断理解程度。建议具体写明学到了什么知识点或方法。'};
+    return {level:'weak',label:'记录不足',color:'#e74c3c',scorePoints:'记录过于简略',comment:'⚠️ 打卡收获太短了，只写了几个字没法判断你到底学到了什么。下次试试这样写："我今天练了XX题，发现XX知识点容易混淆，之前一直以为XX，原来XX才是对的"。',advice:'建议每次打卡写15字以上，最好提到具体知识点或解题方法'};
   }
   var text=takeaway.trim();var len=text.length;var score=0;var points=[];
+  var praise=[];var issues=[];var advice=[];
   /* 1. Length */
-  if(len>=30){score+=2;points.push('记录详细具体');}
-  else if(len>=15){score+=1;}
+  if(len>=30){score+=2;points.push('记录详细具体');praise.push('✅ 记录很详细，写了不少内容，说明认真回顾了训练过程');}
+  else if(len>=15){score+=1;praise.push('✅ 有一定记录长度，但还可以更充实');if(len<25)issues.push('记录长度还不够，15-30字只能算"有记录"，没法看出深层次理解');}
+  else{issues.push('记录太短（不到15字），既看不出理解深度也无法判断学习效果');advice.push('下次至少写15字以上，最好30字以上');}
   /* 2. Subject-specific keywords */
   var kwMap={
     '语文':['中心','主题','结构','修辞','表达','描写','论证','论据','论点','段落','主旨','情感','手法','阅读','作文','古诗文','病句','标点'],
@@ -959,32 +961,43 @@ function analyzeCheckinQuality(subj, action, takeaway) {
   };
   var keywords=kwMap[subj]||[];
   var matched=keywords.filter(function(k){return text.indexOf(k)>=0;});
-  if(matched.length>=2){score+=3;points.push('涉及多个学科知识点('+matched.slice(0,3).join('、')+')');}
-  else if(matched.length>=1){score+=2;points.push('涉及学科知识点('+matched[0]+')');}
+  if(matched.length>=2){score+=3;points.push('涉及多个学科知识点('+matched.slice(0,3).join('、')+')');praise.push('✅ 提到了'+matched.slice(0,3).join('、')+'等多个'+subj+'知识点，说明这节课确实触及了核心内容');}
+  else if(matched.length>=1){score+=2;points.push('涉及学科知识点('+matched[0]+')');praise.push('✅ 提到了'+subj+'知识点"'+matched[0]+'"，说明有具体收获');if(matched.length===1&&len>=20)issues.push('只提到了一个知识点，如果能多写1-2个相关概念会更好');}
+  else{issues.push('没有提到任何'+subj+'的具体知识点');advice.push('下次写收获时，至少提到1个你今天练到的具体知识点名称——比如"不等式变号""古诗文结构""读图比例尺"等');}
   /* 3. Training type alignment */
-  if(action.indexOf('解码')>=0&&(text.indexOf('题目')>=0||text.indexOf('审题')>=0||text.indexOf('关键词')>=0||text.indexOf('条件')>=0)){score+=2;points.push('体现了题目解码意识');}
-  if(action.indexOf('激活')>=0&&(text.indexOf('条件反射')>=0||text.indexOf('关联')>=0||text.indexOf('联想')>=0||text.indexOf('联系')>=0)){score+=2;points.push('体现了知识激活过程');}
-  if(action.indexOf('表达')>=0&&(text.indexOf('模板')>=0||text.indexOf('格式')>=0||text.indexOf('术语')>=0||text.indexOf('结构')>=0)){score+=2;points.push('关注了答题表达规范');}
-  if(action.indexOf('知识梳理')>=0&&(text.indexOf('梳理')>=0||text.indexOf('框架')>=0||text.indexOf('体系')>=0||text.indexOf('整理')>=0)){score+=2;points.push('进行了知识结构化');}
-  if(action.indexOf('压轴')>=0&&(text.indexOf('思路')>=0||text.indexOf('方法')>=0||text.indexOf('分类')>=0||text.indexOf('突破口')>=0)){score+=2;points.push('总结了压轴题思路');}
-  if(action.indexOf('读图')>=0&&(text.indexOf('读图')>=0||text.indexOf('等高线')>=0||text.indexOf('方向')>=0||text.indexOf('图例')>=0)){score+=2;points.push('强化了读图技能');}
-  if(action.indexOf('固定搭配')>=0&&(text.indexOf('搭配')>=0||text.indexOf('辨析')>=0||text.indexOf('区别')>=0)){score+=2;points.push('关注了搭配辨析');}
+  var aligned=false;
+  if(action.indexOf('解码')>=0&&(text.indexOf('题目')>=0||text.indexOf('审题')>=0||text.indexOf('关键词')>=0||text.indexOf('条件')>=0)){score+=2;points.push('体现了题目解码意识');praise.push('✅ 记录中体现了"题目解码"的意识，说明你在认真拆解题目结构');aligned=true;}
+  if(action.indexOf('激活')>=0&&(text.indexOf('条件反射')>=0||text.indexOf('关联')>=0||text.indexOf('联想')>=0||text.indexOf('联系')>=0)){score+=2;points.push('体现了知识激活过程');praise.push('✅ 体现了知识"激活"的过程，说明你在练习知识间的关联联想');aligned=true;}
+  if(action.indexOf('表达')>=0&&(text.indexOf('模板')>=0||text.indexOf('格式')>=0||text.indexOf('术语')>=0||text.indexOf('结构')>=0)){score+=2;points.push('关注了答题表达规范');praise.push('✅ 关注到了答题表达规范，这是"+subj+"答题提分的关键');aligned=true;}
+  if(action.indexOf('知识梳理')>=0&&(text.indexOf('梳理')>=0||text.indexOf('框架')>=0||text.indexOf('体系')>=0||text.indexOf('整理')>=0)){score+=2;points.push('进行了知识结构化');praise.push('✅ 做了知识梳理/结构化，把零散知识串起来了');aligned=true;}
+  if(action.indexOf('压轴')>=0&&(text.indexOf('思路')>=0||text.indexOf('方法')>=0||text.indexOf('分类')>=0||text.indexOf('突破口')>=0)){score+=2;points.push('总结了压轴题思路');praise.push('✅ 总结了压轴题思路/方法，这是从88分突破95分的核心能力');aligned=true;}
+  if(action.indexOf('读图')>=0&&(text.indexOf('读图')>=0||text.indexOf('等高线')>=0||text.indexOf('方向')>=0||text.indexOf('图例')>=0)){score+=2;points.push('强化了读图技能');praise.push('✅ 强化读图技能，地理读图能力越强排名越稳');aligned=true;}
+  if(action.indexOf('固定搭配')>=0&&(text.indexOf('搭配')>=0||text.indexOf('辨析')>=0||text.indexOf('区别')>=0)){score+=2;points.push('关注了搭配辨析');praise.push('✅ 关注了固定搭配辨析，英语丢分主要是搭配搞混');aligned=true;}
+  if(!aligned&&matched.length>0){issues.push('你今天练的是"'+action+'"，但收获记录里没有体现这项训练的核心内容');advice.push('比如练"解码训练"应该写到审题、关键词、条件拆解；练"表达训练"应该写到模板、格式、术语运用');}
   /* 4. Metacognition */
   var metaWords=['发现','意识到','之前','原来','容易错','误区','盲区','之前不会','搞懂了','明白了','弄清了','区分','混淆','漏掉','卡在'];
   var metaMatch=metaWords.filter(function(w){return text.indexOf(w)>=0;});
-  if(metaMatch.length>=1){score+=2;points.push('展现了反思意识('+metaMatch[0]+')');}
+  if(metaMatch.length>=2){score+=2;points.push('展现了反思意识('+metaMatch.slice(0,2).join('、')+')');praise.push('✅ 有自我反思——用了"'+metaMatch[0]+'"这样的词，说明不只是做题还思考了自己的薄弱点');}
+  else if(metaMatch.length>=1){score+=2;points.push('展现了反思意识('+metaMatch[0]+')');praise.push('✅ 有反思意识——发现/意识到自己的问题，这是进步最快的学习方式');}
+  else{if(len>=20)issues.push('缺少反思——没有写出"发现""意识到""之前不会"这类自我审视的内容');advice.push('下次试试加一句反思："我发现XX比之前以为的要复杂""之前总混淆XX和YY，今天终于区分开了"');}
   /* 5. Generic penalty */
   var generic=['学会了','懂了','会了','看完了','做完了','写完了','练习了','复习了','背了'];
   var genMatch=generic.filter(function(p){return text.indexOf(p)>=0;});
-  if(genMatch.length>0&&matched.length===0){score-=1;points.push('注意：表述偏笼统，建议补充具体内容');}
+  if(genMatch.length>0&&matched.length===0){score-=1;points.push('注意：表述偏笼统');issues.push('"'+genMatch[0]+'"太笼统——学会了什么？懂了什么？看完了什么？不写具体内容等于没记录');advice.push('把笼统词换成具体内容："学会了不等式变号规则"而不是"学会了"；"搞懂了坐标系找点方法"而不是"懂了"');}
   /* Determine level */
   var level,label,color;
   if(score>=6){level='excellent';label='高质量';color='#2e7d32';}
   else if(score>=3){level='good';label='有效';color='#1565c0';}
   else if(score>=1){level='fair';label='一般';color='#f39c12';}
   else{level='weak';label='需改进';color='#e74c3c';}
-  var analysis=points.length>0?points.join('；'):'记录内容较少，建议写明具体学到了什么知识点或解题方法';
-  return {level:level,label:label,color:color,analysis:analysis};
+  /* Build 3-layer output */
+  var scoreText=points.length>0?points.join('；'):'';
+  var commentParts=[];
+  if(praise.length>0)commentParts.push('【做得好的】\n'+praise.join('\n'));
+  if(issues.length>0)commentParts.push('【需要注意】\n'+issues.join('\n'));
+  if(advice.length>0)commentParts.push('【改进建议】\n'+advice.join('\n'));
+  if(commentParts.length===0)commentParts.push('本次打卡记录基本合格，继续保持这种详细记录的习惯');
+  return {level:level,label:label,color:color,scorePoints:scoreText,comment:commentParts.join('\n\n')};
 }
 /* Subject-action mapping: each subject only shows its applicable training types */
 var SUBJ_ACTIONS = {
@@ -1028,7 +1041,7 @@ function addCheckin() {
   if(!action){toast('请选择训练内容','error');return;}
   if(!takeaway){toast('请填写打卡收获','error');return;}
   var qa=analyzeCheckinQuality(subj,action,takeaway);
-  checkins.push({subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityAnalysis:qa.analysis,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
+  checkins.push({subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityColor:qa.color,scorePoints:qa.scorePoints,comment:qa.comment,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
   saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！质量：'+qa.label);
   document.getElementById('ciSubject').value='';
   document.getElementById('ciAction').innerHTML='<option value="">— 先选科目 —</option>';
@@ -1088,27 +1101,46 @@ function renderCheckinList() {
   if(todayList.length>0){
     h+='<div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:4px;">今日打卡</div>';
     todayList.forEach(function(c){
-      var qColor=c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c';
+      var qColor=c.qualityColor||(c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c');
       h+='<div class="checkin-item-v2">';
       h+='<div class="ci2-header"><span class="ci2-subj">'+c.subject+'</span><span class="ci2-action">'+c.action+'</span><span class="ci2-time">'+c.time+'</span><span class="ci2-quality" style="background:'+qColor+'1a;color:'+qColor+';">'+(c.qualityLabel||'未分析')+'</span><span style="cursor:pointer;color:#e74c3c;font-size:11px;" onclick="delCheckinById(\''+c.date+'_'+c.time+'\')">✕</span></div>';
       h+='<div class="ci2-takeaway">📝 '+escapeHtml(c.takeaway||'')+'</div>';
-      if(c.qualityAnalysis){h+='<div class="ci2-analysis" style="color:'+qColor+';">📊 '+escapeHtml(c.qualityAnalysis)+'</div>';}
+      if(c.scorePoints){h+='<div class="ci2-score" style="font-size:11px;color:#546e7a;margin-top:4px;">📊 评分维度：'+escapeHtml(c.scorePoints)+'</div>';}
+      if(c.comment){h+='<div class="ci2-comment" style="font-size:12px;margin-top:6px;padding:8px 10px;background:'+qColor+'0d;border-left:3px solid '+qColor+';border-radius:4px;line-height:1.5;">'+formatComment(c.comment,qColor)+'</div>';}
       h+='</div>';
     });
   }
   if(recentList.length>0){
     h+='<div style="font-size:13px;font-weight:600;color:#546e7a;margin:10px 0 4px;">历史打卡（最近10条）</div>';
     recentList.forEach(function(c){
-      var qColor=c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c';
+      var qColor=c.qualityColor||(c.quality==='excellent'?'#2e7d32':c.quality==='good'?'#1565c0':c.quality==='fair'?'#f39c12':'#e74c3c');
       h+='<div class="checkin-item-v2" style="opacity:0.85;">';
       h+='<div class="ci2-header"><span class="ci2-subj">'+c.subject+'</span><span class="ci2-action">'+c.action+'</span><span class="ci2-time">'+c.date+'</span><span class="ci2-quality" style="background:'+qColor+'1a;color:'+qColor+';">'+(c.qualityLabel||'未分析')+'</span></div>';
       h+='<div class="ci2-takeaway">📝 '+escapeHtml(c.takeaway||'')+'</div>';
-      if(c.qualityAnalysis){h+='<div class="ci2-analysis" style="color:'+qColor+';">📊 '+escapeHtml(c.qualityAnalysis)+'</div>';}
+      if(c.scorePoints){h+='<div class="ci2-score" style="font-size:11px;color:#546e7a;margin-top:4px;">📊 评分维度：'+escapeHtml(c.scorePoints)+'</div>';}
+      if(c.comment){h+='<div class="ci2-comment" style="font-size:12px;margin-top:6px;padding:8px 10px;background:'+qColor+'0d;border-left:3px solid '+qColor+';border-radius:4px;line-height:1.5;">'+formatComment(c.comment,qColor)+'</div>';}
       h+='</div>';
     });
   }
   if(checkins.length===0)h='<p style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无打卡记录，完成训练后打卡记录收获吧</p>';
   el.innerHTML=h;
+}
+function formatComment(text,qColor) {
+  /* Format 3-layer comment with section headers */
+  var sections=text.split('\n\n');
+  var h='';
+  sections.forEach(function(sec){
+    if(sec.indexOf('【做得好的】')>=0){
+      h+='<div style="margin-bottom:6px;"><span style="font-weight:600;color:#2e7d32;">👍 做得好的</span><br>'+sec.replace('【做得好的】\n','').replace(/✅/g,'<span style="color:#2e7d32;">✅</span>').split('\n').join('<br>')+'</div>';
+    }else if(sec.indexOf('【需要注意】')>=0){
+      h+='<div style="margin-bottom:6px;"><span style="font-weight:600;color:#f39c12;">⚠️ 需要注意</span><br>'+sec.replace('【需要注意】\n','').split('\n').join('<br>')+'</div>';
+    }else if(sec.indexOf('【改进建议】')>=0){
+      h+='<div style="margin-bottom:4px;"><span style="font-weight:600;color:#1565c0;">💡 改进建议</span><br>'+sec.replace('【改进建议】\n','').split('\n').join('<br>')+'</div>';
+    }else{
+      h+='<div>'+escapeHtml(sec)+'</div>';
+    }
+  });
+  return h;
 }
 function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function delCheckinById(id){
