@@ -6,7 +6,7 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 .header{background:linear-gradient(135deg,#1a237e,#283593);color:#fff;padding:28px 24px;border-radius:12px;margin-bottom:20px}
 .header h1{font-size:22px;margin-bottom:6px}
 .header .sub{font-size:13px;color:#bbdefb}
-.tabs{display:flex;gap:4px;margin-bottom:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px}
 .tab-btn{flex:1;padding:10px 6px;background:#e8eaf6;border:none;border-radius:8px 8px 0 0;cursor:pointer;font-size:13px;font-weight:600;color:#546e7a;transition:all .2s}
 .tab-btn.active{background:#283593;color:#fff}
 .tab-btn:hover:not(.active){background:#c5cae9}
@@ -23,8 +23,8 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 .btn-sm{padding:5px 12px;font-size:12px}
 .btn-green{background:#2e7d32;color:#fff}
 .btn-orange{background:#e65100;color:#fff}
-.subject-tabs{display:flex;gap:4px;margin-bottom:16px}
-.subject-tab{padding:8px 14px;background:#e8eaf6;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:#546e7a;transition:all .2s}
+.subject-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px}
+.subject-tab{padding:8px 12px;background:#e8eaf6;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:#546e7a;transition:all .2s;flex:0 1 auto;min-width:0;white-space:nowrap}
 .subject-tab.active{background:#283593;color:#fff}
 .subject-tab:hover:not(.active){background:#c5cae9}
 .chart-section{margin:16px 0}
@@ -189,6 +189,27 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 .goal-far{background:#ffebee;color:#c62828}
 /* NEW: Backup */
 .backup-bar{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;align-items:center}
+/* Mobile responsive */
+@media(max-width:600px){
+  .container{padding:12px 8px}
+  .header{padding:18px 14px}
+  .header h1{font-size:17px}
+  .header .sub{font-size:11px}
+  .tab-btn{padding:8px 4px;font-size:11px}
+  .subject-tab{padding:6px 8px;font-size:12px}
+  .module{padding:16px 12px}
+  .chart-box{padding:6px}
+  .trend-analysis{padding:10px 12px;font-size:12px}
+  .input-row select{min-width:60px;font-size:12px}
+  .input-row input{width:80px;font-size:12px}
+  .batch-table{font-size:11px}
+  .batch-table input{width:60px}
+  .checkin-row{gap:4px}
+  .checkin-row select{min-width:60px;font-size:12px}
+  .checkin-row input{width:70px;font-size:12px}
+  .goal-row select{min-width:60px;font-size:12px}
+  .goal-row input{width:80px;font-size:12px}
+}
 </style></head><body><div class="container">
 <div class="header"><h1>李思源学情态势分析及短板提升系统</h1><div class="sub" id="headerSub">玉溪市红塔中学 · <span id="gradeLabel">七年级</span> · 2025-2026学年 | 数据自动存档</div></div>
 <div class="tabs"><button class="tab-btn active" onclick="switchTab(0)">📊 成绩态势</button><button class="tab-btn" onclick="switchTab(1)">🔍 短板分析</button><button class="tab-btn" onclick="switchTab(2)">🚀 提升方案</button><button class="tab-btn" onclick="switchTab(3)">✅ 训练打卡</button></div>
