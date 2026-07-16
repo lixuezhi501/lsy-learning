@@ -1,0 +1,1221 @@
+
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>李思源学情态势分析及短板提升系统</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;color:#333;min-height:100vh}
+.container{max-width:960px;margin:0 auto;padding:20px 16px}
+.header{background:linear-gradient(135deg,#1a237e,#283593);color:#fff;padding:28px 24px;border-radius:12px;margin-bottom:20px}
+.header h1{font-size:22px;margin-bottom:6px}
+.header .sub{font-size:13px;color:#bbdefb}
+.tabs{display:flex;gap:4px;margin-bottom:16px}
+.tab-btn{flex:1;padding:10px 6px;background:#e8eaf6;border:none;border-radius:8px 8px 0 0;cursor:pointer;font-size:13px;font-weight:600;color:#546e7a;transition:all .2s}
+.tab-btn.active{background:#283593;color:#fff}
+.tab-btn:hover:not(.active){background:#c5cae9}
+.module{display:none;background:#fff;border-radius:0 0 12px 12px;padding:24px 20px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.module.active{display:block}
+.input-panel{background:#f5f5f5;border-radius:8px;padding:14px;margin-bottom:20px}
+.input-panel h3{font-size:14px;color:#283593;margin-bottom:10px}
+.input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.input-row select{padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;background:#fff;min-width:80px}
+.input-row input{padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;width:100px}
+.btn{padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s}
+.btn-primary{background:#283593;color:#fff}
+.btn-primary:hover{background:#1a237e}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-green{background:#2e7d32;color:#fff}
+.btn-orange{background:#e65100;color:#fff}
+.subject-tabs{display:flex;gap:4px;margin-bottom:16px}
+.subject-tab{padding:8px 14px;background:#e8eaf6;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:#546e7a;transition:all .2s}
+.subject-tab.active{background:#283593;color:#fff}
+.subject-tab:hover:not(.active){background:#c5cae9}
+.chart-section{margin:16px 0}
+.chart-title{font-size:14px;font-weight:700;margin-bottom:6px;color:#283593}
+.chart-box{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:10px;overflow-x:auto}
+.legend-row{display:flex;gap:16px;margin:6px 0;font-size:12px;align-items:center}
+.legend-item{display:flex;align-items:center;gap:4px}
+.legend-line{width:24px;height:3px;border-radius:2px}
+.legend-bar{width:14px;height:14px;border-radius:2px}
+.trend-analysis{background:#e8eaf6;border-radius:8px;padding:14px 16px;margin:14px 0;font-size:13px;line-height:1.7}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:6px}
+.tag-up{background:#2e7d32;color:#fff}
+.tag-down{background:#e74c3c;color:#fff}
+.tag-stable{background:#f39c12;color:#fff}
+.tag-volatile{background:#9b59b6;color:#fff}
+.tag-p{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-left:6px}
+.tag-red{background:#e74c3c;color:#fff}
+.tag-orange{background:#e65100;color:#fff}
+.tag-blue{background:#3498db;color:#fff}
+.tag-green{background:#2e7d32;color:#fff}
+.weak-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:14px 0}
+.weak-card{border-radius:10px;padding:14px;border:2px solid}
+.weak-card.p1{border-color:#e74c3c;background:#fff5f5}
+.weak-card.p2{border-color:#e65100;background:#fff8e1}
+.weak-card.p3{border-color:#3498db;background:#e3f2fd}
+.weak-card.p4{border-color:#2e7d32;background:#e8f5e9}
+.weak-card h4{font-size:14px;margin-bottom:6px}
+.weak-card .rank-info{font-size:12px;margin-bottom:5px;color:#666}
+.weak-card ul{padding-left:16px;font-size:12px}
+.weak-card li{margin:2px 0}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:14px 0}
+.plan-card{border-radius:10px;padding:14px;background:#fff;border:1px solid #e0e0e0}
+.plan-card.p1{border-left:4px solid #e74c3c}
+.plan-card.p2{border-left:4px solid #e65100}
+.plan-card.p3{border-left:4px solid #3498db}
+.plan-card.p4{border-left:4px solid #2e7d32}
+.plan-card h4{font-size:14px;margin-bottom:6px}
+.plan-card .goal{font-size:12px;color:#e74c3c;font-weight:600;margin-bottom:3px}
+.plan-card .target{font-size:11px;color:#283593;margin-bottom:5px}
+.plan-card .schedule{font-size:11px;color:#78909c;margin-bottom:6px}
+.plan-card ul{padding-left:16px;font-size:12px}
+.plan-card li{margin:2px 0}
+.plan-card .mat-link{display:inline-block;margin-top:8px;padding:4px 10px;background:#283593;color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none}
+.alert{padding:12px 16px;border-radius:8px;margin:12px 0;font-size:12px}
+.alert-red{background:#ffebee;color:#c62828;border:1px solid #ef9a9a}
+.alert-blue{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9}
+.alert-green{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.footer{text-align:center;color:#90a4ae;font-size:12px;margin-top:20px;padding-top:14px;border-top:1px solid #e0e0e0}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+.toast-success{background:#2e7d32;color:#fff}
+.toast-error{background:#e74c3c;color:#fff}
+.root-box{background:#e8eaf6;border:2px solid #283593;border-radius:10px;padding:14px;margin:14px 0}
+.root-box h4{color:#1a237e;font-size:15px;margin-bottom:10px}
+.root-item{font-size:13px;line-height:1.9;margin-bottom:10px}
+.root-label{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:4px}
+.rl-decode{background:#e74c3c;color:#fff}
+.rl-activate{background:#f39c12;color:#fff}
+.rl-express{background:#9b59b6;color:#fff}
+.evidence-box{background:#fff5f5;border:1px solid #ef9a9a;border-radius:8px;padding:12px;margin:12px 0;font-size:13px;line-height:1.7}
+.diagnosis{font-size:12px;line-height:1.7;color:#37474f;margin-top:6px;padding-top:6px;border-top:1px solid #c5cae9}
+.surface-label{font-size:11px;color:#78909c;margin-bottom:2px;font-weight:600}
+.sel-info{display:inline-block;background:#fff;border:1px solid #bdbdbd;border-radius:4px;padding:1px 6px;font-size:11px;margin-left:6px;color:#616161}
+.core-section{margin:14px 0}
+.core-card{background:#fff;border-radius:10px;padding:14px;margin-bottom:12px;border-left:4px solid}
+.core-card.decode{border-left-color:#e74c3c}
+.core-card.activate{border-left-color:#f39c12}
+.core-card.express{border-left-color:#9b59b6}
+.core-card h4{font-size:14px;margin-bottom:6px}
+.core-steps{font-size:12px;line-height:1.8;padding-left:18px;margin:4px 0}
+.core-steps li{margin:3px 0}
+.core-apply{font-size:11px;color:#78909c;margin-top:6px;border-top:1px solid #e0e0e0;padding-top:4px}
+.core-ref{border-radius:6px;padding:8px;margin-top:6px;font-size:12px;line-height:1.7}
+.mat-stars{color:#f39c12;font-size:12px;margin-left:4px}
+.mat-note{font-size:11px;color:#78909c}
+.verify{font-size:12px;color:#2e7d32;font-weight:600;margin-top:8px;padding-top:6px;border-top:1px dashed #a5d6a7}
+.exam-section{margin:14px 0;border:1px solid #c5cae9;border-radius:10px;overflow:hidden}
+.exam-header{background:#283593;color:#fff;padding:10px 14px;cursor:pointer;font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.exam-body{padding:14px;display:none}
+.exam-body.open{display:block}
+.ai-step{background:#f5f5f5;border-radius:8px;padding:12px;margin-bottom:12px}
+.ai-step-num{display:inline-block;background:#283593;color:#fff;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-right:6px}
+.ai-import-area{width:100%;min-height:80px;border:1px solid #cfd8dc;border-radius:6px;padding:8px;font-size:12px;font-family:monospace;resize:vertical}
+.ai-btn-row{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}
+.track-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;margin:2px 4px}
+.track-improve{background:#e8f5e9;color:#2e7d32}
+.track-persist{background:#fff3e0;color:#e65100}
+.track-new{background:#fce4ec;color:#c62828}
+.track-trend-down{background:#e8f5e9;color:#2e7d32}
+.track-trend-up{background:#fce4ec;color:#c62828}
+.track-trend-flat{background:#fff8e1;color:#f39c12}
+.exam-item{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.exam-item:hover{border-color:#283593}
+.exam-item.active{border-color:#283593;background:#e8eaf6}
+.exam-item-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.exam-item-info{font-size:11px;color:#78909c}
+.compare-box{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:14px;margin:10px 0}
+.compare-status{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.new-warn{background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:10px;margin:8px 0;font-size:12px;line-height:1.6}
+.improve-delta{font-size:11px;color:#2e7d32;margin-left:6px}
+.improve-alert{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:10px;margin:8px 0;font-size:12px;line-height:1.6}
+/* NEW: Batch input */
+.batch-panel{background:#fff3e0;border:1px solid #f39c12;border-radius:8px;padding:14px;margin-bottom:16px;display:none}
+.batch-panel.open{display:block}
+.batch-table{width:100%;border-collapse:collapse;font-size:13px}
+.batch-table th{background:#f5f5f5;padding:6px;border:1px solid #e0e0e0;text-align:center}
+.batch-table td{padding:6px;border:1px solid #e0e0e0;text-align:center}
+.batch-table input{width:80px;padding:4px;border:1px solid #cfd8dc;border-radius:4px;text-align:center}
+/* NEW: Checkin */
+.checkin-form{background:#f5f5f5;border-radius:8px;padding:14px;margin-bottom:14px}
+.checkin-form select,.checkin-form input{padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;background:#fff}
+.checkin-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.checkin-list{margin:10px 0}
+.checkin-item{background:#fff;border-radius:6px;padding:8px 12px;margin:4px 0;border:1px solid #e0e0e0;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.checkin-item .ci-subj{font-weight:600;color:#283593}
+.checkin-item .ci-action{color:#546e7a}
+.checkin-item .ci-time{color:#78909c;font-size:11px}
+.checkin-item .ci-eval{font-size:11px;padding:2px 6px;border-radius:3px}
+.ci-good{background:#e8f5e9;color:#2e7d32}
+.ci-ok{background:#fff8e1;color:#f39c12}
+.ci-bad{background:#ffebee;color:#e74c3c}
+.streak-box{background:#e8eaf6;border-radius:8px;padding:12px;margin:10px 0;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.streak-num{font-size:28px;font-weight:900;color:#283593}
+.streak-label{font-size:12px;color:#546e7a}
+.week-summary{background:#f5f5f5;border-radius:8px;padding:12px;margin:10px 0;font-size:12px;line-height:1.7}
+/* NEW: Achievement wall */
+.achieve-grid{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.achieve-card{background:#fff;border-radius:10px;padding:12px;min-width:140px;border:2px solid #c5cae9;text-align:center}
+.achieve-card.unlocked{border-color:#2e7d32;background:#e8f5e9}
+.achieve-card.locked{border-color:#e0e0e0;background:#f5f5f5}
+.achieve-icon{font-size:28px;margin-bottom:4px}
+.achieve-title{font-size:13px;font-weight:700;color:#283593}
+.achieve-desc{font-size:11px;color:#78909c}
+.achieve-value{font-size:12px;font-weight:600;color:#2e7d32;margin-top:4px}
+/* NEW: Heat map */
+.heatmap-box{margin:14px 0;overflow-x:auto}
+.hm-table{border-collapse:collapse;font-size:12px;margin:0 auto}
+.hm-table th{padding:8px;border:1px solid #e0e0e0;font-weight:600;background:#f5f5f5}
+.hm-table td{padding:8px;border:1px solid #e0e0e0;text-align:center;min-width:70px;font-weight:600}
+.hm-empty{background:#f5f5f5;color:#999}
+.hm-low{background:#fff8e1;color:#f39c12}
+.hm-med{background:#ffe0b2;color:#e65100}
+.hm-high{background:#ffebee;color:#c62828}
+.hm-na{background:#e8e8e8;color:#bbb}
+/* NEW: Knowledge aggregation */
+.know-aggr{margin:14px 0}
+.know-group{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:12px;margin:8px 0}
+.know-group h5{font-size:13px;color:#283593;margin-bottom:6px}
+.know-item{font-size:12px;margin:3px 0;display:flex;gap:8px;align-items:center}
+.know-freq{background:#e74c3c;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.know-freq-low{background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+/* NEW: Goal management */
+.goal-form{background:#f5f5f5;border-radius:8px;padding:14px;margin-bottom:14px}
+.goal-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.goal-row select,.goal-row input{padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;background:#fff}
+.goal-card{background:#fff;border-radius:8px;padding:10px;margin:4px 0;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center}
+.goal-subj{font-weight:600;color:#283593;font-size:13px}
+.goal-target{font-size:12px;color:#e65100}
+.goal-status{font-size:12px;padding:2px 8px;border-radius:4px;font-weight:600}
+.goal-reached{background:#e8f5e9;color:#2e7d32}
+.goal-close{background:#fff8e1;color:#f39c12}
+.goal-far{background:#ffebee;color:#c62828}
+/* NEW: Backup */
+.backup-bar{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap;align-items:center}
+</style></head><body><div class="container">
+<div class="header"><h1>李思源学情态势分析及短板提升系统</h1><div class="sub" id="headerSub">玉溪市红塔中学 · <span id="gradeLabel">七年级</span> · 2025-2026学年 | 数据自动存档</div></div>
+<div class="tabs"><button class="tab-btn active" onclick="switchTab(0)">📊 成绩态势</button><button class="tab-btn" onclick="switchTab(1)">🔍 短板分析</button><button class="tab-btn" onclick="switchTab(2)">🚀 提升方案</button><button class="tab-btn" onclick="switchTab(3)">✅ 训练打卡</button></div>
+
+<!-- Module 0: Score Trends -->
+<div class="module active">
+<div class="input-panel">
+  <h3>📝 录入成绩</h3>
+  <div style="font-size:11px;color:#78909c;margin-bottom:6px;">单科录入或批量录入（一次录入7科）</div>
+  <div class="input-row">
+    <select id="inputSubject"><option value="语文">语文</option><option value="数学">数学</option><option value="英语">英语</option><option value="生物">生物</option><option value="道法">道法</option><option value="历史">历史</option><option value="地理">地理</option></select>
+    <input type="number" id="inputScore" placeholder="分数">
+    <input type="number" id="inputRank" placeholder="排名">
+    <button class="btn btn-primary btn-sm" onclick="addRecord()">✅ 录入</button>
+    <button class="btn btn-orange btn-sm" onclick="toggleBatchInput()">📋 批量录入</button>
+  </div>
+</div>
+<div class="batch-panel" id="batchPanel">
+  <h3 style="font-size:14px;color:#e65100;margin-bottom:8px;">📋 批量录入7科成绩</h3>
+  <table class="batch-table"><tr><th>科目</th><th>分数</th><th>排名</th></tr>
+  <tr><td>语文</td><td><input id="b_语文_score"></td><td><input id="b_语文_rank"></td></tr>
+  <tr><td>数学</td><td><input id="b_数学_score"></td><td><input id="b_数学_rank"></td></tr>
+  <tr><td>英语</td><td><input id="b_英语_score"></td><td><input id="b_英语_rank"></td></tr>
+  <tr><td>生物</td><td><input id="b_生物_score"></td><td><input id="b_生物_rank"></td></tr>
+  <tr><td>道法</td><td><input id="b_道法_score"></td><td><input id="b_道法_rank"></td></tr>
+  <tr><td>历史</td><td><input id="b_历史_score"></td><td><input id="b_历史_rank"></td></tr>
+  <tr><td>地理</td><td><input id="b_地理_score"></td><td><input id="b_地理_rank"></td></tr>
+  </table>
+  <button class="btn btn-primary" onclick="batchAddRecords()" style="margin-top:8px;">✅ 一键录入7科</button>
+</div>
+<div class="subject-tabs" id="subjectTabs"></div>
+<div id="subjectDetail">
+  <div class="chart-section">
+    <div class="chart-title" id="comboTitle">📊 成绩 & 排名趋势 — 语文</div>
+    <div class="legend-row" id="chartLegend"></div>
+    <div class="chart-box" id="comboChart"></div>
+  </div>
+  <div class="trend-analysis" id="trendAnalysis"></div>
+</div>
+<!-- Goal management -->
+<div style="margin:16px 0;">
+  <div style="font-size:14px;font-weight:700;color:#283593;margin-bottom:8px;">🎯 目标管理</div>
+  <div class="goal-form">
+    <div class="goal-row">
+      <select id="goalSubject"><option value="">选择科目</option><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option></select>
+      <input type="number" id="goalScore" placeholder="目标成绩（如85分）">
+      <button class="btn btn-primary btn-sm" onclick="setGoal()">设定目标</button>
+    </div>
+  </div>
+  <div id="goalList"></div>
+</div>
+<!-- Achievement wall -->
+<div style="margin:16px 0;">
+  <div style="font-size:14px;font-weight:700;color:#283593;margin-bottom:8px;">🏆 成就里程碑</div>
+  <div class="achieve-grid" id="achieveWall"></div>
+</div>
+</div>
+
+<!-- Module 1: Weakness Analysis -->
+<div class="module">
+<div class="alert alert-red">
+  ⚠️ 核心诊断：7科表面问题各异，但底层指向<strong>3个核心能力缺陷</strong>——解码、激活、表达。选择题得分尚可说明知识输入没问题，非选择题才是真正失分源，因为非选择题需要<strong>解码→激活→表达</strong>三步完整链路，任何一环断裂都会丢分。
+</div>
+<div class="root-box">
+  <h4>🔬 三大核心能力缺陷（根因分析）</h4>
+  <div class="root-item"><span class="root-label rl-decode">①解码缺失</span> <strong>读不懂题目真正在问什么</strong> — 习惯"快读"而非"精读"，看到题目就急着写答案。题目中的角色设定、限定条件、深层指向被忽略。表现为：各科偏离题目要求；历史不会身份代入；语文阅读只写表面意思；地理问气候不看纬线。</div>
+  <div class="root-item"><span class="root-label rl-activate">②激活缺失</span> <strong>知识储备在但无法精准调用</strong> — 知识是"散点存储"而非"网络化存储"，缺乏"题目类型→知识模块"的映射。表现为：道法不知道题目考什么知识点；地理不会条件反射式调用；英语固定搭配混淆；数学压轴题不会组合调用。</div>
+  <div class="root-item"><span class="root-label rl-express">③表达缺失</span> <strong>用口语而非学科语言作答</strong> — 没有内化各科的"答题范式"，停留在"我说想法"层面。表现为：历史/道法口语化严重；作文论证不充分缺深度；史论不会结合；道法不会用课本术语。</div>
+</div>
+<div class="evidence-box">
+  <strong>📌 关键证据：选择题 vs 非选择题</strong><br>
+  地理25题错3题、生物25题错3题、历史25题错4题、道法24题错2题——选择题（再认型）错题率不高，说明<strong>知识输入没问题</strong>。非选择题（回忆+组织型）才是真正失分源，因为它需要<strong>解码题目→激活知识→范式表达</strong>三步完整链路。
+</div>
+<!-- NEW: Cross-subject root cause heat map -->
+<div style="font-size:14px;font-weight:700;color:#283593;margin:14px 0 8px;">🔬 跨科根因热力图</div>
+<div style="font-size:12px;color:#78909c;margin-bottom:8px;">识别哪些缺陷是<strong>系统性</strong>的（跨多科出现）vs <strong>学科性</strong>的（仅单科出现）。系统性缺陷→优先训练核心训练法；学科性缺陷→优先补学科知识。</div>
+<div class="heatmap-box" id="heatMapBox"></div>
+<!-- NEW: Knowledge point aggregation -->
+<div style="font-size:14px;font-weight:700;color:#283593;margin:14px 0 8px;">📌 错题知识点聚合（跨考试追踪）</div>
+<div style="font-size:12px;color:#78909c;margin-bottom:8px;">所有试卷分析的错题按"科目+知识点"自动聚合，同一知识点出现≥2次标红，提示<strong>反复出错需专项突破</strong>。</div>
+<div class="know-aggr" id="knowAggr"></div>
+<div class="exam-section">
+  <div class="exam-header" onclick="toggleExamForm()">
+    <span>📋 试卷分析录入与短板改善追踪（AI辅助）</span>
+    <span id="examToggle">▼ 展开</span>
+  </div>
+  <div class="exam-body" id="examBody">
+    <div class="ai-step">
+      <span class="ai-step-num">Step 1</span> 在WorkBuddy对话中发送试卷照片给AI助手
+      <div style="font-size:12px;color:#546e7a;line-height:1.7;margin:6px 0;">
+        操作：在WorkBuddy对话中发送试卷照片，告诉AI"请分析这份<span id="aiSubjectHint">XX</span>试卷的错题"，AI会自动识别错题、判断错误类型，返回一段JSON。<br>
+        <strong>复制那段JSON，粘贴到下方输入框即可。</strong>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin:6px 0;">
+        <select id="aiSubject" style="padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;background:#fff;min-width:80px;"><option value="">选择科目</option><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option></select>
+      </div>
+    </div>
+    <div class="ai-step">
+      <span class="ai-step-num">Step 2</span> 导入AI分析结果，系统自动完成短板对比与更新
+      <textarea class="ai-import-area" id="aiImportInput" placeholder='粘贴AI返回的JSON...'></textarea>
+      <div class="ai-btn-row">
+        <button class="btn btn-primary" onclick="importAIResult()">📥 导入分析结果</button>
+        <button class="btn" style="background:#78909c;color:#fff;" onclick="clearAiForm()">清除</button>
+      </div>
+    </div>
+    <div style="background:#e8eaf6;border-radius:8px;padding:10px;margin:6px 0;font-size:11px;color:#546e7a;line-height:1.7;">
+      💡 <strong>导入后系统自动完成：</strong>①错误类型分布图 ②与当前短板对比（改善/仍存在/新出现）③短板卡片自动更新 ④提升方案动态调整 ⑤新问题预警 ⑥<strong>错题知识点自动聚合</strong> ⑦<strong>跨科根因热力图自动更新</strong>
+    </div>
+    <div id="examAnalysisList"></div>
+    <div id="examCompareResult"></div>
+  </div>
+</div>
+<div class="weak-grid" id="weakCards"></div>
+</div>
+
+<!-- Module 2: Improvement Plan -->
+<div class="module">
+<div class="alert alert-blue">
+  💡 方案逻辑：提升方案瞄准<strong>三大核心能力缺陷</strong>设计训练方法——解码训练（精读题目）、激活训练（条件反射）、表达训练（学科范式），从根因层面修复"知识→答题"转化链路。<strong>三大训练法是自含式协议</strong>，可以套用在任何练习材料上。
+</div>
+<div class="core-section">
+<h3 style="font-size:15px;color:#1a237e;margin-bottom:10px;">🧠 三大核心能力训练法（跨学科通用）</h3>
+
+<div class="core-card decode">
+  <h4><span class="root-label rl-decode">①解码训练</span> 题目解码三步法 — 读懂题目真正在问什么</h4>
+  <ol class="core-steps">
+    <li><strong>圈角色</strong> — 题目让我以什么身份/角色作答？（推介官、导游、学生、评论员…）确认身份再动笔</li>
+    <li><strong>圈条件</strong> — 题目有哪些限定条件？（字数限制、时间范围、角度要求…）</li>
+    <li><strong>圈指向</strong> — 题目真正在问什么？不是表面意思，而是深层指向</li>
+  </ol>
+  <div class="core-apply">适用：语文（阅读深意）、历史（身份代入）、地理（材料信息捕获） | 每次做题前花30秒做解码</div>
+</div>
+<div class="core-card activate">
+  <h4><span class="root-label rl-activate">②激活训练</span> 知识激活条件反射法 — 看到题目就能调出对应知识</h4>
+  <ol class="core-steps">
+    <li><strong>看关键词 → 判断知识模块</strong> — 30秒内判断考哪个知识模块</li>
+    <li><strong>激活核心概念/术语</strong> — 从记忆中提取核心概念和课本术语</li>
+    <li><strong>用课本语言组织答案</strong> — 不用口语，用学科语言作答</li>
+  </ol>
+  <div class="core-ref" style="background:#fff8e1;">
+    <strong>条件反射映射表（反复练习直到自动反应）：</strong><br>
+    📌 道法：问权利义务→宪法/法律保障；问经济→基本经济制度；问民族团结→民族政策<br>
+    📌 地理：问气候→看纬线+海陆位置；问地形→看等高线+海拔；问农业→看气候+地形<br>
+    📌 英语：看语境→判断时态；看搭配→精准比对易混淆项<br>
+    📌 数学：看综合题→标注知识点→逐一调用组合推理<br>
+    📌 生物：问结构→对应器官功能；问实验→对应探究方法
+  </div>
+  <div class="core-apply">适用：道法、地理、数学、英语、生物 | 每天3道非选择题做激活训练</div>
+</div>
+<div class="core-card express">
+  <h4><span class="root-label rl-express">③表达训练</span> 学科答题范式模板 — 用学科语言而非口语作答</h4>
+  <ol class="core-steps">
+    <li><strong>选模板</strong> — 先确定用哪种答题范式（见下方模板清单）</li>
+    <li><strong>填内容</strong> — 按模板结构组织答案</li>
+    <li><strong>查口语</strong> — 答完检查是否有口语化表达，全部替换为学科术语</li>
+  </ol>
+  <div class="core-ref" style="background:#f3e5f5;">
+    <strong>各科答题模板清单：</strong><br>
+    📌 历史：史实描述 + 历史结论/评价 — 史论结合<br>
+    📌 道法：课本观点 + 材料依据 + 结论总结 — 三段式<br>
+    📌 生物：现象描述 + 原因分析 + 结论归纳<br>
+    📌 语文作文：观点 + 论据 + 深化（现象→原因→意义）<br>
+    📌 语文阅读：表面意思 + 深层含义 + 表达意图
+  </div>
+  <div class="core-apply">适用：历史、道法、生物、语文 | 每次做非选择题先选模板再填内容</div>
+</div>
+
+</div>
+<div class="plan-grid" id="planCards"></div>
+<div class="alert alert-green">
+  ✅ 三大核心训练法是<strong>自含式协议</strong>——做任何练习时都可以套用"解码三步法→条件反射法→答题模板"。下方训练材料作为练习素材使用。<br>
+  ⚠️ <strong>关于训练资料更新：</strong>导入试卷分析后，系统会<strong>自动生成训练资料更新请求</strong>，复制发送给AI即可触发针对性重做。随着年级升级，训练内容也会同步更新。
+</div>
+</div>
+
+<!-- Module 3: Training Checkin (NEW) -->
+<div class="module">
+<div style="font-size:15px;font-weight:700;color:#1a237e;margin-bottom:10px;">✅ 训练打卡 — 记录每天的训练执行情况</div>
+<div style="font-size:12px;color:#78909c;margin-bottom:14px;line-height:1.7;">闭环关键：方案告诉你该练什么，打卡记录你实际练了什么，下次试卷分析验证练得怎样。只有<strong>方案→执行→验证</strong>三环闭合，提升才有效。</div>
+<div class="streak-box" id="streakBox"></div>
+<div class="checkin-form">
+  <div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:8px;">📝 打卡记录</div>
+  <div class="checkin-row">
+    <select id="ciSubject" onchange="updateCheckinActions()"><option value="">选择科目</option><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option></select>
+    <select id="ciAction"><option value="">— 先选科目 —</option></select>
+    <input type="number" id="ciDuration" placeholder="时长(分钟)" style="width:90px;">
+    <select id="ciEval"><option value="good">👍 有收获</option><option value="ok">😐 一般</option><option value="bad">👎 无收获</option></select>
+    <button class="btn btn-primary btn-sm" onclick="addCheckin()">打卡</button>
+  </div>
+  <div id="checkinMatHint" style="font-size:11px;color:#78909c;margin-top:4px;"></div>
+</div>
+<div class="week-summary" id="weekSummary"></div>
+<div class="checkin-list" id="checkinList"></div>
+</div>
+
+<!-- Backup & Restore bar -->
+<div style="background:#e8eaf6;border-radius:8px;padding:12px;margin:14px 0;">
+  <div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:6px;">💾 数据备份与恢复</div>
+  <div style="font-size:11px;color:#78909c;margin-bottom:8px;">所有数据存储在浏览器localStorage中，清除缓存将丢失数据。建议定期备份。</div>
+  <div class="backup-bar">
+    <button class="btn btn-primary btn-sm" onclick="exportAllData()">📤 导出备份</button>
+    <button class="btn btn-green btn-sm" onclick="document.getElementById('importFile').click()">📥 导入恢复</button>
+    <input type="file" id="importFile" accept=".json" onchange="importAllData(event)" style="display:none;">
+    <span id="backupStatus" style="font-size:11px;color:#2e7d32;"></span>
+  </div>
+</div>
+
+<div class="footer">李思源学情态势分析及短板提升系统 | 数据通过浏览器localStorage自动存档 | 关闭页面不丢失</div></div>
+
+<script>
+
+var SUBJECTS = ['语文','数学','英语','生物','道法','历史','地理'];
+var SCOLOR = {'语文':'#e74c3c','数学':'#3498db','英语':'#2ecc71','生物':'#9b59b6','道法':'#f39c12','历史':'#e67e22','地理':'#1abc9c'};
+var SPRI = {'语文':'P1','数学':'P3','英语':'P3','生物':'P1','道法':'P2','历史':'P2','地理':'P4'};
+var PLEVEL = {'P1':'紧急','P2':'重点','P3':'保持','P4':'巩固'};
+var SCORE_COLOR = '#e74c3c';
+var RANK_COLOR = '#3498db';
+var DEFAULT_DATA = {"语文": [{"label": "第1次", "score": 70.5, "rank": 216}, {"label": "第2次", "score": 69.25, "rank": 287}, {"label": "第3次", "score": 87.75, "rank": 56}, {"label": "第4次", "score": 86.25, "rank": 190}, {"label": "第5次", "score": 70, "rank": 299}, {"label": "第6次", "score": 81, "rank": 119}, {"label": "第7次", "score": 79, "rank": 295}], "数学": [{"label": "第1次", "score": 82, "rank": 220}, {"label": "第2次", "score": 84, "rank": 187}, {"label": "第3次", "score": 80, "rank": 222}, {"label": "第4次", "score": 88, "rank": 222}, {"label": "第5次", "score": 89, "rank": 103}, {"label": "第6次", "score": 88, "rank": 113}, {"label": "第7次", "score": 90, "rank": 177}], "英语": [{"label": "第1次", "score": 89.5, "rank": 216}, {"label": "第2次", "score": 94.55, "rank": 177}, {"label": "第3次", "score": 87.25, "rank": 166}, {"label": "第4次", "score": 93.5, "rank": 125}, {"label": "第5次", "score": 85, "rank": 194}, {"label": "第6次", "score": 89.35, "rank": 214}, {"label": "第7次", "score": 88.4, "rank": 176}], "地理": [{"label": "第1次", "score": 71, "rank": 304}, {"label": "第2次", "score": 69, "rank": 284}, {"label": "第3次", "score": 66, "rank": 305}, {"label": "第4次", "score": 60, "rank": 320}, {"label": "第5次", "score": 59, "rank": 295}, {"label": "第6次", "score": 76, "rank": 165}], "生物": [{"label": "第1次", "score": 77, "rank": 319}, {"label": "第2次", "score": 74, "rank": 284}, {"label": "第3次", "score": 65, "rank": 282}, {"label": "第4次", "score": 64, "rank": 313}, {"label": "第5次", "score": 67, "rank": 284}, {"label": "第6次", "score": 65, "rank": 308}], "历史": [{"label": "第1次", "score": 68, "rank": 302}, {"label": "第2次", "score": 64, "rank": 309}, {"label": "第3次", "score": 56, "rank": 334}, {"label": "第4次", "score": 45, "rank": 348}, {"label": "第5次", "score": 54, "rank": 327}, {"label": "第6次", "score": 69, "rank": 290}], "道法": [{"label": "第1次", "score": 66, "rank": 283}, {"label": "第2次", "score": 69, "rank": 294}, {"label": "第3次", "score": 65, "rank": 275}, {"label": "第4次", "score": 62, "rank": 301}, {"label": "第5次", "score": 64, "rank": 285}, {"label": "第6次", "score": 73, "rank": 275}]};
+var WEAKNESS = {"生物": {"rank": 308, "total": 400, "pct": "65%", "selection": "25题错3题", "root": ["激活缺失", "表达缺失"], "surface": ["知识掌握有薄弱部分", "选择题尚可（25题错3题），非选择题严重丢分", "实验分析题得分率低", "读图识图能力薄弱"], "diagnosis": "生物最弱不是因为知识不够，而是'知识→答题'转化链断裂。选择题得分尚可，非选择题全面崩塌——典型的激活+表达双缺失。"}, "语文": {"rank": 295, "total": 400, "pct": "79%", "root": ["解码缺失", "表达缺失"], "surface": ["作文得分率仅75%左右，论证不充分", "阅读理解只写表面意思，深意答不到点上", "古诗文鉴赏丢分多", "基础知识偶有失分"], "diagnosis": "79分看似还行但排名295，问题不在'不会读不会写'，而在'读不深、写不深'——阅读只答表面是解码不足，作文论证不充分是表达范式不足。"}, "历史": {"rank": 290, "total": 400, "pct": "69%", "selection": "25题错4题", "root": ["解码缺失", "表达缺失"], "surface": ["未按题目要求作答，不能身份代入", "不清楚史论结合怎么作答", "答题口语化非常严重", "材料分析题无法提取关键信息"], "diagnosis": "历史的核心问题是'题目解码'和'答题范式'双重缺失。身份代入本质是解码，口语化本质是表达。选择题4/25不算差，说明知识储备够。"}, "道法": {"rank": 275, "total": 400, "pct": "73%", "selection": "24题错2题", "root": ["激活缺失", "表达缺失"], "surface": ["非选择题不能用课本知识作答", "答题不能形成条件反射", "答题口语化严重", "材料与知识点对应能力弱"], "diagnosis": "道法选择题2/24表现优秀，说明知识储备不差。非选择题致命问题是'题目→知识点→课本术语'链完全断裂——激活缺失+表达缺失。"}, "数学": {"rank": 177, "total": 400, "pct": "90%", "root": ["激活缺失(深层)"], "surface": ["压轴题丢分，稳定88-90难突破95", "平面直角坐标系综合题最弱", "不等式变号容易出错", "平行线综合证明思路不够灵活"], "diagnosis": "数学88-90分稳定说明基础激活没问题，但压轴题需要跨知识点综合调用——这是深层激活能力不足。"}, "英语": {"rank": 176, "total": 400, "pct": "88%", "root": ["激活缺失(精准)"], "surface": ["固定搭配不熟，用法混淆", "时态使用不当", "完形填空推断能力不足", "写作词汇量有限"], "diagnosis": "英语88分说明整体不错，但固定搭配和时态精准激活不足——知识是'模糊存储'而非'精准存储'。"}, "地理": {"rank": 165, "total": 400, "pct": "76%", "selection": "25题错3题", "root": ["激活缺失(轻度)", "解码缺失(轻度)"], "surface": ["不能有效捕获材料中的关键信息", "答题不会形成条件反射", "知识运用解题能力不足", "读图题偶尔失分"], "diagnosis": "地理排名165是最好科目！选择题3/25不错，说明基础知识扎实。条件反射不足是轻度激活+解码问题。"}};
+var IMPROVE = {"生物": {"goal": "排名从308提升至250以内", "target": "得分率80%+", "time": "每天30分钟", "root": ["激活缺失", "表达缺失"], "actions": ["【激活】每天3道非选择题，用条件反射法——先判断考哪个知识模块", "【表达】每天2道非选择题，用生物答题模板作答", "薄弱知识模块专项补强", "周末做1套完整测试题验收"], "mat": "生物突破材料与测试题.html", "matRating": 3, "matNote": "知识复习+测试题，需配合核心训练法", "verify": "周末测试得分率≥80%"}, "语文": {"goal": "排名从295提升至230以内", "target": "得分率85%+", "time": "每天45分钟", "root": ["解码缺失", "表达缺失"], "actions": ["【解码】每天2道阅读理解题，先用题目解码三步法", "【解码】阅读深读法训练——读三遍：表面→深层→指向", "【表达】作文深写法训练——论证三层次：现象→原因→意义", "古诗文鉴赏每天1首", "病句标点专项每天5题"], "mat": "语文突破材料与测试题.html", "matRating": 3, "matNote": "需配合深读法+深写法", "verify": "阅读题能写出深层含义"}, "历史": {"goal": "排名从290提升至230以内", "target": "得分率80%+", "time": "每天30分钟", "root": ["解码缺失", "表达缺失"], "actions": ["【解码】每天2道材料分析题，先做题目解码三步法", "【表达】史论结合模板训练——史实描述+历史结论", "材料提取训练：圈关键词→映射课本→学科语言", "周末1套测试题验收"], "mat": "历史突破材料与测试题.html", "matRating": 3, "matNote": "需配合解码法+史论模板", "verify": "答题无口语化，能正确身份代入"}, "道法": {"goal": "排名从275提升至220以内", "target": "得分率80%+", "time": "每天25分钟", "root": ["激活缺失", "表达缺失"], "actions": ["【激活】每天3道非选择题，用条件反射训练", "【表达】课本观点+材料依据+结论总结三段式", "材料信息提取训练", "周末1套测试题验收"], "mat": "道法突破材料与测试题.html", "matRating": 3, "matNote": "需配合条件反射法+答题模板", "verify": "能条件反射判断知识点"}, "数学": {"goal": "排名从177提升至150以内", "target": "得分率95%+", "time": "每天40分钟", "root": ["激活缺失(深层)"], "actions": ["【深层激活】每天1道压轴题，用组合激活法", "坐标系综合题专项（每周3道）", "不等式变号专题（每周2道）", "平行线证明思路拓展"], "mat": "数学压轴抽题系统.html", "matRating": 5, "matNote": "50题交互式系统，直接针对组合激活", "verify": "压轴题能独立完成≥70%"}, "英语": {"goal": "保持排名176左右", "target": "得分率90%+", "time": "每天20分钟", "root": ["激活缺失(精准)"], "actions": ["【精准激活】固定搭配精准比对法", "时态专项：辨析常见时态使用场景", "完形填空每周2篇"], "mat": "英语突破材料与测试题.html", "matRating": 3, "matNote": "有搭配和时态练习", "verify": "固定搭配正确率≥90%"}, "地理": {"goal": "排名从165提升至140以内", "target": "得分率85%+", "time": "每天20分钟", "root": ["激活缺失(轻度)", "解码缺失(轻度)"], "actions": ["【条件反射】读图条件反射训练——问气候→看纬线", "【解码】材料信息捕获法——圈关键词再关联", "知识运用解题训练", "周末1套测试题验收"], "mat": "地理突破材料与测试题.html", "matRating": 4, "matNote": "有SVG读图训练+条件反射练习", "verify": "读图题得分率≥85%"}};
+var data = {};
+var curSubj = '语文';
+var goals = {};
+var checkins = [];
+var examAnalysis = {};
+var weaknessTracking = {};
+var saveCounter = 0;
+
+
+/* === Grade auto-upgrade === */
+function getGrade() {
+  var now = new Date();
+  var y = now.getFullYear();
+  var m = now.getMonth() + 1;
+  // Grade 7: Sep 2025 - Aug 2026
+  // Grade 8: Sep 2026 - Aug 2027
+  // General rule: if month >= 9, grade = (year - 2025) + 7; else grade = (year - 2026) + 7
+  var grade;
+  if (y >= 2027 || (y === 2026 && m >= 9)) grade = 8;
+  else grade = 7;
+  return grade;
+}
+function getGradeLabel() {
+  var g = getGrade();
+  return g === 7 ? '七年级' : g === 8 ? '八年级' : g + '年级';
+}
+function getSchoolYear() {
+  var g = getGrade();
+  var startYear = 2025 + (g - 7);
+  return startYear + '-' + (startYear + 1) + '学年';
+}
+
+/* === Data load/save === */
+function loadData() {
+  var saved = localStorage.getItem('lsy_data_v8');
+  if (saved) { data = JSON.parse(saved); }
+  else { data = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); }
+}
+function saveData() {
+  localStorage.setItem('lsy_data_v8', JSON.stringify(data));
+  saveCounter++;
+  if (saveCounter % 3 === 0) { toast('建议定期备份数据！点击底部"导出备份"按钮'); }
+}
+function loadGoals() {
+  var saved = localStorage.getItem('lsy_goals_v1');
+  if (saved) { goals = JSON.parse(saved); }
+}
+function saveGoals() { localStorage.setItem('lsy_goals_v1', JSON.stringify(goals)); }
+function loadCheckins() {
+  var saved = localStorage.getItem('lsy_checkin_v1');
+  if (saved) { checkins = JSON.parse(saved); }
+}
+function saveCheckins() { localStorage.setItem('lsy_checkin_v1', JSON.stringify(checkins)); }
+function loadExamAnalysis() {
+  var saved = localStorage.getItem('lsy_exam_analysis_v2');
+  if (saved) { examAnalysis = JSON.parse(saved); }
+  var savedTrack = localStorage.getItem('lsy_weakness_tracking_v1');
+  if (savedTrack) { weaknessTracking = JSON.parse(savedTrack); }
+}
+function saveExamData() {
+  try { localStorage.setItem('lsy_exam_analysis_v2', JSON.stringify(examAnalysis)); }
+  catch(e) { toast('存储空间不足','error'); }
+  localStorage.setItem('lsy_weakness_tracking_v1', JSON.stringify(weaknessTracking));
+}
+
+function toast(msg, type) {
+  var t = document.createElement('div'); t.className='toast toast-'+(type||'success')+' show'; t.textContent=msg;
+  document.body.appendChild(t); setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},300);},2000);
+}
+
+function switchTab(idx) {
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.module').forEach(function(m,i){m.classList.toggle('active',i===idx);});
+  if (idx === 3) renderCheckinModule();
+}
+
+/* === Subject tabs & detail === */
+function initSubjectTabs() {
+  var el = document.getElementById('subjectTabs');
+  var h = '';
+  SUBJECTS.forEach(function(s) {
+    var active = s===curSubj ? ' active' : '';
+    var p = SPRI[s];
+    var tc = p==='P1'?'tag-red':p==='P2'?'tag-orange':p==='P3'?'tag-blue':'tag-green';
+    h += '<button class="subject-tab'+active+'" onclick="selectSubject(\''+s+'\')">'+s+'<span class="tag-p '+tc+'">'+p+'</span></button>';
+  });
+  el.innerHTML = h;
+}
+function selectSubject(s) {
+  curSubj = s;
+  document.querySelectorAll('.subject-tab').forEach(function(b) {
+    var subj = b.textContent.replace(/P[1-4].*/,'').trim();
+    b.classList.toggle('active', subj===s);
+  });
+  renderSubjectDetail();
+}
+
+/* === Single record add === */
+function addRecord() {
+  var subj = document.getElementById('inputSubject').value;
+  var score = document.getElementById('inputScore').value;
+  var rank = document.getElementById('inputRank').value;
+  if (!score && !rank) { toast('请至少填写分数或排名','error'); return; }
+  var n = data[subj].length + 1;
+  data[subj].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
+  saveData(); selectSubject(subj); toast('已录入 '+subj+' 第'+n+'次！');
+  document.getElementById('inputScore').value = '';
+  document.getElementById('inputRank').value = '';
+  renderGoals(); renderAchievements();
+}
+function delRecord(subj, idx) {
+  if (!confirm('确定删除'+subj+'第'+(idx+1)+'次记录？')) return;
+  data[subj].splice(idx, 1);
+  data[subj].forEach(function(r,i){ r.label = '第'+(i+1)+'次'; });
+  saveData(); renderSubjectDetail(); renderGoals(); renderAchievements(); toast('已删除');
+}
+
+/* === Batch input (NEW) === */
+function toggleBatchInput() {
+  var panel = document.getElementById('batchPanel');
+  panel.classList.toggle('open');
+}
+function batchAddRecords() {
+  var count = 0;
+  SUBJECTS.forEach(function(s) {
+    var scoreEl = document.getElementById('b_'+s+'_score');
+    var rankEl = document.getElementById('b_'+s+'_rank');
+    var score = scoreEl.value;
+    var rank = rankEl.value;
+    if (score || rank) {
+      var n = data[s].length + 1;
+      data[s].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
+      count++;
+      scoreEl.value = '';
+      rankEl.value = '';
+    }
+  });
+  if (count === 0) { toast('请至少填写1科数据','error'); return; }
+  saveData(); selectSubject(curSubj); renderGoals(); renderAchievements();
+  toast('已批量录入'+count+'科成绩！');
+  document.getElementById('batchPanel').classList.remove('open');
+}
+
+/* === Smooth bezier path === */
+function smoothPath(pts) {
+  if (pts.length < 2) return '';
+  if (pts.length === 2) return 'M'+pts[0].x+','+pts[0].y+' L'+pts[1].x+','+pts[1].y;
+  var d = 'M'+pts[0].x+','+pts[0].y;
+  for (var i = 0; i < pts.length - 1; i++) {
+    var p0 = pts[i > 0 ? i-1 : 0], p1 = pts[i], p2 = pts[i+1], p3 = pts[i+2 < pts.length ? i+2 : pts.length-1];
+    var t = 0.3;
+    d += ' C'+(p1.x+(p2.x-p0.x)*t)+','+(p1.y+(p2.y-p0.y)*t)+' '+
+          (p2.x-(p3.x-p1.x)*t)+','+(p2.y-(p3.y-p1.y)*t)+' '+p2.x+','+p2.y;
+  }
+  return d;
+}
+
+/* === Dual-axis chart: red score line + blue rank bars + goal line === */
+function renderComboChart() {
+  var records = data[curSubj];
+  var el = document.getElementById('comboChart');
+  var titleEl = document.getElementById('comboTitle');
+  var legendEl = document.getElementById('chartLegend');
+  titleEl.textContent = '📊 成绩 & 排名趋势 — ' + curSubj;
+
+  var scoreVals = [], rankVals = [];
+  records.forEach(function(r){ if(r.score!==null) scoreVals.push(r.score); if(r.rank!==null) rankVals.push(r.rank); });
+
+  if (scoreVals.length < 1 && rankVals.length < 1) {
+    legendEl.innerHTML = '';
+    el.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">暂无数据</p>';
+    return;
+  }
+
+  legendEl.innerHTML =
+    '<span class="legend-item"><span class="legend-line" style="background:'+SCORE_COLOR+'"></span> 成绩（左轴）</span>' +
+    '<span class="legend-item"><span class="legend-bar" style="background:'+RANK_COLOR+';opacity:0.6"></span> 排名（右轴）</span>' +
+    (goals[curSubj] ? '<span class="legend-item"><span class="legend-line" style="background:#2e7d32;border-style:dashed"></span> 目标成绩线</span>' : '');
+
+  var W=800, H=300, pL=55, pR=55, pT=30, pB=50;
+  var pw=W-pL-pR, ph=H-pT-pB;
+  var n = records.length;
+  var barW; if (n<=1) barW=30; else { var spacing=pw/(n-1); barW=Math.max(16,Math.min(50,spacing*0.4)); }
+  var sMin=0, sMax=100, rMin=1, rMax=400;
+  function scoreY(v){return pT+ph-ph*(v-sMin)/(sMax-sMin);}
+  function rankY(v){return pT+ph*(v-rMin)/(rMax-rMin);}
+  var baseline = pT+ph;
+  function xPos(i){return n>1?pL+i*(pw/(n-1)):pL+pw/2;}
+
+  var svg = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;">';
+  svg += '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fafafa" rx="4"/>';
+
+  /* Left axis grid */
+  var sTicks=6;
+  for(var i=0;i<=sTicks;i++){var sv=sMin+(sMax-sMin)*i/sTicks;var sy=scoreY(sv);svg+='<line x1="'+pL+'" y1="'+sy+'" x2="'+(W-pR)+'" y2="'+sy+'" stroke="#e8e8e8"/>';svg+='<text x="'+(pL-6)+'" y="'+(sy+4)+'" text-anchor="end" font-size="10" fill="#e74c3c">'+Math.round(sv)+'分</text>';}
+  /* Right axis ticks */
+  var rTicks=6;
+  for(var i=0;i<=rTicks;i++){var rv=rMin+(rMax-rMin)*i/rTicks;var ry=rankY(rv);svg+='<text x="'+(W-pR+6)+'" y="'+(ry+4)+'" text-anchor="start" font-size="10" fill="#3498db">'+Math.round(rv)+'名</text>';}
+  svg += '<text x="'+(pL-6)+'" y="'+(pT-8)+'" text-anchor="end" font-size="11" fill="#e74c3c" font-weight="600">分数</text>';
+  svg += '<text x="'+(W-pR+6)+'" y="'+(pT-8)+'" text-anchor="start" font-size="11" fill="#3498db" font-weight="600">排名</text>';
+
+  /* Goal line — score-based */
+  if (goals[curSubj]) {
+    var goalY = scoreY(goals[curSubj]);
+    svg += '<line x1="'+pL+'" y1="'+goalY+'" x2="'+(W-pR)+'" y2="'+goalY+'" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="8,4"/>';
+    svg += '<text x="'+(pL+4)+'" y="'+(goalY-6)+'" font-size="10" fill="#2e7d32">目标'+goals[curSubj]+'分</text>';
+  }
+
+  /* Rank bars */
+  records.forEach(function(r,i){if(r.rank!==null){var xp=xPos(i);var ry=rankY(r.rank);var bH=baseline-ry;if(bH<1)bH=1;var bx=xp-barW/2;svg+='<rect x="'+bx+'" y="'+ry+'" width="'+barW+'" height="'+bH+'" fill="'+RANK_COLOR+'" opacity="0.35" rx="2"/>';var lblY=ry-6;if(lblY<pT)lblY=ry+14;svg+='<text x="'+xp+'" y="'+lblY+'" text-anchor="middle" font-size="9" fill="'+RANK_COLOR+'" font-weight="600">R'+r.rank+'</text>';}});
+
+  /* Score smooth line */
+  if(scoreVals.length>=1){var sPoints=[];records.forEach(function(r,i){if(r.score!==null)sPoints.push({x:xPos(i),y:scoreY(r.score),val:r.score});});if(sPoints.length>=2)svg+='<path d="'+smoothPath(sPoints)+'" fill="none" stroke="'+SCORE_COLOR+'" stroke-width="2.5" stroke-linecap="round"/>';sPoints.forEach(function(pt){svg+='<circle cx="'+pt.x+'" cy="'+pt.y+'" r="4" fill="'+SCORE_COLOR+'" stroke="#fff" stroke-width="1.5"/>';svg+='<text x="'+pt.x+'" y="'+(pt.y-14)+'" text-anchor="middle" font-size="11" font-weight="700" fill="'+SCORE_COLOR+'">'+pt.val+'</text>';});}
+
+  /* X labels & delete */
+  records.forEach(function(r,i){var xp=xPos(i);svg+='<text x="'+xp+'" y="'+(H-18)+'" text-anchor="middle" font-size="10" fill="#999">'+r.label+'</text>';svg+='<text x="'+xp+'" y="'+(H-5)+'" text-anchor="middle" font-size="9" fill="#e74c3c" cursor="pointer" onclick="delRecord(\''+curSubj+'\','+i+')">✕</text>';});
+
+  svg += '</svg>';
+  el.innerHTML = svg;
+}
+
+/* === Trend analysis with goal status === */
+function renderTrendAnalysis() {
+  var el = document.getElementById('trendAnalysis');
+  var records = data[curSubj];
+  var p = SPRI[curSubj];
+  var tc = p==='P1'?'tag-red':p==='P2'?'tag-orange':p==='P3'?'tag-blue':'tag-green';
+  var html = '<div style="font-size:15px;font-weight:700;margin-bottom:8px;color:'+SCOLOR[curSubj]+';">'+curSubj+'<span class="tag-p '+tc+'" style="margin-left:8px;">'+p+' '+PLEVEL[p]+'</span></div>';
+
+  var scores=[]; records.forEach(function(r){if(r.score!==null)scores.push(r.score);});
+  if(scores.length>=2){var latest=scores[scores.length-1],prev=scores[scores.length-2],diff=latest-prev,best=Math.max.apply(null,scores),worst=Math.min.apply(null,scores),avg=scores.reduce(function(a,b){return a+b;},0)/scores.length,vol=best-worst;var trendTag=diff>2?'<span class="tag tag-up">↗ 上升</span>':diff<-2?'<span class="tag tag-down">↘ 下降</span>':'<span class="tag tag-stable">→ 稳定</span>';var volTag=vol>15?'<span class="tag tag-volatile">波动大</span>':'';html+='<div style="margin-bottom:6px;">成绩：最新 '+latest+' 分，较上次 '+diff.toFixed(1)+' 分 '+trendTag+' '+volTag+'</div>';html+='<div style="margin-bottom:6px;">历史：最高 '+best+'，最低 '+worst+'，平均 '+avg.toFixed(1)+'</div>';}
+
+  var ranks=[]; records.forEach(function(r){if(r.rank!==null)ranks.push(r.rank);});
+  if(ranks.length>=2){var rLatest=ranks[ranks.length-1],rPrev=ranks[ranks.length-2],rDiff=rLatest-rPrev,rBest=Math.min.apply(null,ranks),rWorst=Math.max.apply(null,ranks);var rTrendTag=rDiff<-10?'<span class="tag tag-up">↗ 进步</span>':rDiff>10?'<span class="tag tag-down">↘ 退步</span>':'<span class="tag tag-stable">→ 稳定</span>';html+='<div style="margin-bottom:6px;">排名：最新 R'+rLatest+'，较上次 '+rDiff+' 名 '+rTrendTag+'</div>';html+='<div style="margin-bottom:6px;">历史：最佳 R'+rBest+'，最差 R'+rWorst+'</div>';
+  /* Goal status — score-based */
+  if(goals[curSubj]){var gap=latest-goals[curSubj];var goalTag=gap>=0?'<span class="goal-status goal-reached">✅ 已达成</span>':gap>=-5?'<span class="goal-status goal-close">接近（差'+Math.abs(gap).toFixed(1)+'分）</span>':'<span class="goal-status goal-far">差'+Math.abs(gap).toFixed(1)+'分</span>';html+='<div style="margin-bottom:6px;">目标：'+goals[curSubj]+'分 → 当前 '+latest+'分 '+goalTag+'</div>';}
+  }
+
+  var w = WEAKNESS[curSubj];
+  if(w) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid #c5cae9;color:#546e7a;font-size:12px;">💡 '+w.diagnosis+'</div>';
+  el.innerHTML = html;
+}
+
+function renderSubjectDetail() { renderComboChart(); renderTrendAnalysis(); }
+
+/* === Goal management (NEW) — 目标成绩 === */
+function setGoal() {
+  var subj = document.getElementById('goalSubject').value;
+  var score = document.getElementById('goalScore').value;
+  if(!subj){toast('请选择科目','error');return;}
+  if(!score){toast('请填写目标成绩','error');return;}
+  goals[subj] = parseFloat(score);
+  saveGoals(); renderGoals(); renderSubjectDetail(); toast(subj+'目标已设定：'+score+'分');
+  document.getElementById('goalSubject').value = '';
+  document.getElementById('goalScore').value = '';
+}
+function removeGoal(subj) {
+  delete goals[subj];
+  saveGoals(); renderGoals(); renderSubjectDetail(); toast('目标已删除');
+}
+function renderGoals() {
+  var el = document.getElementById('goalList');
+  if(Object.keys(goals).length===0){el.innerHTML='<p style="color:#999;font-size:12px;text-align:center;padding:8px;">未设定目标，设定后目标线将显示在趋势图上</p>';return;}
+  var h='';
+  SUBJECTS.forEach(function(s){
+    if(goals[s]){
+      var latestScore=null;
+      data[s].forEach(function(r){if(r.score!==null)latestScore=r.score;});
+      var gap=latestScore?(latestScore-goals[s]):null;
+      var statusClass=gap===null?'goal-close':gap>=0?'goal-reached':gap>=-5?'goal-close':'goal-far';
+      var statusText=gap===null?'暂无成绩数据':gap>=0?'✅ 已达成':gap>=-5?'接近（差'+Math.abs(gap).toFixed(1)+'分）':'差'+Math.abs(gap).toFixed(1)+'分';
+      h+='<div class="goal-card"><span class="goal-subj">'+s+'</span><span class="goal-target">目标 '+goals[s]+'分</span><span class="goal-status '+statusClass+'">'+statusText+'</span><span style="cursor:pointer;color:#e74c3c;font-size:11px;margin-left:8px;" onclick="removeGoal(\''+s+'\')">删除</span></div>';
+    }
+  });
+  el.innerHTML=h;
+}
+
+/* === Achievement milestones (NEW) === */
+function detectAchievements() {
+  var achievements = [];
+  /* 1. 单科最强 — 得分率最高的科目 */
+  var bestPctSubj=null,bestPct=0;
+  SUBJECTS.forEach(function(s){
+    var latestScore=null;
+    data[s].forEach(function(r){if(r.score!==null)latestScore=r.score;});
+    if(latestScore!==null&&latestScore>bestPct){bestPct=latestScore;bestPctSubj=s;}
+  });
+  if(bestPctSubj){achievements.push({icon:'🌟',title:bestPctSubj+'最强科目',desc:'得分率'+bestPct+'%',cat:'best_subj'});}
+
+  /* 2. 单科最佳记录 — 进入过前200名即显示 */
+  SUBJECTS.forEach(function(s){
+    var ranks=[];data[s].forEach(function(r){if(r.rank!==null)ranks.push(r.rank);});
+    if(ranks.length>=1){
+      var best=Math.min.apply(null,ranks);
+      if(best<200){achievements.push({icon:'🥇',title:s+'最佳记录',desc:'R'+best,cat:'best'});}
+    }
+  });
+
+  /* 3. 大幅进步 — 最近一次与上一次排名跃升≥30名 */
+  SUBJECTS.forEach(function(s){
+    var ranks=[];data[s].forEach(function(r){if(r.rank!==null)ranks.push(r.rank);});
+    if(ranks.length>=2){
+      var jump=ranks[ranks.length-2]-ranks[ranks.length-1];
+      if(jump>=30){achievements.push({icon:'🚀',title:s+'大幅进步',desc:'跃升'+jump+'名',cat:'jump'});}
+    }
+  });
+
+  /* 4. 成绩突破目标 — 成绩≥目标即点亮 */
+  SUBJECTS.forEach(function(s){
+    if(goals[s]){
+      var latestScore=null;
+      data[s].forEach(function(r){if(r.score!==null)latestScore=r.score;});
+      if(latestScore!==null&&latestScore>=goals[s]){
+        achievements.push({icon:'🎯',title:s+'突破目标',desc:latestScore+'分 ≥ '+goals[s]+'分',cat:'goal_reached'});
+      }
+    }
+  });
+
+  /* 5. 连续进步 — 最近3次排名连续上升 */
+  SUBJECTS.forEach(function(s){
+    var ranks=[];data[s].forEach(function(r){if(r.rank!==null)ranks.push(r.rank);});
+    if(ranks.length>=3){
+      var last3=ranks.slice(-3);
+      if(last3[0]>last3[1]&&last3[1]>last3[2]){
+        var totalJump=last3[0]-last3[2];
+        achievements.push({icon:'🔥',title:s+'连续3次进步',desc:'累计跃升'+totalJump+'名',cat:'streak'});
+      }
+    }
+  });
+
+  /* 6. 短板突破 */
+  for(var subj in weaknessTracking){
+    var track=weaknessTracking[subj];
+    if(track&&track.currentStatus){
+      for(var rk in track.currentStatus){
+        if(track.currentStatus[rk]===('改善')){achievements.push({icon:'💪',title:subj+'短板突破',desc:rk+'已改善',cat:'breakthrough'});break;}
+      }
+    }
+  }
+  return achievements;
+}
+function renderAchievements() {
+  var el = document.getElementById('achieveWall');
+  var achs = detectAchievements();
+  if(achs.length===0){el.innerHTML='<div style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无解锁的成就，继续努力！设定目标并录入更多数据后自动检测</div>';return;}
+  var h='';
+  achs.forEach(function(a){
+    h+='<div class="achieve-card unlocked"><div class="achieve-icon">'+a.icon+'</div><div class="achieve-title">'+a.title+'</div><div class="achieve-desc">'+a.desc+'</div></div>';
+  });
+  el.innerHTML=h;
+}
+
+/* === Module 2: Weakness cards === */
+function renderModule2() {
+  var el = document.getElementById('weakCards');
+  var order={'P1':0,'P2':1,'P3':2,'P4':3};
+  var sorted=SUBJECTS.slice().sort(function(a,b){return order[SPRI[a]]-order[SPRI[b]];});
+  var rootCSS={'解码缺失':'rl-decode','激活缺失':'rl-activate','激活缺失(深层)':'rl-activate','激活缺失(精准)':'rl-activate','激活缺失(轻度)':'rl-activate','表达缺失':'rl-express','解码缺失(轻度)':'rl-decode'};
+  var h='';
+  sorted.forEach(function(s){
+    var w=WEAKNESS[s];var p=SPRI[s];var pc=p==='P1'?'p1':p==='P2'?'p2':p==='P3'?'p3':'p4';var tc=p==='P1'?'tag-red':p==='P2'?'tag-orange':p==='P3'?'tag-blue':'tag-green';
+    h+='<div class="weak-card '+pc+'"><h4>'+s+'（排名R'+w.rank+'/'+w.total+')<span class="tag-p '+tc+'">'+p+' '+PLEVEL[p]+'</span>';
+    if(w.selection)h+='<span class="sel-info">选择题：'+w.selection+'</span>';
+    h+='</h4><div class="rank-info">得分率'+w.pct+'</div>';
+    if(w.root&&w.root.length>0){h+='<div style="margin-bottom:4px;">';w.root.forEach(function(r){var rc=rootCSS[r]||'rl-activate';h+='<span class="root-label '+rc+'">'+r+'</span>';});
+      var track=weaknessTracking[s];if(track&&track.currentStatus){for(var rk in track.currentStatus){var st=track.currentStatus[rk];if(st===('改善'))h+='<span class="track-tag track-improve">✅改善</span>';else if(st===('仍存在'))h+='<span class="track-tag track-persist">⚠仍存在</span>';else if(st===('新出现'))h+='<span class="track-tag track-new">🆕新出现</span>';}}
+      h+='</div>';
+    }
+    h+='<div class="surface-label">表面症状：</div><ul>';w.surface.forEach(function(prob){h+='<li>'+prob+'</li>';});h+='</ul>';
+    h+='<div class="diagnosis">💡 '+w.diagnosis+'</div></div>';
+  });
+  el.innerHTML=h;
+}
+
+/* === Cross-subject root cause heat map (NEW) === */
+function renderHeatMap() {
+  var el = document.getElementById('heatMapBox');
+  var errorTypes = ['解码错误','激活错误','表达错误','知识缺失','粗心失误'];
+  /* Build data: for each subject+errorType, count frequency from exam analyses or WEAKNESS root labels */
+  var matrix = {};
+  SUBJECTS.forEach(function(s){matrix[s]={};errorTypes.forEach(function(et){matrix[s][et]=0;});});
+  /* From exam analyses */
+  for(var id in examAnalysis){
+    var ea=examAnalysis[id];
+    ea.wrongQuestions.forEach(function(q){
+      if(q.errorType&&matrix[ea.subject])matrix[ea.subject][q.errorType]=(matrix[ea.subject][q.errorType]||0)+1;
+    });
+  }
+  /* From WEAKNESS root labels (fallback if no exam data) */
+  if(Object.keys(examAnalysis).length===0){
+    var rootMap={'解码缺失':'解码错误','解码缺失(轻度)':'解码错误','激活缺失':'激活错误','激活缺失(深层)':'激活错误','激活缺失(精准)':'激活错误','激活缺失(轻度)':'激活错误','表达缺失':'表达错误'};
+    SUBJECTS.forEach(function(s){var w=WEAKNESS[s];if(w&&w.root)w.root.forEach(function(r){var et=rootMap[r];if(et&&matrix[s])matrix[s][et]=1;});});
+  }
+  var h='<table class="hm-table"><tr><th></th>';
+  SUBJECTS.forEach(function(s){h+='<th>'+s+'</th>';});
+  h+='</tr>';
+  errorTypes.forEach(function(et){
+    h+='<tr><th style="text-align:left;">'+et+'</th>';
+    SUBJECTS.forEach(function(s){
+      var val=matrix[s][et]||0;
+      var cls=val===0?'hm-empty':val===1?'hm-low':val===2?'hm-med':val>=3?'hm-high':'hm-na';
+      var txt=val===0?'-':val+'次';
+      h+='<td class="'+cls+'">'+txt+'</td>';
+    });
+    h+='</tr>';
+  });
+  h+='</table>';
+  /* Systematic vs subject-specific analysis */
+  h+='<div style="font-size:12px;margin-top:8px;line-height:1.7;">';
+  errorTypes.forEach(function(et){
+    var count=0;SUBJECTS.forEach(function(s){if((matrix[s][et]||0)>0)count++;});
+    if(count>=3)h+='<div style="margin:2px 0;">🔴 <strong>'+et+'是系统性问题</strong>（跨'+count+'科出现）→ 优先训练核心训练法</div>';
+    else if(count>=1)h+='<div style="margin:2px 0;">🟡 <strong>'+et+'是学科性问题</strong>（仅'+count+'科出现）→ 优先补学科知识</div>';
+  });
+  h+='</div>';
+  el.innerHTML=h;
+}
+
+/* === Knowledge point aggregation (NEW) === */
+function renderKnowledgeAggregation() {
+  var el = document.getElementById('knowAggr');
+  if(Object.keys(examAnalysis).length===0){
+    el.innerHTML='<p style="color:#999;font-size:12px;text-align:center;padding:8px;">暂无试卷分析数据，导入后自动聚合错题知识点</p>';
+    return;
+  }
+  /* Aggregate by subject+knowledge */
+  var aggr={};
+  for(var id in examAnalysis){
+    var ea=examAnalysis[id];
+    ea.wrongQuestions.forEach(function(q){
+      if(q.knowledge){
+        var key=ea.subject+'::'+q.knowledge;
+        if(!aggr[key])aggr[key]={subject:ea.subject,knowledge:q.knowledge,count:0,exams:[],errorTypes:[]};
+        aggr[key].count++;
+        aggr[key].exams.push(ea.label);
+        if(q.errorType&&aggr[key].errorTypes.indexOf(q.errorType)<0)aggr[key].errorTypes.push(q.errorType);
+      }
+    });
+  }
+  /* Sort by count descending */
+  var items=Object.values(aggr).sort(function(a,b){return b.count-a.count;});
+  if(items.length===0){el.innerHTML='<p style="color:#999;font-size:12px;">错题未标注知识点，无法聚合</p>';return;}
+  /* Group by subject */
+  var bySubj={};
+  items.forEach(function(item){if(!bySubj[item.subject])bySubj[item.subject]=[];bySubj[item.subject].push(item);});
+  var h='';
+  SUBJECTS.forEach(function(s){
+    if(bySubj[s]){
+      h+='<div class="know-group"><h5>'+s+'（'+bySubj[s].length+'个知识点出错）</h5>';
+      bySubj[s].forEach(function(item){
+        var freqClass=item.count>=2?'know-freq':'know-freq-low';
+        h+='<div class="know-item"><span class="'+freqClass+'">'+item.count+'次</span><span>'+item.knowledge+'</span><span style="font-size:11px;color:#78909c;">考试：'+item.exams.join('、')+' | 类型：'+item.errorTypes.join('、')+'</span></div>';
+      });
+      h+='</div>';
+    }
+  });
+  /* Recurring alert */
+  var recurring=items.filter(function(i){return i.count>=2;});
+  if(recurring.length>0){
+    h+='<div class="new-warn"><strong>🔴 反复出错知识点（≥2次）：</strong><br>';
+    recurring.forEach(function(i){h+='· '+i.subject+' — '+i.knowledge+'（'+i.count+'次）<br>';});
+    h+='需专项突破，建议在训练资料更新请求中包含这些知识点。</div>';
+  }
+  el.innerHTML=h;
+}
+
+/* === Module 3: Plan cards === */
+function renderModule3() {
+  var el=document.getElementById('planCards');
+  var order={'P1':0,'P2':1,'P3':2,'P4':3};
+  var sorted=SUBJECTS.slice().sort(function(a,b){return order[SPRI[a]]-order[SPRI[b]];});
+  var rootCSS={'解码缺失':'rl-decode','激活缺失':'rl-activate','激活缺失(深层)':'rl-activate','激活缺失(精准)':'rl-activate','激活缺失(轻度)':'rl-activate','表达缺失':'rl-express','解码缺失(轻度)':'rl-decode'};
+  var h='';
+  sorted.forEach(function(s){
+    var p=IMPROVE[s];var pri=SPRI[s];var pc=pri==='P1'?'p1':pri==='P2'?'p2':pri==='P3'?'p3':'p4';var tc=pri==='P1'?'tag-red':pri==='P2'?'tag-orange':pri==='P3'?'tag-blue':'tag-green';
+    h+='<div class="plan-card '+pc+'"><h4>'+s+'<span class="tag-p '+tc+'">'+pri+' '+PLEVEL[pri]+'</span></h4>';
+    if(p.root&&p.root.length>0){h+='<div style="margin-bottom:4px;">';p.root.forEach(function(r){var rc=rootCSS[r]||'rl-activate';h+='<span class="root-label '+rc+'">'+r+'</span>';});
+      var track=weaknessTracking[s];if(track&&track.currentStatus){for(var rk in track.currentStatus){var st=track.currentStatus[rk];if(st===('改善'))h+='<span class="track-tag track-improve">✅改善</span>';else if(st===('仍存在'))h+='<span class="track-tag track-persist">⚠仍存在</span>';else if(st===('新出现'))h+='<span class="track-tag track-new">🆕新出现</span>';}}
+      h+='</div>';
+    }
+    var track2=weaknessTracking[s];
+    if(track2&&track2.currentStatus){var hasI=false,hasP=false,hasN=false;for(var rk3 in track2.currentStatus){if(track2.currentStatus[rk3]===('改善'))hasI=true;if(track2.currentStatus[rk3]===('仍存在'))hasP=true;if(track2.currentStatus[rk3]===('新出现'))hasN=true;}
+      if(hasI)h+='<div class="improve-alert">✅ 有改善迹象，可适当减少训练频率但仍需巩固</div>';
+      if(hasP)h+='<div class="improve-alert" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;">⚠ 仍存在，需加大针对性训练力度</div>';
+      if(hasN)h+='<div class="improve-alert" style="background:#fce4ec;border-color:#f48fb1;color:#c62828;">🆕 新问题出现，需新增针对性训练</div>';
+    }
+    h+='<div class="goal">🎯 '+p.goal+'</div><div class="target">指标：'+p.target+'</div>';
+    h+='<div class="schedule">⏰ '+p.time+'</div><ul>';p.actions.forEach(function(a){h+='<li>'+a+'</li>';});h+='</ul>';
+    var stars='';if(p.matRating){for(var i=0;i<5;i++)stars+=i<p.matRating?'★':'☆';h+='<a class="mat-link" href="'+p.mat+'" target="_blank">📖 打开训练资料</a><span class="mat-stars">'+stars+'</span>';if(p.matNote)h+='<span class="mat-note"> — '+p.matNote+'</span>';}
+    if(p.verify)h+='<div class="verify">✅ 验收：'+p.verify+'</div>';
+    h+='</div>';
+  });
+  el.innerHTML=h;
+}
+
+/* === Training Checkin (NEW) === */
+/* Subject-action mapping: each subject only shows its applicable training types */
+var SUBJ_ACTIONS = {
+  '语文': ['解码训练(题目解码三步法)','解码训练(阅读深读法)','表达训练(答题模板)','表达训练(作文深写法)','知识梳理(古诗文)','知识梳理(病句标点)','测试题验收'],
+  '数学': ['激活训练(组合激活法)','压轴题训练','知识梳理(坐标系)','知识梳理(不等式变号)','知识梳理(平行线证明)','测试题验收'],
+  '英语': ['激活训练(固定搭配精准比对)','固定搭配专项','知识梳理(时态)','测试题验收'],
+  '生物': ['激活训练(条件反射)','表达训练(答题模板)','知识梳理(薄弱模块)','测试题验收'],
+  '道法': ['激活训练(条件反射)','表达训练(三段式模板)','知识梳理(课本观点)','测试题验收'],
+  '历史': ['解码训练(题目解码三步法)','表达训练(史论结合模板)','知识梳理(史实)','测试题验收'],
+  '地理': ['解码训练(材料信息捕获)','激活训练(读图条件反射)','读图条件反射','知识梳理(地图)','测试题验收']
+};
+function updateCheckinActions() {
+  var subj = document.getElementById('ciSubject').value;
+  var sel = document.getElementById('ciAction');
+  var hint = document.getElementById('checkinMatHint');
+  sel.innerHTML = '';
+  if (!subj) {
+    sel.innerHTML = '<option value="">— 先选科目 —</option>';
+    hint.innerHTML = '';
+    return;
+  }
+  var actions = SUBJ_ACTIONS[subj] || [];
+  sel.innerHTML = '<option value="">选择训练内容</option>';
+  actions.forEach(function(a) {
+    sel.innerHTML += '<option value="'+a+'">'+a+'</option>';
+  });
+  sel.innerHTML += '<option value="其他">其他</option>';
+  /* Show material source hint */
+  var imp = IMPROVE[subj];
+  if (imp && imp.mat) {
+    hint.innerHTML = '📖 训练资料：<a href="'+imp.mat+'" target="_blank" style="color:#283593;font-weight:600;">'+imp.mat+'</a>（适用度：'+(imp.matRating||0)+'星）';
+  } else {
+    hint.innerHTML = '';
+  }
+}
+function addCheckin() {
+  var subj=document.getElementById('ciSubject').value;
+  var action=document.getElementById('ciAction').value;
+  var duration=document.getElementById('ciDuration').value;
+  var eval=document.getElementById('ciEval').value;
+  if(!subj){toast('请选择科目','error');return;}
+  if(!action){toast('请选择训练内容','error');return;}
+  checkins.push({subject:subj,action:action,duration:duration?parseInt(duration):null,eval:eval,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
+  saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！');
+  document.getElementById('ciSubject').value='';
+  document.getElementById('ciAction').value='';
+  document.getElementById('ciDuration').value='';
+  document.getElementById('ciEval').value='good';
+}
+function renderCheckinModule() {
+  renderStreak();
+  renderWeekSummary();
+  renderCheckinList();
+}
+function renderStreak() {
+  var el=document.getElementById('streakBox');
+  /* Calculate streak: consecutive days with at least 1 checkin */
+  var today=new Date().toLocaleDateString();
+  var dates=[];checkins.forEach(function(c){if(dates.indexOf(c.date)<0)dates.push(c.date);});
+  dates.sort(function(a,b){return new Date(b)-new Date(a);});
+  var streak=0;var d=new Date();
+  for(var i=0;i<365;i++){
+    var ds=d.toLocaleDateString();
+    if(dates.indexOf(ds)>=0){streak++;d.setDate(d.getDate()-1);}
+    else break;
+  }
+  var totalToday=checkins.filter(function(c){return c.date===today;}).length;
+  el.innerHTML='<div><div class="streak-num">'+streak+'</div><div class="streak-label">连续打卡天数</div></div><div><div class="streak-num" style="color:#e65100;">'+totalToday+'</div><div class="streak-label">今日打卡次数</div></div><div><div class="streak-num" style="color:#2e7d32;">'+checkins.length+'</div><div class="streak-label">累计总打卡</div></div>';
+}
+function renderWeekSummary() {
+  var el=document.getElementById('weekSummary');
+  /* This week's checkins */
+  var now=new Date();var weekStart=new Date(now);weekStart.setDate(now.getDate()-now.getDay());weekStart.setHours(0,0,0,0);
+  var weekCheckins=checkins.filter(function(c){return new Date(c.date)>=weekStart;});
+  var weekBySubj={};
+  weekCheckins.forEach(function(c){if(!weekBySubj[c.subject])weekBySubj[c.subject]=0;weekBySubj[c.subject]++;});
+  var totalWeek=weekCheckins.length;
+  /* Completion rate: compare with plan actions count */
+  var plannedActions=0;SUBJECTS.forEach(function(s){plannedActions+=IMPROVE[s].actions.length;});
+  var completionRate=Math.round(totalWeek/plannedActions*100);
+  var h='<div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:6px;">本周训练概览</div>';
+  h+='<div>本周打卡：'+totalWeek+'次 | 训练执行率：'+completionRate+'%</div>';
+  if(totalWeek>0){
+    h+='<div style="margin-top:4px;">';
+    SUBJECTS.forEach(function(s){if(weekBySubj[s])h+='<span class="tag tag-up" style="margin:2px;">'+s+' '+weekBySubj[s]+'次</span>';});
+    h+='</div>';
+  }
+  /* Link to weakness tracking: if training execution is low and weakness persists, note it */
+  var lowTraining=SUBJECTS.filter(function(s){return !weekBySubj[s]&&SPRI[s]!=='P4';});
+  if(lowTraining.length>0)h+='<div style="margin-top:6px;color:#e65100;">⚠️ 以下重点科目本周未训练：'+lowTraining.join('、')+' — 对应短板可能持续存在</div>';
+  el.innerHTML=h;
+}
+function renderCheckinList() {
+  var el=document.getElementById('checkinList');
+  /* Show today's + recent checkins */
+  var today=new Date().toLocaleDateString();
+  var todayList=checkins.filter(function(c){return c.date===today;});
+  var recentList=checkins.filter(function(c){return c.date!==today;}).slice(-10);
+  var h='';
+  if(todayList.length>0){
+    h+='<div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:4px;">今日打卡</div>';
+    todayList.forEach(function(c,i){
+      var evalClass=c.eval==='good'?'ci-good':c.eval==='ok'?'ci-ok':'ci-bad';
+      var evalText=c.eval==='good'?'👍 有收获':c.eval==='ok'?'😐 一般':'👎 无收获';
+      h+='<div class="checkin-item"><span class="ci-subj">'+c.subject+'</span><span class="ci-action">'+c.action+'</span><span class="ci-time">'+(c.duration?c.duration+'min':'')+' · '+c.time+'</span><span class="ci-eval '+evalClass+'">'+evalText+'</span><span style="cursor:pointer;color:#e74c3c;font-size:11px;" onclick="delCheckin('+i+')">✕</span></div>';
+    });
+  }
+  if(recentList.length>0){
+    h+='<div style="font-size:13px;font-weight:600;color:#546e7a;margin:8px 0 4px;">历史打卡（最近10条）</div>';
+    recentList.forEach(function(c){
+      var evalClass=c.eval==='good'?'ci-good':c.eval==='ok'?'ci-ok':'ci-bad';
+      var evalText=c.eval==='good'?'👍':c.eval==='ok'?'😐':'👎';
+      h+='<div class="checkin-item" style="opacity:0.7;"><span class="ci-subj">'+c.subject+'</span><span class="ci-action">'+c.action+'</span><span class="ci-time">'+c.date+'</span><span class="ci-eval '+evalClass+'">'+evalText+'</span></div>';
+    });
+  }
+  if(checkins.length===0)h='<p style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无打卡记录</p>';
+  el.innerHTML=h;
+}
+function delCheckin(todayIdx) {
+  var today=new Date().toLocaleDateString();
+  var todayList=checkins.filter(function(c){return c.date===today;});
+  var target=todayList[todayIdx];
+  var idx=checkins.indexOf(target);
+  if(idx>=0){checkins.splice(idx,1);saveCheckins();renderCheckinModule();toast('已删除打卡');}
+}
+
+/* === Exam Analysis (AI bridge) === */
+var ERROR_TYPES={'解码错误':{color:'#e74c3c',root:'解码缺失'},'激活错误':{color:'#f39c12',root:'激活缺失'},'表达错误':{color:'#9b59b6',root:'表达缺失'},'知识缺失':{color:'#607d8b'},'粗心失误':{color:'#78909c'}};
+
+function toggleExamForm(){var body=document.getElementById('examBody');var toggle=document.getElementById('examToggle');body.classList.toggle('open');toggle.textContent=body.classList.contains('open')?'▲ 收起':'▼ 展开';}
+function clearAiForm(){document.getElementById('aiImportInput').value='';document.getElementById('aiSubject').value='';}
+
+function importAIResult(){
+  var input=document.getElementById('aiImportInput').value.trim();
+  if(!input){toast('请粘贴AI返回的JSON','error');return;}
+  try{
+    var result=JSON.parse(input);
+    if(!result.subject||!result.wrongQuestions){toast('JSON格式不正确','error');return;}
+    if(result.wrongQuestions.length===0){toast('wrongQuestions为空','error');return;}
+    var id=Date.now().toString();var subj=result.subject;
+    examAnalysis[id]={subject:subj,label:result.label||('第'+getExamCount(subj)+'次'),score:result.score||null,rank:result.rank||null,photos:result.photos||[],wrongQuestions:result.wrongQuestions,createdAt:new Date().toLocaleDateString(),aiSummary:result.analysis||''};
+    updateWeaknessTracking(subj,id);
+    saveExamData();renderExamList();selectExamAnalysis(id);renderModule2();renderModule3();renderHeatMap();renderKnowledgeAggregation();
+    var updateReq=generateUpdateRequest(subj,id);renderUpdateRequest(updateReq,subj);
+    clearAiForm();toast(subj+'试卷分析已导入！短板+热力图+聚合已自动更新');
+  }catch(e){toast('JSON解析错误：'+e.message,'error');}
+}
+function getExamCount(subj){var count=0;for(var id in examAnalysis){if(examAnalysis[id].subject===subj)count++;}return count+1;}
+
+function updateWeaknessTracking(subj,examId){
+  var ea=examAnalysis[examId];var w=WEAKNESS[subj];if(!w)return;
+  var currentRoots=w.root||[];var typeCount={};
+  ea.wrongQuestions.forEach(function(q){if(q.errorType)typeCount[q.errorType]=(typeCount[q.errorType]||0)+1;});
+  var rootMap={'解码缺失':'解码错误','激活缺失':'激活错误','激活缺失(深层)':'激活错误','激活缺失(精准)':'激活错误','激活缺失(轻度)':'激活错误','表达缺失':'表达错误','解码缺失(轻度)':'解码错误'};
+  var rootKeys=[{key:'解码缺失',label:'解码'},{key:'激活缺失',label:'激活'},{key:'表达缺失',label:'表达'}];
+  var trackEntry={examId:examId,label:ea.label,date:ea.createdAt,typeCount:typeCount,rootStatus:{}};
+  rootKeys.forEach(function(rk){var mappedError=rootMap[rk.key]||'';var hasRoot=currentRoots.some(function(r){return r.indexOf(rk.label)>=0;});var hasError=(typeCount[mappedError]||0)>0;
+    if(hasRoot&&!hasError)trackEntry.rootStatus[rk.key]='改善';else if(hasRoot&&hasError)trackEntry.rootStatus[rk.key]='仍存在';else if(!hasRoot&&hasError)trackEntry.rootStatus[rk.key]='新出现';else trackEntry.rootStatus[rk.key]='无';});
+  if(!weaknessTracking[subj])weaknessTracking[subj]={history:[]};
+  weaknessTracking[subj].history.push(trackEntry);
+  var hist=weaknessTracking[subj].history;var last=hist[hist.length-1];
+  weaknessTracking[subj].currentStatus=last.rootStatus;
+  if(hist.length>=2){var prev=hist[hist.length-2];weaknessTracking[subj].trend={};for(var rk2 in last.rootStatus){var currVal=typeCount[rootMap[rk2]]||0;var prevVal=prev.typeCount[rootMap[rk2]]||0;if(currVal<prevVal)weaknessTracking[subj].trend[rk2]='减少';else if(currVal>prevVal)weaknessTracking[subj].trend[rk2]='增加';else weaknessTracking[subj].trend[rk2]='持平';}}
+  weaknessTracking[subj].lastExamLabel=last.label;weaknessTracking[subj].lastExamDate=last.date;
+}
+function deleteExamAnalysis(id){if(!confirm('确定删除？'))return;var subj=examAnalysis[id].subject;delete examAnalysis[id];
+  if(weaknessTracking[subj]){weaknessTracking[subj].history=weaknessTracking[subj].history.filter(function(h){return h.examId!==id;});if(weaknessTracking[subj].history.length===0)delete weaknessTracking[subj];else{var last=weaknessTracking[subj].history[weaknessTracking[subj].history.length-1];weaknessTracking[subj].currentStatus=last.rootStatus;weaknessTracking[subj].lastExamLabel=last.label;delete weaknessTracking[subj].trend;}}
+  saveExamData();renderExamList();renderModule2();renderModule3();renderHeatMap();renderKnowledgeAggregation();document.getElementById('examCompareResult').innerHTML='';toast('已删除，短板状态已回退');}
+
+function renderExamList(){
+  var el=document.getElementById('examAnalysisList');var ids=Object.keys(examAnalysis);
+  if(ids.length===0){el.innerHTML='<p style="color:#999;font-size:12px;text-align:center;padding:10px;">暂无试卷分析记录</p>';return;}
+  ids.sort(function(a,b){return new Date(examAnalysis[b].createdAt)-new Date(examAnalysis[a].createdAt);});
+  var h='<div style="font-size:13px;font-weight:600;margin-bottom:8px;color:#283593;">已录入的试卷分析</div>';
+  ids.forEach(function(id){var ea=examAnalysis[id];h+='<div class="exam-item" onclick="selectExamAnalysis(\''+id+'\')" id="examItem_'+id+'"><div class="exam-item-title">'+ea.subject+' · '+ea.label+(ea.score?' · '+ea.score+'分':'')+(ea.rank?' · R'+ea.rank:'')+'</div><div class="exam-item-info">错题'+ea.wrongQuestions.length+'道 · '+ea.createdAt+' · <span style="color:#e74c3c;cursor:pointer;" onclick="event.stopPropagation();deleteExamAnalysis(\''+id+'\')">删除</span></div></div>';});
+  el.innerHTML=h;
+}
+function selectExamAnalysis(id){document.querySelectorAll('.exam-item').forEach(function(el){el.classList.remove('active');});var item=document.getElementById('examItem_'+id);if(item)item.classList.add('active');renderExamCompare(id);}
+
+function renderExamCompare(id){
+  var ea=examAnalysis[id];var el=document.getElementById('examCompareResult');var subj=ea.subject;var w=WEAKNESS[subj];if(!w){el.innerHTML='<p style="color:#999;">无短板数据</p>';return;}
+  var typeCount={};ea.wrongQuestions.forEach(function(q){if(q.errorType)typeCount[q.errorType]=(typeCount[q.errorType]||0)+1;});
+  var h='<div class="compare-box"><div style="font-size:14px;font-weight:700;margin-bottom:10px;color:#1a237e;">📊 '+subj+' · '+ea.label+' 短板改善分析</div>';
+  if(ea.aiSummary)h+='<div style="background:#e8eaf6;border-radius:6px;padding:8px;margin:6px 0;font-size:12px;">💡 AI分析：'+ea.aiSummary+'</div>';
+  /* Error distribution */
+  h+='<div style="font-size:12px;font-weight:600;margin:10px 0 6px;">错误类型分布：</div>';
+  var maxCount=0;for(var t in typeCount){if(typeCount[t]>maxCount)maxCount=typeCount[t];}if(maxCount===0)maxCount=1;
+  for(var et in ERROR_TYPES){var count=typeCount[et]||0;var info=ERROR_TYPES[et];var pct=count/maxCount*100;
+    h+='<div style="display:flex;align-items:center;gap:6px;margin:3px 0;"><span style="width:70px;font-size:11px;text-align:right;">'+et+'</span><div style="flex:1;height:18px;background:#f0f0f0;border-radius:3px;overflow:hidden;"><div style="width:'+pct+'%;height:100%;background:'+info.color+';opacity:0.8;border-radius:3px;"></div></div><span style="width:20px;font-size:11px;font-weight:600;">'+count+'</span></div>';
+  }
+  /* Tracking status */
+  var track=weaknessTracking[subj];if(track&&track.currentStatus){
+    h+='<div style="font-size:12px;font-weight:600;margin:12px 0 6px;">核心缺陷改善状态：</div><div class="compare-status">';
+    var improveCount=0,persistCount=0,newCount=0;
+    for(var rk in track.currentStatus){var status=track.currentStatus[rk];var trendInfo='';
+      if(track.trend&&track.trend[rk]){var tr=track.trend[rk];trendInfo=tr===('减少')?' <span class="track-trend-down">↓'+tr+'</span>':tr===('增加')?' <span class="track-trend-up">↑'+tr+'</span>':' <span class="track-trend-flat">→'+tr+'</span>';}
+      if(status===('改善')){h+='<span class="track-tag track-improve">✅ '+rk+' 改善'+trendInfo+'</span>';improveCount++;}
+      else if(status===('仍存在')){h+='<span class="track-tag track-persist">⚠ '+rk+' 仍存在'+trendInfo+'</span>';persistCount++;}
+      else if(status===('新出现')){h+='<span class="track-tag track-new">🆕 '+rk+' 新出现'+trendInfo+'</span>';newCount++;}
+      else{h+='<span class="track-tag track-improve">✓ '+rk+' 未涉及</span>';}}
+    h+='</div>';
+    h+='<div style="background:#e8eaf6;border-radius:8px;padding:10px;margin-top:10px;font-size:12px;line-height:1.7;"><strong>📈 综合：</strong><br>';
+    if(improveCount>0)h+='· '+improveCount+'项核心缺陷已改善 ✅<br>';
+    if(persistCount>0)h+='· '+persistCount+'项仍存在，需加强训练 ⚠️<br>';
+    if(newCount>0)h+='· '+newCount+'项新出现，需关注 🆕<br>';
+    var knowledgeGaps=ea.wrongQuestions.filter(function(q){return q.errorType===('知识缺失');});
+    if(knowledgeGaps.length>0){h+='· 发现'+knowledgeGaps.length+'个知识盲点：<br>';knowledgeGaps.forEach(function(q){h+='&nbsp;&nbsp;题'+(q.qNum||'?')+'：'+(q.knowledge||'未标注')+'（失'+q.lost+'分）<br>';});}
+    /* Compare with previous */
+    var prevExams=[];for(var eid in examAnalysis){if(examAnalysis[eid].subject===subj&&eid!==id)prevExams.push({id:eid,ea:examAnalysis[eid]});}
+    if(prevExams.length>0){prevExams.sort(function(a,b){return new Date(b.ea.createdAt)-new Date(a.ea.createdAt);});var prev=prevExams[0].ea;var prevTypeCount={};prev.wrongQuestions.forEach(function(q){if(q.errorType)prevTypeCount[q.errorType]=(prevTypeCount[q.errorType]||0)+1;});
+      h+='<br><strong>与上次('+prev.label+')对比：</strong><br>';
+      for(var et2 in ERROR_TYPES){var prevC=prevTypeCount[et2]||0;var currC=typeCount[et2]||0;if(prevC>0||currC>0){var diff=currC-prevC;var arrow=diff<0?'↓减少'+Math.abs(diff):diff>0?'↑增加'+diff:'→持平';h+='· '+et2+': '+prevC+'→'+currC+' ('+arrow+')<br>';}}}
+    h+='</div>';
+  }
+  h+='<details style="margin-top:10px;"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#283593;">查看错题明细</summary>';
+  h+='<table style="width:100%;font-size:11px;margin-top:6px;border-collapse:collapse;"><tr style="background:#f5f5f5;"><th style="padding:4px;border:1px solid #e0e0e0;">题号</th><th style="padding:4px;border:1px solid #e0e0e0;">题型</th><th style="padding:4px;border:1px solid #e0e0e0;">知识点</th><th style="padding:4px;border:1px solid #e0e0e0;">错误类型</th><th style="padding:4px;border:1px solid #e0e0e0;">失分</th></tr>';
+  ea.wrongQuestions.forEach(function(q){var etInfo=ERROR_TYPES[q.errorType]||{};var etColor=etInfo.color||'#999';h+='<tr><td style="padding:4px;border:1px solid #e0e0e0;text-align:center;">'+(q.qNum||'-')+'</td><td style="padding:4px;border:1px solid #e0e0e0;">'+(q.qType||'-')+'</td><td style="padding:4px;border:1px solid #e0e0e0;">'+(q.knowledge||'-')+'</td><td style="padding:4px;border:1px solid #e0e0e0;color:'+etColor+';font-weight:600;">'+(q.errorType||'-')+'</td><td style="padding:4px;border:1px solid #e0e0e0;text-align:center;">'+q.lost+'</td></tr>';});
+  h+='</table></details></div>';
+  el.innerHTML=h;
+}
+
+/* === Auto-generate training material update request === */
+function generateUpdateRequest(subj,examId){
+  var ea=examAnalysis[examId];var track=weaknessTracking[subj];var w=WEAKNESS[subj];var imp=IMPROVE[subj];
+  var request={type:'training_material_update',subject:subj,examLabel:ea.label,examDate:ea.createdAt,currentGrade:getGradeLabel(),nextGrade:getGrade()===7?'八年级':'九年级',gradeUpgradeNeeded:true,currentWeakness:w?{root:w.root,surface:w.surface}:null,trackingStatus:track?track.currentStatus:null,trend:track?track.trend:null,wrongQuestionsSummary:{},knowledgeGaps:[],updateInstructions:[]};
+  var typeCount={};ea.wrongQuestions.forEach(function(q){if(q.errorType)typeCount[q.errorType]=(typeCount[q.errorType]||0)+1;if(q.errorType===('知识缺失')&&q.knowledge)request.knowledgeGaps.push(q.knowledge);});
+  request.wrongQuestionsSummary=typeCount;
+  if(track&&track.currentStatus){for(var rk in track.currentStatus){var status=track.currentStatus[rk];if(status===('改善'))request.updateInstructions.push(rk+'已改善 → 训练比重可适当降低但仍需巩固');else if(status===('仍存在'))request.updateInstructions.push(rk+'仍存在 → 需加强针对'+rk+'的训练题量和难度');else if(status===('新出现'))request.updateInstructions.push(rk+'新出现 → 需新增针对'+rk+'的训练模块');}}
+  request.updateInstructions.push('年级升级：'+getGradeLabel()+'→'+request.nextGrade+'，需补充'+request.nextGrade+'新知识内容，同时保留'+getGradeLabel()+'薄弱知识点巩固训练');
+  if(request.knowledgeGaps.length>0)request.updateInstructions.push('知识盲点补充：需新增以下知识点专项训练 — '+request.knowledgeGaps.join('、'));
+  return request;
+}
+function renderUpdateRequest(req,subj){
+  var el=document.getElementById('examCompareResult');
+  var h='<div style="background:#fff3e0;border:2px solid #f39c12;border-radius:10px;padding:14px;margin:14px 0;">';
+  h+='<div style="font-size:14px;font-weight:700;color:#e65100;margin-bottom:10px;">🔄 训练资料更新请求（自动生成）</div>';
+  h+='<div style="font-size:12px;color:#546e7a;line-height:1.7;margin-bottom:8px;">基于 <strong>'+subj+' · '+req.examLabel+'</strong> 的试卷分析，系统已自动生成训练资料更新请求。<br>复制下方JSON → 在WorkBuddy对话中发送给AI → AI将针对性重做或补充训练资料。<br>⚠️ 当前年级：<strong>'+getGradeLabel()+'</strong>，即将升级为<strong>'+req.nextGrade+'</strong>，更新请求已包含年级升级内容补充指令。</div>';
+  h+='<div style="background:#fff;border:1px solid #f39c12;border-radius:8px;padding:12px;margin:8px 0;"><div style="font-size:13px;font-weight:600;color:#e65100;margin-bottom:6px;">📋 更新要点：</div>';
+  req.updateInstructions.forEach(function(inst){h+='<div style="font-size:12px;line-height:1.7;margin:4px 0;">· '+inst+'</div>';});
+  if(req.knowledgeGaps.length>0)h+='<div style="font-size:12px;color:#c62828;margin:6px 0;">🔴 知识盲点：'+req.knowledgeGaps.join('、')+'</div>';
+  h+='</div>';
+  var jsonStr=JSON.stringify(req,null,2);
+  h+='<textarea id="updateRequestJson" style="width:100%;min-height:120px;border:1px solid #cfd8dc;border-radius:6px;padding:8px;font-size:11px;font-family:monospace;resize:vertical;margin:8px 0;" readonly>'+jsonStr+'</textarea>';
+  h+='<div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="copyUpdateRequest()" style="font-size:12px;">📋 复制更新请求JSON</button><span id="copyStatus" style="font-size:11px;color:#2e7d32;"></span></div>';
+  h+='</div>';
+  el.innerHTML+=h;
+}
+function copyUpdateRequest(){var textarea=document.getElementById('updateRequestJson');if(!textarea){toast('无更新请求','error');return;}textarea.select();try{document.execCommand('copy');document.getElementById('copyStatus').textContent='✅ 已复制！请粘贴发送给AI';toast('已复制！');}catch(e){toast('复制失败，请手动选择','error');}}
+
+/* === Data Backup & Restore (NEW) === */
+function exportAllData() {
+  var backup = {
+    version: 'v11',
+    exportDate: new Date().toISOString(),
+    grade: getGrade(),
+    examData: data,
+    goals: goals,
+    checkins: checkins,
+    examAnalysis: examAnalysis,
+    weaknessTracking: weaknessTracking
+  };
+  var jsonStr = JSON.stringify(backup, null, 2);
+  var blob = new Blob([jsonStr], {type: 'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = '李思源学情数据备份_' + new Date().toLocaleDateString().replace(/[/]/g,'-') + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('备份文件已下载！');
+  document.getElementById('backupStatus').textContent = '✅ 最近备份：' + new Date().toLocaleTimeString();
+}
+function importAllData(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var backup = JSON.parse(e.target.result);
+      if (!backup.examData) { toast('备份文件格式不正确','error'); return; }
+      /* Restore to localStorage */
+      data = backup.examData;
+      goals = backup.goals || {};
+      checkins = backup.checkins || [];
+      examAnalysis = backup.examAnalysis || {};
+      weaknessTracking = backup.weaknessTracking || {};
+      saveData(); saveGoals(); saveCheckins(); saveExamData();
+      /* Refresh all modules */
+      initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3();
+      renderExamList(); renderHeatMap(); renderKnowledgeAggregation();
+      renderGoals(); renderAchievements(); renderCheckinModule();
+      toast('数据已恢复！共恢复'+Object.keys(data).length+'科成绩数据');
+      document.getElementById('backupStatus').textContent = '✅ 恢复成功：' + new Date().toLocaleTimeString();
+    } catch(e) {
+      toast('备份文件解析失败：'+e.message,'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+/* === Init === */
+document.getElementById('aiSubject').addEventListener('change', function() {
+  document.getElementById('aiSubjectHint').textContent = this.value || 'XX';
+});
+
+/* Grade label update */
+document.getElementById('gradeLabel').textContent = getGradeLabel();
+document.getElementById('headerSub').innerHTML = '玉溪市红塔中学 · <span id="gradeLabel">'+getGradeLabel()+'</span> · '+getSchoolYear()+' | 数据自动存档';
+
+loadData(); loadGoals(); loadCheckins(); loadExamAnalysis();
+initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3(); renderExamList();
+renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements();
+
+</script></body></html>
