@@ -418,10 +418,10 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 <div class="checkin-list" id="checkinList"></div>
 </div>
 
-<!-- Cloud Sync for Checkin -->
+<!-- Cloud Sync for Checkin & Goals -->
 <div style="background:#e8f5e9;border-radius:8px;padding:12px;margin:14px 0;">
-  <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px;">☁️ 打卡云端同步</div>
-  <div style="font-size:11px;color:#78909c;margin-bottom:8px;">配置 GitHub Token 后，平板/手机/电脑多端共享同一份打卡记录。Token 仅保存在本机浏览器中。</div>
+  <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px;">☁️ 数据云端同步</div>
+  <div style="font-size:11px;color:#78909c;margin-bottom:8px;">配置 GitHub Token 后，打卡记录与目标管理多端共享。Token 仅保存在本机浏览器中。</div>
   <div id="cloudSyncForm" style="display:none;margin-bottom:8px;">
     <div class="checkin-row" style="margin-bottom:6px;">
       <input type="password" id="cloudToken" placeholder="GitHub Token" style="flex:1;min-width:200px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
@@ -429,12 +429,15 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
     <div class="checkin-row" style="margin-bottom:6px;">
       <input type="text" id="cloudOwner" placeholder="用户名" value="lixuezhi501" style="width:120px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
       <input type="text" id="cloudRepo" placeholder="仓库名" value="lsy-learning" style="width:120px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
-      <input type="text" id="cloudPath" placeholder="文件路径" value="data/checkin.json" style="width:160px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+    </div>
+    <div class="checkin-row" style="margin-bottom:6px;">
+      <input type="text" id="cloudPath" placeholder="打卡文件路径" value="data/checkin.json" style="flex:1;min-width:140px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+      <input type="text" id="cloudGoalsPath" placeholder="目标文件路径" value="data/goals.json" style="flex:1;min-width:140px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
     </div>
     <div class="checkin-row">
       <button class="btn btn-green btn-sm" onclick="saveCloudConfig()">💾 保存设置</button>
-      <button class="btn btn-primary btn-sm" onclick="syncCheckinsToCloud()">⬆️ 同步到云端</button>
-      <button class="btn btn-orange btn-sm" onclick="fetchCheckinsFromCloud()">⬇️ 从云端恢复</button>
+      <button class="btn btn-primary btn-sm" onclick="syncAllToCloud()">⬆️ 同步全部到云端</button>
+      <button class="btn btn-orange btn-sm" onclick="fetchAllFromCloud()">⬇️ 从云端恢复</button>
     </div>
   </div>
   <div class="checkin-row" style="margin-bottom:0;">
@@ -514,8 +517,12 @@ function saveData() {
 function loadGoals() {
   var saved = localStorage.getItem('lsy_goals_v1');
   if (saved) { goals = JSON.parse(saved); }
+  if (cloudConfig && cloudConfig.token) { fetchGoalsFromCloud(); }
 }
-function saveGoals() { localStorage.setItem('lsy_goals_v1', JSON.stringify(goals)); }
+function saveGoals() {
+  localStorage.setItem('lsy_goals_v1', JSON.stringify(goals));
+  if (cloudConfig && cloudConfig.token) { syncGoalsToCloud(true); }
+}
 
 /* === Cloud sync for checkins === */
 var cloudConfig = null;
@@ -530,12 +537,14 @@ function saveCloudConfig() {
     token: document.getElementById('cloudToken').value.trim(),
     owner: document.getElementById('cloudOwner').value.trim() || 'lixuezhi501',
     repo: document.getElementById('cloudRepo').value.trim() || 'lsy-learning',
-    path: document.getElementById('cloudPath').value.trim() || 'data/checkin.json'
+    path: document.getElementById('cloudPath').value.trim() || 'data/checkin.json',
+    goalsPath: document.getElementById('cloudGoalsPath').value.trim() || 'data/goals.json'
   };
   if (!cloudConfig.token) { toast('请输入 GitHub Token', 'error'); return; }
   localStorage.setItem('lsy_cloud_config_v1', JSON.stringify(cloudConfig));
-  updateCloudStatus('已保存，正在同步本地记录到云端…');
-  syncCheckinsToCloud(false);
+  updateCloudStatus('已保存，正在同步本地数据到云端…');
+  syncCheckinsToCloud(true);
+  syncGoalsToCloud(false);
   toggleCloudForm();
 }
 function updateCloudStatus(msg) { document.getElementById('cloudStatus').textContent = msg; }
@@ -556,7 +565,8 @@ function renderCloudForm() {
     document.getElementById('cloudOwner').value = cloudConfig.owner || 'lixuezhi501';
     document.getElementById('cloudRepo').value = cloudConfig.repo || 'lsy-learning';
     document.getElementById('cloudPath').value = cloudConfig.path || 'data/checkin.json';
-    updateCloudStatus('☁️ 已配置：' + cloudConfig.owner + '/' + cloudConfig.repo + '/' + cloudConfig.path);
+    document.getElementById('cloudGoalsPath').value = cloudConfig.goalsPath || 'data/goals.json';
+    updateCloudStatus('☁️ 已配置：' + cloudConfig.owner + '/' + cloudConfig.repo);
   } else {
     updateCloudStatus('☁️ 未配置云端同步，点击展开配置');
   }
@@ -637,6 +647,88 @@ function mergeCheckins(cloudList) {
     if (!map[key]) { checkins.push(c); map[key] = c; }
   });
   checkins.sort(function(a, b) { return (a.time || '').localeCompare(b.time || ''); });
+}
+
+/* === Cloud sync for goals === */
+var _goalsSha = null;
+function syncGoalsToCloud(silent, retry) {
+  if (!cloudConfig || !cloudConfig.token) { if (!silent) toast('未配置云端同步', 'error'); return; }
+  var goalsPath = cloudConfig.goalsPath || 'data/goals.json';
+  var url = 'https://api.github.com/repos/' + cloudConfig.owner + '/' + cloudConfig.repo + '/contents/' + goalsPath;
+  fetch(url, { headers: apiHeaders() }).then(function(r) {
+    if (r.status === 404) { return { sha: null }; }
+    if (!r.ok) { throw new Error('查询云端目标失败：' + r.status); }
+    return r.json();
+  }).then(function(file) {
+    _goalsSha = (file && file.sha) ? file.sha : null;
+    var payload = {
+      message: '同步目标管理 ' + new Date().toLocaleString(),
+      content: toBase64(JSON.stringify(goals))
+    };
+    if (_goalsSha) payload.sha = _goalsSha;
+    return fetch(url, { method: 'PUT', headers: apiHeaders(), body: JSON.stringify(payload) });
+  }).then(function(r) {
+    if (!r.ok) throw new Error('推送失败：' + r.status);
+    return r.json();
+  }).then(function(res) {
+    if (res && res.content && res.content.sha) _goalsSha = res.content.sha;
+    updateCloudStatus('☁️ 目标已同步：' + new Date().toLocaleTimeString());
+    if (!silent) toast('☁️ 目标管理已同步到云端');
+  }).catch(function(e) {
+    if (!retry) {
+      setTimeout(function() { syncGoalsToCloud(silent, true); }, 3000);
+      updateCloudStatus('🔄 目标同步失败，3秒后自动重试…');
+    } else {
+      updateCloudStatus('❌ 目标同步失败：' + e.message);
+      if (!silent) toast('目标云端同步失败，已重试仍失败', 'error');
+    }
+  });
+}
+function fetchGoalsFromCloud() {
+  if (!cloudConfig || !cloudConfig.token) { return; }
+  var goalsPath = cloudConfig.goalsPath || 'data/goals.json';
+  var url = 'https://api.github.com/repos/' + cloudConfig.owner + '/' + cloudConfig.repo + '/contents/' + goalsPath;
+  fetch(url, { headers: apiHeaders() }).then(function(r) {
+    if (r.status === 404) { return null; }
+    if (!r.ok) throw new Error('拉取失败：' + r.status);
+    return r.json();
+  }).then(function(file) {
+    if (!file || !file.content) return;
+    var cloudGoals = JSON.parse(fromBase64(file.content));
+    if (typeof cloudGoals !== 'object' || cloudGoals === null) throw new Error('云端目标格式错误');
+    var beforeKeys = Object.keys(goals).filter(function(k){return goals[k]!=null;}).length;
+    mergeGoals(cloudGoals);
+    var afterKeys = Object.keys(goals).filter(function(k){return goals[k]!=null;}).length;
+    if (afterKeys > beforeKeys) {
+      toast('已从云端恢复目标设置');
+    }
+  }).catch(function(e) {
+    console.log('目标云端恢复：' + e.message);
+  });
+}
+function mergeGoals(cloudGoals) {
+  var changed = false;
+  for (var subj in cloudGoals) {
+    if (cloudGoals[subj] != null && goals[subj] !== cloudGoals[subj]) {
+      goals[subj] = cloudGoals[subj];
+      changed = true;
+    }
+  }
+  if (changed) {
+    localStorage.setItem('lsy_goals_v1', JSON.stringify(goals));
+    renderGoals();
+    renderAchievements();
+  }
+}
+function syncAllToCloud() {
+  if (!cloudConfig || !cloudConfig.token) { toast('未配置云端同步', 'error'); return; }
+  syncCheckinsToCloud(true);
+  syncGoalsToCloud(false);
+}
+function fetchAllFromCloud() {
+  if (!cloudConfig || !cloudConfig.token) { toast('未配置云端同步', 'error'); return; }
+  fetchCheckinsFromCloud();
+  fetchGoalsFromCloud();
 }
 
 function loadCheckins() {
@@ -1492,7 +1584,7 @@ document.getElementById('aiSubject').addEventListener('change', function() {
 document.getElementById('gradeLabel').textContent = getGradeLabel();
 document.getElementById('headerSub').innerHTML = '玉溪市红塔中学 · <span id="gradeLabel">'+getGradeLabel()+'</span> · '+getSchoolYear()+' | 数据自动存档';
 
-loadData(); loadGoals(); loadCloudConfig(); loadCheckins(); loadExamAnalysis();
+loadData(); loadCloudConfig(); loadGoals(); loadCheckins(); loadExamAnalysis();
 initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3(); renderExamList();
 renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements(); renderCloudForm();
 /* char count listener */
