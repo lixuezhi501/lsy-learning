@@ -534,8 +534,8 @@ function saveCloudConfig() {
   };
   if (!cloudConfig.token) { toast('请输入 GitHub Token', 'error'); return; }
   localStorage.setItem('lsy_cloud_config_v1', JSON.stringify(cloudConfig));
-  updateCloudStatus('已保存，尝试同步中…');
-  syncCheckinsToCloud(true);
+  updateCloudStatus('已保存，正在同步本地记录到云端…');
+  syncCheckinsToCloud(false);
   toggleCloudForm();
 }
 function updateCloudStatus(msg) { document.getElementById('cloudStatus').textContent = msg; }
@@ -575,7 +575,8 @@ function apiHeaders() {
     'X-GitHub-Api-Version': '2022-11-28'
   };
 }
-function syncCheckinsToCloud(silent) {
+var _cloudSha = null;
+function syncCheckinsToCloud(silent, retry) {
   if (!cloudConfig || !cloudConfig.token) { if (!silent) toast('未配置云端同步', 'error'); return; }
   var url = 'https://api.github.com/repos/' + cloudConfig.owner + '/' + cloudConfig.repo + '/contents/' + cloudConfig.path;
   fetch(url, { headers: apiHeaders() }).then(function(r) {
@@ -583,21 +584,28 @@ function syncCheckinsToCloud(silent) {
     if (!r.ok) { throw new Error('查询云端文件失败：' + r.status); }
     return r.json();
   }).then(function(file) {
+    _cloudSha = (file && file.sha) ? file.sha : null;
     var payload = {
       message: '同步打卡记录 ' + new Date().toLocaleString(),
       content: toBase64(JSON.stringify(checkins))
     };
-    if (file && file.sha) payload.sha = file.sha;
+    if (_cloudSha) payload.sha = _cloudSha;
     return fetch(url, { method: 'PUT', headers: apiHeaders(), body: JSON.stringify(payload) });
   }).then(function(r) {
     if (!r.ok) throw new Error('推送失败：' + r.status);
     return r.json();
-  }).then(function() {
+  }).then(function(res) {
+    if (res && res.content && res.content.sha) _cloudSha = res.content.sha;
     updateCloudStatus('☁️ 已同步：' + new Date().toLocaleTimeString());
-    if (!silent) toast('打卡记录已同步到云端');
+    if (!silent) toast('☁️ 打卡记录已同步到云端');
   }).catch(function(e) {
-    updateCloudStatus('❌ 同步失败：' + e.message);
-    if (!silent) toast('云端同步失败：' + e.message, 'error');
+    if (!retry) {
+      setTimeout(function() { syncCheckinsToCloud(silent, true); }, 3000);
+      updateCloudStatus('🔄 同步失败，3秒后自动重试…');
+    } else {
+      updateCloudStatus('❌ 同步失败：' + e.message + '（可手动点击同步）');
+      if (!silent) toast('云端同步失败，已重试仍失败', 'error');
+    }
   });
 }
 function fetchCheckinsFromCloud() {
@@ -638,7 +646,7 @@ function loadCheckins() {
 }
 function saveCheckins() { 
   localStorage.setItem('lsy_checkin_v1', JSON.stringify(checkins)); 
-  if (cloudConfig && cloudConfig.token && cloudConfig.owner && cloudConfig.repo) {
+  if (cloudConfig && cloudConfig.token) {
     syncCheckinsToCloud();
   }
 }
@@ -1189,7 +1197,12 @@ function addCheckin() {
   var qa=analyzeCheckinQuality(subj,action,takeaway);
   var now = new Date();
   checkins.push({id:Date.now()+'_'+Math.random().toString(36).slice(2,8),subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityColor:qa.color,scorePoints:qa.scorePoints,comment:qa.comment,date:now.toLocaleDateString(),time:now.toLocaleTimeString()});
-  saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！质量：'+qa.label);
+  saveCheckins(); renderCheckinModule(); 
+  if (cloudConfig && cloudConfig.token) {
+    toast(subj+'打卡成功！质量：'+qa.label+' ☁️ 正在同步云端…');
+  } else {
+    toast(subj+'打卡成功！质量：'+qa.label+'（未配置云端同步）');
+  }
   document.getElementById('ciSubject').value='';
   document.getElementById('ciAction').innerHTML='<option value="">— 先选科目 —</option>';
   document.getElementById('ciTakeaway').value='';
