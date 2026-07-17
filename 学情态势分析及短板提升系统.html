@@ -418,6 +418,31 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
 <div class="checkin-list" id="checkinList"></div>
 </div>
 
+<!-- Cloud Sync for Checkin -->
+<div style="background:#e8f5e9;border-radius:8px;padding:12px;margin:14px 0;">
+  <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:6px;">☁️ 打卡云端同步</div>
+  <div style="font-size:11px;color:#78909c;margin-bottom:8px;">配置 GitHub Token 后，平板/手机/电脑多端共享同一份打卡记录。Token 仅保存在本机浏览器中。</div>
+  <div id="cloudSyncForm" style="display:none;margin-bottom:8px;">
+    <div class="checkin-row" style="margin-bottom:6px;">
+      <input type="password" id="cloudToken" placeholder="GitHub Token" style="flex:1;min-width:200px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+    </div>
+    <div class="checkin-row" style="margin-bottom:6px;">
+      <input type="text" id="cloudOwner" placeholder="用户名" value="lixuezhi501" style="width:120px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+      <input type="text" id="cloudRepo" placeholder="仓库名" value="lsy-learning" style="width:120px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+      <input type="text" id="cloudPath" placeholder="文件路径" value="data/checkin.json" style="width:160px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+    </div>
+    <div class="checkin-row">
+      <button class="btn btn-green btn-sm" onclick="saveCloudConfig()">💾 保存设置</button>
+      <button class="btn btn-primary btn-sm" onclick="syncCheckinsToCloud()">⬆️ 同步到云端</button>
+      <button class="btn btn-orange btn-sm" onclick="fetchCheckinsFromCloud()">⬇️ 从云端恢复</button>
+    </div>
+  </div>
+  <div class="checkin-row" style="margin-bottom:0;">
+    <button class="btn btn-sm" id="cloudToggleBtn" onclick="toggleCloudForm()" style="background:#fff;color:#2e7d32;border:1px solid #a5d6a7;">展开配置</button>
+    <span id="cloudStatus" style="font-size:11px;color:#2e7d32;"></span>
+  </div>
+</div>
+
 <!-- Backup & Restore bar -->
 <div style="background:#e8eaf6;border-radius:8px;padding:12px;margin:14px 0;">
   <div style="font-size:13px;font-weight:600;color:#283593;margin-bottom:6px;">💾 数据备份与恢复</div>
@@ -491,11 +516,132 @@ function loadGoals() {
   if (saved) { goals = JSON.parse(saved); }
 }
 function saveGoals() { localStorage.setItem('lsy_goals_v1', JSON.stringify(goals)); }
+
+/* === Cloud sync for checkins === */
+var cloudConfig = null;
+function loadCloudConfig() {
+  try {
+    var cfg = localStorage.getItem('lsy_cloud_config_v1');
+    if (cfg) cloudConfig = JSON.parse(cfg);
+  } catch(e) { cloudConfig = null; }
+}
+function saveCloudConfig() {
+  cloudConfig = {
+    token: document.getElementById('cloudToken').value.trim(),
+    owner: document.getElementById('cloudOwner').value.trim() || 'lixuezhi501',
+    repo: document.getElementById('cloudRepo').value.trim() || 'lsy-learning',
+    path: document.getElementById('cloudPath').value.trim() || 'data/checkin.json'
+  };
+  if (!cloudConfig.token) { toast('请输入 GitHub Token', 'error'); return; }
+  localStorage.setItem('lsy_cloud_config_v1', JSON.stringify(cloudConfig));
+  updateCloudStatus('已保存，尝试同步中…');
+  syncCheckinsToCloud(true);
+  toggleCloudForm();
+}
+function updateCloudStatus(msg) { document.getElementById('cloudStatus').textContent = msg; }
+function toggleCloudForm() {
+  var el = document.getElementById('cloudSyncForm');
+  var btn = document.getElementById('cloudToggleBtn');
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    btn.textContent = '收起配置';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '展开配置';
+  }
+}
+function renderCloudForm() {
+  if (cloudConfig) {
+    document.getElementById('cloudToken').value = cloudConfig.token || '';
+    document.getElementById('cloudOwner').value = cloudConfig.owner || 'lixuezhi501';
+    document.getElementById('cloudRepo').value = cloudConfig.repo || 'lsy-learning';
+    document.getElementById('cloudPath').value = cloudConfig.path || 'data/checkin.json';
+    updateCloudStatus('☁️ 已配置：' + cloudConfig.owner + '/' + cloudConfig.repo + '/' + cloudConfig.path);
+  } else {
+    updateCloudStatus('☁️ 未配置云端同步，点击展开配置');
+  }
+}
+function toBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function fromBase64(str) {
+  return decodeURIComponent(escape(window.atob(str)));
+}
+function apiHeaders() {
+  return {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': 'token ' + cloudConfig.token,
+    'Content-Type': 'application/json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+}
+function syncCheckinsToCloud(silent) {
+  if (!cloudConfig || !cloudConfig.token) { if (!silent) toast('未配置云端同步', 'error'); return; }
+  var url = 'https://api.github.com/repos/' + cloudConfig.owner + '/' + cloudConfig.repo + '/contents/' + cloudConfig.path;
+  fetch(url, { headers: apiHeaders() }).then(function(r) {
+    if (r.status === 404) { return { sha: null }; }
+    if (!r.ok) { throw new Error('查询云端文件失败：' + r.status); }
+    return r.json();
+  }).then(function(file) {
+    var payload = {
+      message: '同步打卡记录 ' + new Date().toLocaleString(),
+      content: toBase64(JSON.stringify(checkins))
+    };
+    if (file && file.sha) payload.sha = file.sha;
+    return fetch(url, { method: 'PUT', headers: apiHeaders(), body: JSON.stringify(payload) });
+  }).then(function(r) {
+    if (!r.ok) throw new Error('推送失败：' + r.status);
+    return r.json();
+  }).then(function() {
+    updateCloudStatus('☁️ 已同步：' + new Date().toLocaleTimeString());
+    if (!silent) toast('打卡记录已同步到云端');
+  }).catch(function(e) {
+    updateCloudStatus('❌ 同步失败：' + e.message);
+    if (!silent) toast('云端同步失败：' + e.message, 'error');
+  });
+}
+function fetchCheckinsFromCloud() {
+  if (!cloudConfig || !cloudConfig.token) { toast('未配置云端同步', 'error'); return; }
+  var url = 'https://api.github.com/repos/' + cloudConfig.owner + '/' + cloudConfig.repo + '/contents/' + cloudConfig.path;
+  fetch(url, { headers: apiHeaders() }).then(function(r) {
+    if (r.status === 404) { toast('云端暂无打卡记录', 'error'); return; }
+    if (!r.ok) throw new Error('拉取失败：' + r.status);
+    return r.json();
+  }).then(function(file) {
+    if (!file || !file.content) return;
+    var cloudList = JSON.parse(fromBase64(file.content));
+    if (!Array.isArray(cloudList)) throw new Error('云端数据格式错误');
+    mergeCheckins(cloudList);
+    localStorage.setItem('lsy_checkin_v1', JSON.stringify(checkins));
+    renderCheckinModule();
+    updateCloudStatus('☁️ 已恢复：' + cloudList.length + '条，' + new Date().toLocaleTimeString());
+    toast('已从云端恢复 ' + cloudList.length + ' 条打卡记录');
+  }).catch(function(e) {
+    updateCloudStatus('❌ 恢复失败：' + e.message);
+    toast('云端恢复失败：' + e.message, 'error');
+  });
+}
+function mergeCheckins(cloudList) {
+  var map = {};
+  checkins.forEach(function(c) { map[c.id || (c.date + '_' + c.time)] = c; });
+  cloudList.forEach(function(c) {
+    var key = c.id || (c.date + '_' + c.time);
+    if (!map[key]) { checkins.push(c); map[key] = c; }
+  });
+  checkins.sort(function(a, b) { return (a.time || '').localeCompare(b.time || ''); });
+}
+
 function loadCheckins() {
   var saved = localStorage.getItem('lsy_checkin_v1');
   if (saved) { checkins = JSON.parse(saved); }
+  if (cloudConfig && cloudConfig.token) { fetchCheckinsFromCloud(); }
 }
-function saveCheckins() { localStorage.setItem('lsy_checkin_v1', JSON.stringify(checkins)); }
+function saveCheckins() { 
+  localStorage.setItem('lsy_checkin_v1', JSON.stringify(checkins)); 
+  if (cloudConfig && cloudConfig.token && cloudConfig.owner && cloudConfig.repo) {
+    syncCheckinsToCloud();
+  }
+}
 function loadExamAnalysis() {
   var saved = localStorage.getItem('lsy_exam_analysis_v2');
   if (saved) { examAnalysis = JSON.parse(saved); }
@@ -1041,7 +1187,8 @@ function addCheckin() {
   if(!action){toast('请选择训练内容','error');return;}
   if(!takeaway){toast('请填写打卡收获','error');return;}
   var qa=analyzeCheckinQuality(subj,action,takeaway);
-  checkins.push({subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityColor:qa.color,scorePoints:qa.scorePoints,comment:qa.comment,date:new Date().toLocaleDateString(),time:new Date().toLocaleTimeString()});
+  var now = new Date();
+  checkins.push({id:Date.now()+'_'+Math.random().toString(36).slice(2,8),subject:subj,action:action,takeaway:takeaway,quality:qa.level,qualityLabel:qa.label,qualityColor:qa.color,scorePoints:qa.scorePoints,comment:qa.comment,date:now.toLocaleDateString(),time:now.toLocaleTimeString()});
   saveCheckins(); renderCheckinModule(); toast(subj+'打卡成功！质量：'+qa.label);
   document.getElementById('ciSubject').value='';
   document.getElementById('ciAction').innerHTML='<option value="">— 先选科目 —</option>';
@@ -1332,9 +1479,9 @@ document.getElementById('aiSubject').addEventListener('change', function() {
 document.getElementById('gradeLabel').textContent = getGradeLabel();
 document.getElementById('headerSub').innerHTML = '玉溪市红塔中学 · <span id="gradeLabel">'+getGradeLabel()+'</span> · '+getSchoolYear()+' | 数据自动存档';
 
-loadData(); loadGoals(); loadCheckins(); loadExamAnalysis();
+loadData(); loadGoals(); loadCloudConfig(); loadCheckins(); loadExamAnalysis();
 initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3(); renderExamList();
-renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements();
+renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements(); renderCloudForm();
 /* char count listener */
 document.getElementById('ciTakeaway').addEventListener('input',function(){document.getElementById('charCount').textContent=this.value.length;});
 
