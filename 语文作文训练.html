@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>语文作文训练 - 李思源</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;line-height:1.8;}
+.header{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;padding:20px;text-align:center;}
+.header h1{font-size:20px;margin-bottom:4px;}
+.header p{font-size:12px;opacity:0.85;}
+.container{max-width:800px;margin:0 auto;padding:14px;}
+.nav{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.nav button{padding:8px 16px;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-weight:600;transition:all 0.2s;}
+.nav button.active{background:#e74c3c;color:#fff;}
+.nav button:not(.active){background:#fff;color:#666;border:1px solid #ddd;}
+.section{display:none;background:#fff;border-radius:10px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.section.active{display:block;}
+/* Essay display */
+.essay-box{background:#fafafa;border-left:3px solid #e74c3c;padding:14px 18px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;line-height:2;white-space:pre-wrap;}
+.essay-box.optimize{border-left-color:#27ae60;background:#f0fdf4;}
+.essay-label{font-size:12px;font-weight:700;color:#e74c3c;margin-bottom:4px;}
+.essay-label.opt{color:#27ae60;}
+/* Evaluation table */
+.eval-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;}
+.eval-table th{background:#e74c3c;color:#fff;padding:8px;text-align:left;font-size:12px;}
+.eval-table td{padding:8px;border-bottom:1px solid #eee;}
+.eval-table tr:nth-child(even){background:#fafafa;}
+/* Highlight & issue cards */
+.highlight-card{background:#e8f5e9;border-radius:8px;padding:12px 16px;margin:8px 0;border-left:3px solid #27ae60;}
+.issue-card{background:#fff3e0;border-radius:8px;padding:12px 16px;margin:8px 0;border-left:3px solid #ff9800;}
+.tip-card{background:#e3f2fd;border-radius:8px;padding:12px 16px;margin:8px 0;border-left:3px solid #2196f3;}
+.highlight-card h4,.issue-card h4,.tip-card h4{font-size:13px;margin-bottom:4px;}
+.highlight-card h4{color:#2e7d32;}
+.issue-card h4{color:#e65100;}
+.tip-card h4{color:#1565c0;}
+.highlight-card p,.issue-card p,.tip-card p{font-size:12px;color:#555;}
+/* Weekly plan */
+.week-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin:10px 0;}
+.week-card.done{border-color:#27ae60;background:#f0fdf4;}
+.week-card.done .week-title{text-decoration:line-through;color:#27ae60;}
+.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.week-title{font-size:14px;font-weight:700;color:#333;}
+.week-status{font-size:11px;padding:2px 8px;border-radius:10px;}
+.week-status.pending{background:#fff3e0;color:#e65100;}
+.week-status.done{background:#e8f5e9;color:#27ae60;}
+.week-goal{font-size:12px;color:#666;margin-bottom:8px;line-height:1.8;}
+.week-sample{background:#f5f5f5;border-radius:6px;padding:10px;margin:8px 0;font-size:13px;line-height:1.8;white-space:pre-wrap;border-left:2px solid #bbb;}
+.week-input{width:100%;min-height:100px;border:1px solid #ddd;border-radius:6px;padding:10px;font-size:13px;font-family:inherit;line-height:1.8;resize:vertical;}
+.week-input:focus{outline:none;border-color:#e74c3c;}
+.week-actions{display:flex;gap:8px;margin-top:8px;}
+.btn{padding:6px 14px;border:none;border-radius:5px;font-size:12px;cursor:pointer;font-weight:600;}
+.btn-save{background:#e74c3c;color:#fff;}
+.btn-done{background:#27ae60;color:#fff;}
+.btn-reset{background:#eee;color:#666;}
+.progress-bar{background:#e0e0e0;border-radius:10px;height:20px;overflow:hidden;margin:12px 0;}
+.progress-fill{background:linear-gradient(90deg,#e74c3c,#27ae60);height:100%;border-radius:10px;transition:width 0.5s;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;}
+.score-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:700;margin-left:6px;}
+.score-original{background:#fff3e0;color:#e65100;}
+.score-optimized{background:#e8f5e9;color:#27ae60;}
+.back-link{display:inline-block;margin-top:14px;color:#e74c3c;text-decoration:none;font-size:13px;}
+@media(max-width:600px){
+  .container{padding:10px;}
+  .section{padding:14px;}
+  .essay-box{font-size:13px;padding:10px 14px;}
+  .nav button{padding:6px 12px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>✍️ 语文作文训练</h1>
+<p>玉溪市红塔中学 · 七年级 · 作文素材库 + 8周临摹计划</p>
+</div>
+
+<div class="container">
+<div class="nav">
+<button class="active" onclick="showSection('library')">📚 素材库</button>
+<button onclick="showSection('plan')">📅 8周临摹</button>
+<button onclick="showSection('tips')">💡 写作心法</button>
+</div>
+
+<!-- Section 1: Essay Library -->
+<div class="section active" id="library">
+<h2 style="font-size:16px;color:#e74c3c;margin-bottom:10px;">《努力让我成长》批阅与优化</h2>
+
+<h3 style="font-size:14px;margin:14px 0 4px;">一、原文 <span class="score-badge score-original">38/50 二等文中段</span></h3>
+<div class="essay-box"><div class="essay-label">原文</div>人的一生随时都在成长，可以是心智上的成长，身体上的成长，或是认知上的成长。但除了身体成长，任何成长都是需要努力的。
+
+"哗啦啦，轰"的一声，天气随着我的心情下起倾盆大雨。看着我那一样比拌很低的成绩，我心想，这还没我字号高的成绩，拿回去怎么交代呀？我表面上若无其事，但心里却已翻起了惊涛骇浪。回到家后，幻想中的结果并没有发生。
+
+"你一天是跑去哪玩了？能考那么低？"爸爸无可奈何地对我说。后来，他又让我过来，"我们来分折一下试卷，并制定一个暑假学习计划。"他拿着试卷开始跟我分析错题，制定了各科的学习计划。讲到了很晚，我一脸疲惫，他却一脸兴致勃勃。我看出了爸爸对我的决心，于是我也决定在这个暑假努力拼一把。
+
+第二天早上起来，我没有疲惫，而是一脸神清气爽。于是，我开始了一天的学习计划。早上起来背一些英语单词，语文课文和语法知识；背一两个小时可以写一些学校里布置的作业；下午，爸爸给我讲所有科目的知识点和错题；晚上运动一下，早睡早起。我每天都按时按量完成。甚至更加努力，早上背书前，我还听一会儿听力，在吃饭时我也在回忆知识。爸爸给我讲时，我也在非常认真倾听。争取十分的知识听进去九分。但努力了一段时间后，我感到了压力和疲惫，有点不想努力了。我可我在幻想了一会儿学习好的学生的生活，感觉非常快活，于是我便将压力转化为动力，更加努力学习。
+
+开学之后，虽然我感觉非常累，但我感觉这些都是值得的。在开学测试后，我的成绩突飞猛进，取得了很大进步，我的脸上洋溢起了别样的笑容。
+
+努力是对自己能力不足的改变，这个改变和爸爸一起成了我学习的动力，让我有了认知和成绩上的成长。虽然努力不一定可以决定未来，但一定可以决定现在的自己。</div>
+
+<h3 style="font-size:14px;margin:14px 0 4px;">二、批阅点评</h3>
+
+<div class="highlight-card">
+<h4>✦ 亮点一：主题鲜明，结构完整</h4>
+<p>成绩下滑→爸爸分析→制定计划→暑假努力→开学进步→升华主题，闭环清晰。</p>
+</div>
+<div class="highlight-card">
+<h4>✦ 亮点二：父子情感真挚</h4>
+<p>爸爸"无可奈何"地问、却仍陪我定计划——不空洞，有真实温度。</p>
+</div>
+<div class="highlight-card">
+<h4>✦ 亮点三：心理变化曲线真实</h4>
+<p>惊涛骇浪→被爸爸触动→咬牙坚持→疲惫想放弃→再次出发→喜悦，成长感可信。</p>
+</div>
+
+<div class="issue-card">
+<h4>✗ 问题①：错别字</h4>
+<p>"比拌"→应为"比较"；"字号"→应为"学号"；"分折"→应为"分析"——基本功扣分项。</p>
+</div>
+<div class="issue-card">
+<h4>✗ 问题②：病句</h4>
+<p>"天气随着我的心情下起倾盆大雨"——主客倒置，应为"心情像这场雨一样"。</p>
+</div>
+<div class="issue-card">
+<h4>✗ 问题③：口语化严重</h4>
+<p>"我心想""脸上洋溢起了别样的笑容"——大白话，缺乏文采。</p>
+</div>
+<div class="issue-card">
+<h4>✗ 问题④：环境描写不系统</h4>
+<p>只有开头写雨，中段结尾丢了景物烘托。</p>
+</div>
+<div class="issue-card">
+<h4>✗ 问题⑤：爸爸形象单薄</h4>
+<p>只说"一脸兴致勃勃"，缺一个"特写镜头"。</p>
+</div>
+<div class="issue-card">
+<h4>✗ 问题⑥：结尾立意稍浅</h4>
+<p>"努力改变能力不足"表达生硬，可往"成长是和自己较量"走。</p>
+</div>
+
+<h3 style="font-size:14px;margin:14px 0 4px;">三、高分优化版 <span class="score-badge score-optimized">47-49/50 一等文</span></h3>
+<div class="essay-box optimize"><div class="essay-label opt">优化版（约850字）</div>"啪"的一声脆响，我把那张惨不忍睹的试卷重重地摔在书桌上。窗外，铅灰色的云层越压越低，憋了一整天的雨终于倾泻而下，雨点砸在玻璃上噼噼啪啪，仿佛也砸在我心口——我盯着那个刺眼的分数，脑海中一片空白：拿回家，怎么跟爸妈交代？
+
+回到家，我强装镇定，蹑手蹑脚地溜进房间。可不到五分钟，门外便响起了爸爸那熟悉的脚步声。他没有责骂，只是平静地拉过一把椅子，坐到我身边，翻开试卷，一道题一道题地陪我分析错因。从数学的辅助线，到英语的时态，再到物理的受力分析——他的笔尖在草稿纸上沙沙作响，我的眼眶却在不知不觉中湿润了。
+
+"来，咱们一起定个暑假计划。"爸爸的语气不急不缓，仿佛不是在面对一个考砸的孩子，而是在规划一段值得期待的新旅程。台灯下，他一边勾画时间表，一边念叨："清晨背单词，上午攻弱项，下午复盘错题，晚上跑步放松……"望着他鬓角悄悄爬出的几缕白发，我心里突然酸酸的，又暗暗涌起一股倔强——我不能让他失望。
+
+第二天清晨，当第一缕阳光溜进窗帘时，我已经坐在书桌前。英语单词本被翻得卷了边，语文课本的空白处密密麻麻写满了批注，连吃饭时耳朵里都塞着英语听力的耳机。每当我困得眼皮打架、累得想放弃时，脑海里总会浮现出台灯下那个为我定计划的父亲——是他，把"努力"这两个字刻进了我的骨骼里。
+
+"宝剑锋从磨砺出，梅花香自苦寒来。"开学摸底考那天，我握着笔的手心全是汗。当成绩公布的那一刻，我竟有些不敢相信自己的眼睛——那个曾经垫底的数字，已经悄悄爬到了中上游。回家的路上，秋风拂过脸庞，我忽然明白：所有的汗水与疲惫，都在这一刻化作了嘴角那一抹难以抑制的笑容。
+
+慢慢走在成长路上，我才真正懂得：努力，从不是为了抵达某个终点，而是为了在攀登的过程中，长成自己原本不敢想象的样子。它或许不能决定我们的未来，但一定能在每一个"现在"，塑造出一个比昨天更笃定、从容的自己。爸爸教会我的，不只是学习方法，更是一种面对人生低谷的姿态——真正的成长，恰恰发生在我们咬牙挺过的那些时刻。</div>
+
+<h3 style="font-size:14px;margin:14px 0 4px;">四、对比学习表</h3>
+<table class="eval-table">
+<tr><th>维度</th><th>原文</th><th>优化版</th></tr>
+<tr><td>开篇</td><td>"哗啦啦"拟声+天气随心情下雨</td><td>摔试卷的"啪"+雨砸玻璃"砸"心口</td></tr>
+<tr><td>人物</td><td>爸爸只说"一脸兴致勃勃"</td><td>鬓角白发+台灯下勾画时间表</td></tr>
+<tr><td>环境</td><td>只有开头下雨</td><td>雨→阳光→秋风（首尾呼应）</td></tr>
+<tr><td>心理</td><td>"翻起惊涛骇浪"</td><td>"眼眶湿润"+"酸酸的+倔强"</td></tr>
+<tr><td>立意</td><td>"努力改变能力不足"</td><td>"长成自己不敢想象的样子"</td></tr>
+<tr><td>预估分</td><td>38/50</td><td>47-49/50</td></tr>
+</table>
+</div>
+
+<!-- Section 2: 8-Week Plan -->
+<div class="section" id="plan">
+<h2 style="font-size:16px;color:#e74c3c;margin-bottom:6px;">📅 8周临摹计划</h2>
+<p style="font-size:12px;color:#888;margin-bottom:10px;">每周临摹优化版的一个段落，写出自己的版本。坚持8周，作文稳进一等文（45+分）。</p>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%;">0/8</div></div>
+<div id="weekList"></div>
+</div>
+
+<!-- Section 3: Writing Tips -->
+<div class="section" id="tips">
+<h2 style="font-size:16px;color:#e74c3c;margin-bottom:10px;">💡 4条写作心法</h2>
+<div class="tip-card">
+<h4>心法一：写人必有一"特写镜头"</h4>
+<p>比如爸爸鬓角的白发，比说一百句"爸爸很爱我"都管用。好的细节 = 一个画面 + 一个动作 + 一种感官（视觉/听觉/触觉）。<br><br>练习：找一个你熟悉的人，写一段50字的"特写镜头"，不出现"他很爱我"这类直接抒情。</p>
+</div>
+<div class="tip-card">
+<h4>心法二：环境是心情的"外衣"</h4>
+<p>开头写雨、过程写阳光、结尾写秋风——景物会替你说话。景随情变，是高分作文的标配。<br><br>练习：用"雨天""晴天""秋天"各写一句开头，表达"失落""希望""释然"三种心情，不用"失落""希望""释然"这三个词。</p>
+</div>
+<div class="tip-card">
+<h4>心法三：少用"心想、感到、觉得"</h4>
+<p>换成具体的动作或感受。比如"眼眶不知不觉湿润了"比"我心想很感动"好10倍。动词和名词永远比形容词和副词有力。<br><br>练习：把"我感到很紧张"改写成带动作的句子（提示：手心、呼吸、视线……）。</p>
+</div>
+<div class="tip-card">
+<h4>心法四：结尾用"金句"压轴</h4>
+<p>把立意浓缩成一句有节奏的话，比如"真正的成长，恰恰发生在我们咬牙挺过的那些时刻"。金句 = 对比 + 哲理 + 节奏感。<br><br>练习：以"______，恰恰______"为句式，写3句关于"成长"的金句。</p>
+</div>
+<div class="tip-card" style="border-left-color:#9b59b6;background:#f3e5f5;">
+<h4 style="color:#6a1b9a;">附：常用金句模板</h4>
+<p>① "______不是为了______，而是为了______"<br>② "______或许不能______，但一定可以______"<br>③ "真正的______，恰恰发生在______"<br>④ "______教会我的，不只是______，更是______"<br>⑤ "所有的______与______，都在这一刻化作了______"</p>
+</div>
+</div>
+
+<a class="back-link" href="index.html">← 返回首页</a>
+</div>
+
+<script>
+var WEEKS = [
+  {title:'第1周：开篇环境描写',goal:'学习用"动作+声音+景物"三重通感开篇。\n\n优化版参考：\n"啪"的一声脆响，我把试卷摔在书桌上。窗外，铅灰色的云层越压越低，雨点砸在玻璃上噼噼啪啪，仿佛也砸在我心口。\n\n你的任务：以"考试失利"或"比赛失败"为场景，写一段80字左右的开篇，必须包含：一个动作声+一处环境描写+一处心理感受。',sample:'"啪"的一声脆响，我把那张惨不忍睹的试卷重重地摔在书桌上。窗外，铅灰色的云层越压越低，憋了一整天的雨终于倾泻而下，雨点砸在玻璃上噼噼啪啪，仿佛也砸在我心口——我盯着那个刺眼的分数，脑海中一片空白。'},
+  {title:'第2周：人物出场写法',goal:'学习用"动作链"让人物自然出场，不直接评价。\n\n优化版参考：\n他没有责骂，只是平静地拉过一把椅子，坐到我身边，翻开试卷，一道题一道题地陪我分析错因。\n\n你的任务：写一个家人（爸爸/妈妈/爷爷……）出场帮你解决困难的场景，80字左右，只用动作+语言，不出现"他很爱我"等直接抒情。',sample:'他没有责骂，只是平静地拉过一把椅子，坐到我身边，翻开试卷，一道题一道题地陪我分析错因。从数学的辅助线，到英语的时态，再到物理的受力分析——他的笔尖在草稿纸上沙沙作响，我的眼眶却在不知不觉中湿润了。'},
+  {title:'第3周：人物特写镜头',goal:'学习用"一个细节"立住人物形象。\n\n优化版参考：\n望着他鬓角悄悄爬出的几缕白发，我心里突然酸酸的。\n\n你的任务：给爸爸/妈妈写一个"特写镜头"，50-80字。必须包含：一个视觉细节（白发/皱纹/手势……）+一种心理反应。',sample:'台灯下，他一边勾画时间表，一边念叨："清晨背单词，上午攻弱项，下午复盘错题，晚上跑步放松……"望着他鬓角悄悄爬出的几缕白发，我心里突然酸酸的，又暗暗涌起一股倔强——我不能让他失望。'},
+  {title:'第4周：努力过程细节化',goal:'学习用"物品状态"暗示努力程度，不直说"我很努力"。\n\n优化版参考：\n英语单词本被翻得卷了边，语文课本的空白处密密麻麻写满了批注。\n\n你的任务：写一段自己努力学习/训练的过程，80字左右。用至少2个"物品状态"细节（本子卷边/课本批注/笔芯用完……），不出现"我很努力"。',sample:'第二天清晨，当第一缕阳光溜进窗帘时，我已经坐在书桌前。英语单词本被翻得卷了边，语文课本的空白处密密麻麻写满了批注，连吃饭时耳朵里都塞着英语听力的耳机。'},
+  {title:'第5周：心理转折写法',goal:'学习用"困→回忆→咬牙"三步写心理转折。\n\n优化版参考：\n每当我困得眼皮打架、累得想放弃时，脑海里总会浮现出台灯下那个为我定计划的父亲——是他，把"努力"这两个字刻进了我的骨骼里。\n\n你的任务：写一段"想放弃→想起某人/某事→重新振作"的心理转折，80字左右。',sample:'每当我困得眼皮打架、累得想放弃时，脑海里总会浮现出台灯下那个为我定计划的父亲——是他，把"努力"这两个字刻进了我的骨骼里。'},
+  {title:'第6周：结果呈现+环境呼应',goal:'学习用"动作+环境"呈现结果，不直说"我考好了"。\n\n优化版参考：\n回家的路上，秋风拂过脸庞，我忽然明白：所有的汗水与疲惫，都在这一刻化作了嘴角那一抹难以抑制的笑容。\n\n你的任务：写一段"取得好成绩后"的场景，80字左右。必须包含：一个身体反应+一处环境描写+一种心情（不用"高兴""开心"）。',sample:'开学摸底考那天，我握着笔的手心全是汗。当成绩公布的那一刻，我竟有些不敢相信自己的眼睛——那个曾经垫底的数字，已经悄悄爬到了中上游。回家的路上，秋风拂过脸庞，我忽然明白：所有的汗水与疲惫，都在这一刻化作了嘴角那一抹难以抑制的笑容。'},
+  {title:'第7周：议论升华+金句收束',goal:'学习用"金句"结尾，把记叙升华为哲理。\n\n优化版参考：\n真正的成长，恰恰发生在我们咬牙挺过的那些时刻。\n\n你的任务：为"努力让我成长"写一个结尾段，100字左右。必须包含至少1句金句（用模板：______不是为了______，而是为了______）。',sample:'慢慢走在成长路上，我才真正懂得：努力，从不是为了抵达某个终点，而是为了在攀登的过程中，长成自己原本不敢想象的样子。它或许不能决定我们的未来，但一定能在每一个"现在"，塑造出一个比昨天更笃定、从容的自己。爸爸教会我的，不只是学习方法，更是一种面对人生低谷的姿态——真正的成长，恰恰发生在我们咬牙挺过的那些时刻。'},
+  {title:'第8周：综合实战',goal:'综合运用前7周所学，写一篇完整的成长类作文。\n\n要求：\n① 题目自拟，关于"成长"主题\n② 600-800字\n③ 必须包含：环境描写开头+人物特写+努力过程细节+心理转折+金句结尾\n④ 写在下方文本区，保存后可反复修改',sample:'（本周无范文，自主创作）'}
+];
+
+var weekData = [];
+try {
+  var saved = localStorage.getItem('lsy_essay_plan_v1');
+  if (saved) weekData = JSON.parse(saved);
+} catch(e) { weekData = []; }
+if (weekData.length === 0) {
+  weekData = WEEKS.map(function(w) { return {text:'', done:false}; });
+}
+
+function savePlan() {
+  localStorage.setItem('lsy_essay_plan_v1', JSON.stringify(weekData));
+}
+
+function renderWeeks() {
+  var html = '';
+  var doneCount = 0;
+  WEEKS.forEach(function(w, i) {
+    var d = weekData[i];
+    if (d.done) doneCount++;
+    html += '<div class="week-card' + (d.done ? ' done' : '') + '">';
+    html += '<div class="week-header">';
+    html += '<span class="week-title">' + w.title + '</span>';
+    html += '<span class="week-status ' + (d.done ? 'done' : 'pending') + '">' + (d.done ? '已完成' : '待完成') + '</span>';
+    html += '</div>';
+    html += '<div class="week-goal">' + w.goal.replace(/\n/g, '<br>') + '</div>';
+    if (w.sample) {
+      html += '<div class="week-sample">📌 优化版参考段落：\n' + w.sample + '</div>';
+    }
+    html += '<textarea class="week-input" id="weekInput' + i + '" placeholder="在此写下你的临摹版本……" oninput="updateWeekText(' + i + ', this.value)">' + (d.text || '') + '</textarea>';
+    html += '<div class="week-actions">';
+    html += '<button class="btn btn-save" onclick="saveWeek(' + i + ')">💾 保存</button>';
+    if (!d.done) {
+      html += '<button class="btn btn-done" onclick="toggleDone(' + i + ')">✓ 标记完成</button>';
+    } else {
+      html += '<button class="btn btn-reset" onclick="toggleDone(' + i + ')">↩ 取消完成</button>';
+    }
+    html += '</div>';
+    html += '</div>';
+  });
+  document.getElementById('weekList').innerHTML = html;
+  var pct = Math.round(doneCount / WEEKS.length * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressFill').textContent = doneCount + '/' + WEEKS.length;
+}
+
+function updateWeekText(i, val) { weekData[i].text = val; }
+function saveWeek(i) { savePlan(); toast('已保存第' + (i+1) + '周临摹'); }
+function toggleDone(i) {
+  weekData[i].done = !weekData[i].done;
+  savePlan();
+  renderWeeks();
+  toast(weekData[i].done ? '第' + (i+1) + '周已完成！继续加油！' : '已取消完成标记');
+}
+
+function toast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:6px;font-size:13px;z-index:9999;opacity:0.9;';
+  document.body.appendChild(t);
+  setTimeout(function() { t.remove(); }, 2000);
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+}
+
+renderWeeks();
+</script>
+</body>
+</html>
