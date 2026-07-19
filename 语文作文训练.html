@@ -54,6 +54,14 @@ body{font-family:"Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;line
 .btn-save{background:#e74c3c;color:#fff;}
 .btn-done{background:#27ae60;color:#fff;}
 .btn-reset{background:#eee;color:#666;}
+.btn-analyze{background:#7b1fa2;color:#fff;}
+.essay-analysis{margin-top:10px;padding:12px 14px;border-radius:8px;background:#fafafa;border:1px solid #e0e0e0;}
+.ea-level{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:8px;}
+.ea-section{margin:6px 0;padding:8px 10px;border-radius:6px;font-size:12px;line-height:1.7;}
+.ea-praise{background:#e8f5e9;border-left:3px solid #27ae60;}
+.ea-issues{background:#fff3e0;border-left:3px solid #ff9800;}
+.ea-suggest{background:#e3f2fd;border-left:3px solid #2196f3;}
+.ea-section b{font-size:12px;}
 .progress-bar{background:#e0e0e0;border-radius:10px;height:20px;overflow:hidden;margin:12px 0;}
 .progress-fill{background:linear-gradient(90deg,#e74c3c,#27ae60);height:100%;border-radius:10px;transition:width 0.5s;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;}
 .score-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:700;margin-left:6px;}
@@ -242,12 +250,22 @@ function renderWeeks() {
     html += '<textarea class="week-input" id="weekInput' + i + '" placeholder="在此写下你的临摹版本……" oninput="updateWeekText(' + i + ', this.value)">' + (d.text || '') + '</textarea>';
     html += '<div class="week-actions">';
     html += '<button class="btn btn-save" onclick="saveWeek(' + i + ')">💾 保存</button>';
+    html += '<button class="btn btn-analyze" onclick="analyzeEssay(' + i + ')">🔍 分析点评</button>';
     if (!d.done) {
       html += '<button class="btn btn-done" onclick="toggleDone(' + i + ')">✓ 标记完成</button>';
     } else {
       html += '<button class="btn btn-reset" onclick="toggleDone(' + i + ')">↩ 取消完成</button>';
     }
     html += '</div>';
+    if (d.analysis) {
+      var a = d.analysis;
+      html += '<div class="essay-analysis">';
+      html += '<span class="ea-level" style="background:'+a.color+'1a;color:'+a.color+';">'+a.label+'</span>';
+      if (a.praise && a.praise.length) { html += '<div class="ea-section ea-praise"><b style="color:#2e7d32;">✅ 做得好的</b><br>'+a.praise.join('<br>')+'</div>'; }
+      if (a.issues && a.issues.length) { html += '<div class="ea-section ea-issues"><b style="color:#e65100;">⚠️ 需要注意的</b><br>'+a.issues.join('<br>')+'</div>'; }
+      if (a.suggest && a.suggest.length) { html += '<div class="ea-section ea-suggest"><b style="color:#1565c0;">💡 改进建议</b><br>'+a.suggest.join('<br>')+'</div>'; }
+      html += '</div>';
+    }
     html += '</div>';
   });
   document.getElementById('weekList').innerHTML = html;
@@ -258,6 +276,183 @@ function renderWeeks() {
 
 function updateWeekText(i, val) { weekData[i].text = val; }
 function saveWeek(i) { savePlan(); toast('已保存第' + (i+1) + '周临摹'); }
+
+function hasKw(text, arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if (text.indexOf(arr[i]) >= 0) return arr[i];
+  }
+  return null;
+}
+function hasAny(text, arr) {
+  var found = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (text.indexOf(arr[i]) >= 0) found.push(arr[i]);
+  }
+  return found;
+}
+
+function analyzeEssay(i) {
+  var text = (weekData[i].text || '').trim();
+  if (!text) { toast('请先写下临摹内容再分析', 'warn'); return; }
+  var praise = [], issues = [], suggest = [];
+  var len = text.length;
+
+  /* ---- 通用检查 ---- */
+  if (len < 30) { issues.push('字数偏少（'+len+'字），建议按本周要求写到80字左右'); }
+  if (len > 50 && len < 60) { praise.push('字数接近要求（'+len+'字），继续完善'); }
+  if (len >= 70 && len <= 120) { praise.push('字数适中（'+len+'字），篇幅把控好'); }
+  if (len > 300) { praise.push('篇幅充实（'+len+'字），内容丰富'); }
+  /* 错别字/口语化通用检查 */
+  var oralWords = ['我心想','感到','觉得','非常','特别','十分','一脸','拿回去怎么交代'];
+  var oralFound = hasAny(text, oralWords);
+  if (oralFound.length > 0) {
+    issues.push('口语化表达：「'+oralFound.join('」「')+'」——建议换成具体动作或感受');
+  } else if (len > 50) {
+    praise.push('没有明显口语化表达，语言较规范');
+  }
+
+  /* ---- 每周针对性检查 ---- */
+  var w = WEEKS[i];
+  if (i === 0) {
+    /* 第1周：开篇环境描写 — 动作声+环境+心理 */
+    var sounds = ['啪','哗','砰','咔','咚','嗒','哐','叮','轰','哗啦','噼啪','吱'];
+    var envWords = ['窗外','天空','云','雨','风','阳光','月光','树','落叶','雪','雾','雷','光','天空','空气','温度'];
+    var psyWords = ['心','脑海','脑','空白','慌','怕','紧','沉','酸','颤','怦','窒息','喘','压'];
+    var sf = hasKw(text, sounds);
+    var ef = hasAny(text, envWords);
+    var pf = hasKw(text, psyWords);
+    if (sf) praise.push('有动作声音词「'+sf+'」，开篇有冲击力');
+    else { issues.push('缺少拟声词/动作声——任务要求有"一个动作声"'); suggest.push('试试用"啪""砰""哗啦"等拟声词开头'); }
+    if (ef.length >= 1) praise.push('有环境描写（'+ef.join('、')+'）');
+    else { issues.push('缺少环境描写——任务要求有"一处环境描写"'); suggest.push('加入窗外天气、光线等环境细节'); }
+    if (pf) praise.push('有心理感受词「'+pf+'」，内心活动到位');
+    else { issues.push('缺少心理感受——任务要求有"一处心理感受"'); suggest.push('加入"脑海一片空白""心怦怦跳"等心理描写'); }
+  }
+  else if (i === 1) {
+    /* 第2周：人物出场写法 — 动作链，不直接评价 */
+    var actionWords = ['走','坐','站','拉','推','翻','拿','放','递','指','拍','握','转身','低头','抬头','弯腰','伸'];
+    var af = hasAny(text, actionWords);
+    var evalWords = ['他很爱我','她很关心','他很温柔','她很辛苦','他很伟大','很爱','关心我','为了我'];
+    var evf = hasAny(text, evalWords);
+    if (af.length >= 2) praise.push('动作链丰富（'+af.join('、')+'），人物出场自然');
+    else if (af.length === 1) { praise.push('有动作词「'+af[0]+'」'); suggest.push('再加1-2个连续动作，形成"动作链"'); }
+    else { issues.push('缺少动作描写——任务要求"只用动作+语言"'); suggest.push('用走、坐、翻、拿等动词让人物动起来'); }
+    if (evf.length > 0) { issues.push('出现直接评价「'+evf.join('、')+'」——任务要求不直接抒情'); suggest.push('删掉评价词，用动作和语言让读者自己感受到'); }
+    else if (len > 50) praise.push('没有直接抒情，符合"用动作说话"的要求');
+  }
+  else if (i === 2) {
+    /* 第3周：人物特写镜头 — 视觉细节+心理反应 */
+    var detailWords = ['白发','皱纹','手','指纹','茧','粗糙','苍老','鬓角','额','眉','眼角','嘴角','手势','指','肩','背','步','影子','侧脸','轮廓'];
+    var df = hasAny(text, detailWords);
+    var reactWords = ['酸','疼','颤','怦','暖','凉','湿','红','热','涩','堵','紧','沉','触动','鼻酸','哽咽','湿润','模糊'];
+    var rf = hasKw(text, reactWords);
+    if (df.length >= 1) praise.push('有视觉细节（'+df.join('、')+'），特写镜头到位');
+    else { issues.push('缺少视觉细节——任务要求"一个视觉细节"'); suggest.push('聚焦一个部位：白发、皱纹、粗糙的手……'); }
+    if (rf) praise.push('有心理反应「'+rf+'」，情感真实');
+    else { issues.push('缺少心理反应——任务要求"一种心理反应"'); suggest.push('加入"鼻酸""心里一颤""眼眶湿润"等反应'); }
+  }
+  else if (i === 3) {
+    /* 第4周：努力过程细节化 — 物品状态，不直说"我很努力" */
+    var itemWords = ['本子','课本','书','笔记','笔','笔芯','草稿','卷','批注','密密麻麻','写满','翻','磨损','用完','堆','叠','画满','标满'];
+    var iff = hasAny(text, itemWords);
+    var hardWords = ['我很努力','我非常努力','拼命','很用功','很刻苦','很勤奋'];
+    var hf = hasAny(text, hardWords);
+    if (iff.length >= 2) praise.push('物品状态细节丰富（'+iff.join('、')+'），"不直说"技巧好');
+    else if (iff.length === 1) { praise.push('有物品状态「'+iff[0]+'」'); suggest.push('再加1个物品细节，如"笔芯用完""课本翻卷了边"'); }
+    else { issues.push('缺少物品状态描写——任务要求至少2个"物品状态"细节'); suggest.push('写本子卷边、课本批注、笔芯用完等细节'); }
+    if (hf.length > 0) { issues.push('直接说了「'+hf.join('、')+'」——任务要求不出现"我很努力"'); suggest.push('删掉直说，用物品状态替你说话'); }
+    else if (len > 50) praise.push('没有直说"我很努力"，用细节暗示，高级写法');
+  }
+  else if (i === 4) {
+    /* 第5周：心理转折 — 困→回忆→咬牙 */
+    var tiredWords = ['困','累','疲','放弃','撑','眼皮','打','想放弃','不想','坚持','熬','乏','倦'];
+    var tf = hasKw(text, tiredWords);
+    var memWords = ['想起','回忆','浮现','脑海','记忆','闪过','回响','浮现出'];
+    var mf = hasKw(text, memWords);
+    var rallyWords = ['咬牙','振作','重新','站起来','不能','绝不','拼','冲','逼','逼自己','强','燃','动力'];
+    var rfl = hasKw(text, rallyWords);
+    if (tf) praise.push('有困倦/想放弃的描写「'+tf+'」，转折起点清晰');
+    else { issues.push('缺少"困倦/想放弃"——转折需要先有低谷'); suggest.push('写"眼皮打架""累得想放弃"等低谷状态'); }
+    if (mf) praise.push('有回忆触发「'+mf+'」，转折过渡自然');
+    else { issues.push('缺少回忆触发——任务要求"想起某人/某事"'); suggest.push('加入"脑海里浮现出……"触发转折'); }
+    if (rfl) praise.push('有重新振作的词「'+rfl+'」，转折完整');
+    else { issues.push('缺少"咬牙振作"——转折需要落到行动上'); suggest.push('写"咬牙""逼自己""重新拿起笔"等振作动作'); }
+  }
+  else if (i === 5) {
+    /* 第6周：结果呈现+环境呼应 — 身体反应+环境，不用"高兴/开心" */
+    var bodyWords = ['手心','汗','颤','抖','笑','嘴角','泪','红','湿','握','松','跳','怦','呼吸','喘','脚步','轻'];
+    var bf = hasKw(text, bodyWords);
+    var envWords2 = ['风','阳光','路','天','云','树','叶','光','秋','春','晨','夕','空气','花','草','影'];
+    var ef2 = hasAny(text, envWords2);
+    var happyWords = ['高兴','开心','快乐','兴奋','喜悦','欢喜','美滋滋','乐'];
+    var hpf = hasAny(text, happyWords);
+    if (bf) praise.push('有身体反应「'+bf+'」，结果呈现生动');
+    else { issues.push('缺少身体反应——任务要求"一个身体反应"'); suggest.push('写"手心全是汗""嘴角上扬"等身体细节'); }
+    if (ef2.length >= 1) praise.push('有环境呼应（'+ef2.join('、')+'），情景交融');
+    else { issues.push('缺少环境描写——任务要求"一处环境描写"'); suggest.push('加入"秋风拂过""阳光洒下"等环境呼应'); }
+    if (hpf.length > 0) { issues.push('直接用了「'+hpf.join('、')+'」——任务要求不用"高兴""开心"'); suggest.push('用身体反应和环境替你表达喜悦'); }
+    else if (len > 50) praise.push('没有直说"高兴/开心"，用细节呈现，高级');
+  }
+  else if (i === 6) {
+    /* 第7周：议论升华+金句收束 — 金句模板 */
+    var templateWords = ['不是为了','而是为了','不是','而是','恰恰','恰恰是','或许','但一定','从不是','而是在'];
+    var tlf = hasAny(text, templateWords);
+    var philWords = ['成长','未来','现在','自己','攀登','远方','终点','过程','意义','力量','姿态','笃定','从容'];
+    var plf = hasAny(text, philWords);
+    if (tlf.length >= 1) praise.push('使用了金句模板（'+tlf.join('、')+'），议论有力度');
+    else { issues.push('缺少金句模板——任务要求至少1句金句'); suggest.push('用"______不是为了______，而是为了______"句式'); }
+    if (plf.length >= 1) praise.push('有哲思词汇（'+plf.join('、')+'），立意有深度');
+    else { issues.push('立意偏浅——建议往"成长""未来""自己"等深层概念延伸'); suggest.push('思考：努力的意义到底是什么？'); }
+    if (len < 80) { issues.push('结尾段偏短（'+len+'字），议论展开不够'); suggest.push('展开2-3句，先说理再金句收束'); }
+  }
+  else if (i === 7) {
+    /* 第8周：综合实战 — 检查所有要素 */
+    var allChecks = {
+      '环境描写': hasAny(text, ['窗外','天空','云','雨','风','阳光','月光','树','秋','晨']),
+      '人物特写': hasAny(text, ['白发','皱纹','手','鬓角','眼角','侧脸','背影']),
+      '努力细节': hasAny(text, ['本子','课本','笔','批注','卷','密密麻麻','写满']),
+      '心理转折': hasKw(text, ['困','累','放弃','咬牙','振作','坚持','撑','想放弃']),
+      '金句结尾': hasAny(text, ['不是为了','而是','恰恰','或许','从不是','而是在'])
+    };
+    var passCount = 0;
+    for (var k in allChecks) {
+      var v = allChecks[k];
+      if (v && (typeof v === 'string' || v.length > 0)) {
+        praise.push('包含'+k+'，要素齐全');
+        passCount++;
+      } else {
+        issues.push('缺少'+k+'——综合作文需包含此要素');
+      }
+    }
+    if (passCount === 5) praise.push('五要素全部齐全，结构完整！');
+    if (len < 400) { issues.push('字数偏少（'+len+'字），要求600-800字'); suggest.push('展开每个段落，充实细节和描写'); }
+    else if (len >= 600 && len <= 900) praise.push('字数达标（'+len+'字），篇幅合适');
+    else if (len > 900) issues.push('字数偏多（'+len+'字），建议精简到800字以内');
+  }
+
+  /* ---- 评分 ---- */
+  var score = 0;
+  var maxScore = praise.length + issues.length;
+  if (maxScore > 0) score = Math.round(praise.length / maxScore * 100);
+  var level, label, color;
+  if (score >= 80) { level = 'excellent'; label = '优秀 ★ ' + score + '分'; color = '#2e7d32'; }
+  else if (score >= 60) { level = 'good'; label = '良好 · ' + score + '分'; color = '#1565c0'; }
+  else if (score >= 40) { level = 'fair'; label = '尚可 · ' + score + '分'; color = '#f39c12'; }
+  else { level = 'needImprove'; label = '待提升 · ' + score + '分'; color = '#e74c3c'; }
+
+  if (praise.length === 0) praise.push('已认真完成临摹，继续加油！');
+  if (issues.length === 0) { praise.push('本周技法要点全部达标！'); }
+  if (suggest.length === 0) suggest.push('保持当前水平，可以尝试标记完成！');
+
+  weekData[i].analysis = {
+    level: level, label: label, color: color,
+    praise: praise, issues: issues, suggest: suggest,
+    date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString()
+  };
+  savePlan();
+  renderWeeks();
+  toast('分析完成：' + label);
+}
 function toggleDone(i) {
   weekData[i].done = !weekData[i].done;
   savePlan();
