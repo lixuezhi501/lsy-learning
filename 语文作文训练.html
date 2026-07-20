@@ -176,6 +176,30 @@ body{font-family:"Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;line
 <h2 style="font-size:16px;color:#e74c3c;margin-bottom:6px;">📅 8周临摹计划</h2>
 <p style="font-size:12px;color:#888;margin-bottom:10px;">每周临摹优化版的一个段落，写出自己的版本。坚持8周，作文稳进一等文（45+分）。</p>
 <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%;">0/8</div></div>
+
+<!-- Cloud Sync Panel -->
+<div style="background:#e8f5e9;border-radius:8px;padding:12px;margin:10px 0;">
+  <div style="font-size:13px;font-weight:600;color:#2e7d32;margin-bottom:4px;">☁️ 临摹数据云端同步</div>
+  <div style="font-size:11px;color:#78909c;margin-bottom:8px;">配置 GitHub Token 后，平板/手机/电脑多端共享同一份临摹记录。Token 仅保存在本机浏览器中。</div>
+  <div id="essayCloudForm" style="display:none;margin-bottom:8px;">
+    <input type="password" id="essayToken" placeholder="GitHub Token" style="width:100%;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;margin-bottom:6px;">
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;">
+      <input type="text" id="essayOwner" placeholder="用户名" value="lixuezhi501" style="width:110px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+      <input type="text" id="essayRepo" placeholder="仓库名" value="lsy-learning" style="width:110px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+      <input type="text" id="essayPath" placeholder="文件路径" value="data/essay.json" style="flex:1;min-width:130px;padding:6px 10px;border:1px solid #cfd8dc;border-radius:5px;font-size:13px;">
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button class="btn btn-save" onclick="saveEssayCloudConfig()">💾 保存设置</button>
+      <button class="btn btn-done" onclick="syncEssayToCloud()">⬆️ 同步到云端</button>
+      <button class="btn btn-reset" onclick="fetchEssayFromCloud()">⬇️ 从云端恢复</button>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="btn" id="essayCloudToggle" onclick="toggleEssayCloudForm()" style="background:#fff;color:#2e7d32;border:1px solid #a5d6a7;">展开配置</button>
+    <span id="essayCloudStatus" style="font-size:11px;color:#2e7d32;"></span>
+  </div>
+</div>
+
 <div id="weekList"></div>
 </div>
 
@@ -230,7 +254,140 @@ if (weekData.length === 0) {
 
 function savePlan() {
   localStorage.setItem('lsy_essay_plan_v1', JSON.stringify(weekData));
+  if (essayCloud && essayCloud.token) { syncEssayToCloud(true); }
 }
+
+/* ---- Cloud Sync ---- */
+var essayCloud = null;
+var essayCloudSHA = null;
+try { var sc = localStorage.getItem('lsy_essay_cloud_v1'); if (sc) essayCloud = JSON.parse(sc); } catch(e) {}
+
+function essayApiHeaders() {
+  return { 'Authorization': 'token ' + essayCloud.token, 'Accept': 'application/vnd.github.v3+json' };
+}
+function essayToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+function essayFromBase64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))); }
+
+function toggleEssayCloudForm() {
+  var f = document.getElementById('essayCloudForm');
+  var btn = document.getElementById('essayCloudToggle');
+  if (f.style.display === 'none') { f.style.display = 'block'; btn.textContent = '收起配置'; if (essayCloud) { document.getElementById('essayToken').value = essayCloud.token || ''; document.getElementById('essayOwner').value = essayCloud.owner || 'lixuezhi501'; document.getElementById('essayRepo').value = essayCloud.repo || 'lsy-learning'; document.getElementById('essayPath').value = essayCloud.path || 'data/essay.json'; } }
+  else { f.style.display = 'none'; btn.textContent = '展开配置'; }
+}
+
+function saveEssayCloudConfig() {
+  essayCloud = {
+    token: document.getElementById('essayToken').value.trim(),
+    owner: document.getElementById('essayOwner').value.trim() || 'lixuezhi501',
+    repo: document.getElementById('essayRepo').value.trim() || 'lsy-learning',
+    path: document.getElementById('essayPath').value.trim() || 'data/essay.json'
+  };
+  if (!essayCloud.token) { toast('请输入 GitHub Token'); return; }
+  localStorage.setItem('lsy_essay_cloud_v1', JSON.stringify(essayCloud));
+  updateEssayCloudStatus('已保存，正在同步…');
+  syncEssayToCloud(false);
+  document.getElementById('essayCloudForm').style.display = 'none';
+  document.getElementById('essayCloudToggle').textContent = '展开配置';
+}
+
+function updateEssayCloudStatus(msg) {
+  var el = document.getElementById('essayCloudStatus');
+  if (el) el.textContent = msg;
+}
+
+function syncEssayToCloud(silent) {
+  if (!essayCloud || !essayCloud.token) { if (!silent) toast('未配置云端同步'); return; }
+  var url = 'https://api.github.com/repos/' + essayCloud.owner + '/' + essayCloud.repo + '/contents/' + essayCloud.path;
+  var headers = essayApiHeaders();
+  var doPut = function(sha) {
+    var payload = { message: '同步作文临摹 ' + new Date().toLocaleString(), content: essayToBase64(JSON.stringify(weekData)) };
+    if (sha) payload.sha = sha;
+    fetch(url, { method: 'PUT', headers: headers, body: JSON.stringify(payload) }).then(function(r) {
+      if (!r.ok) throw new Error('推送失败: ' + r.status);
+      return r.json();
+    }).then(function(d) {
+      if (d && d.content && d.content.sha) essayCloudSHA = d.content.sha;
+      updateEssayCloudStatus('已同步: ' + new Date().toLocaleTimeString());
+      if (!silent) toast('临摹记录已同步到云端');
+    }).catch(function(e) {
+      updateEssayCloudStatus('同步失败: ' + e.message);
+      if (!silent) { toast('同步失败，3秒后重试…'); setTimeout(function() { syncEssayToCloud(true); }, 3000); }
+    });
+  };
+  if (essayCloudSHA) { doPut(essayCloudSHA); }
+  else {
+    fetch(url, { headers: headers }).then(function(r) {
+      if (r.status === 404) return null;
+      if (!r.ok) throw new Error('查询失败: ' + r.status);
+      return r.json();
+    }).then(function(file) {
+      if (file && file.sha) essayCloudSHA = file.sha;
+      doPut(essayCloudSHA);
+    }).catch(function(e) {
+      updateEssayCloudStatus('同步失败: ' + e.message);
+      if (!silent) toast('同步失败: ' + e.message);
+    });
+  }
+}
+
+function mergeEssayData(cloudData) {
+  if (!Array.isArray(cloudData) || cloudData.length !== WEEKS.length) return false;
+  var changed = false;
+  for (var i = 0; i < WEEKS.length; i++) {
+    var cd = cloudData[i];
+    var ld = weekData[i];
+    if (!cd) continue;
+    /* 云端有文本且本地为空 → 用云端 */
+    if (cd.text && !ld.text) { weekData[i].text = cd.text; changed = true; }
+    /* 云端有文本且与本地不同 → 用较长的（通常更完整） */
+    else if (cd.text && ld.text && cd.text.length > ld.text.length) { weekData[i].text = cd.text; changed = true; }
+    /* 云端已标记完成 → 本地也标记完成 */
+    if (cd.done && !ld.done) { weekData[i].done = true; changed = true; }
+    /* 云端有分析结果 → 用云端（分析结果不覆盖本地的，除非本地没有） */
+    if (cd.analysis && !ld.analysis) { weekData[i].analysis = cd.analysis; changed = true; }
+  }
+  return changed;
+}
+
+function fetchEssayFromCloud() {
+  if (!essayCloud || !essayCloud.token) {
+    /* 未配置时尝试从主系统共享配置 */
+    try { var sc = localStorage.getItem('lsy_cloud_config_v1'); if (sc) { var c = JSON.parse(sc); essayCloud = { token: c.token, owner: c.owner || 'lixuezhi501', repo: c.repo || 'lsy-learning', path: c.essayPath || 'data/essay.json' }; localStorage.setItem('lsy_essay_cloud_v1', JSON.stringify(essayCloud)); } } catch(e) {}
+  }
+  if (!essayCloud || !essayCloud.token) { toast('未配置云端同步'); return; }
+  updateEssayCloudStatus('正在从云端拉取…');
+  var url = 'https://api.github.com/repos/' + essayCloud.owner + '/' + essayCloud.repo + '/contents/' + essayCloud.path;
+  fetch(url, { headers: essayApiHeaders() }).then(function(r) {
+    if (r.status === 404) {
+      /* 云端没有 → 把本地推上去 */
+      if (weekData.some(function(d) { return d.text || d.done; })) {
+        updateEssayCloudStatus('云端无记录，正在推送本地…');
+        syncEssayToCloud(true);
+      } else {
+        updateEssayCloudStatus('云端暂无记录');
+      }
+      return null;
+    }
+    if (!r.ok) throw new Error('拉取失败: ' + r.status);
+    return r.json();
+  }).then(function(file) {
+    if (!file || !file.content) return;
+    if (file.sha) essayCloudSHA = file.sha;
+    var cloudData = JSON.parse(essayFromBase64(file.content));
+    var changed = mergeEssayData(cloudData);
+    if (changed) { savePlan(); renderWeeks(); toast('已从云端恢复临摹记录'); }
+    else { updateEssayCloudStatus('云端数据已是最新'); }
+    /* 如果本地有云端没有的内容，反向同步 */
+    var localHasMore = weekData.some(function(d, i) { return (d.text && (!cloudData[i] || !cloudData[i].text || d.text.length > cloudData[i].text.length)) || (d.done && (!cloudData[i] || !cloudData[i].done)) || (d.analysis && (!cloudData[i] || !cloudData[i].analysis)); });
+    if (localHasMore) { syncEssayToCloud(true); }
+  }).catch(function(e) {
+    updateEssayCloudStatus('恢复失败: ' + e.message);
+    toast('云端恢复失败: ' + e.message);
+  });
+}
+
+/* 页面加载时自动从云端拉取 */
+setTimeout(function() { fetchEssayFromCloud(); }, 1500);
 
 function renderWeeks() {
   var html = '';
@@ -460,10 +617,12 @@ function toggleDone(i) {
   toast(weekData[i].done ? '第' + (i+1) + '周已完成！继续加油！' : '已取消完成标记');
 }
 
-function toast(msg) {
+function toast(msg, type) {
   var t = document.createElement('div');
   t.textContent = msg;
-  t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:6px;font-size:13px;z-index:9999;opacity:0.9;';
+  var bg = '#333';
+  if (type === 'warn') bg = '#e65100';
+  t.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:'+bg+';color:#fff;padding:8px 20px;border-radius:6px;font-size:13px;z-index:9999;opacity:0.9;';
   document.body.appendChild(t);
   setTimeout(function() { t.remove(); }, 2000);
 }
