@@ -220,14 +220,14 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
   .goal-row input{width:80px;font-size:12px}
 }
 </style></head><body><div class="container">
-<div class="header"><h1>李思源学情态势分析及短板提升系统</h1><div class="sub" id="headerSub">玉溪市红塔中学 · <span id="gradeLabel">七年级</span> · 2025-2026学年 | 数据自动存档</div></div>
+<div class="header"><h1>李思源学情态势分析及短板提升系统</h1><div class="sub" id="headerSub">玉溪市红塔中学 · <span id="gradeLabel">八年级</span> · 2026-2027学年 | 数据自动存档</div></div>
 <div class="tabs"><button class="tab-btn active" onclick="switchTab(0)">📊 成绩态势</button><button class="tab-btn" onclick="switchTab(1)">🔍 短板分析</button><button class="tab-btn" onclick="switchTab(2)">🚀 提升方案</button><button class="tab-btn" onclick="switchTab(3)">✅ 训练打卡</button></div>
 
 <!-- Module 0: Score Trends -->
 <div class="module active">
 <div class="input-panel">
   <h3>📝 录入成绩</h3>
-  <div style="font-size:11px;color:#78909c;margin-bottom:6px;">单科录入或批量录入（物理满分90分，其余各科满分100分）</div>
+  <div style="font-size:11px;color:#78909c;margin-bottom:6px;">单科录入或批量录入（物理、生物满分90分，其余各科满分100分）</div>
   <div class="input-row">
     <select id="inputSubject"><option value="语文">语文</option><option value="数学">数学</option><option value="英语">英语</option><option value="生物">生物</option><option value="道法">道法</option><option value="历史">历史</option><option value="地理">地理</option><option value="物理">物理</option></select>
     <input type="number" id="inputScore" placeholder="分数">
@@ -242,13 +242,18 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
   <tr><td>语文</td><td><input id="b_语文_score"></td><td><input id="b_语文_rank"></td></tr>
   <tr><td>数学</td><td><input id="b_数学_score"></td><td><input id="b_数学_rank"></td></tr>
   <tr><td>英语</td><td><input id="b_英语_score"></td><td><input id="b_英语_rank"></td></tr>
-  <tr><td>生物</td><td><input id="b_生物_score"></td><td><input id="b_生物_rank"></td></tr>
+  <tr><td>生物</td><td><input id="b_生物_score" placeholder="满分90"></td><td><input id="b_生物_rank"></td></tr>
   <tr><td>道法</td><td><input id="b_道法_score"></td><td><input id="b_道法_rank"></td></tr>
   <tr><td>历史</td><td><input id="b_历史_score"></td><td><input id="b_历史_rank"></td></tr>
   <tr><td>地理</td><td><input id="b_地理_score"></td><td><input id="b_地理_rank"></td></tr>
   <tr><td>物理</td><td><input id="b_物理_score" placeholder="满分90"></td><td><input id="b_物理_rank"></td></tr>
   </table>
   <button class="btn btn-primary" onclick="batchAddRecords()" style="margin-top:8px;">✅ 一键录入各科</button>
+</div>
+<div style="margin-top:8px;font-size:11px;color:#78909c;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+  <span>⚠ 物理为八年级新科，仅本次月考应有成绩。若发现多余物理成绩（或某科需重录）：</span>
+  <select id="clearSubj" style="padding:3px 6px;border:1px solid #cfd8dc;border-radius:4px;font-size:12px;"><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option><option>物理</option></select>
+  <button class="btn btn-sm" style="background:#c62828;color:#fff;" onclick="clearSubject()">🗑 清空该科成绩</button>
 </div>
 <div class="subject-tabs" id="subjectTabs"></div>
 <div id="subjectDetail">
@@ -818,6 +823,15 @@ function delRecord(subj, idx) {
   data[subj].forEach(function(r,i){ r.label = '第'+(i+1)+'次'; });
   saveData(); renderSubjectDetail(); renderGoals(); renderAchievements(); toast('已删除');
 }
+function clearSubject() {
+  var s = document.getElementById('clearSubj').value;
+  if (!data[s]) { toast(s+'暂无数据','error'); return; }
+  if (!confirm('确认清空【'+s+'】的全部成绩记录？(清空后可重新录入，仅保留本次月考等真实成绩)')) return;
+  data[s] = [];
+  if (curSubj === s) curSubj = SUBJECTS[0];
+  saveData(); initSubjectTabs(); renderSubjectDetail(); renderGoals(); renderAchievements();
+  toast(s+'成绩已清空，请重新录入真实成绩');
+}
 
 /* === Batch input (NEW) === */
 function toggleBatchInput() {
@@ -885,7 +899,7 @@ function renderComboChart() {
   var pw=W-pL-pR, ph=H-pT-pB;
   var n = records.length;
   var barW; if (n<=1) barW=30; else { var spacing=pw/(n-1); barW=Math.max(16,Math.min(50,spacing*0.4)); }
-  var sMin=0, sMax=100, rMin=1, rMax=400;
+  var sMin=0, sMax=SUBJECT_FULL[curSubj]||100, rMin=1, rMax=400;
   function scoreY(v){return pT+ph-ph*(v-sMin)/(sMax-sMin);}
   function rankY(v){return pT+ph*(v-rMin)/(rMax-rMin);}
   var baseline = pT+ph;
@@ -987,7 +1001,8 @@ function detectAchievements() {
   SUBJECTS.forEach(function(s){
     var latestScore=null;
     data[s].forEach(function(r){if(r.score!==null)latestScore=r.score;});
-    if(latestScore!==null&&latestScore>bestPct){bestPct=latestScore;bestPctSubj=s;}
+    var pct = latestScore!==null ? Math.round(latestScore/(SUBJECT_FULL[s]||100)*100) : 0;
+    if(latestScore!==null&&pct>bestPct){bestPct=pct;bestPctSubj=s;}
   });
   if(bestPctSubj){achievements.push({icon:'🌟',title:bestPctSubj+'最强科目',desc:'得分率'+bestPct+'%',cat:'best_subj'});}
 
