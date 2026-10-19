@@ -254,6 +254,7 @@ body{font-family:"微软雅黑","PingFang SC",sans-serif;background:#f0f2f5;colo
   <span>⚠ 物理为八年级新科，仅本次月考应有成绩。若发现多余物理成绩（或某科需重录）：</span>
   <select id="clearSubj" style="padding:3px 6px;border:1px solid #cfd8dc;border-radius:4px;font-size:12px;"><option>语文</option><option>数学</option><option>英语</option><option>生物</option><option>道法</option><option>历史</option><option>地理</option><option>物理</option></select>
   <button class="btn btn-sm" style="background:#c62828;color:#fff;" onclick="clearSubject()">🗑 清空该科成绩</button>
+  <button class="btn btn-sm" style="background:#37474f;color:#fff;" onclick="repairData()">🔧 数据自检修复</button>
 </div>
 <div class="subject-tabs" id="subjectTabs"></div>
 <div id="subjectDetail">
@@ -487,6 +488,7 @@ var checkins = [];
 var examAnalysis = {};
 var weaknessTracking = {};
 var saveCounter = 0;
+var physicsAutoFixedFlag = false; /* 标记本次加载是否自动修复了物理遗留数据 */
 
 
 /* === Grade auto-upgrade === */
@@ -515,8 +517,33 @@ function getSchoolYear() {
 /* === Data load/save === */
 function loadData() {
   var saved = localStorage.getItem('lsy_data_v8');
-  if (saved) { data = JSON.parse(saved); }
-  else { data = JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); }
+  if (saved) {
+    try { data = JSON.parse(saved); }
+    catch (e) { console.warn('成绩数据解析失败，已恢复初始数据', e); data = null; }
+  }
+  if (!data || typeof data !== 'object') {
+    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    saveData();
+  }
+  /* 数据完整性校验：确保每个当前科目都有合法数组，避免 undefined 导致的录入崩溃 */
+  var changed = false;
+  SUBJECTS.forEach(function(s) {
+    if (!Array.isArray(data[s])) {
+      data[s] = Array.isArray(DEFAULT_DATA[s]) ? JSON.parse(JSON.stringify(DEFAULT_DATA[s])) : [];
+      changed = true;
+    }
+  });
+  /* 一次性迁移修复：物理为八年级新科，清理历史版本可能误带入的地理等旧数据 */
+  if (!localStorage.getItem('lsy_v8_physics_fixed')) {
+    if (Array.isArray(data['物理']) && data['物理'].length > 0) {
+      console.warn('已自动清空物理历史遗留成绩（物理为新科，请重新录入本次月考）');
+      data['物理'] = [];
+      changed = true;
+      physicsAutoFixedFlag = true;
+    }
+    try { localStorage.setItem('lsy_v8_physics_fixed', '1'); } catch(e) {}
+  }
+  if (changed) saveData();
 }
 function saveData() {
   localStorage.setItem('lsy_data_v8', JSON.stringify(data));
@@ -806,16 +833,19 @@ function selectSubject(s) {
 
 /* === Single record add === */
 function addRecord() {
-  var subj = document.getElementById('inputSubject').value;
-  var score = document.getElementById('inputScore').value;
-  var rank = document.getElementById('inputRank').value;
-  if (!score && !rank) { toast('请至少填写分数或排名','error'); return; }
-  var n = data[subj].length + 1;
-  data[subj].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
-  saveData(); selectSubject(subj); toast('已录入 '+subj+' 第'+n+'次！');
-  document.getElementById('inputScore').value = '';
-  document.getElementById('inputRank').value = '';
-  renderGoals(); renderAchievements();
+  try {
+    var subj = document.getElementById('inputSubject').value;
+    var score = document.getElementById('inputScore').value;
+    var rank = document.getElementById('inputRank').value;
+    if (!score && !rank) { toast('请至少填写分数或排名','error'); return; }
+    if (!Array.isArray(data[subj])) data[subj] = [];
+    var n = data[subj].length + 1;
+    data[subj].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
+    saveData(); selectSubject(subj); toast('已录入 '+subj+' 第'+n+'次！');
+    document.getElementById('inputScore').value = '';
+    document.getElementById('inputRank').value = '';
+    renderGoals(); renderAchievements();
+  } catch(e) { toast('录入失败：'+e.message,'error'); console.error(e); }
 }
 function delRecord(subj, idx) {
   if (!confirm('确定删除'+subj+'第'+(idx+1)+'次记录？')) return;
@@ -825,12 +855,30 @@ function delRecord(subj, idx) {
 }
 function clearSubject() {
   var s = document.getElementById('clearSubj').value;
-  if (!data[s]) { toast(s+'暂无数据','error'); return; }
+  if (!Array.isArray(data[s]) || data[s].length === 0) { toast(s+'暂无数据','error'); return; }
   if (!confirm('确认清空【'+s+'】的全部成绩记录？(清空后可重新录入，仅保留本次月考等真实成绩)')) return;
   data[s] = [];
   if (curSubj === s) curSubj = SUBJECTS[0];
   saveData(); initSubjectTabs(); renderSubjectDetail(); renderGoals(); renderAchievements();
   toast(s+'成绩已清空，请重新录入真实成绩');
+}
+
+/* === 数据自检与修复（安全网） === */
+function repairData() {
+  if (!confirm('执行数据自检与修复？\n· 物理为新科，将清空其中的历史遗留成绩（若有）\n· 重建缺失/损坏的科目数据\n· 不影响你已正常录入的真实成绩')) return;
+  var fixedPhysics = false;
+  SUBJECTS.forEach(function(s) {
+    if (!Array.isArray(data[s])) {
+      data[s] = Array.isArray(DEFAULT_DATA[s]) ? JSON.parse(JSON.stringify(DEFAULT_DATA[s])) : [];
+    }
+  });
+  if (Array.isArray(data['物理']) && data['物理'].length > 0) {
+    data['物理'] = [];
+    fixedPhysics = true;
+  }
+  try { localStorage.setItem('lsy_v8_physics_fixed', '1'); } catch(e) {}
+  saveData(); initSubjectTabs(); renderSubjectDetail(); renderGoals(); renderAchievements();
+  toast(fixedPhysics ? '已修复：清空物理遗留成绩，其余数据已保留' : '数据完整，无需修复');
 }
 
 /* === Batch input (NEW) === */
@@ -839,24 +887,28 @@ function toggleBatchInput() {
   panel.classList.toggle('open');
 }
 function batchAddRecords() {
-  var count = 0;
-  SUBJECTS.forEach(function(s) {
-    var scoreEl = document.getElementById('b_'+s+'_score');
-    var rankEl = document.getElementById('b_'+s+'_rank');
-    var score = scoreEl.value;
-    var rank = rankEl.value;
-    if (score || rank) {
-      var n = data[s].length + 1;
-      data[s].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
-      count++;
-      scoreEl.value = '';
-      rankEl.value = '';
-    }
-  });
-  if (count === 0) { toast('请至少填写1科数据','error'); return; }
-  saveData(); selectSubject(curSubj); renderGoals(); renderAchievements();
-  toast('已批量录入'+count+'科成绩！');
-  document.getElementById('batchPanel').classList.remove('open');
+  try {
+    var count = 0;
+    SUBJECTS.forEach(function(s) {
+      var scoreEl = document.getElementById('b_'+s+'_score');
+      var rankEl = document.getElementById('b_'+s+'_rank');
+      if (!scoreEl || !rankEl) return;
+      var score = scoreEl.value;
+      var rank = rankEl.value;
+      if (score || rank) {
+        if (!Array.isArray(data[s])) data[s] = [];
+        var n = data[s].length + 1;
+        data[s].push({label:'第'+n+'次', score:score?parseFloat(score):null, rank:rank?parseInt(rank):null});
+        count++;
+        scoreEl.value = '';
+        rankEl.value = '';
+      }
+    });
+    if (count === 0) { toast('请至少填写1科数据','error'); return; }
+    saveData(); selectSubject(curSubj); renderGoals(); renderAchievements();
+    toast('已批量录入'+count+'科成绩！');
+    document.getElementById('batchPanel').classList.remove('open');
+  } catch(e) { toast('批量录入失败：'+e.message,'error'); console.error(e); }
 }
 
 /* === Smooth bezier path === */
@@ -1668,6 +1720,9 @@ document.getElementById('headerSub').innerHTML = '玉溪市红塔中学 · <span
 loadData(); loadCloudConfig(); loadGoals(); loadCheckins(); loadExamAnalysis();
 initSubjectTabs(); renderSubjectDetail(); renderModule2(); renderModule3(); renderExamList();
 renderHeatMap(); renderKnowledgeAggregation(); renderGoals(); renderAchievements(); renderCloudForm();
+if (physicsAutoFixedFlag) {
+  setTimeout(function(){ toast('已自动修复：物理为新科，已清空历史遗留成绩，可重新录入本次月考', 'error'); }, 600);
+}
 /* char count listener */
 document.getElementById('ciTakeaway').addEventListener('input',function(){document.getElementById('charCount').textContent=this.value.length;});
 
