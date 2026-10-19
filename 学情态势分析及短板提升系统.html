@@ -989,6 +989,54 @@ function renderComboChart() {
   el.innerHTML = svg;
 }
 
+/* === 动态分析（随录入实时生成，各科通用） === */
+function buildDynamicDiagnosis(subj, records) {
+  var pts = [];
+  records.forEach(function(r){ pts.push({label:r.label, score:r.score, rank:r.rank}); });
+  if (pts.length === 0) return '';
+  var last = pts[pts.length-1];
+  if (last.score === null && last.rank === null) return '';
+  var full = SUBJECT_FULL[subj] || 100;
+  var parts = [];
+  /* 1) 最新状态（单条成绩也能显示） */
+  var seg1 = subj + '最新' + last.label + '：';
+  var segArr = [];
+  if (last.score !== null) segArr.push(last.score + '分/得分率' + Math.round(last.score/full*100) + '%（满分' + full + '）');
+  if (last.rank !== null) segArr.push('排名R' + last.rank);
+  if (segArr.length === 0) return '';
+  parts.push(seg1 + segArr.join('，'));
+  /* 2) 较上次趋势 */
+  if (pts.length >= 2) {
+    var prev = pts[pts.length-2];
+    var seg = [];
+    if (last.score !== null && prev.score !== null) {
+      var d = last.score - prev.score;
+      seg.push(d > 2 ? '成绩上升' + d.toFixed(1) + '分' : d < -2 ? '成绩下滑' + Math.abs(d).toFixed(1) + '分' : '成绩平稳');
+    }
+    if (last.rank !== null && prev.rank !== null) {
+      var rd = last.rank - prev.rank;
+      seg.push(rd < -10 ? '排名进步' + Math.abs(rd) + '名' : rd > 10 ? '排名退步' + rd + '名' : '排名基本持平');
+    }
+    if (seg.length) parts.push('较上次' + seg.join('、'));
+  }
+  /* 3) 个人历史定位 */
+  var rankPts = pts.filter(function(p){ return p.rank !== null; });
+  if (rankPts.length >= 2 && last.rank !== null) {
+    var rBest = Math.min.apply(null, rankPts.map(function(p){return p.rank;}));
+    var rWorst = Math.max.apply(null, rankPts.map(function(p){return p.rank;}));
+    var bestPt = rankPts.filter(function(p){ return p.rank === rBest; })[0];
+    var span = rWorst - rBest;
+    var pos = span === 0 ? '为历史唯一水平' : (last.rank <= rBest + span*0.33 ? '处于个人历史较好区间' : last.rank >= rWorst - span*0.33 ? '处于个人历史较差区间，需重点关注' : '处于个人历史中段');
+    parts.push('个人历史最佳R' + rBest + '（' + bestPt.label + '）、最差R' + rWorst + '，当前' + pos);
+  }
+  /* 4) 目标差距 */
+  if (goals[subj] && last.score !== null) {
+    var gap = goals[subj] - last.score;
+    parts.push(gap <= 0 ? '✅ 已达成目标' + goals[subj] + '分' : '距目标' + goals[subj] + '分还差' + gap.toFixed(1) + '分');
+  }
+  return parts.join('；') + '。';
+}
+
 /* === Trend analysis with goal status === */
 function renderTrendAnalysis() {
   var el = document.getElementById('trendAnalysis');
@@ -1006,8 +1054,10 @@ function renderTrendAnalysis() {
   if(goals[curSubj]){var gap=latest-goals[curSubj];var goalTag=gap>=0?'<span class="goal-status goal-reached">✅ 已达成</span>':gap>=-5?'<span class="goal-status goal-close">接近（差'+Math.abs(gap).toFixed(1)+'分）</span>':'<span class="goal-status goal-far">差'+Math.abs(gap).toFixed(1)+'分</span>';html+='<div style="margin-bottom:6px;">目标：'+goals[curSubj]+'分 → 当前 '+latest+'分 '+goalTag+'</div>';}
   }
 
+  var dyn = buildDynamicDiagnosis(curSubj, records);
+  if (dyn) html += '<div style="margin-top:8px;padding-top:8px;border-top:1px solid #c5cae9;background:#e8eaf6;border-radius:6px;padding:8px;color:#1a237e;font-size:12.5px;font-weight:600;line-height:1.7;">📈 动态分析（随成绩录入实时更新）<br><span style="font-weight:400;color:#283593;">' + dyn + '</span></div>';
   var w = WEAKNESS[curSubj];
-  if(w) html+='<div style="margin-top:6px;padding-top:6px;border-top:1px solid #c5cae9;color:#546e7a;font-size:12px;">💡 '+w.diagnosis+'</div>';
+  if (w) html+='<div style="margin-top:6px;color:#90a4ae;font-size:11.5px;line-height:1.6;">📌 静态基线诊断（基于期末数据存档，供参考，不随新成绩变化）：' + w.diagnosis + '</div>';
   el.innerHTML = html;
 }
 
