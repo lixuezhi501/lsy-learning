@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源·八上道法「框架学习法」全套资料（人教版）</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--blue);}
+  h2{font-size:20px;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .stage{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .chip{flex:1 1 120px;border-radius:10px;padding:10px 12px;color:#fff;font-size:12.5px;font-weight:700;text-align:center;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .unit{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:16px 0;overflow:hidden;}
+  .unit .head{padding:12px 16px;font-weight:800;font-size:16px;color:#fff;}
+  .unit .body{padding:12px 16px;}
+  .kbd{background:#1f2937;color:#fff;border-radius:6px;padding:1px 7px;font-size:12px;}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .wrong{color:var(--red);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:14px;}
+  .toc a{color:var(--blue);text-decoration:none;}
+  .meth{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px 18px;margin:12px 0;}
+  @media print{body{background:#fff;}.card,.unit,.toc,.meth{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>李思源 · 八上道法「框架学习法」全套资料</h1>
+<div class="sub">人教版八年级上册 道德与法治 全册 4 单元 10 课完整覆盖 ｜ 核心目标：<b>教你搭框架、把知识点理清、不再混淆</b></div>
+
+<div class="toc">
+  <b>📑 目录</b><br>
+  <a href="#how">0. 这份资料怎么用</a> ｜
+  <a href="#frame">1. 先学「道法怎么搭框架」（最重要）</a> ｜
+  <a href="#axis">2. 一条生活逻辑链：八上骨架</a> ｜
+  <a href="#units">3. 四单元完整知识（逐课细颗粒）</a> ｜
+  <a href="#mix">4. 跨单元易混淆大汇总</a> ｜
+  <a href="#quiz">5. 自测题（每单元+综合）</a> ｜
+  <a href="#tpl">6. 框架练习模板（自己练）</a>
+</div>
+
+<!-- ============ 0 ============ -->
+<h2 id="how">0. 这份资料怎么用</h2>
+<div class="card">
+  <div class="point">① <b>第1节必看</b>：先学会"道法怎么搭框架"——横线是"生活逻辑链"，纵线是"单元主题"，这是你道法学不好的根（不是背不下，是没框架，记了也乱）。</div>
+  <div class="point">② <b>第2节骨架</b>：八上整本书就一条"生活逻辑链"，先记骨架。</div>
+  <div class="point">③ <b>第3节逐单元</b>：每单元都按"主题定位 → 逐课细知识（核心观点/关键词/为什么/怎么做/易错/举例）→ 单元易混"给你填好，直接背。</div>
+  <div class="point">④ <b>第4节对比表</b>：所有"容易混"的放一起比，这是防混淆的杀手锏。</div>
+  <div class="point">⑤ <b>第5节自测 + 第6节模板</b>：做完自测，再用模板自己搭一遍，框架就长在你脑子里了。</div>
+  <div class="ok">💡 一句话心法：<span class="kbd">先定位单元 → 再填三要素（是什么/为什么/怎么做）→ 最后用对比表核查</span>。每学一课都走这三步，混淆自然消失。</div>
+</div>
+
+<!-- ============ 1 框架方法论 ============ -->
+<h2 id="frame">1. 先学「道法怎么搭框架」（这是核心，比背课文重要）</h2>
+
+<div class="meth">
+  <h3 style="margin-top:0">🧱 框架 = 两条线交织</h3>
+  <div class="grid">
+    <div>
+      <b>横线：生活逻辑链</b>（按"我与社会的关系"递进，解决"知识点散乱"）<br>
+      走进社会(我是谁) → 遵守规则(怎么相处) → 承担责任(我该做什么) → 维护国家利益(大我)<br>
+      把这四步挂到这条链上，就知道"这课在讲我成长路上的哪一站"。
+    </div>
+    <div>
+      <b>纵线：单元主题</b>（按"在讲啥"分，解决"知识点混淆"）<br>
+      走进社会生活 → 遵守社会规则 → 勇担社会责任 → 维护国家利益<br>
+      先知道"这个单元的主题"，再填细节，就不会张冠李戴。
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📋 每课填充"三要素"（拿到任何一课都按这三个格子填）</h3>
+  <table>
+    <tr><th style="width:90px">要素</th><th style="width:110px">问自己</th><th>举例（以"合理利用网络"为例）</th></tr>
+    <tr><td><b>① 是什么</b></td><td>这课讲了啥概念？</td><td>理性参与网络生活 + 传播网络正能量</td></tr>
+    <tr><td><b>② 为什么</b></td><td>为啥要这样做？</td><td>网络是把双刃剑，既丰富生活、推动社会进步，也有谣言、沉迷、隐私泄露等弊端</td></tr>
+    <tr><td><b>③ 怎么做</b></td><td>我该怎么做？</td><td>提高媒介素养、不沉迷、学会信息节食、辨别谣言、遵守道德法律；建言献策、弘扬核心价值观</td></tr>
+  </table>
+  <div class="tip">🧭 用法：考试前拿一张白纸，按单元默写每课的"三要素"。能默出来 = 真会了；卡住 = 回去再背那一课。这就是"自己搭框架"。</div>
+</div>
+
+<div class="card">
+  <h3>🔍 防混淆三步法（专门针对"知识点容易混淆"）</h3>
+  <div class="point"><b>第一步·同类归堆</b>：把所有"违法/犯罪"放一张表（见第4节），所有"诉讼"放一张表，所有"地位/意义"放一张表。</div>
+  <div class="point"><b>第二步·逐格比对</b>：比如"民事违法"和"犯罪"都违法，但违反的法律、危害程度、法律后果都不一样——放一起比就忘不了。</div>
+  <div class="point"><b>第三步·出题自测</b>：自己问自己"犯罪三特征哪个是最本质的？"、"三种诉讼哪种是最权威最后屏障？"，答得上来才算过。</div>
+  <div class="warn">⚠️ 道法最易错的就是"张冠李戴"——把诚信的地位套到礼貌上，把一般违法的后果写成刑罚。只要按上面归堆，这类错能砍掉一大半。</div>
+</div>
+
+<!-- ============ 2 生活逻辑链 ============ -->
+<h2 id="axis">2. 一条生活逻辑链：八上骨架（先记这条线）</h2>
+<div class="card">
+  <div class="stage">
+    <div class="chip" style="background:#dc2626">①走进社会<br>我是谁<br>丰富的社会生活<br>网络生活新空间</div>
+    <div class="chip" style="background:#ea580c">②遵守规则<br>怎么相处<br>维护秩序·守规则<br>讲道德·做守法公民</div>
+    <div class="chip" style="background:#16a34a">③承担责任<br>我该做什么<br>责任与角色同在<br>积极奉献社会</div>
+    <div class="chip" style="background:#7c3aed">④国家利益<br>大我<br>国家好大家才好<br>总体国家安全观·建设祖国</div>
+  </div>
+  <div class="tip">🧭 速记口诀：<span class="mn">走进社会 → 遵守规则 → 承担责任 → 维护国家利益</span>。整本书就这四站，考试先判断"材料落在第几站"。</div>
+</div>
+
+<!-- ============ 3 四单元完整知识 ============ -->
+<h2 id="units">3. 四单元完整知识（每课六维度细颗粒全覆盖）</h2>
+<div class="tip" style="background:#eff6ff;border-left:4px solid var(--blue)">📖 每课按 <b>核心观点 / 关键词 / 为什么 / 怎么做 / 易错提醒 / 举例</b> 六维度展开，细颗粒度背记。</div>
+
+<!-- 单元1 -->
+<div class="unit">
+  <div class="head" style="background:#dc2626">第一单元　走进社会生活（我是谁 · 我与社会的关系）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：从"认识自己与社会的关系"出发，先知道"我是社会中的谁"，再学会在<b>现实社会</b>和<b>网络社会</b>中健康成长。</div>
+
+    <h3>第一课　丰富的社会生活</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①我与社会：</b>个人是社会的有机组成部分；人的身份是在社会关系中确定的（社会关系分血缘、地缘、业缘）。<br><b>②在社会中成长：</b>人的成长是不断社会化的过程；要树立亲社会行为（谦让、分享、帮助他人、关心社会发展），参与社会实践。</td></tr>
+      <tr><td><b>关键词</b></td><td>社会有机组成部分、社会关系（血缘/地缘/业缘）、社会化、亲社会行为</td></tr>
+      <tr><td><b>为什么</b></td><td>人的身份离不开社会关系；社会化让我们从生物人成长为"社会人"；亲社会行为有利于我们养成良好品格、实现人生价值。</td></tr>
+      <tr><td><b>怎么做</b></td><td>主动认识不同社会关系中的身份；树立谦让、分享、帮助他人、关心社会发展的亲社会行为；积极参与社会实践。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 人的身份不是天生的，是<b>在社会关系中确定</b>的；血缘、地缘、业缘是三种社会关系，别漏"业缘"（因职业/学业形成）。</td></tr>
+      <tr><td><b>举例</b></td><td>在家里是子女（血缘）、在小区是邻居（地缘）、在学校是学生（业缘）；参与志愿者服务、分享学习资料都是亲社会行为。</td></tr>
+    </table>
+
+    <h3>第二课　网络生活新空间</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①网络改变世界：</b>利——网络丰富日常生活（信息传递交流方便、打破时空限制促进交往、生活便利），推动社会进步（经济、政治、文化传播、科技创新）。<br>弊——网络信息良莠不齐（谣言、暴力色情）、沉迷影响学习工作、个人隐私容易被侵犯。<br><b>②合理利用网络：</b>理性参与（提高媒介素养、不沉迷、学会信息节食、辨别谣言、遵守道德法律）；传播网络正能量（建言献策、弘扬社会主义核心价值观）。</td></tr>
+      <tr><td><b>关键词</b></td><td>网络是把双刃剑、媒介素养、信息节食、辨别谣言、网络正能量、社会主义核心价值观</td></tr>
+      <tr><td><b>为什么</b></td><td>网络有利有弊，既是生活便利工具，也带来信息污染、沉迷、隐私风险，所以要"理性参与 + 传播正能量"双向用力。</td></tr>
+      <tr><td><b>怎么做</b></td><td>理性参与：提高媒介素养、不沉迷、学会"信息节食"、辨别网络谣言、遵守道德和法律；传播正能量：为社会发展建言献策、在网上弘扬社会主义核心价值观。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ "信息节食"不是不碰网络，而是<b>不沉溺、有选择地摄取有益信息</b>；网络推动社会进步体现在经济、政治、文化、科技四个方面，别只写"生活便利"。</td></tr>
+      <tr><td><b>举例</b></td><td>利：网课、视频通话打破时空、网络购物；弊：轻信谣言、熬夜打游戏误学、个人信息被泄露；正能量：在政府网站留言提建议、转发好人好事。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：第一课讲"现实社会中的我"，第二课讲"网络社会中的我"——都是"走进社会"，但一个是线下社会化，一个是线上合理用网，别把两课的位置搞反。</div>
+  </div>
+</div>
+
+<!-- 单元2 -->
+<div class="unit">
+  <div class="head" style="background:#ea580c">第二单元　遵守社会规则（怎么相处 · 规则与道德与法）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：在社会里"怎么和别人好好相处"——先靠<b>规则</b>维护秩序，再靠<b>道德</b>（尊重/礼貌/诚信）提升素养，最后用<b>法律</b>守住底线、做守法公民。</div>
+
+    <h3>第三课　社会生活离不开规则</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①维护秩序：</b>社会秩序包括社会管理秩序、生产秩序、交通秩序、公共场所秩序；社会秩序保障社会良性运行；社会规则明确秩序内容、保障秩序实现。<br><b>②遵守规则：</b>自由与规则不可分（规则划定自由边界、保障自由）；遵守规则需要他律和自律；要发自内心敬畏规则；规则可改进（与时俱进）。</td></tr>
+      <tr><td><b>关键词</b></td><td>社会秩序（四类）、社会规则、自由与规则不可分、他律与自律、敬畏规则、规则可改进</td></tr>
+      <tr><td><b>为什么</b></td><td>没有秩序社会无法良性运行；没有规则秩序就没有依据；自由不是随心所欲，受规则约束，规则也保障自由。</td></tr>
+      <tr><td><b>怎么做</b></td><td>自觉遵守规则：靠他律（外部监督）更要靠自律（内心约束）；发自内心敬畏规则；认识到规则不是一成不变，要积极参与改进规则。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ "自由与规则不可分"——规则<b>既划定边界又保障自由</b>，不能说"规则限制自由"就完了，要写"也保障自由"；遵守规则主要靠<b>自律</b>而非只靠他律。</td></tr>
+      <tr><td><b>举例</b></td><td>红绿灯（交通秩序）靠规则保障；自觉遵守排队是自律；高铁"禁烟"规则随社会发展而增加，体现规则可改进。</td></tr>
+    </table>
+
+    <h3>第四课　社会生活讲道德</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①尊重他人：</b>尊重是交往的起点，要换位思考、平等待人、学会欣赏。<br><b>②以礼待人：</b>礼体现一个人的素养；"文明有礼"是一个人立身处世的前提、促进社会和谐、体现国家形象；要态度谦和用语文明、仪表整洁举止端庄。<br><b>③诚实守信：</b>诚信是价值准则，也是道德与法律规范；是一个人安身立命之本、企业的无形资产、促进社会文明国家兴旺；要树立诚信意识、运用诚信智慧、珍惜信用记录。</td></tr>
+      <tr><td><b>关键词</b></td><td>尊重（换位思考/平等/欣赏）、文明有礼（立身处世前提）、诚信（安身立命之本/企业无形资产）</td></tr>
+      <tr><td><b>为什么</b></td><td>尊重是交往起点；文明有礼关乎个人立身、社会和谐、国家形象；诚信是个人的"金字招牌"、企业的生命线、社会的基石。</td></tr>
+      <tr><td><b>怎么做</b></td><td>尊重：换位思考、平等待人、学会欣赏；礼貌：态度谦和、用语文明、仪表整洁、举止端庄；诚信：树立诚信意识、运用诚信智慧、珍惜个人信用记录。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 三者"地位"各不相同：礼貌是"立身处世的前提"，诚信是"安身立命之本"，尊重是"交往的起点"——考试常让填空，别串味（详见第4节表）。</td></tr>
+      <tr><td><b>举例</b></td><td>尊重：耐心听同学讲话、欣赏他人长处；礼貌：见面问好、衣着整洁；诚信：考试不作弊、借物按时还、企业童叟无欺。</td></tr>
+    </table>
+
+    <h3>第五课　做守法的公民</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①法不可违：</b>法律是最刚性的社会规则；违法行为分三类——民事违法、行政违法、刑事违法（即犯罪），前两者属于一般违法。<br><b>②预防犯罪：</b>刑法规定什么是犯罪；犯罪三特征——严重社会危害性（最本质特征）、刑事违法性、应受刑罚处罚性；加强自我防范（杜绝不良行为、依法自律、从小事做起）。<br><b>③善用法律：</b>遇到侵害依法求助——法律服务机构、寻求国家法律救济、诉讼（民事诉讼/行政诉讼/刑事诉讼，诉讼是最正规最权威的最后屏障）。</td></tr>
+      <tr><td><b>关键词</b></td><td>最刚性社会规则、一般违法（民事/行政）、犯罪三特征、刑罚、诉讼三种（民/行/刑）</td></tr>
+      <tr><td><b>为什么</b></td><td>法律靠国家强制力保证实施，最刚性；犯罪危害最严重；合法权益受侵害时，诉讼是最后、最权威的维权手段。</td></tr>
+      <tr><td><b>怎么做</b></td><td>预防：杜绝不良行为、依法自律、从小事做起；维权：找法律服务机构、寻求国家救济、敢于并善于诉讼；认识犯罪三特征互不替代。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ ①一般违法 = 民事违法 + 行政违法，<b>不含</b>犯罪；②犯罪"最本质特征"是严重社会危害性（不是刑事违法性）；③诉讼是"最正规最权威最后屏障"，但不是唯一求助方式。</td></tr>
+      <tr><td><b>举例</b></td><td>一般违法：欠钱不还（民事）、闯红灯被罚（行政）；犯罪：抢劫（受刑罚）；诉讼：打官司讨回被骗钱财（民事/刑事）；告政府不作为（行政）。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：第三课"规则"含道德与法律；第四课专讲"道德"（尊重/礼貌/诚信）；第五课专讲"法律/违法/犯罪"。顺序是从一般规则→道德→法律，层层收紧底线。</div>
+  </div>
+</div>
+
+<!-- 单元3 -->
+<div class="unit">
+  <div class="head" style="background:#16a34a">第三单元　勇担社会责任（我该做什么 · 责任与奉献）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：社会规则让我"会相处"，这一单元进阶到"我主动该承担什么"——先弄清责任从哪来、角色与责任的关系，再学会关爱他人、服务社会。</div>
+
+    <h3>第六课　责任与角色同在</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①我对谁负责 谁对我负责：</b>责任来自对他人的承诺、职业要求、道德规范、法律规定；角色不同，责任不同。<br><b>②做负责任的人：</b>承担责任有代价也有回报；要不言代价与回报、敢于承担责任、全身心投入。</td></tr>
+      <tr><td><b>关键词</b></td><td>责任来源（承诺/职业/道德/法律）、角色与责任、代价与回报、不言代价与回报</td></tr>
+      <tr><td><b>为什么</b></td><td>社会舞台上每个人都扮演不同角色，角色意味着责任；许多人在为我们承担责任，我们也应回报社会。</td></tr>
+      <tr><td><b>怎么做</b></td><td>认清角色、自觉承担应负的责任；做负责任的人：不计较代价与回报、敢于担当、全身心投入。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 责任来源有<b>四个</b>（承诺、职业要求、道德规范、法律规定），考试常漏"对他人的承诺"或"职业要求"；"代价与回报"是并存关系，不是只有代价。</td></tr>
+      <tr><td><b>举例</b></td><td>子女角色——孝敬父母（道德/法律）；学生角色——认真学习；医生角色——救死扶伤（职业要求）；答应别人的事要做到（承诺）。</td></tr>
+    </table>
+
+    <h3>第七课　积极奉献社会</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①关爱他人：</b>关爱是美好品德，要心怀善意、尽己所能、讲究策略。<br><b>②服务社会：</b>服务社会体现人生价值、促进全面发展；要积极参与公益活动、热爱劳动爱岗敬业。</td></tr>
+      <tr><td><b>关键词</b></td><td>关爱他人（善意/尽己所能/讲究策略）、服务社会（人生价值/全面发展）、公益活动</td></tr>
+      <tr><td><b>为什么</b></td><td>关爱传递美好情感；服务社会既能实现人生价值，又能拓宽视野、提升能力，促进自身全面发展。</td></tr>
+      <tr><td><b>怎么做</b></td><td>关爱：心怀善意、尽己所能、讲究策略（保护他人自尊、讲究方法）；服务社会：参加公益活动、热爱劳动、爱岗敬业。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 关爱他人要"讲究策略"——不是一味付出，还要注意方式和自我保护；服务社会<b>不等于</b>只有大型志愿活动，日常爱岗敬业也是服务社会。</td></tr>
+      <tr><td><b>举例</b></td><td>关爱：扶起摔倒同学、捐书给山区；服务社会：社区打扫、义务植树、将来做好本职工作。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：第六课讲"责任"（该不该做、代价回报），第七课讲"奉献"（主动关爱、服务）；责任是底线要求，奉献是更高层次的主动付出。</div>
+  </div>
+</div>
+
+<!-- 单元4 -->
+<div class="unit">
+  <div class="head" style="background:#7c3aed">第四单元　维护国家利益（大我 · 国家与个人）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：从"小我"走向"大我"——认识国家利益与人民利益的关系，树立总体国家安全观，最后落脚到"劳动实干、建设祖国"。</div>
+
+    <h3>第八课　国家好 大家才会好</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①国家至上：</b>国家利益涉及安全利益、政治利益、经济利益、文化利益等，关系民族生存、国家兴亡。<br><b>②国家利益与人民利益：</b>二者在根本上是一致的、相辅相成的；国家利益至上，人民利益高于一切，二者统一。</td></tr>
+      <tr><td><b>关键词</b></td><td>国家利益（安全/政治/经济/文化）、民族生存国家兴亡、国家利益至上、人民利益高于一切</td></tr>
+      <tr><td><b>为什么</b></td><td>国家利益关系民族生存国家兴亡；人民利益只有上升集中到国家利益才能得到真正维护，国家利益依靠人民奋斗才能实现。</td></tr>
+      <tr><td><b>怎么做</b></td><td>树立国家利益至上观念；当个人利益与国家利益发生矛盾时，以国家利益为重，把国家利益放在第一位。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 国家利益与人民利益是"<b>根本上一致、相辅相成、统一</b>"，不是"对立"；表述要用"国家利益至上、人民利益高于一切"，别颠倒。</td></tr>
+      <tr><td><b>举例</b></td><td>国家利益：领土安全、经济发展、文化传承；人民利益：安居乐业、收入提高——国家强盛了人民才安稳。</td></tr>
+    </table>
+
+    <h3>第九课　树立总体国家安全观</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①认识国家安全：</b>国家安全是国家生存与发展的重要保障，是人民幸福安康的前提。<br><b>②总体国家安全观：</b>以人民安全为宗旨、政治安全为根本、经济安全为基础、军事文化社会安全为保障、促进国际安全为依托，走中国特色国家安全道路；公民要履行维护国家安全的义务（检举制止危害行为、保守国家秘密）。</td></tr>
+      <tr><td><b>关键词</b></td><td>国家安全（生存发展保障/幸福安康前提）、总体国家安全观（宗旨/根本/基础/保障/依托）、保守国家秘密</td></tr>
+      <tr><td><b>为什么</b></td><td>没有国家安全，发展无从谈起、人民难享安康；总体国家安全观是系统守护国家安全的"总钥匙"。</td></tr>
+      <tr><td><b>怎么做</b></td><td>公民义务：检举、制止危害国家安全的行为；保守国家秘密；增强国家安全意识，自觉维护。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ 总体国家安全观五要素位置固定：<b>宗旨=人民安全、根本=政治安全、基础=经济安全、保障=军事文化社会安全、依托=促进国际安全</b>，填空别错位（详见第4节表）。</td></tr>
+      <tr><td><b>举例</b></td><td>发现有人偷拍军事基地要举报；不随意在网络晒涉密岗位信息；保守工作中接触的国家秘密。</td></tr>
+    </table>
+
+    <h3>第十课　建设美好祖国</h3>
+    <table>
+      <tr><th style="width:80px">维度</th><th>内容</th></tr>
+      <tr><td><b>核心观点</b></td><td><b>①关心国家发展：</b>为成就自豪（经济增长、科技创新、衣食住行改善），正视发展中的问题（不平衡不充分等），对国家未来充满信心。<br><b>②天下兴亡 匹夫有责：</b>劳动是财富和幸福的源泉，实干创造未来；要尊重劳动者、发扬实干精神、努力学习担负历史重任。</td></tr>
+      <tr><td><b>关键词</b></td><td>成就自豪/正视问题/充满信心、劳动是源泉、实干创造未来、尊重劳动者、历史重任</td></tr>
+      <tr><td><b>为什么</b></td><td>国家发展有成就也有问题，理性看待才能坚定信心；劳动创造一切，实干才能把蓝图变现实。</td></tr>
+      <tr><td><b>怎么做</b></td><td>关心国家：看到成就自豪、看到问题不悲观、对未来有信心；行动：尊重每一位劳动者、发扬实干精神、努力学习勇担重任。</td></tr>
+      <tr><td><b>易错提醒</b></td><td>⚠️ "关心国家发展"要<b>两分法</b>——既为成就自豪，也正视问题，不能说"全是问题"或"没有问题"；劳动是财富和幸福的<b>源泉</b>，不是"结果"。</td></tr>
+      <tr><td><b>举例</b></td><td>成就：高铁、航天、网购便利；问题：区域/城乡发展不平衡；实干：科学家攻关、工人造桥、我们刻苦读书。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：第八课讲"国家利益与人民利益的关系"，第九课讲"国家安全"，第十课讲"劳动实干建设祖国"——三者递进：认关系 → 保安全 → 去建设。</div>
+  </div>
+</div>
+
+<!-- ============ 4 跨单元易混淆大汇总 ============ -->
+<h2 id="mix">4. 跨单元易混淆大汇总（所有"容易混"的都归堆在这里）</h2>
+
+<div class="card">
+  <h3>表A：一般违法（民事/行政） vs 犯罪（刑事）对比（必背，考试高频）</h3>
+  <table>
+    <tr><th>类型</th><th>违反法律</th><th>危害程度</th><th>法律后果</th></tr>
+    <tr><td><b>民事违法</b>（一般违法）</td><td>民事法律</td><td>相对较轻</td><td>民事责任（如赔礼道歉、赔偿损失）</td></tr>
+    <tr><td><b>行政违法</b>（一般违法）</td><td>行政法律</td><td>相对较轻</td><td>行政处分或行政处罚（如罚款、拘留）</td></tr>
+    <tr><td><b>刑事违法（犯罪）</b></td><td>刑事法律（刑法）</td><td><span class="wrong">严重</span></td><td><span class="wrong">刑罚处罚</span></td></tr>
+  </table>
+  <div class="tip">🧭 一句话：一般违法（民事+行政）= 轻、非刑罚；犯罪 = 严重、受刑罚。前两者合称"一般违法"，<b>不包括</b>犯罪。</div>
+</div>
+
+<div class="card">
+  <h3>表B：犯罪三特征（记住"最本质"那一个）</h3>
+  <table>
+    <tr><th>特征</th><th>说明</th><th>地位</th></tr>
+    <tr><td><b>严重社会危害性</b></td><td>行为对社会的危害达到相当严重的程度</td><td><span class="mn">最本质特征</span></td></tr>
+    <tr><td><b>刑事违法性</b></td><td>行为违反刑法</td><td>法律标志</td></tr>
+    <tr><td><b>应受刑罚处罚性</b></td><td>应当受到刑罚处罚</td><td>必然法律后果</td></tr>
+  </table>
+  <div class="warn">⚠️ 最易错：问"犯罪最本质特征"，答"严重社会危害性"，<b>不是</b>"刑事违法性"。</div>
+</div>
+
+<div class="card">
+  <h3>表C：三种诉讼对比（哪种最权威？）</h3>
+  <table>
+    <tr><th>诉讼类型</th><th>告谁 / 解决什么</th><th>举例</th></tr>
+    <tr><td><b>民事诉讼</b></td><td>公民之间、法人之间的民事纠纷</td><td>讨回借款、离婚、侵权赔偿</td></tr>
+    <tr><td><b>行政诉讼</b>（民告官）</td><td>公民告行政机关的违法行为</td><td>告政府部门不作为、处罚不当</td></tr>
+    <tr><td><b>刑事诉讼</b></td><td>追究犯罪嫌疑人刑事责任</td><td>起诉抢劫、伤害等犯罪</td></tr>
+  </table>
+  <div class="warn">⚠️ 三种诉讼都是"打官司"，诉讼是维护合法权益<span class="mn">最正规、最权威、最后屏障</span>。注意：行政诉讼是"民告官"，别和民事诉讼混。</div>
+</div>
+
+<div class="card">
+  <h3>表D：自由与规则的关系（不可分）</h3>
+  <table>
+    <tr><th>角度</th><th>关系</th></tr>
+    <tr><td>规则划定自由边界</td><td>自由不是随心所欲，它受道德、纪律、法律等社会规则的约束</td></tr>
+    <tr><td>规则保障自由</td><td>社会规则不是限制自由，而是保证每个人不越过边界、真正享有自由</td></tr>
+    <tr><td>结论</td><td><b>自由与规则不可分</b>：守规则才能享自由</td></tr>
+  </table>
+  <div class="warn">⚠️ 易错：只说"规则限制自由"是片面的，必须补上"<b>规则也保障自由</b>"。</div>
+</div>
+
+<div class="card">
+  <h3>表E：诚信 / 尊重 / 礼貌 各自"地位"对照（填空最爱考）</h3>
+  <table>
+    <tr><th>概念</th><th>地位 / 作用表述</th></tr>
+    <tr><td><b>尊重他人</b></td><td>尊重是交往的<b>起点</b></td></tr>
+    <tr><td><b>文明有礼</b></td><td>是一个人<b>立身处世的前提</b>；促进社会和谐；体现国家形象</td></tr>
+    <tr><td><b>诚实守信</b></td><td>是一个人<b>安身立命之本</b>；是企业的无形资产；促进社会文明、国家兴旺；是价值准则，也是道德与法律规范</td></tr>
+  </table>
+  <div class="warn">⚠️ 三者地位不能串：起点=尊重，前提=礼貌，安身立命之本=诚信。</div>
+</div>
+
+<div class="card">
+  <h3>表F：国家利益与人民利益的关系</h3>
+  <table>
+    <tr><th>要点</th><th>表述</th></tr>
+    <tr><td>一致性</td><td>在根本上是一致的、相辅相成的</td></tr>
+    <tr><td>国家利益</td><td><b>国家利益至上</b>（关系民族生存、国家兴亡）</td></tr>
+    <tr><td>人民利益</td><td><b>人民利益高于一切</b></td></tr>
+    <tr><td>结论</td><td>二者统一；人民利益集中到国家利益才能得到真正维护</td></tr>
+  </table>
+  <div class="warn">⚠️ 易错：二者是"统一、相辅相成"，不是对立；表述顺序"国家利益至上、人民利益高于一切"别颠倒。</div>
+</div>
+
+<div class="card">
+  <h3>表G：总体国家安全观内涵（五要素位置固定）</h3>
+  <table>
+    <tr><th>定位</th><th>内容</th></tr>
+    <tr><td>宗旨</td><td><b>人民安全</b></td></tr>
+    <tr><td>根本</td><td><b>政治安全</b></td></tr>
+    <tr><td>基础</td><td><b>经济安全</b></td></tr>
+    <tr><td>保障</td><td><b>军事、文化、社会安全</b></td></tr>
+    <tr><td>依托</td><td><b>促进国际安全</b></td></tr>
+    <tr><td>道路</td><td>走中国特色国家安全道路</td></tr>
+  </table>
+  <div class="warn">⚠️ 填空常错位，记住口诀：<span class="mn">宗旨人民、根本政治、基础经济、保障军文社、依托国际安全</span>。</div>
+</div>
+
+<!-- ============ 5 自测 ============ -->
+<h2 id="quiz">5. 自测题（做完点开对答案）</h2>
+
+<details>
+  <summary>第一单元自测（丰富的社会生活 · 网络生活新空间）</summary>
+  <div class="a">
+    <b>Q1</b> 人的身份是在什么中确定的？社会关系分哪三类？→ <span class="right">在社会关系中确定；血缘、地缘、业缘</span><br>
+    <b>Q2</b> 亲社会行为具体包括哪些表现？→ <span class="right">谦让、分享、帮助他人、关心社会发展</span><br>
+    <b>Q3</b> 网络推动社会进步体现在哪四个方面？→ <span class="right">经济、政治、文化传播、科技创新</span><br>
+    <b>Q4</b> "信息节食"是什么意思？→ <span class="right">不沉溺网络，有选择地摄取有益信息（不是不碰网络）</span>
+  </div>
+</details>
+<details>
+  <summary>第二单元自测（规则 · 道德 · 守法）</summary>
+  <div class="a">
+    <b>Q1</b> 自由与规则的关系？→ <span class="right">不可分：规则划定自由边界，也保障自由</span><br>
+    <b>Q2</b> 文明有礼的地位是什么？→ <span class="right">一个人立身处世的前提；促进社会和谐；体现国家形象</span><br>
+    <b>Q3</b> 违法行为分哪三类？哪两类属于一般违法？→ <span class="right">民事违法、行政违法、刑事违法（犯罪）；前两者（民事+行政）是一般违法</span><br>
+    <b>Q4</b> 犯罪的最本质特征？→ <span class="right">严重社会危害性</span>
+  </div>
+</details>
+<details>
+  <summary>第三单元自测（责任 · 奉献）</summary>
+  <div class="a">
+    <b>Q1</b> 责任来自哪些方面？→ <span class="right">对他人的承诺、职业要求、道德规范、法律规定</span><br>
+    <b>Q2</b> 做负责任的人应该怎么做？→ <span class="right">不言代价与回报、敢于承担责任、全身心投入</span><br>
+    <b>Q3</b> 关爱他人要注意什么？→ <span class="right">心怀善意、尽己所能、讲究策略</span><br>
+    <b>Q4</b> 服务社会的意义？→ <span class="right">体现人生价值、促进全面发展</span>
+  </div>
+</details>
+<details>
+  <summary>第四单元自测（国家利益 · 安全 · 建设）</summary>
+  <div class="a">
+    <b>Q1</b> 国家利益与人民利益的关系？→ <span class="right">根本上一致、相辅相成、统一；国家利益至上，人民利益高于一切</span><br>
+    <b>Q2</b> 总体国家安全观的宗旨、根本、基础分别是什么？→ <span class="right">宗旨=人民安全；根本=政治安全；基础=经济安全</span><br>
+    <b>Q3</b> 公民维护国家安全要履行哪些义务？→ <span class="right">检举制止危害行为、保守国家秘密</span><br>
+    <b>Q4</b> "天下兴亡 匹夫有责"里，劳动是什么？→ <span class="right">劳动是财富和幸福的源泉，实干创造未来</span>
+  </div>
+</details>
+<details>
+  <summary>综合易混自测（专治混淆）</summary>
+  <div class="a">
+    <b>Q1</b> "起点/前提/安身立命之本"分别对应谁？→ <span class="right">起点=尊重；前提=文明有礼；安身立命之本=诚信</span><br>
+    <b>Q2</b> 一般违法和犯罪的区别（违反法律/危害/后果）？→ <span class="right">一般违法违民事或行政法律、危害较轻、非刑罚；犯罪违刑法、危害严重、受刑罚</span><br>
+    <b>Q3</b> 三种诉讼各解决什么？→ <span class="right">民事=民间纠纷；行政=民告官；刑事=追究犯罪</span><br>
+    <b>Q4</b> 总体国家安全观五要素口诀？→ <span class="right">宗旨人民、根本政治、基础经济、保障军文社、依托国际安全</span><br>
+    <b>Q5</b> 自由与规则只能说"限制"吗？→ <span class="right">不能，二者不可分：既划定边界，也保障自由</span>
+  </div>
+</details>
+
+<!-- ============ 6 模板 ============ -->
+<h2 id="tpl">6. 框架练习模板（自己动手搭，才会真会）</h2>
+<div class="card">
+  <div class="ok">📝 用法：拿一张白纸，按下面模板默填任意一课。能填出 3 格 = 过关；填不出哪格就回去翻第3节对应单元。</div>
+  <table>
+    <tr><th style="width:90px">要素</th><th>你填：第____课《________》</th></tr>
+    <tr><td><b>① 是什么</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>② 为什么</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>③ 怎么做</b></td><td style="height:34px"></td></tr>
+  </table>
+  <div class="tip">🧭 进阶练：用第4节的对比表，自己闭卷默写"表A 一般违法vs犯罪"三行、和"表G 总体国家安全观五要素"。默写全对，八上选择题基本不丢分。</div>
+</div>
+
+<div class="foot">
+  资料说明：本资料依据人教版八年级上册《道德与法治》4 单元 10 课系统整理，覆盖全学期，以"框架学习法"为主线（生活逻辑链横线 + 单元主题纵线 + 三要素填充 + 对比表防混淆），针对"不会搭框架、知识点易混淆"的核心问题设计。内容严格依据教材要点展开，未作编造；若学校教学进度或教材版本有差异，请以课本为准。
+</div>
+
+</div>
+</body>
+</html>
