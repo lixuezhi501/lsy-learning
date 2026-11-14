@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源·八上生物「框架学习法」全套资料（北师大版）</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--blue);}
+  h2{font-size:20px;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .stage{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .chip{flex:1 1 120px;border-radius:10px;padding:10px 12px;color:#fff;font-size:12.5px;font-weight:700;text-align:center;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .unit{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:16px 0;overflow:hidden;}
+  .unit .head{padding:12px 16px;font-weight:800;font-size:16px;color:#fff;}
+  .unit .body{padding:12px 16px;}
+  .kbd{background:#1f2937;color:#fff;border-radius:6px;padding:1px 7px;font-size:12px;}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .wrong{color:var(--red);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:14px;}
+  .toc a{color:var(--blue);text-decoration:none;}
+  .meth{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px 18px;margin:12px 0;}
+  @media print{body{background:#fff;}.card,.unit,.toc,.meth{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>李思源 · 八上生物「框架学习法」全套资料</h1>
+<div class="sub">北师大版八年级上册 全册 第15–21章 完整覆盖 ｜ 核心目标：<b>教你搭框架、把知识点理清、不再混淆</b></div>
+
+<div class="toc">
+  <b>📑 目录</b><br>
+  <a href="#how">0. 这份资料怎么用</a> ｜
+  <a href="#frame">1. 先学「怎么搭框架」（最重要）</a> ｜
+  <a href="#axis">2. 一条生命逻辑链：八上骨架</a> ｜
+  <a href="#units">3. 七章完整知识（含易混）</a> ｜
+  <a href="#mix">4. 跨章易混淆大汇总</a> ｜
+  <a href="#quiz">5. 自测题（每章+综合）</a> ｜
+  <a href="#tpl">6. 框架练习模板（自己练）</a>
+</div>
+
+<!-- ============ 0 ============ -->
+<h2 id="how">0. 这份资料怎么用</h2>
+<div class="card">
+  <div class="point">① <b>第1节必看</b>：先学会"怎么搭框架"——生物八上不是零散知识点，是一条"生命逻辑链"，没框架就会记混（比如把关节和鸡蛋结构搞混）。</div>
+  <div class="point">② <b>第2节逻辑链</b>：八上整本书就一条主线，先记骨架。</div>
+  <div class="point">③ <b>第3节逐章</b>：每章都按"定位 → 知识表（节节覆盖）→ 易混"给你填好，直接背。</div>
+  <div class="point">④ <b>第4节对比表</b>：所有"容易混"的放一起比，这是防混淆的杀手锏（八对对比表全有了）。</div>
+  <div class="point">⑤ <b>第5节自测 + 第6节模板</b>：做完自测，再用模板自己搭一遍，框架就长在你脑子里了。</div>
+  <div class="ok">💡 一句话心法：<span class="kbd">先定位章节 → 再填四要素（结构/功能/过程/意义） → 最后用对比表核查</span>。每学一节都走这三步，混淆自然消失。</div>
+</div>
+
+<!-- ============ 1 框架方法论 ============ -->
+<h2 id="frame">1. 先学「怎么搭框架」（这是核心，比死记硬背重要）</h2>
+
+<div class="meth">
+  <h3 style="margin-top:0">🧱 框架 = 两条线交织</h3>
+  <div class="grid">
+    <div>
+      <b>横线：生命逻辑链</b>（按"生物怎么活着"排，解决"知识点乱成一团"）<br>
+      结构(运动/微生物) → 功能与行为 → 生殖发育 → 遗传变异 → 进化<br>
+      所有内容都能挂到这条链上：动物怎么动、怎么生、怎么传、怎么变、怎么来。
+    </div>
+    <div>
+      <b>纵线：单元主题</b>（按"每章在讲啥"分，解决"张冠李戴"）<br>
+      运动行为 → 动物生殖 → 动物作用 → 微生物 → 植物生殖 → 遗传变异 → 生命起源进化<br>
+      先知道"这章主题"，再填细节，就不会把关节和鸡蛋混在一起。
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📋 每节填充"四要素"（拿到任何一节都按这四个格子填）</h3>
+  <table>
+    <tr><th style="width:90px">要素</th><th style="width:110px">问自己</th><th>举例（以"关节结构"为例）</th></tr>
+    <tr><td><b>① 结构</b></td><td>由什么组成？</td><td>关节面(关节头+关节窝，覆关节软骨)、关节囊、关节腔</td></tr>
+    <tr><td><b>② 功能</b></td><td>有啥用？</td><td>既牢固又灵活，是骨连接主要形式，运动支点</td></tr>
+    <tr><td><b>③ 过程</b></td><td>怎么运作？</td><td>骨骼肌收缩牵动骨绕关节活动；囊和腔内有滑液减少摩擦</td></tr>
+    <tr><td><b>④ 意义</b></td><td>为啥重要？</td><td>骨杠杆、关节支点、肌肉动力，三者配合完成运动</td></tr>
+  </table>
+  <div class="tip">🧭 用法：考试前拿一张白纸，按章节默写每节的"四要素"。能默出来 = 真会了；卡住 = 回去再背那一节。这就是"自己搭框架"。</div>
+</div>
+
+<div class="card">
+  <h3>🔍 防混淆三步法（专门针对"知识点容易混淆"）</h3>
+  <div class="point"><b>第一步·同类归堆</b>：把所有"行为对比"放一张表（第4节表A），所有"发育方式"放一张表，所有"生殖方式"放一张表，所有"微生物"放一张表。</div>
+  <div class="point"><b>第二步·逐格比对</b>：比如"完全变态"和"不完全变态"都经历卵→成虫，但一个多了"蛹期"、代表动物不同——放一起比就忘不了。</div>
+  <div class="point"><b>第三步·出题自测</b>：自己问自己"关节囊和卵壳膜啥区别？"，答得上来才算过。</div>
+  <div class="warn">⚠️ 你期中错最多的本质就是"没归堆"——把学习行为(如大山雀偷奶)混成先天性行为(如蜘蛛结网)。只要按上面归堆，这类错能砍掉一大半。</div>
+</div>
+
+<!-- ============ 2 生命逻辑链 ============ -->
+<h2 id="axis">2. 一条生命逻辑链：八上骨架（先记这条线）</h2>
+<div class="card">
+  <div class="stage">
+    <div class="chip" style="background:#dc2626">第15章<br>运动和行为<br>结构·功能</div>
+    <div class="chip" style="background:#ea580c">第16章<br>动物生殖发育<br>生·发育</div>
+    <div class="chip" style="background:#16a34a">第17章<br>动物作用<br>生态角色</div>
+    <div class="chip" style="background:#0d9488">第18章<br>微生物<br>微世界</div>
+    <div class="chip" style="background:#ca8a04">第19章<br>植物生殖<br>有性·无性</div>
+    <div class="chip" style="background:#7c3aed">第20章<br>遗传变异<br>基因·性状</div>
+    <div class="chip" style="background:#db2777">第21章<br>生命起源进化<br>从哪来</div>
+  </div>
+  <div class="tip">🧭 速记口诀：<span class="mn">动行为→动物生→动物用→微生物→植物生→遗传变→生命源</span>。整本书就这七章，考试先判断"这题落在第几章、挂在逻辑链哪一段"。</div>
+  <div class="ok">📍 逻辑链一句话：动物先会<span class="mn">动</span>（结构功能）→ 才会<span class="mn">生</span>（生殖发育）→ 在圈里<span class="mn">有用</span>（生态作用）→ 周围还有<span class="mn">微生物</span>→ 植物也能<span class="mn">生</span>→ 性状靠<span class="mn">遗传变异</span>→ 这一切都从<span class="mn">生命起源与进化</span>来。</div>
+</div>
+
+<!-- ============ 3 七章完整知识 ============ -->
+<h2 id="units">3. 七章完整知识（每节四要素全覆盖）</h2>
+
+<!-- 第15章 -->
+<div class="unit">
+  <div class="head" style="background:#dc2626">第15章　动物的运动和行为</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：动物<b>怎么动</b>（运动系统结构与功能），以及动物的<b>行为</b>分哪几类（先天/学习/社会）。</div>
+
+    <h3>15.1 动物运动的方式</h3>
+    <table>
+      <tr><th style="width:90px">要素</th><th>内容</th></tr>
+      <tr><td><b>结构/方式</b></td><td>游泳、飞行、行走、奔跑、爬行、跳跃等；不同运动方式与其<b>生活环境相适应</b>。</td></tr>
+      <tr><td><b>举例</b></td><td>鱼游泳、鸟飞行、虎奔跑、蛇爬行——都跟所处环境匹配。</td></tr>
+    </table>
+
+    <h3>15.2 动物运动的形成</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>运动系统组成</b></td><td>由<b>骨、骨连接、骨骼肌</b>三部分组成。</td></tr>
+      <tr><td><b>骨连接</b></td><td>主要形式是<b>关节</b>。</td></tr>
+      <tr><td><b>关节结构</b></td><td>关节面（<b>关节头</b>和<b>关节窝</b>，表面覆盖<b>关节软骨</b>）、<b>关节囊</b>、<b>关节腔</b>；囊和腔内有<b>滑液</b>；特点：<b>既牢固又灵活</b>。</td></tr>
+      <tr><td><b>骨骼肌</b></td><td>包括<b>肌腱</b>和<b>肌腹</b>；受<b>神经刺激</b>收缩，牵动<b>骨绕关节活动</b>。</td></tr>
+      <tr><td><b>运动三者关系</b></td><td><b>骨</b>起杠杆作用、<b>关节</b>起支点作用、<b>骨骼肌</b>提供动力。</td></tr>
+      <tr><td><b>关键细节</b></td><td>一块骨骼肌<b>至少跨过一个关节</b>（如肱二头肌、肱三头肌都跨过肘关节）。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易错：①关节"既牢固又灵活"——牢固靠关节囊及韧带，灵活靠关节软骨和滑液；②骨骼肌是"牵动骨绕关节"，不是骨自己动；③肌腱（白色、连骨）≠肌腹（红色、能收缩）。</div>
+
+    <h3>15.3 先天性行为和学习行为</h3>
+    <table>
+      <tr><th style="width:120px">类型</th><th>定义</th><th>决定因素</th><th>举例</th></tr>
+      <tr><td><b>先天性行为</b></td><td>生来就有、由遗传物质决定</td><td>遗传物质</td><td>蜜蜂采蜜、蜘蛛结网、鸟类迁徙</td></tr>
+      <tr><td><b>学习行为</b></td><td>在遗传因素基础上，通过环境作用由生活经验和学习获得</td><td>遗传+环境+学习</td><td>望梅止渴、大山雀偷奶、鹦鹉学舌</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：学习行为<b>不是</b>完全由环境决定，它必须以<b>遗传因素为基础</b>。详见第4节表A。</div>
+
+    <h3>15.4 社会行为</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>特征</b></td><td>群体内部形成<b>一定组织</b>、成员有<b>明确分工</b>、有的群体还有<b>等级</b>。</td></tr>
+      <tr><td><b>举例</b></td><td>白蚁（工蚁/兵蚁/蚁后分工）、蜜蜂（蜂王/工蜂/雄蜂）、狒狒（有"首领"等级）。</td></tr>
+      <tr><td><b>通讯方式</b></td><td>群体间通过<b>动作、气味、声音</b>传递信息（如蜜蜂"舞蹈"、蚂蚁"气味"）。</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 第16章 -->
+<div class="unit">
+  <div class="head" style="background:#ea580c">第16章　动物的生殖和发育</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：昆虫、两栖、鸟三类的<b>生殖方式</b>和<b>发育过程</b>各有什么特点（核心差异在"变不变态""有没有蛹"）。</div>
+
+    <h3>16.1 昆虫的生殖和发育</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>生殖方式</b></td><td><b>有性生殖、卵生</b>。</td></tr>
+      <tr><td><b>完全变态</b></td><td>经历 受精卵 → <b>幼虫</b> → <b>蛹</b> → <b>成虫</b> 四个时期；代表：蚕、蜜蜂、蝶、蛾。</td></tr>
+      <tr><td><b>不完全变态</b></td><td>经历 受精卵 → <b>若虫</b> → <b>成虫</b> 三个时期；若虫<b>形似成虫</b>；代表：蝗虫、蟋蟀、蝼蛄。</td></tr>
+      <tr><td><b>蜕皮现象</b></td><td>昆虫体表有外骨骼，不能随身体长大，所以发育中需<b>蜕皮</b>。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易错：①完全变态比不完全变态<b>多了"蛹"期</b>；②若虫≠幼虫——若虫没有蛹期、外形已像成虫；③蝗虫是<b>不完全变态</b>（不是完全变态）。详见第4节表B。</div>
+
+    <h3>16.2 两栖动物的生殖和发育</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>生殖方式</b></td><td><b>体外受精、卵生</b>。</td></tr>
+      <tr><td><b>发育过程</b></td><td><b>变态发育</b>：受精卵 → <b>蝌蚪</b> → <b>幼蛙</b> → <b>成蛙</b>。</td></tr>
+      <tr><td><b>呼吸变化</b></td><td>蝌蚪用<b>鳃</b>呼吸；成蛙用<b>肺</b>呼吸，<b>兼用皮肤</b>辅助。</td></tr>
+      <tr><td><b>与环境关系</b></td><td>生殖和发育<b>离不开水</b>；水域减少 → 两栖动物数量下降。</td></tr>
+    </table>
+
+    <h3>16.3 鸟的生殖和发育</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>生殖方式</b></td><td><b>有性生殖、卵生</b>。</td></tr>
+      <tr><td><b>生殖过程</b></td><td>求偶 → 交配 → 筑巢 → 产卵 → 孵卵 → 育雏（有的鸟不筑巢、不孵卵，如<b>杜鹃</b>把蛋下到别的鸟窝）。</td></tr>
+      <tr><td><b>鸡蛋结构</b></td><td>卵壳、卵壳膜、气室、<b>卵白</b>（提供营养和水分）、<b>卵黄</b>（主要营养）、<b>胚盘</b>（含细胞核，发育成雏鸟的部位）、系带（固定）。</td></tr>
+      <tr><td><b>受精判断</b></td><td>已受精的卵胚盘大色深；<b>未受精的卵胚盘小、色浅</b>。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混结构辨认：关节"关节腔/关节囊/滑液" vs 鸡蛋"卵壳膜/气室/卵白"——两套词完全不同，别串。详见第4节表H。</div>
+  </div>
+</div>
+
+<!-- 第17章 -->
+<div class="unit">
+  <div class="head" style="background:#16a34a">第17章　生物圈中的动物（动物在生物圈中的作用）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：动物不是"旁观者"，它在生态里<b>起什么作用</b>、有哪些<b>珍稀资源</b>、怎么<b>保护</b>。</div>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>三大作用</b></td><td>①<b>促进物质循环</b>（消费者，分解有机物）；②<b>维持生态平衡</b>；③<b>帮助植物传粉、传播种子</b>。</td></tr>
+      <tr><td><b>我国珍稀动物</b></td><td>大熊猫、金丝猴、朱鹮、扬子鳄、白鳍豚（记这五种）。</td></tr>
+      <tr><td><b>保护措施</b></td><td><b>就地保护</b>（建立<b>自然保护区</b>）是保护生物多样性<b>最有效</b>的措施。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易错：①动物能促进物质循环，但不是"制造"有机物（生产者才是绿色植物）；②"最有效"的保护是就地保护/自然保护区，不是易地保护。</div>
+  </div>
+</div>
+
+<!-- 第18章 -->
+<div class="unit">
+  <div class="head" style="background:#0d9488">第18章　生物圈中的微生物</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：微生物三大家族——<b>细菌、真菌、病毒</b>，从结构到繁殖到与人类关系逐一认清。</div>
+    <table>
+      <tr><th style="width:110px">类群</th><th>结构特点</th><th>生殖方式</th><th>其他</th></tr>
+      <tr><td><b>细菌</b></td><td>单细胞；<b>无成形细胞核</b>（原核生物）</td><td><b>分裂生殖</b></td><td>有的能形成<b>芽孢</b>度过不良环境（休眠体）</td></tr>
+      <tr><td><b>真菌</b></td><td>酵母菌单细胞；霉菌、蘑菇多细胞</td><td>酵母菌<b>出芽生殖</b>；霉菌/蘑菇<b>孢子生殖</b></td><td>有成形细胞核（真核生物）</td></tr>
+      <tr><td><b>病毒</b></td><td><b>无细胞结构</b>，由<b>蛋白质外壳+内部遗传物质</b>组成</td><td>靠寄生在活细胞内复制</td><td><b>寄生</b>生活；抗生素杀细菌<b>对病毒无效</b>；可<b>接种疫苗</b>预防</td></tr>
+    </table>
+    <div class="warn">⚠️ 易错：①<b>抗生素只治细菌性疾病，对病毒无效</b>（感冒大多是病毒，别乱吃抗生素）；②细菌无成形的细胞核，真菌有；③病毒无细胞结构，必须寄生。详见第4节表C。</div>
+  </div>
+</div>
+
+<!-- 第19章 -->
+<div class="unit">
+  <div class="head" style="background:#ca8a04">第19章　生物的生殖和发育（植物的）</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：植物的生殖分<b>有性</b>和<b>无性</b>两大类，无性里还有营养繁殖和组织培养。</div>
+
+    <h3>19.1 有性生殖 vs 无性生殖</h3>
+    <table>
+      <tr><th style="width:120px">类型</th><th>定义</th><th>举例</th></tr>
+      <tr><td><b>有性生殖</b></td><td>经<b>两性生殖细胞结合</b>形成受精卵，发育成新个体</td><td>开花 → 传粉 → 受精 → 形成果实和种子</td></tr>
+      <tr><td><b>无性生殖</b></td><td><b>不经</b>两性生殖细胞结合，由母体<b>直接</b>产生新个体</td><td>营养繁殖（扦插、压条、嫁接）、组织培养</td></tr>
+    </table>
+
+    <h3>19.2 营养繁殖</h3>
+    <table>
+      <tr><th style="width:120px">方式</th><th>内容</th></tr>
+      <tr><td><b>扦插</b></td><td>剪取枝条插入土中长成新株（如月季、葡萄）。</td></tr>
+      <tr><td><b>压条</b></td><td>把枝条压入土中，生根后断开（如桂花）。</td></tr>
+      <tr><td><b>嫁接</b></td><td>把一株植物体的芽或枝（<b>接穗</b>）接在另一株（<b>砧木</b>）上。<b>成活关键：使接穗与砧木的形成层紧密结合</b>。例：苹果、梨、桃。</td></tr>
+    </table>
+
+    <h3>19.3 组织培养</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>条件</b></td><td><b>无菌</b>条件下，用植物组织或细胞培养。</td></tr>
+      <tr><td><b>优点</b></td><td>能<b>快速繁殖</b>，并<b>保持优良性状</b>（属无性生殖，后代不变异）。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混：嫁接成活关键是<b>形成层</b>紧密结合（不是树皮、不是木质部）。有性 vs 无性区别见第4节表D。</div>
+  </div>
+</div>
+
+<!-- 第20章 -->
+<div class="unit">
+  <div class="head" style="background:#7c3aed">第20章　生物的遗传和变异</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：性状由<b>基因</b>控制，基因随<b>生殖细胞</b>传代，有显隐性，决定性别，并发生<b>变异</b>。</div>
+
+    <h3>20.1 基因控制生物的性状</h3>
+    <table>
+      <tr><th style="width:120px">概念</th><th>内容</th></tr>
+      <tr><td><b>性状</b></td><td>生物体形态结构、生理、行为等特征（如血型、单双眼皮、肤色）。</td></tr>
+      <tr><td><b>相对性状</b></td><td><b>同种生物同一性状的不同表现</b>（如单眼皮 vs 双眼皮）。</td></tr>
+      <tr><td><b>实验证据</b></td><td><b>转基因鼠实验</b>说明基因控制性状（导入大鼠生长激素基因的鼠更大）。</td></tr>
+      <tr><td><b>技术</b></td><td><b>转基因技术</b>：把一种生物基因转入另一种生物体内。</td></tr>
+    </table>
+
+    <h3>20.2 基因在亲子代间的传递</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>位置关系</b></td><td>基因在<b>DNA</b>上，DNA 在<b>染色体</b>上；染色体 = <b>DNA + 蛋白质</b>，<b>成对存在</b>。</td></tr>
+      <tr><td><b>传递桥梁</b></td><td><b>生殖细胞</b>（精子、卵细胞）中染色体<b>数目减半</b>；受精后恢复。所以父母各传一半。</td></tr>
+      <tr><td><b>结论</b></td><td>基因经<b>生殖细胞</b>在亲子代间传递。</td></tr>
+    </table>
+
+    <h3>20.3 基因的显性和隐性</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>经典实验</b></td><td><b>孟德尔豌豆杂交实验</b>。</td></tr>
+      <tr><td><b>显隐性</b></td><td>显性基因用<b>大写 A</b>、隐性基因用<b>小写 a</b>；<b>AA、Aa 表现显性性状</b>，<b>aa 表现隐性性状</b>。</td></tr>
+      <tr><td><b>近亲结婚</b></td><td>近亲携带<b>相同隐性致病基因</b>概率高，后代隐性病相遇概率上升 → <b>禁止近亲结婚</b>。</td></tr>
+    </table>
+
+    <h3>20.4 人的性别遗传</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>染色体组成</b></td><td>体细胞有 <b>23 对</b>染色体 = <b>22 对常染色体 + 1 对性染色体</b>。</td></tr>
+      <tr><td><b>男女不同</b></td><td>男性性染色体 <b>XY</b>，女性 <b>XX</b>。</td></tr>
+      <tr><td><b>生殖细胞</b></td><td>精子含 <b>X 或 Y</b>，卵细胞只含 <b>X</b>。</td></tr>
+      <tr><td><b>生男生女</b></td><td>概率<b>各约 50%</b>，取决于<b>哪种精子</b>与卵细胞结合；<b>生男生女由父亲决定</b>。</td></tr>
+    </table>
+
+    <h3>20.5 生物的变异</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>普遍性</b></td><td>变异在生物界<b>普遍存在</b>。</td></tr>
+      <tr><td><b>可遗传变异</b></td><td>由<b>遗传物质改变</b>引起，能遗传（如<b>太空椒</b>）。</td></tr>
+      <tr><td><b>不可遗传变异</b></td><td>仅由<b>环境</b>引起，遗传物质没变（如<b>晒黑</b>）。</td></tr>
+      <tr><td><b>意义</b></td><td>变异是<b>不定向</b>的，为<b>选择</b>提供材料。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易混集中区：①Aa 是显性性状不是"中间"；②生男生女由父亲精子类型决定；③晒黑不可遗传、太空椒可遗传。详见第4节表E、F、G。</div>
+  </div>
+</div>
+
+<!-- 第21章 -->
+<div class="unit">
+  <div class="head" style="background:#db2777">第21章　生命的发生和发展</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：生命<b>从哪来</b>（起源）、生物<b>怎么变</b>（进化证据与历程）、<b>为什么</b>会变（自然选择）。</div>
+
+    <h3>21.1 生命的起源</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>原始大气</b></td><td><b>没有氧气</b>，有水蒸气、氨、甲烷、氢气等。</td></tr>
+      <tr><td><b>米勒实验</b></td><td>模拟原始地球条件，证明<b>原始地球能形成有机物（氨基酸）</b>。</td></tr>
+      <tr><td><b>生命诞生地</b></td><td>原始生命诞生于<b>原始海洋</b>（"原始汤"）。</td></tr>
+    </table>
+
+    <h3>21.2 生物的进化</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>证据</b></td><td><b>化石</b>是重要证据；<b>越古老的地层，化石越简单、低等</b>。</td></tr>
+      <tr><td><b>总趋势</b></td><td>简单 → 复杂、低等 → 高等、水生 → 陆生。</td></tr>
+      <tr><td><b>植物历程</b></td><td>藻类 → 苔藓 → 蕨类 → 种子植物。</td></tr>
+      <tr><td><b>动物历程</b></td><td>无脊椎动物 → 鱼类 → 两栖类 → 爬行类 → 鸟类/哺乳类。</td></tr>
+    </table>
+
+    <h3>21.3 生物进化的原因</h3>
+    <table>
+      <tr><th style="width:120px">要点</th><th>内容</th></tr>
+      <tr><td><b>学说</b></td><td>达尔文<b>自然选择学说</b>：过度繁殖、生存斗争、遗传变异、适者生存。</td></tr>
+      <tr><td><b>方向</b></td><td><b>变异不定向</b>，<b>选择定向</b>。</td></tr>
+      <tr><td><b>经典例子</b></td><td>长颈鹿脖子长是<b>自然选择</b>的结果（颈长的个体更易生存繁殖）。</td></tr>
+    </table>
+    <div class="warn">⚠️ 易错：①米勒实验证明"能形成有机物"，不是"合成生命"；②化石越古老越简单低等（不是越复杂）；③变异不定向、选择才定向。</div>
+  </div>
+</div>
+
+<!-- ============ 4 跨章易混淆大汇总 ============ -->
+<h2 id="mix">4. 跨章易混淆大汇总（所有"容易混"的都归堆在这里）</h2>
+
+<div class="card">
+  <h3>表A：先天性行为 vs 学习行为（必背，考试高频）</h3>
+  <table>
+    <tr><th>对比项</th><th>先天性行为</th><th>学习行为</th></tr>
+    <tr><td>获得时间</td><td>生来就有</td><td>出生后通过学习获得</td></tr>
+    <tr><td>决定因素</td><td>由<b>遗传物质</b>决定</td><td>遗传基础 + 环境作用 + 生活经验/学习</td></tr>
+    <tr><td>是否可变</td><td>相对稳定</td><td>随环境变化可建立/消退</td></tr>
+    <tr><td>举例</td><td>蜜蜂采蜜、蜘蛛结网、小鸟喂鱼</td><td>望梅止渴、大山雀偷奶、蚯蚓走迷宫</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表B：完全变态 vs 不完全变态（有无蛹期是分水岭）</h3>
+  <table>
+    <tr><th>对比项</th><th>完全变态</th><th>不完全变态</th></tr>
+    <tr><td>发育时期</td><td>受精卵→幼虫→<b>蛹</b>→成虫（4期）</td><td>受精卵→若虫→成虫（3期，<b>无蛹</b>）</td></tr>
+    <tr><td>幼体形态</td><td>幼虫与成虫差异大</td><td>若虫<b>形似成虫</b></td></tr>
+    <tr><td>代表动物</td><td>蚕、蜜蜂、蝶、蛾</td><td>蝗虫、蟋蟀、蝼蛄</td></tr>
+    <tr><td>蜕皮</td><td>有（幼虫期）</td><td>有（若虫期）</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表C：细菌 vs 真菌 vs 病毒（微生物三兄弟）</h3>
+  <table>
+    <tr><th>对比项</th><th>细菌</th><th>真菌</th><th>病毒</th></tr>
+    <tr><td>细胞结构</td><td>单细胞，<b>无成形细胞核</b>（原核）</td><td>有成形细胞核（真核），酵母菌单细胞、其余多细胞</td><td><b>无细胞结构</b></td></tr>
+    <tr><td>组成</td><td>细胞壁、膜、质、DNA等</td><td>细胞壁、膜、质、细胞核</td><td><b>蛋白质外壳 + 内部遗传物质</b></td></tr>
+    <tr><td>生殖</td><td><b>分裂生殖</b></td><td>酵母菌<b>出芽</b>、霉菌蘑菇<b>孢子</b></td><td>寄生在活细胞内复制</td></tr>
+    <tr><td>特殊</td><td>能形成<b>芽孢</b>（休眠）</td><td>—</td><td>必须<b>寄生</b></td></tr>
+    <tr><td>与人关系</td><td>部分致病；抗生素有效</td><td>酿酒、发霉、部分致病</td><td>致病；<b>抗生素无效</b>，可接种疫苗预防</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表D：有性生殖 vs 无性生殖（植物生殖核心对比）</h3>
+  <table>
+    <tr><th>对比项</th><th>有性生殖</th><th>无性生殖</th></tr>
+    <tr><td>两性细胞</td><td><b>经两性生殖细胞结合</b></td><td><b>不经</b>两性生殖细胞结合</td></tr>
+    <tr><td>新个体来源</td><td>受精卵发育</td><td>母体直接产生</td></tr>
+    <tr><td>后代特点</td><td>具双亲遗传，易变异</td><td>保持母体优良性状，变异少</td></tr>
+    <tr><td>举例</td><td>开花→传粉→受精→种子</td><td>扦插、压条、嫁接、组织培养</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表E：基因显隐性判定（AA / Aa / aa）</h3>
+  <table>
+    <tr><th>基因型</th><th>组成</th><th>表现型</th><th>说明</th></tr>
+    <tr><td><b>AA</b></td><td>两个显性基因</td><td><b>显性性状</b></td><td>纯合显性</td></tr>
+    <tr><td><b>Aa</b></td><td>一显一隐</td><td><b>显性性状</b></td><td>杂合，隐性基因被"盖住"但不消失</td></tr>
+    <tr><td><b>aa</b></td><td>两个隐性基因</td><td><b>隐性性状</b></td><td>隐性基因相遇才表现</td></tr>
+  </table>
+  <div class="tip">🧭 判定口诀：只要带一个大写 A（AA 或 Aa）就显显性；只有 aa 才显隐性。隐性病要"双隐相遇"，所以近亲结婚风险高。</div>
+</div>
+
+<div class="card">
+  <h3>表F：可遗传变异 vs 不可遗传变异</h3>
+  <table>
+    <tr><th>对比项</th><th>可遗传变异</th><th>不可遗传变异</th></tr>
+    <tr><td>根本原因</td><td><b>遗传物质改变</b></td><td>仅由<b>环境</b>引起，遗传物质不变</td></tr>
+    <tr><td>能否遗传</td><td>能传给后代</td><td>不能传给后代</td></tr>
+    <tr><td>举例</td><td>太空椒、杂交育种</td><td>晒黑、水肥好的麦子更高</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表G：男女性别决定（XY / XX 与"生男生女各半"）</h3>
+  <table>
+    <tr><th>对比项</th><th>男性</th><th>女性</th></tr>
+    <tr><td>体细胞性染色体</td><td><b>XY</b></td><td><b>XX</b></td></tr>
+    <tr><td>产生的生殖细胞</td><td>精子含 <b>X 或 Y</b>（两种，各约一半）</td><td>卵细胞只含 <b>X</b>（一种）</td></tr>
+    <tr><td>受精卵性染色体</td><td colspan="2">X 卵 + X 精 = XX（女）；X 卵 + Y 精 = XY（男）</td></tr>
+    <tr><td>概率</td><td colspan="2">生男生女<b>各约 50%</b>，由<b>父亲</b>的精子类型决定</td></tr>
+  </table>
+  <div class="warn">⚠️ 易错：生男生女不是"由母亲决定"，也不是"能人为控制比例"——是父亲的 X/Y 精子随机结合，概率各半。</div>
+</div>
+
+<div class="card">
+  <h3>表H：关节结构 vs 鸡蛋结构（两套名词别串）</h3>
+  <table>
+    <tr><th>关节结构（运动系统）</th><th>鸡蛋结构（鸟卵）</th></tr>
+    <tr><td>关节面 = 关节头 + 关节窝（覆<b>关节软骨</b>）</td><td>卵壳、<b>卵壳膜</b>、气室</td></tr>
+    <tr><td><b>关节囊</b>（分泌滑液、加固）</td><td><b>卵白</b>（营养+水分）</td></tr>
+    <tr><td><b>关节腔</b>（内有<b>滑液</b>，灵活）</td><td><b>卵黄</b>（主要营养）</td></tr>
+    <tr><td>骨连接主要形式，既牢固又灵活</td><td><b>胚盘</b>（含细胞核，发育成雏鸟）、系带</td></tr>
+  </table>
+  <div class="tip">🧭 区分诀窍：带"关节"二字的（关节囊/关节腔/关节软骨/滑液）全属于运动系统；带"卵"字或"胚盘/系带"的（卵壳膜/卵白/卵黄）全属于鸟卵。考试常把"滑液"错填到鸡蛋里，记住：滑液只在关节。</div>
+</div>
+
+<!-- ============ 5 自测 ============ -->
+<h2 id="quiz">5. 自测题（做完点开对答案）</h2>
+
+<details>
+  <summary>第15章自测（运动和行为）</summary>
+  <div class="a">
+    <b>Q1</b> 运动系统由哪三部分组成？→ <span class="right">骨、骨连接、骨骼肌</span><br>
+    <b>Q2</b> 关节为什么"既牢固又灵活"？→ <span class="right">牢固靠关节囊和韧带，灵活靠关节软骨和滑液</span><br>
+    <b>Q3</b> 运动中骨、关节、骨骼肌分别起什么作用？→ <span class="right">骨=杠杆，关节=支点，骨骼肌=动力</span><br>
+    <b>Q4</b> "大山雀偷奶"属于先天性还是学习行为？→ <span class="right">学习行为（生活经验+学习获得）</span>
+  </div>
+</details>
+<details>
+  <summary>第16章自测（动物生殖发育）</summary>
+  <div class="a">
+    <b>Q1</b> 完全变态和不完全变态的根本区别？→ <span class="right">完全变态有"蛹"期（4期），不完全变态无蛹（3期）</span><br>
+    <b>Q2</b> 青蛙的发育过程和呼吸变化？→ <span class="right">受精卵→蝌蚪→幼蛙→成蛙（变态发育）；蝌蚪用鳃，成蛙用肺兼皮肤</span><br>
+    <b>Q3</b> 鸟卵中发育成雏鸟的部位、主要营养分别是？→ <span class="right">胚盘（含细胞核）；卵黄（主要营养）</span><br>
+    <b>Q4</b> 未受精的鸡蛋胚盘有什么特征？→ <span class="right">胚盘小、色浅</span>
+  </div>
+</details>
+<details>
+  <summary>第17章自测（动物在生物圈中的作用）</summary>
+  <div class="a">
+    <b>Q1</b> 动物在生物圈中有哪三大作用？→ <span class="right">促进物质循环、维持生态平衡、帮助植物传粉传播种子</span><br>
+    <b>Q2</b> 我国五种珍稀动物（任写三）？→ <span class="right">大熊猫、金丝猴、朱鹮、扬子鳄、白鳍豚</span><br>
+    <b>Q3</b> 保护生物多样性最有效的措施？→ <span class="right">就地保护（建立自然保护区）</span>
+  </div>
+</details>
+<details>
+  <summary>第18章自测（微生物）</summary>
+  <div class="a">
+    <b>Q1</b> 细菌与真菌在细胞结构上的关键区别？→ <span class="right">细菌无成形细胞核（原核），真菌有成形细胞核（真核）</span><br>
+    <b>Q2</b> 病毒的结构、生活方式？→ <span class="right">蛋白质外壳+内部遗传物质，无细胞结构；寄生</span><br>
+    <b>Q3</b> 抗生素对病毒有效吗？为什么？→ <span class="right">无效；抗生素只杀细菌，对病毒不起作用</span><br>
+    <b>Q4</b> 酵母菌和霉菌的生殖方式分别？→ <span class="right">酵母菌出芽生殖，霉菌孢子生殖</span>
+  </div>
+</details>
+<details>
+  <summary>第19章自测（植物生殖）</summary>
+  <div class="a">
+    <b>Q1</b> 有性生殖和无性生殖的根本区别？→ <span class="right">是否经两性生殖细胞结合</span><br>
+    <b>Q2</b> 嫁接成活的关键？→ <span class="right">使接穗与砧木的形成层紧密结合</span><br>
+    <b>Q3</b> 组织培养的优点（两点）？→ <span class="right">快速繁殖、保持优良性状</span>
+  </div>
+</details>
+<details>
+  <summary>第20章自测（遗传和变异）</summary>
+  <div class="a">
+    <b>Q1</b> 染色体、DNA、基因的位置关系？→ <span class="right">基因在DNA上，DNA在染色体上（染色体=DNA+蛋白质，成对存在）</span><br>
+    <b>Q2</b> AA、Aa、aa 分别表现什么性状？→ <span class="right">AA/Aa表现显性性状，aa表现隐性性状</span><br>
+    <b>Q3</b> 生男生女由谁决定？概率？→ <span class="right">由父亲（X/Y精子）决定，各约50%</span><br>
+    <b>Q4</b> "晒黑"和"太空椒"分别属哪类变异？→ <span class="right">晒黑=不可遗传（环境），太空椒=可遗传（遗传物质改变）</span>
+  </div>
+</details>
+<details>
+  <summary>第21章自测（生命起源和进化）</summary>
+  <div class="a">
+    <b>Q1</b> 米勒实验证明了什么？→ <span class="right">原始地球条件下能形成有机物（氨基酸）</span><br>
+    <b>Q2</b> 生物进化的重要证据和总趋势？→ <span class="right">化石；简单→复杂、低等→高等、水生→陆生</span><br>
+    <b>Q3</b> 自然选择学说四要点、变异与选择的方向？→ <span class="right">过度繁殖、生存斗争、遗传变异、适者生存；变异不定向、选择定向</span>
+  </div>
+</details>
+<details>
+  <summary>综合易混自测（专治混淆）</summary>
+  <div class="a">
+    <b>Q1</b> 蜘蛛结网 vs 大山雀偷奶，谁先天谁学习？→ <span class="right">蜘蛛结网=先天性；大山雀偷奶=学习行为</span><br>
+    <b>Q2</b> 蝗虫和蚕谁是完全变态？→ <span class="right">蚕是完全变态（有蛹）；蝗虫是不完全变态</span><br>
+    <b>Q3</b> 抗生素能治病毒性感冒吗？为什么？→ <span class="right">不能；抗生素只对细菌有效，对病毒无效</span><br>
+    <b>Q4</b> 扦插和嫁接属于有性还是无性生殖？→ <span class="right">无性生殖（不经两性生殖细胞结合）</span><br>
+    <b>Q5</b> "滑液"属于关节还是鸡蛋？→ <span class="right">属于关节（关节腔内）；鸡蛋里没有滑液</span><br>
+    <b>Q6</b> Aa 表现显性还是隐性？→ <span class="right">显性性状（带一个大写A即显性）</span>
+  </div>
+</details>
+
+<!-- ============ 6 模板 ============ -->
+<h2 id="tpl">6. 框架练习模板（自己动手搭，才会真会）</h2>
+<div class="card">
+  <div class="ok">📝 用法：拿一张白纸，按下面模板默填任意一节。能填出 4 格 = 过关；填不出哪格就回去翻第3节对应章节。</div>
+  <table>
+    <tr><th style="width:90px">要素</th><th>你填：第____章《________》第____节</th></tr>
+    <tr><td><b>① 结构</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>② 功能</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>③ 过程</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>④ 意义</b></td><td style="height:34px"></td></tr>
+  </table>
+  <div class="tip">🧭 进阶练：用第4节的八张对比表，自己闭卷默写"表C 细菌/真菌/病毒"和"表E AA/Aa/aa"。默写全对，八上选择题基本不丢分。</div>
+</div>
+
+<div class="foot">
+  资料说明：本资料依据北师大版八年级上册生物 第15–21章 系统整理，覆盖全学期，以"框架学习法"为主线（生命逻辑链骨架 + 章节主题纵线 + 四要素填充 + 对比表防混淆），针对"不会搭框架、知识点易混淆"的核心问题设计。内容严格依据所给要点展开，若学校教学进度或教材版本有差异，请以课本为准。
+</div>
+
+</div>
+</body>
+</html>
