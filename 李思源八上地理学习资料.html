@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源·八上地理「框架学习法」全套资料（湘教版）</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--blue);}
+  h2{font-size:20px;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .stage{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .chip{flex:1 1 120px;border-radius:10px;padding:10px 12px;color:#fff;font-size:12.5px;font-weight:700;text-align:center;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .unit{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:16px 0;overflow:hidden;}
+  .unit .head{padding:12px 16px;font-weight:800;font-size:16px;color:#fff;}
+  .unit .body{padding:12px 16px;}
+  .kbd{background:#1f2937;color:#fff;border-radius:6px;padding:1px 7px;font-size:12px;}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .wrong{color:var(--red);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:14px;}
+  .toc a{color:var(--blue);text-decoration:none;}
+  .meth{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px 18px;margin:12px 0;}
+  @media print{body{background:#fff;}.card,.unit,.toc,.meth{box-shadow:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>李思源 · 八上地理「框架学习法」全套资料</h1>
+<div class="sub">湘教版八年级上册 全册 4 章完整覆盖 ｜ 核心目标：<b>教你搭框架、把地理知识理清、不再张冠李戴</b></div>
+
+<div class="toc">
+  <b>📑 目录</b><br>
+  <a href="#how">0. 这份资料怎么用</a> ｜
+  <a href="#frame">1. 先学「怎么搭框架」（最重要）</a> ｜
+  <a href="#axis">2. 一条空间逻辑链：八上骨架</a> ｜
+  <a href="#units">3. 四章完整知识（细颗粒度）</a> ｜
+  <a href="#mix">4. 跨章易混淆大汇总</a> ｜
+  <a href="#quiz">5. 自测题（每章+综合）</a> ｜
+  <a href="#tpl">6. 框架练习模板（自己练）</a>
+</div>
+
+<!-- ============ 0 ============ -->
+<h2 id="how">0. 这份资料怎么用</h2>
+<div class="card">
+  <div class="point">① <b>第1节必看</b>：先学会"地理怎么搭框架"——地理不是背时间，而是理清"空间逻辑链"，这是你地理学不好的根（不是记不住，是没框架，记了也乱）。</div>
+  <div class="point">② <b>第2节空间链</b>：八上整本书就一条逻辑线——从"中国在哪"到"怎么发展"，先记骨架。</div>
+  <div class="point">③ <b>第3节逐章</b>：每章都按"定义 / 核心数据 / 关键词 / 易错提醒 / 对比 / 举例"给你填好，直接背。</div>
+  <div class="point">④ <b>第4节对比表</b>：所有"容易混"的放一起比，这是防混淆的杀手锏（长江黄河、阶梯分界、南北对比全在这）。</div>
+  <div class="point">⑤ <b>第5节自测 + 第6节模板</b>：做完自测，再用模板自己搭一遍，框架就长在你脑子里了。</div>
+  <div class="ok">💡 一句话心法：<span class="kbd">先定位章 → 再填四要素(位置/特征/分布/问题) → 最后用对比表核查</span>。每学一节都走这三步，混淆自然消失。</div>
+</div>
+
+<!-- ============ 1 框架方法论 ============ -->
+<h2 id="frame">1. 先学「怎么搭框架」（这是核心，比死记硬背重要）</h2>
+
+<div class="meth">
+  <h3 style="margin-top:0">🧱 框架 = 两条线交织</h3>
+  <div class="grid">
+    <div>
+      <b>横线：空间逻辑链</b>（地理不是时间轴！按"从哪到哪"排，解决"前后颠倒"）<br>
+      整体中国(在哪) → 位置疆域 → 自然环境(地形·气候·河流) → 自然资源(怎么用) → 主要产业(怎么发展)<br>
+      把所有知识挂到这条链上，就知道"这题在讲哪一段"。
+    </div>
+    <div>
+      <b>纵线：每章主题</b>（按"在讲啥"分，解决"知识点混淆"）<br>
+      疆域人口 → 自然环境 → 自然资源 → 主要产业<br>
+      先知道"这章在讲啥主题"，再填细节，就不会把长江的分界城市塞到气候里。
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>📋 每节填充"四要素"（拿到任何一节都按这四个格子填）</h3>
+  <table>
+    <tr><th style="width:90px">要素</th><th style="width:120px">问自己</th><th>举例（以"中国的地势"为例）</th></tr>
+    <tr><td><b>① 位置</b></td><td>在哪？</td><td>中国地势总体——西高东低，呈三级阶梯分布</td></tr>
+    <tr><td><b>② 特征</b></td><td>有啥特点？</td><td>三级阶梯；一二级分界昆仑—祁连—横断；二三级分界大兴安岭—太行—巫山—雪峰山</td></tr>
+    <tr><td><b>③ 分布</b></td><td>怎么铺开？</td><td>第一级：青藏高原；第二级：高原盆地；第三级：平原丘陵</td></tr>
+    <tr><td><b>④ 问题/对策</b></td><td>有啥隐患怎么办？</td><td>阶梯交界处水能丰富可发电；山区面积大→交通不便但利于林业、旅游</td></tr>
+  </table>
+  <div class="tip">🧭 用法：考试前拿一张白纸，按章节默写每节的"四要素"。能默出来 = 真会了；卡住 = 回去再背那一节。这就是"自己搭框架"。</div>
+</div>
+
+<div class="card">
+  <h3>🔍 防混淆三步法（专门针对"地理知识点容易混淆"）</h3>
+  <div class="point"><b>第一步·同类归堆</b>：把所有"分界线"放一张表（见第4节：阶梯分界、秦岭—淮河、季风区界线），所有"之最"放一张表，所有"对比"放一张表。</div>
+  <div class="point"><b>第二步·逐格比对</b>：比如"长江"和"黄河"都有上中下游分界城市，但长江是宜昌/湖口、黄河是河口/桃花峪——放一起比就忘不了。</div>
+  <div class="point"><b>第三步·出题自测</b>：自己问自己"塔里木河是外流河还是内流河？"，答得上来才算过。</div>
+  <div class="warn">⚠️ 地理最常见的错就是"把线记混"——把季风区与非季风区分界线（大—阴—贺—巴—冈）和三级阶梯二三级分界（大—太—巫—雪）搞混。只要按上面归堆，这类错能砍掉一大半。</div>
+</div>
+
+<!-- ============ 2 空间逻辑链 ============ -->
+<h2 id="axis">2. 一条空间逻辑链：八上骨架（先记这条线）</h2>
+<div class="card">
+  <div class="stage">
+    <div class="chip" style="background:#2563eb">①在哪<br>疆域人口<br>位置·四至·行政区·人口·民族</div>
+    <div class="chip" style="background:#ea580c">②啥环境<br>自然环境<br>地形·气候·河流</div>
+    <div class="chip" style="background:#16a34a">③有啥资源<br>自然资源<br>土地·水</div>
+    <div class="chip" style="background:#7c3aed">④怎么发展<br>主要产业<br>农·工·交通</div>
+  </div>
+  <div class="tip">🧭 速记口诀：<span class="mn">在哪→环境→资源→产业</span>。整本书就这四大块（四章），考试先判断"这题落在第几块"，再去对应章里找细节。</div>
+  <div class="ok">📍 纵线四章主题：<b>第一章 疆域和人口</b> → <b>第二章 自然环境</b> → <b>第三章 自然资源</b> → <b>第四章 主要产业</b>。</div>
+</div>
+
+<!-- ============ 3 四章完整知识 ============ -->
+<h2 id="units">3. 四章完整知识（每节按"定义/数据/关键词/易错/对比/举例"展开）</h2>
+
+<!-- 第一章 -->
+<div class="unit">
+  <div class="head" style="background:#2563eb">第一章　中国的疆域和人口</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：先解决"<b>中国在哪</b>"——位置、疆域、行政区划，再看"<b>中国有多少人、哪些民族</b>"。这是后面所有章节的地理底图。</div>
+
+    <!-- 疆域 -->
+    <h3>一、疆域</h3>
+    <div class="card">
+      <div class="point"><b>定义</b>：从半球、纬度、海陆三方面描述中国的地理位置与范围。</div>
+      <table>
+        <tr><th style="width:120px">角度</th><th>核心内容</th></tr>
+        <tr><td><b>半球位置</b></td><td>北半球、东半球</td></tr>
+        <tr><td><b>纬度位置</b></td><td>大部分位于<b>北温带</b>，南部少数地区在<b>热带</b>，<b>没有寒带</b></td></tr>
+        <tr><td><b>海陆位置</b></td><td><b>亚欧大陆东部、太平洋西岸</b>，是一个<b>海陆兼备</b>的国家</td></tr>
+        <tr><td><b>陆地面积</b></td><td><b>约 960 万 km²</b>，世界第<b>三</b>位，仅次于<b>俄罗斯、加拿大</b></td></tr>
+      </table>
+      <div class="point"><b>核心数据·四至点</b>：南——<b>南沙群岛曾母暗沙</b>；北——<b>黑龙江漠河以北</b>；东——<b>黑龙江与乌苏里江主航道中心线汇合处</b>；西——<b>帕米尔高原</b>。</div>
+      <div class="point"><b>核心数据·临海</b>：自北向南依次是 <b>渤海、黄海、东海、南海</b>；其中<b>渤海、琼州海峡</b>是中国的<b>内海</b>。</div>
+      <div class="point"><b>核心数据·岛屿群岛</b>：最大岛——<b>台湾岛</b>；第二大岛——<b>海南岛</b>；最大群岛——<b>舟山群岛</b>。</div>
+      <div class="point"><b>关键词</b>：北半球·东半球、海陆兼备、960万、四至点、内海、台湾岛。</div>
+      <div class="warn">⚠️ 易错提醒：①琼州海峡（不是台湾海峡）是内海；②我国<b>无寒带</b>，只有北温带+少数热带；③面积世界第三，不是第一第二。</div>
+      <div class="point"><b>对比·邻国</b>：<b>14 个陆上邻国</b>——朝、俄、蒙、哈、吉、塔、阿、巴、尼、印、不、缅、老、越；<b>6 个隔海相望国</b>——日、韩、菲、文（文莱）、马（马来西亚）、印尼（印度尼西亚）。</div>
+      <div class="tip">🧭 举例：从北京坐船去东南亚，出东海、过南海，沿途就能体会"太平洋西岸、海陆兼备"的含义。</div>
+    </div>
+
+    <!-- 行政区划 -->
+    <h3>二、行政区划</h3>
+    <div class="card">
+      <div class="point"><b>定义</b>：我国现行行政区划，共 <b>34 个</b>省级行政区。</div>
+      <div class="point"><b>核心数据·构成</b>：<b>23 个省</b> + <b>5 个自治区</b> + <b>4 个直辖市</b> + <b>2 个特别行政区</b> = 34 个。</div>
+      <div class="point"><b>关键词</b>：23/5/4/2 = 34；自治区（民族）、直辖市（直隶中央）、特别行政区（一国两制）。</div>
+      <div class="warn">⚠️ 易错提醒：海南是"省"（不是自治区），台湾是"省"；内蒙古、桂、宁、新、藏才是 5 个自治区；港、澳是 2 个特别行政区。</div>
+      <details>
+        <summary>点开：34 个省级行政区全称 / 简称 / 行政中心 对照表</summary>
+        <div class="a">
+          <table>
+            <tr><th style="width:130px">全称</th><th style="width:80px">简称</th><th>行政中心</th><th style="width:130px">全称</th><th style="width:80px">简称</th><th>行政中心</th></tr>
+            <tr><td>河北省</td><td>冀</td><td>石家庄</td><td>湖南省</td><td>湘</td><td>长沙</td></tr>
+            <tr><td>河南省</td><td>豫</td><td>郑州</td><td>黑龙江省</td><td>黑</td><td>哈尔滨</td></tr>
+            <tr><td>湖北省</td><td>鄂</td><td>武汉</td><td>吉林省</td><td>吉</td><td>长春</td></tr>
+            <tr><td>江西省</td><td>赣</td><td>南昌</td><td>辽宁省</td><td>辽</td><td>沈阳</td></tr>
+            <tr><td>安徽省</td><td>皖</td><td>合肥</td><td>江苏省</td><td>苏</td><td>南京</td></tr>
+            <tr><td>福建省</td><td>闽</td><td>福州</td><td>浙江省</td><td>浙</td><td>杭州</td></tr>
+            <tr><td>贵州省</td><td>黔/贵</td><td>贵阳</td><td>青海省</td><td>青</td><td>西宁</td></tr>
+            <tr><td>云南省</td><td>滇/云</td><td>昆明</td><td>台湾省</td><td>台</td><td>台北</td></tr>
+            <tr><td>甘肃省</td><td>陇/甘</td><td>兰州</td><td>海南省</td><td>琼</td><td>海口</td></tr>
+            <tr><td>陕西省</td><td>秦/陕</td><td>西安</td><td>山西省</td><td>晋</td><td>太原</td></tr>
+            <tr><td>山东省</td><td>鲁</td><td>济南</td><td>广东省</td><td>粤</td><td>广州</td></tr>
+            <tr><td>四川省</td><td>川/蜀</td><td>成都</td><td>内蒙古自治区</td><td>内蒙古</td><td>呼和浩特</td></tr>
+            <tr><td>广西壮族自治区</td><td>桂</td><td>南宁</td><td>宁夏回族自治区</td><td>宁</td><td>银川</td></tr>
+            <tr><td>新疆维吾尔自治区</td><td>新</td><td>乌鲁木齐</td><td>西藏自治区</td><td>藏</td><td>拉萨</td></tr>
+            <tr><td>北京市</td><td>京</td><td>北京</td><td>天津市</td><td>津</td><td>天津</td></tr>
+            <tr><td>上海市</td><td>沪</td><td>上海</td><td>重庆市</td><td>渝</td><td>重庆</td></tr>
+            <tr><td>香港特别行政区</td><td>港</td><td>香港</td><td>澳门特别行政区</td><td>澳</td><td>澳门</td></tr>
+          </table>
+        </div>
+      </details>
+      <div class="tip">🧭 速记易混简称：冀(河北)豫(河南)鄂(湖北)赣(江西)皖(安徽)闽(福建)——这几个是中部/南方省，最易考；黔=贵州、滇=云南、陇=甘肃、秦=陕西 是"双简称"里的生僻字。</div>
+    </div>
+
+    <!-- 人口 -->
+    <h3>三、人口</h3>
+    <div class="card">
+      <div class="point"><b>定义/数据</b>：我国人口约 <b>14 亿</b>，世界<b>第一</b>。</div>
+      <div class="point"><b>分布特征</b>：分布<b>不均</b>，<b>东南多、西北少</b>。</div>
+      <div class="point"><b>核心数据·人口地理分界线</b>：<b>黑河—腾冲线（胡焕庸线）</b>——线东南人口稠密，西北人口稀疏。</div>
+      <div class="point"><b>政策演变</b>：计划生育 → 单独二孩 → 全面二孩 → 三孩。</div>
+      <div class="point"><b>关键词</b>：14亿第一、东南多西北少、黑河—腾冲线、三孩政策。</div>
+      <div class="warn">⚠️ 易错提醒：人口分界线是"黑河—腾冲"，不是秦岭—淮河；秦岭—淮河是气候/南北方分界线。</div>
+      <div class="tip">🧭 举例：同样面积，江苏（腾冲线东南）人口密度远高于西藏（线西北），这就是胡焕庸线的直观体现。</div>
+    </div>
+
+    <!-- 民族 -->
+    <h3>四、民族</h3>
+    <div class="card">
+      <div class="point"><b>定义/数据</b>：我国有 <b>56 个民族</b>，<b>汉族占 91.5%</b>；少数民族 <b>55 个</b>。</div>
+      <div class="point"><b>分布特征</b>：<b>"大散居、小聚居、交错杂居"</b>；少数民族主要集中在<b>西南、西北、东北</b>地区。</div>
+      <div class="point"><b>核心数据</b>：少数民族中人口最多的是<b>壮族</b>。</div>
+      <div class="point"><b>关键词</b>：56个、汉族91.5%、大散居小聚居、壮族最多。</div>
+      <div class="warn">⚠️ 易错提醒：人口最多的少数民族是<b>壮族</b>（不是满族、回族）；汉族不是"少数民族"。</div>
+      <div class="tip">🧭 举例：广西壮族、云南傣族、内蒙古蒙古族、东北朝鲜族，都体现了"西南西北东北集中"的分布特点。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第二章 -->
+<div class="unit">
+  <div class="head" style="background:#ea580c">第二章　中国的自然环境</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：在"知道中国在哪"之后，看"<b>中国长啥样</b>"——地形、气候、河流三大自然环境要素，决定了后面资源和产业怎么分布。</div>
+
+    <!-- 地形 -->
+    <h3>一、地形与地势</h3>
+    <div class="card">
+      <div class="point"><b>定义/特征</b>：地势<b>西高东低，呈三级阶梯</b>分布；地形<b>复杂多样，山区面积广大</b>（山地约<b>33%</b>）。</div>
+      <div class="point"><b>核心数据·阶梯分界线</b>：一二级分界——<b>昆仑山—祁连山—横断山脉</b>；二三级分界——<b>大兴安岭—太行山—巫山—雪峰山</b>。</div>
+      <div class="point"><b>四大高原</b>：①<b>青藏</b>——雪山冰川，"世界屋脊"；②<b>内蒙古</b>——平坦开阔；③<b>黄土</b>——水土流失严重；④<b>云贵</b>——喀斯特地貌。</div>
+      <div class="point"><b>四大盆地</b>：①<b>塔里木</b>——最大，有塔克拉玛干沙漠；②<b>准噶尔</b>；③<b>柴达木</b>——"聚宝盆"，海拔最高；④<b>四川</b>——"天府之国"。</div>
+      <div class="point"><b>三大平原</b>：①<b>东北</b>——最大，黑土广布；②<b>华北</b>；③<b>长江中下游</b>——"鱼米之乡"。</div>
+      <div class="point"><b>关键词</b>：西高东低三级阶梯、山区33%、四大高原/盆地/三大平原。</div>
+      <div class="warn">⚠️ 易错提醒：①"聚宝盆"是柴达木盆地（不是塔里木）；②"天府之国"是四川盆地；③山区面积广大≠山地面积最大，山地约33%。</div>
+      <div class="tip">🧭 举例：黄河从青藏高原（第一级）奔流而下，经黄土高原、华北平原（第三级），正体现"西高东低"的地势。</div>
+    </div>
+
+    <!-- 气候 -->
+    <h3>二、气候</h3>
+    <div class="card">
+      <div class="point"><b>定义/特征</b>：气候<b>复杂多样</b>，<b>季风气候显著</b>。</div>
+      <div class="point"><b>气温·冬夏差异</b>：冬季<b>南北温差大</b>（受纬度因素+冬季风影响），1 月 <b>0℃ 等温线大致沿秦岭—淮河</b>；夏季<b>全国普遍高温</b>。</div>
+      <div class="point"><b>温度带</b>：热带、亚热带、暖温带、中温带、寒温带、高原气候区（共 6 个）。</div>
+      <div class="point"><b>降水·空间</b>：<b>东南多、西北少</b>（由东南沿海向西北内陆递减）；<b>800mm 等降水量线沿秦岭—淮河</b>。</div>
+      <div class="point"><b>降水·时间</b>：<b>夏秋多、冬春少</b>。</div>
+      <div class="point"><b>核心数据·季风区与非季风区分界线</b>：<b>大兴安岭—阴山—贺兰山—巴颜喀拉山—冈底斯山</b>。</div>
+      <div class="point"><b>特殊天气</b>：寒潮、梅雨、台风、沙尘暴；<b>旱涝是最常见自然灾害</b>。</div>
+      <div class="point"><b>关键词</b>：复杂多样+季风显著、0℃等温线=秦岭淮河、800mm线=秦岭淮河、季风区分界线。</div>
+      <div class="warn">⚠️ 易错提醒：①冬季温差大、夏季普遍高温，别记反；②季风区分界线含"阴山、贺兰山、巴颜喀拉山、冈底斯山"，与二三级阶梯分界（无阴山、贺兰山）不同；③秦岭—淮河既是 0℃ 等温线也是 800mm 等降水量线。</div>
+      <div class="tip">🧭 举例：1 月哈尔滨冰天雪地、广州温暖如春，就是"南北温差大"；梅雨在长江中下游、台风多在东南沿海。</div>
+    </div>
+
+    <!-- 河流 -->
+    <h3>三、河流</h3>
+    <div class="card">
+      <div class="point"><b>定义·内外流区</b>：<b>外流区</b>（东部，多注入太平洋）；<b>内流区</b>（西北内陆，河流多不注入海洋）。<b>塔里木河是我国最大内流河</b>。</div>
+      <table>
+        <tr><th style="width:80px">河流</th><th>地位/特征</th><th>上中下游分界</th><th>关键记忆</th></tr>
+        <tr><td><b>长江</b></td><td>我国<b>长度最长、水量最大、流域面积最广</b>的河流</td><td>上中游：<b>宜昌</b>；中下游：<b>湖口</b></td><td>上游"<b>水能宝库</b>"、下游"<b>黄金水道</b>"；<b>三峡工程</b></td></tr>
+        <tr><td><b>黄河</b></td><td>"<b>母亲河</b>"</td><td>上中游：<b>河口</b>；中下游：<b>桃花峪</b></td><td>上游水能丰富；中游流经<b>黄土高原水土流失严重</b>；下游"<b>地上河</b>"（含沙量大）；治理关键：<b>中游水土保持 + 调水调沙</b></td></tr>
+      </table>
+      <div class="point"><b>关键词</b>：长江=最长水量最大、宜昌/湖口、黄金水道；黄河=母亲河、河口/桃花峪、地上河；塔里木河=最大内流河。</div>
+      <div class="warn">⚠️ 易错提醒：①长江上中游分界是宜昌（不是湖口），中下游分界才是湖口；②黄河下游"地上河"成因是<b>含沙量大、泥沙淤积</b>，不是水量大；③治理黄河关键是中游水土保持，不是下游加高堤坝。</div>
+      <div class="tip">🧭 举例：长江三峡是"水能宝库"的代表；黄河下游河南段河床比两岸地面还高，就是"地上河"。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第三章 -->
+<div class="unit">
+  <div class="head" style="background:#16a34a">第三章　中国的自然资源</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：在"知道自然环境"之后，看"<b>中国有什么资源、怎么用</b>"——土地和水两大资源，以及"总量多但人均少"的基本国情。</div>
+
+    <!-- 概况 -->
+    <h3>一、自然资源概况</h3>
+    <div class="card">
+      <div class="point"><b>定义/特征</b>：基本特征——<b>总量丰富、人均不足</b>。</div>
+      <div class="point"><b>分类</b>：分为<b>可再生资源</b>（合理利用可不断更新）与<b>非可再生资源</b>（形成慢、用一点少一点）。</div>
+      <div class="point"><b>关键词</b>：总量丰富人均不足、可再生/非可再生。</div>
+      <div class="warn">⚠️ 易错提醒："总量丰富"不等于"人均丰富"，我国人均资源世界排名靠后；可再生资源若不合理利用也会枯竭（如滥砍森林）。</div>
+    </div>
+
+    <!-- 土地 -->
+    <h3>二、土地资源</h3>
+    <div class="card">
+      <div class="point"><b>定义/特征</b>：类型齐全，但<b>耕地、林地比重小</b>，<b>难利用土地比重大</b>。</div>
+      <table>
+        <tr><th style="width:110px">土地类型</th><th>主要分布</th></tr>
+        <tr><td><b>耕地</b></td><td>东部季风区的平原、盆地</td></tr>
+        <tr><td><b>林地</b></td><td>东北、西南、东南（山区）</td></tr>
+        <tr><td><b>草地</b></td><td>西部内陆（干旱半干旱区）</td></tr>
+        <tr><td><b>难利用土地</b></td><td>西北（沙漠、戈壁等）</td></tr>
+      </table>
+      <div class="point"><b>基本国策</b>：<b>十分珍惜、合理利用土地和切实保护耕地</b>。</div>
+      <div class="point"><b>关键词</b>：耕地林地比重小、东耕西草、保护耕地国策。</div>
+      <div class="warn">⚠️ 易错提醒：耕地在"东部季风区"而非西部；草地在"西部内陆"而非东部。</div>
+    </div>
+
+    <!-- 水 -->
+    <h3>三、水资源</h3>
+    <div class="card">
+      <div class="point"><b>定义/特征</b>：时空分布<b>不均</b>——空间：<b>南多北少、东多西少</b>；时间：<b>夏秋多、冬春少、年际变化大</b>。</div>
+      <table>
+        <tr><th style="width:140px">问题</th><th>解决措施</th></tr>
+        <tr><td><b>空间不均</b>（南多北少）</td><td><b>跨流域调水</b>——<b>南水北调</b></td></tr>
+        <tr><td><b>时间不均</b>（夏秋多冬春少）</td><td><b>兴修水库</b>——防洪抗旱、调节季节</td></tr>
+        <tr><td>总量/意识</td><td><b>节约用水</b>、防治水污染</td></tr>
+      </table>
+      <div class="point"><b>核心数据·南水北调三线</b>：<b>东线</b>——利用<b>京杭运河</b>；<b>中线</b>——从<b>丹江口水库</b>引水；<b>西线</b>——从<b>长江上游</b>调水。</div>
+      <div class="point"><b>关键词</b>：南多北少、夏秋多、南水北调、丹江口、节约用水。</div>
+      <div class="warn">⚠️ 易错提醒：①解决空间不均靠"调水"（南水北调），解决时间不均靠"水库"，别混；②中线水源是丹江口水库（不是三峡）。</div>
+      <div class="tip">🧭 举例：北方华北缺水严重，南水北调把长江水送到北京、天津，就是"跨流域调水"。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 第四章 -->
+<div class="unit">
+  <div class="head" style="background:#7c3aed">第四章　中国的主要产业</div>
+  <div class="body">
+    <div class="ok">📍 主题定位：在"知道资源"之后，看"<b>中国怎么发展</b>"——农业（基础）、工业（主导）、交通运输业（先行官）三大产业及其分布规律。</div>
+
+    <!-- 农业 -->
+    <h3>一、农业</h3>
+    <div class="card">
+      <div class="point"><b>定义/地位</b>：农业是国民经济的<b>基础</b>。</div>
+      <div class="point"><b>种植业</b>：集中在<b>东部季风区</b>，<b>"南稻北麦"</b>，以<b>秦岭—淮河</b>为界（南水稻、北小麦）。</div>
+      <div class="point"><b>畜牧业</b>：西部<b>四大牧区</b>——<b>内蒙古、新疆、青海、西藏</b>；东部为农耕区畜牧业。</div>
+      <div class="point"><b>林业</b>：分布在<b>东北、西南、东南</b>。</div>
+      <div class="point"><b>渔业</b>：分布在<b>东部沿海、长江中下游</b>。</div>
+      <div class="point"><b>关键词</b>：农业是基础、南稻北麦、四大牧区、东耕西牧。</div>
+      <div class="warn">⚠️ 易错提醒：①"南稻北麦"以秦岭—淮河为界，不是以长城；②四大牧区是内蒙古/新疆/青海/西藏，注意没有"甘肃牧区"单列。</div>
+      <div class="tip">🧭 举例："东耕西牧、南稻北麦"八个字概括了我国农业东西、南北分布的总规律。</div>
+    </div>
+
+    <!-- 工业 -->
+    <h3>二、工业</h3>
+    <div class="card">
+      <div class="point"><b>定义/地位</b>：工业是国民经济的<b>主导</b>；我国工业门类齐全。</div>
+      <table>
+        <tr><th style="width:140px">四大工业基地</th><th>特点</th></tr>
+        <tr><td><b>辽中南</b></td><td>以<b>重工业</b>为主</td></tr>
+        <tr><td><b>京津唐</b></td><td><b>综合性</b>工业基地</td></tr>
+        <tr><td><b>沪宁杭</b></td><td><b>最大的综合性</b>工业基地</td></tr>
+        <tr><td><b>珠江三角洲</b></td><td>以<b>轻工业</b>为主</td></tr>
+      </table>
+      <div class="point"><b>高新技术产业分布</b>：集中在<b>环渤海、长三角、珠三角</b>三大密集区。</div>
+      <div class="point"><b>关键词</b>：工业主导、四大基地特点、高新=环渤海/长三角/珠三角。</div>
+      <div class="warn">⚠️ 易错提醒：沪宁杭是"最大综合性"（不是辽中南）；辽中南才是重工业；珠江三角洲是轻工业。</div>
+    </div>
+
+    <!-- 交通 -->
+    <h3>三、交通运输业</h3>
+    <div class="card">
+      <div class="point"><b>定义/地位</b>：交通运输业是经济发展的<b>"先行官"</b>。</div>
+      <table>
+        <tr><th style="width:90px">方式</th><th>突出特点</th><th>适合运输</th></tr>
+        <tr><td><b>铁路</b></td><td>运量大、成本低、适合远程</td><td>长途大批货物、旅客</td></tr>
+        <tr><td><b>公路</b></td><td>灵活机动、"门到门"</td><td>短途、量少、偏远</td></tr>
+        <tr><td><b>水运</b></td><td>运量最大、成本最低、<b>最慢</b></td><td>大宗、远程、不急</td></tr>
+        <tr><td><b>航空</b></td><td><b>最快、最贵</b></td><td>急件、贵重、生鲜</td></tr>
+        <tr><td><b>管道</b></td><td>专门运输气体、液体</td><td>石油、天然气</td></tr>
+      </table>
+      <div class="point"><b>核心数据·铁路干线"五纵三横"</b>：<br>南北（五纵）：<b>京哈—京广、京九、京沪、同蒲—焦柳、宝成—成昆</b>；<br>东西（三横）：<b>京包—包兰、陇海—兰新、沪杭—浙赣—湘黔—贵昆</b>。</div>
+      <div class="point"><b>关键词</b>：先行官、铁路为主、五纵三横。</div>
+      <div class="warn">⚠️ 易错提醒：①"运量最大、最便宜、最慢"是水运（不是铁路）；②"最快最贵"是航空；③铁路"五纵"里京哈—京广是一条纵线，宝成—成昆也是一条。</div>
+      <div class="tip">🧭 举例：运100吨煤炭从山西到上海，选铁路/水运最划算；送急救药品选航空。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4 跨章易混淆大汇总 ============ -->
+<h2 id="mix">4. 跨章易混淆大汇总（所有"容易混"的都归堆在这里）</h2>
+
+<div class="card">
+  <h3>表①：34 个省级行政区构成 + 易混简称对照</h3>
+  <table>
+    <tr><th style="width:200px">构成</th><th>数量</th><th>易混简称（生僻/双简称）</th></tr>
+    <tr><td><b>23 个省</b></td><td>23</td><td>冀(河北)、豫(河南)、鄂(湖北)、赣(江西)、皖(安徽)、闽(福建)、黔/贵(贵州)、滇/云(云南)、陇/甘(甘肃)、秦/陕(陕西)、晋(山西)、鲁(山东)、粤(广东)、川/蜀(四川)、湘(湖南)、黑(黑龙江)、吉(吉林)、辽(辽宁)、苏(江苏)、浙(浙江)、琼(海南)、青(青海)、台(台湾)</td></tr>
+    <tr><td><b>5 个自治区</b></td><td>5</td><td>内蒙古、桂(广西)、宁(宁夏)、新(新疆)、藏(西藏)</td></tr>
+    <tr><td><b>4 个直辖市</b></td><td>4</td><td>京(北京)、津(天津)、沪(上海)、渝(重庆)</td></tr>
+    <tr><td><b>2 个特别行政区</b></td><td>2</td><td>港(香港)、澳(澳门)</td></tr>
+    <tr><td><b>合计</b></td><td><span class="mn">34</span></td><td>口诀：<span class="mn">23省+5区+4市+2特区=34</span></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表②：三级阶梯分界山脉表</h3>
+  <table>
+    <tr><th style="width:140px">阶梯分界</th><th>分界山脉</th></tr>
+    <tr><td>第一、二级阶梯之间</td><td><b>昆仑山 — 祁连山 — 横断山脉</b></td></tr>
+    <tr><td>第二、三级阶梯之间</td><td><b>大兴安岭 — 太行山 — 巫山 — 雪峰山</b></td></tr>
+  </table>
+  <div class="warn">⚠️ 别和"季风区与非季风区分界线"（大—阴—贺—巴—冈）记混，两组线只共一个"大兴安岭"。</div>
+</div>
+
+<div class="card">
+  <h3>表③：南北方（秦岭—淮河）对比表</h3>
+  <table>
+    <tr><th>对比项</th><th>秦岭—淮河以北（北方）</th><th>秦岭—淮河以南（南方）</th></tr>
+    <tr><td>1 月平均气温</td><td><b>＜0℃</b></td><td><b>＞0℃</b></td></tr>
+    <tr><td>年降水量</td><td><b>＜800mm</b></td><td><b>＞800mm</b></td></tr>
+    <tr><td>耕地类型</td><td><b>旱地</b></td><td><b>水田</b></td></tr>
+    <tr><td>主要粮食作物</td><td><b>小麦</b></td><td><b>水稻</b></td></tr>
+    <tr><td>植被类型</td><td>温带落叶阔叶林</td><td>亚热带常绿阔叶林</td></tr>
+  </table>
+  <div class="tip">🧭 秦岭—淮河一线同时是：1月0℃等温线 + 800mm等降水量线 + 南北方分界线，一记三用。</div>
+</div>
+
+<div class="card">
+  <h3>表④：长江 vs 黄河对比表</h3>
+  <table>
+    <tr><th>对比项</th><th>长江</th><th>黄河</th></tr>
+    <tr><td>地位</td><td>长度最长、水量最大、流域最广</td><td>"母亲河"</td></tr>
+    <tr><td>上中游分界城市</td><td><b>宜昌</b></td><td><b>河口</b></td></tr>
+    <tr><td>中下游分界城市</td><td><b>湖口</b></td><td><b>桃花峪</b></td></tr>
+    <tr><td>水能</td><td>上游"<b>水能宝库</b>"</td><td>上游水能丰富</td></tr>
+    <tr><td>主要忧患</td><td>中下游洪涝</td><td>下游"<b>地上河</b>"（含沙量大）</td></tr>
+    <tr><td>治理关键</td><td>防洪</td><td><b>中游水土保持 + 调水调沙</b></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表⑤：内流河 vs 外流河</h3>
+  <table>
+    <tr><th>对比项</th><th>外流河</th><th>内流河</th></tr>
+    <tr><td>分布</td><td>东部（季风区）</td><td>西北内陆</td></tr>
+    <tr><td>最终去向</td><td>注入海洋（多注入太平洋）</td><td>不注入海洋（或消失于荒漠）</td></tr>
+    <tr><td>代表河流</td><td>长江、黄河</td><td><b>塔里木河（我国最大内流河）</b></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表⑥：主要运输方式特点对比</h3>
+  <table>
+    <tr><th>方式</th><th>运量</th><th>速度</th><th>成本</th><th>最适合</th></tr>
+    <tr><td><b>铁路</b></td><td>大</td><td>较快</td><td>较低</td><td>远程大批</td></tr>
+    <tr><td><b>公路</b></td><td>较小</td><td>快</td><td>较高</td><td>灵活机动、短途</td></tr>
+    <tr><td><b>水运</b></td><td><b>最大</b></td><td><b>最慢</b></td><td><b>最低</b></td><td>大宗远程、不急</td></tr>
+    <tr><td><b>航空</b></td><td>小</td><td><b>最快</b></td><td><b>最高</b></td><td>急件、贵重</td></tr>
+    <tr><td><b>管道</b></td><td>连续</td><td>—</td><td>—</td><td>气体、液体专用</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>表⑦：可再生资源 vs 非可再生资源</h3>
+  <table>
+    <tr><th>类型</th><th>特点</th><th>举例</th></tr>
+    <tr><td><b>可再生资源</b></td><td>合理利用下可不断更新、循环使用</td><td>气候、土地、生物、水、太阳能</td></tr>
+    <tr><td><b>非可再生资源</b></td><td>形成慢、用一点少一点、不可再生</td><td>矿产（煤、铁、石油等）</td></tr>
+  </table>
+</div>
+
+<!-- ============ 5 自测 ============ -->
+<h2 id="quiz">5. 自测题（做完点开对答案）</h2>
+
+<details>
+  <summary>第一章自测（疆域·行政区划·人口·民族）</summary>
+  <div class="a">
+    <b>Q1</b> 我国陆地面积约多少、世界第几？→ <span class="right">约 960 万 km²，世界第三（仅次于俄罗斯、加拿大）</span><br>
+    <b>Q2</b> 我国四至点分别是什么？→ <span class="right">南：曾母暗沙；北：漠河以北；东：黑龙江与乌苏里江汇合处；西：帕米尔高原</span><br>
+    <b>Q3</b> 我国的两个内海是？→ <span class="right">渤海、琼州海峡</span><br>
+    <b>Q4</b> 我国人口地理分界线（胡焕庸线）是？→ <span class="right">黑河—腾冲线</span><br>
+    <b>Q5</b> 少数民族中人口最多的是哪个？→ <span class="right">壮族</span>
+  </div>
+</details>
+<details>
+  <summary>第二章自测（地形·气候·河流）</summary>
+  <div class="a">
+    <b>Q1</b> 我国地势特征及三级阶梯分界线？→ <span class="right">西高东低、三级阶梯；一二级：昆仑—祁连—横断；二三级：大兴安岭—太行—巫山—雪峰山</span><br>
+    <b>Q2</b> 1 月 0℃ 等温线和 800mm 等降水量线大致沿哪条线？→ <span class="right">秦岭—淮河一线</span><br>
+    <b>Q3</b> 季风区与非季风区分界线是？→ <span class="right">大兴安岭—阴山—贺兰山—巴颜喀拉山—冈底斯山</span><br>
+    <b>Q4</b> 长江的上中游、中下游分界城市分别是？→ <span class="right">宜昌（上中游）、湖口（中下游）</span><br>
+    <b>Q5</b> 黄河"地上河"出现在哪段、成因？→ <span class="right">下游；含沙量大、泥沙淤积抬升河床</span>
+  </div>
+</details>
+<details>
+  <summary>第三章自测（自然资源·土地·水）</summary>
+  <div class="a">
+    <b>Q1</b> 我国自然资源的基本特征是？→ <span class="right">总量丰富、人均不足</span><br>
+    <b>Q2</b> 我国土地基本国策是？→ <span class="right">十分珍惜、合理利用土地和切实保护耕地</span><br>
+    <b>Q3</b> 解决水资源空间不均、时间不均分别靠什么？→ <span class="right">空间不均→跨流域调水（南水北调）；时间不均→兴修水库</span><br>
+    <b>Q4</b> 南水北调三线各自的起点/依托是？→ <span class="right">东线利用京杭运河；中线引丹江口水库；西线从长江上游调水</span>
+  </div>
+</details>
+<details>
+  <summary>第四章自测（农业·工业·交通）</summary>
+  <div class="a">
+    <b>Q1</b> 国民经济的基础、主导、先行官分别指什么产业？→ <span class="right">农业是基础、工业是主导、交通运输业是先行官</span><br>
+    <b>Q2</b> "南稻北麦""东耕西牧"以什么为界、如何分布？→ <span class="right">南稻北麦以秦岭—淮河为界；东耕西牧：东部种植业、西部畜牧业</span><br>
+    <b>Q3</b> 四大工业基地及其突出特点？→ <span class="right">辽中南（重工业）、京津唐（综合性）、沪宁杭（最大综合性）、珠江三角洲（轻工业）</span><br>
+    <b>Q4</b> 铁路"五纵"包括哪些？→ <span class="right">京哈—京广、京九、京沪、同蒲—焦柳、宝成—成昆</span>
+  </div>
+</details>
+<details>
+  <summary>综合易混自测（专治混淆）</summary>
+  <div class="a">
+    <b>Q1</b> 长江和黄河的上中下游分界城市有何不同？→ <span class="right">长江：宜昌/湖口；黄河：河口/桃花峪</span><br>
+    <b>Q2</b> 外流河与内流河的代表及分布？→ <span class="right">外流河在东部（长江、黄河），内流河在西北（塔里木河，最大内流河）</span><br>
+    <b>Q3</b> 两组阶梯分界山脉 vs 季风区分界线，共同点是什么？→ <span class="right">只共"大兴安岭"；季风线另含阴山、贺兰山、巴颜喀拉山、冈底斯山</span><br>
+    <b>Q4</b> 可再生与非可再生资源各举两例？→ <span class="right">可再生：水、森林、太阳能；非可再生：煤、石油、铁等矿产</span><br>
+    <b>Q5</b> 五种运输方式各自最突出的一点？→ <span class="right">铁路量大成本低；公路灵活机动；水运最大最慢最便宜；航空最快最贵；管道专运气体液体</span>
+  </div>
+</details>
+
+<!-- ============ 6 模板 ============ -->
+<h2 id="tpl">6. 框架练习模板（自己动手搭，才会真会）</h2>
+<div class="card">
+  <div class="ok">📝 用法：拿一张白纸，按下面模板默填任意一节。能填出 4 格 = 过关；填不出哪格就回去翻第3节对应章。</div>
+  <table>
+    <tr><th style="width:90px">要素</th><th>你填：第____章《________》第____节</th></tr>
+    <tr><td><b>① 位置</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>② 特征</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>③ 分布</b></td><td style="height:34px"></td></tr>
+    <tr><td><b>④ 问题/对策</b></td><td style="height:34px"></td></tr>
+  </table>
+  <div class="tip">🧭 进阶练：用第4节的对比表，自己闭卷默写"表② 三级阶梯分界"和"表③ 秦岭—淮河南北对比"全部内容。默写全对，八上选择题基本不丢分。</div>
+</div>
+
+<div class="foot">
+  资料说明：本资料依据湘教版八年级上册地理（四章结构）系统整理，覆盖全学期，以"框架学习法"为主线（空间逻辑链骨架 + 章节主题纵线 + 四要素填充 + 对比表防混淆），针对"不会搭框架、知识点易混淆"的核心问题设计。文中数据均依据教材要点，若学校教学进度或教材版本有差异，请以课本为准。
+</div>
+
+</div>
+</body>
+</html>
