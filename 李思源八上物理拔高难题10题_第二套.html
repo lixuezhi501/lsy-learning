@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源 · 八上物理拔高难题 10 题（第二套·人教版）</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;}
+  .wrap{max-width:960px;margin:0 auto;padding:18px 16px 70px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--purple);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top;}
+  th{background:#f5f3ff;color:var(--purple);font-weight:700;}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:11px 14px;border-radius:8px;margin:10px 0;font-size:13.5px;}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px;}
+  .btn{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .btn.ghost{background:#f5f3ff;color:var(--purple);}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:16px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden;}
+  .qhead{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:11px 16px;background:#f5f3ff;border-bottom:1px solid var(--line);}
+  .no{background:var(--purple);color:#fff;font-weight:800;border-radius:8px;padding:2px 10px;font-size:14px;}
+  .tag{background:#ede9fe;color:#6d28d9;border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700;}
+  .stars{color:#f59e0b;font-size:13px;letter-spacing:1px;margin-left:auto;}
+  .qbody{padding:14px 16px;}
+  .qbody p{margin:6px 0;}
+  .ask{margin:6px 0 6px 2px;}
+  details.sol{margin:12px 16px 16px;border:1px solid #ddd6fe;border-radius:10px;background:#fcfbff;}
+  details.sol>summary{cursor:pointer;padding:9px 14px;font-weight:800;color:var(--purple);font-size:14px;list-style:none;}
+  details.sol>summary::-webkit-details-marker{display:none;}
+  details.sol>summary::before{content:"▶ ";font-size:11px;color:var(--purple);}
+  details.sol[open]>summary::before{content:"▼ ";}
+  .sbody{padding:2px 14px 14px;border-top:1px dashed #ddd6fe;}
+  .step{margin:9px 0;padding-left:10px;border-left:3px solid #c4b5fd;font-size:13.8px;}
+  .ans{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px 12px;margin:12px 0 6px;font-size:14px;font-weight:700;color:#15803d;}
+  .caution{background:#fef2f2;border-left:4px solid var(--red);border-radius:8px;padding:9px 12px;margin:10px 0 4px;font-size:13.3px;}
+  .caution b{color:var(--red);}
+  .figwrap{text-align:center;margin:10px 0;}
+  .kv{display:inline-block;background:#ede9fe;border-radius:6px;padding:1px 8px;font-weight:700;color:var(--purple);margin:1px 3px;}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  @media print{
+    body{background:#fff;}
+    .btn,.bar{display:none;}
+    .qcard,.card{box-shadow:none;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>李思源 · 八上物理拔高难题 10 题（第二套）</h1>
+<div class="sub">人教版八年级上册 ｜ 已学 5 章（机械运动 / 声现象 / 物态变化 / 光现象 / 透镜及其应用）｜ 比第一套更难：多步推理 · 逆向求解 · 相对运动 · 图像分析 · 实验情境</div>
+
+<div class="card">
+  <b>📋 考点分布（与第一套不重复）</b>
+  <table>
+    <tr><th style="width:44px">题</th><th style="width:214px">考点</th><th style="width:92px">难度</th><th>拔高在哪里</th></tr>
+    <tr><td>1</td><td>机械运动 · 相遇追及（往返奔跑）</td><td>★★★★☆</td><td>跳出"来回跑"细节，抓住总时间</td></tr>
+    <tr><td>2</td><td>机械运动 · 通信员队伍往返</td><td>★★★★★</td><td>追及 + 相遇两种相对速度组合</td></tr>
+    <tr><td>3</td><td>机械运动 · s-t 图像综合</td><td>★★★★☆</td><td>读斜率、辨方向、算总路程（非位移）</td></tr>
+    <tr><td>4</td><td>声现象 · 不同介质声速差</td><td>★★★★★</td><td>同一段距离、两个速度列时间差方程</td></tr>
+    <tr><td>5</td><td>声现象 · 回声区分条件 + 背离运动</td><td>★★★★☆</td><td>最小距离 17 m + 背离时声程加车程</td></tr>
+    <tr><td>6</td><td>物态变化 · 不准温度计</td><td>★★★★☆</td><td>均匀刻度的比例换算（双向）</td></tr>
+    <tr><td>7</td><td>物态变化 · 熔化 + 沸腾综合</td><td>★★★★★</td><td>读数据表判状态、气压对沸点、质量与熔点无关</td></tr>
+    <tr><td>8</td><td>光现象 · 平面镜看全身</td><td>★★★★★</td><td>用对称性算"最小镜长"和悬挂高度</td></tr>
+    <tr><td>9</td><td>透镜 · 焦距范围反推 + 动态成像</td><td>★★★★★</td><td>不等式定范围、物距变了光屏怎么移</td></tr>
+    <tr><td>10</td><td>透镜 · 近视镜矫正模拟</td><td>★★★★☆</td><td>加凹/凸透镜后像距怎么变，联系真实眼睛</td></tr>
+  </table>
+  <div class="tip">💡 <b>用法建议</b>：限时 75 分钟闭卷完成，再点开答案逐题订正。这套的每题都至少两步推理，卡住时先问自己"<b>这道题的主线是哪一段路程／哪一段时间</b>"，不要急着套公式。全对说明八上力学与光学已经打通。</div>
+  <div class="bar">
+    <button class="btn" onclick="document.querySelectorAll('details.sol').forEach(d=>d.open=true)">展开全部答案</button>
+    <button class="btn ghost" onclick="document.querySelectorAll('details.sol').forEach(d=>d.open=false)">收起全部答案</button>
+    <button class="btn ghost" onclick="window.print()">打印 / 导出 PDF</button>
+  </div>
+</div>
+
+<!-- ================= 题1 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 1 题</span><span class="tag">机械运动 · 相遇追及</span><span class="stars">★★★★☆</span></div>
+  <div class="qbody">
+    <p>甲、乙两人相距 1200 m，同时相向而行，甲的速度是 4 m/s，乙的速度是 6 m/s。他们带的一只小狗以 10 m/s 的速度在两人之间<b>来回奔跑</b>：遇到乙立刻掉头跑向甲，遇到甲又立刻掉头跑向乙，如此往复，直到两人相遇为止。</p>
+    <div class="ask">(1) 甲、乙经过多长时间相遇？</div>
+    <div class="ask">(2) 小狗在这段时间里一共跑了多少路程？</div>
+    <div class="ask">(3) 小狗第一次从甲处跑到乙处，用了多长时间？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>(1) 先求相遇时间</b>：两人相向而行，<b>相对速度</b> = 4 + 6 = 10 m/s<br>
+        t = 1200 ÷ 10 = <b>120 s</b></div>
+      <div class="step"><b>(2) 小狗跑的路程（本题精髓）</b>：小狗一直在跑，<b>跑的时间就是两人相遇的时间 120 s</b>（中途掉头不占用时间）。<br>
+        所以 s狗 = 10 × 120 = <b>1200 m</b>。<br>
+        💡 千万别去一段一段地算"第一次跑多远、第二次跑多远……"——那是无限长的过程，算不完。<b>换一个视角：只盯住"总时间"</b>，问题一步解决。</div>
+      <div class="step"><b>(3) 第一次相遇（小狗追乙）</b>：出发时小狗在甲身边、乙在 1200 m 外，两者<b>相向</b>而行，相对速度 = 10 + 6 = 16 m/s<br>
+        t₁ = 1200 ÷ 16 = <b>75 s</b><br>
+        验算：75 s 内甲走 300 m、乙走 450 m，两人还相距 1200 − 300 − 450 = 450 m；小狗跑了 750 m，正好到达乙的位置（乙从 1200 m 处走到 750 m 处）✓</div>
+      <div class="ans">答：(1) 120 s；(2) 1200 m；(3) 75 s。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 第 (2) 问去逐段累加小狗路程——这是本题最大的陷阱，正确做法是<b>总时间 × 速度</b>。② 第 (3) 问把"小狗追乙"当成追及问题用 10 − 6，实际两者<b>相向</b>而行，要用 10 + 6。③ 混淆"小狗与谁同向、与谁相向"：狗从甲出发奔向乙，与乙相向（加），与甲同向（减，若问追甲）。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题2 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 2 题</span><span class="tag">机械运动 · 通信员往返</span><span class="stars">★★★★★</span></div>
+  <div class="qbody">
+    <p>一列队伍长 300 m，正以 1 m/s 的速度匀速前进。一名通信员从<b>队尾</b>以 3 m/s 的速度跑到<b>队首</b>传达命令，传达完立即以同样大小的速度返回队尾。</p>
+    <div class="ask">(1) 通信员从队尾跑到队首用时多少？</div>
+    <div class="ask">(2) 从队首返回队尾用时多少？</div>
+    <div class="ask">(3) 通信员往返一共跑了多少路程？</div>
+    <div class="ask">(4) 通信员回到队尾时，整个队伍向前移动了多少米？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>关键：以"队伍"为参照看相对速度</b><br>
+        · 从队尾到队首：通信员和队伍<b>同向</b>，通信员要"追上"队首 → 相对速度 = 3 − 1 = <b>2 m/s</b><br>
+        · 从队首到队尾：通信员和队伍<b>反向</b>，通信员要"迎上"队尾 → 相对速度 = 3 + 1 = <b>4 m/s</b></div>
+      <div class="step"><b>(1) 去程（追及）</b>：t₁ = 300 ÷ 2 = <b>150 s</b></div>
+      <div class="step"><b>(2) 回程（相遇）</b>：t₂ = 300 ÷ 4 = <b>75 s</b></div>
+      <div class="step"><b>(3) 通信员路程</b>：注意要用通信员对<b>地面</b>的速度 3 m/s（不是相对速度）<br>
+        t总 = 150 + 75 = 225 s<br>
+        s = 3 × 225 = <b>675 m</b></div>
+      <div class="step"><b>(4) 队伍移动距离</b>：s队 = 1 × 225 = <b>225 m</b><br>
+        验算：150 s 时通信员跑 450 m，队首原在 300 m 处、此时到 300+150=450 m 处，正好追上 ✓；再过 75 s，通信员从 450 m 往回跑 225 m 到 225 m 处，队尾从 0 前进 225 m 也到 225 m 处，正好相遇 ✓</div>
+      <div class="ans">答：(1) 150 s；(2) 75 s；(3) 675 m；(4) 225 m。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 去程、回程都用 300÷(3−1) 或都用 300÷(3+1)——<b>同向追及用减、反向相遇用加</b>，这是本题的核心。② 第 (3) 问用相对速度 2 或 4 去乘时间求通信员路程——求"某人跑了多远"必须用他对<b>地面</b>的速度。③ 忘记队伍也在动，把 300 m 当成固定距离直接除 3。④ 口诀：<b>同向追、速度相减；相向遇、速度相加</b>。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题3 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 3 题</span><span class="tag">机械运动 · s-t 图像</span><span class="stars">★★★★☆</span></div>
+  <div class="qbody">
+    <p>一辆小车在平直公路上运动，下图是它的<b>路程—时间（s-t）图像</b>，横轴为时间 t（单位 s），纵轴为路程 s（单位 m）。</p>
+    <div class="figwrap">
+      <svg viewBox="0 0 400 260" style="max-width:430px;width:100%;height:auto;background:#fff;border:1px solid #e5e7eb;border-radius:8px;">
+        <line x1="50" y1="220" x2="362" y2="220" stroke="#334155" stroke-width="1.5"/>
+        <line x1="50" y1="220" x2="50" y2="30" stroke="#334155" stroke-width="1.5"/>
+        <text x="44" y="236" font-size="11" fill="#475569">0</text>
+        <text x="104" y="236" font-size="11" fill="#475569">2</text>
+        <text x="164" y="236" font-size="11" fill="#475569">4</text>
+        <text x="224" y="236" font-size="11" fill="#475569">6</text>
+        <text x="284" y="236" font-size="11" fill="#475569">8</text>
+        <text x="340" y="236" font-size="11" fill="#475569">10</text>
+        <text x="354" y="252" font-size="11" fill="#475569">t/s</text>
+        <text x="42" y="224" font-size="11" fill="#475569">0</text>
+        <text x="26" y="164" font-size="11" fill="#475569">10</text>
+        <text x="26" y="104" font-size="11" fill="#475569">20</text>
+        <text x="26" y="44" font-size="11" fill="#475569">30</text>
+        <text x="10" y="26" font-size="11" fill="#475569">s/m</text>
+        <line x1="50" y1="160" x2="350" y2="160" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="50" y1="100" x2="350" y2="100" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
+        <polyline points="50,220 110,172 200,172 290,64 350,136" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <circle cx="50" cy="220" r="3.5" fill="#7c3aed"/>
+        <circle cx="110" cy="172" r="3.5" fill="#dc2626"/>
+        <circle cx="200" cy="172" r="3.5" fill="#dc2626"/>
+        <circle cx="290" cy="64" r="3.5" fill="#dc2626"/>
+        <circle cx="350" cy="136" r="3.5" fill="#dc2626"/>
+        <text x="56" y="212" font-size="12" fill="#dc2626" font-weight="700">A</text>
+        <text x="112" y="164" font-size="12" fill="#dc2626" font-weight="700">B</text>
+        <text x="202" y="164" font-size="12" fill="#dc2626" font-weight="700">C</text>
+        <text x="292" y="56" font-size="12" fill="#dc2626" font-weight="700">D</text>
+        <text x="352" y="130" font-size="12" fill="#dc2626" font-weight="700">E</text>
+      </svg>
+    </div>
+    <div class="ask">(1) AB 段小车处于什么状态？</div>
+    <div class="ask">(2) 分别求 OA 段和 CD 段的速度大小。</div>
+    <div class="ask">(3) DE 段小车的运动方向与前几段相比有什么不同？为什么？</div>
+    <div class="ask">(4) 小车在 10 s 内通过的总路程是多少？全程的平均速度是多少？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>读图方法</b>：s-t 图像中，<b>斜率 = 速度</b>；水平线表示静止；<b>向下倾斜</b>表示往回走（反向运动）。</div>
+      <div class="step"><b>(1) AB 段（2~5 s）</b>：s 一直是 8 m 不变 → <b>静止</b>。</div>
+      <div class="step"><b>(2) 速度</b>：<br>
+        OA 段：v = (8 − 0) ÷ (2 − 0) = <b>4 m/s</b><br>
+        CD 段：v = (26 − 8) ÷ (8 − 5) = 18 ÷ 3 = <b>6 m/s</b></div>
+      <div class="step"><b>(3) DE 段（8~10 s）</b>：s 由 26 m <b>减小</b>到 14 m，说明小车<b>掉头往回走</b>，与前几段方向相反。<br>
+        速度大小 = (26 − 14) ÷ (10 − 8) = 12 ÷ 2 = <b>6 m/s</b>（方向相反，所以若规定原方向为正，应记作 −6 m/s）。</div>
+      <div class="step"><b>(4) 总路程与平均速度</b>：注意"路程"要把倒退的那段也算上<br>
+        OA 走 8 m；AB 走 0 m；CD 走 18 m；DE 走 12 m<br>
+        s总 = 8 + 0 + 18 + 12 = <b>38 m</b><br>
+        v平均 = 38 ÷ 10 = <b>3.8 m/s</b></div>
+      <div class="ans">答：(1) 静止；(2) OA 段 4 m/s，CD 段 6 m/s；(3) DE 段反向（往回走），速度大小 6 m/s；(4) 总路程 38 m，平均速度 3.8 m/s。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 把 AB 段水平线读成"匀速运动"——<b>水平 = 静止</b>。② 看到 DE 段 s 变小就以为"速度变小了"——变的是<b>方向</b>，速度大小是 6 m/s，并不小。③ 第 (4) 问拿 10 s 末的位置 14 m 去除以 10 得 1.4 m/s——那是"位移÷时间"，而初中物理平均速度用<b>总路程</b>÷总时间，要 38÷10=3.8。④ 读图时先看坐标轴单位（本题 s 的单位是 m，t 是 s）。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题4 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 4 题</span><span class="tag">声现象 · 不同介质声速差</span><span class="stars">★★★★★</span></div>
+  <div class="qbody">
+    <p>在一根很长的钢管一端敲击一下，站在另一端的人会听到<b>两次</b>响声：第一次由钢管传来，第二次由空气传来。已知声音在空气中的传播速度为 340 m/s，在钢管中的传播速度为 5200 m/s。</p>
+    <div class="ask">(1) 为什么能听到两次响声？哪一次先到？</div>
+    <div class="ask">(2) 若两次响声的时间间隔是 0.5 s，求这根钢管的长度（结果保留整数）。</div>
+    <div class="ask">(3) 若人耳要分辨出两次响声，间隔至少 0.1 s，那么钢管至少要多长？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>(1) 原因</b>：声音在不同介质中传播<b>速度不同</b>，钢管中（5200 m/s）远快于空气中（340 m/s），所以沿钢管传来的声音<b>先到</b>，沿空气传来的后到。</div>
+      <div class="step"><b>(2) 列时间差方程</b>：设管长 L<br>
+        空气中用时 t₁ = L / 340；钢管中用时 t₂ = L / 5200<br>
+        t₁ − t₂ = 0.5<br>
+        L × (1/340 − 1/5200) = 0.5<br>
+        括号内 = (5200 − 340) ÷ (340 × 5200) = 4860 ÷ 1768000 ≈ 0.002749<br>
+        L = 0.5 ÷ 0.002749 ≈ <b>182 m</b><br>
+        验算：182÷340 ≈ 0.535 s，182÷5200 ≈ 0.035 s，差 ≈ 0.500 s ✓</div>
+      <div class="step"><b>(3) 最小可分辨长度</b>：把间隔换成 0.1 s<br>
+        L = 0.1 ÷ 0.002749 ≈ <b>36 m</b><br>
+        结论：管子太短（比如几米）时，两次声音间隔不到 0.1 s，人耳就分不出，只能听到一次"加强"的响声。</div>
+      <div class="ans">答：(1) 声速在钢中大于空气中，故钢管传来的先到；(2) 约 182 m；(3) 约 36 m。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 列成 340t + 5200t = L 这种乱式——两列声波走的是<b>同一段距离 L</b>，只是速度不同、时间不同。② 把"0.5 s"当成声音在钢管中传播的时间——它是<b>两次到达的时间差</b>。③ 算完不验算，出现几百米甚至上千米的离谱结果。④ 记住通用模板：<b>L/v慢 − L/v快 = Δt</b>。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题5 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 5 题</span><span class="tag">声现象 · 回声条件 + 背离运动</span><span class="stars">★★★★☆</span></div>
+  <div class="qbody">
+    <p>已知人耳要区分原声和回声，两者到达的时间间隔至少要 0.1 s；空气中声速取 340 m/s。</p>
+    <div class="ask">(1) 人要站在距障碍物至少多远，才可能听到自己的回声？</div>
+    <div class="ask">(2) 一辆汽车以 20 m/s 的速度<b>背离</b>山崖匀速行驶，在某一位置鸣笛，2 s 后司机听到回声。求鸣笛时汽车距山崖多远？</div>
+    <div class="ask">(3) 为什么第 (2) 问的声程是"2L + 车走的距离"，而不是"2L − 车走的距离"？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>(1) 回声最小距离</b>：声音要走一个来回（2s），所以<br>
+        2s ≥ v声 × 0.1 = 340 × 0.1 = 34 m<br>
+        s ≥ <b>17 m</b></div>
+      <div class="step"><b>(2) 背离山崖的回声</b>：设鸣笛处距山崖为 L。<br>
+        这 2 s 内车又<b>远离</b>山崖行驶了 s车 = 20 × 2 = 40 m。<br>
+        声音去程走 L 到山崖；回程要追赶已经跑远的车，走的是 L + 40。<br>
+        列式：L + (L + 40) = 340 × 2 = 680<br>
+        2L = 640 → L = <b>320 m</b></div>
+      <div class="step"><b>(3) 道理</b>：车<b>背离</b>山崖时，司机听到回声的位置比鸣笛位置更远，所以声音回程比去程<b>多走</b>了车跑的那段，声程 = 2L + s车；若车<b>驶向</b>山崖，听到回声的位置更近，回程<b>少走</b>，声程 = 2L − s车。</div>
+      <div class="ans">答：(1) 至少 17 m；(2) 320 m；(3) 背离时回程距离变长，故为 2L + s车；驶向时为 2L − s车。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 第 (1) 问忘记声音走"来回"，直接用 340×0.1=34 m 作答——要再除以 2。② 第 (2) 问套用第一套"驶向山崖"的公式 2L − s车，结果算成 360 m，方向判断反了。③ 判断车是"驶向"还是"背离"时只看题目字面，不画草图——建议每次画一条线标出山崖、鸣笛点、2 s 后车的位置。④ 两个模型的口诀：<b>驶向减、背离加</b>（指声程中车走的那一段）。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题6 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 6 题</span><span class="tag">物态变化 · 不准温度计</span><span class="stars">★★★★☆</span></div>
+  <div class="qbody">
+    <p>有一支刻度均匀但<b>示数不准</b>的温度计。把它插入冰水混合物中，示数为 4 ℃；插入标准大气压下的沸水中，示数为 104 ℃。</p>
+    <div class="ask">(1) 这支温度计的每一小格（示数 1 ℃）实际代表多少摄氏度？</div>
+    <div class="ask">(2) 用它测某杯温水，示数为 52 ℃，这杯水的实际温度是多少？</div>
+    <div class="ask">(3) 若实际气温是 30 ℃，这支温度计的示数会是多少？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>第 0 步·抓住"刻度均匀"</b>：示数与实际温度之间是<b>线性关系</b>，可以用比例换算。<br>
+        真实的 0 ℃ 对应示数 4；真实的 100 ℃ 对应示数 104。</div>
+      <div class="step"><b>(1) 每格代表的实际温度</b>：<br>
+        示数从 4 到 104 共 100 格，对应实际从 0 ℃ 到 100 ℃（差 100 ℃）<br>
+        每格 = 100 ÷ (104 − 4) = <b>1 ℃</b>（正好 1:1，本题数字特意设计整齐）</div>
+      <div class="step"><b>(2) 由示数求实际</b>：<br>
+        示数 52 比"冰水点"4 多了 52 − 4 = 48 格<br>
+        实际温度 = 0 + 48 × 1 = <b>48 ℃</b></div>
+      <div class="step"><b>(3) 由实际求示数（反向）</b>：<br>
+        实际 30 ℃ 相当于从冰水点升高 30 ℃，需要 30 ÷ 1 = 30 格<br>
+        示数 = 4 + 30 = <b>34 ℃</b></div>
+      <div class="ans">答：(1) 每格代表实际 1 ℃；(2) 实际 48 ℃；(3) 示数 34 ℃。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 直接把示数 52 ℃ 当实际温度——这支表在 0 ℃ 时就偏 4 度，必须减掉"零点偏移"。② 通用公式记牢：<b>实际温度 = (示数 − 冰水示数) × 100 ÷ (沸水示数 − 冰水示数)</b>；反向则 <b>示数 = 冰水示数 + 实际温度 × (沸水示数 − 冰水示数) ÷ 100</b>。③ 本题数字恰好使每格=1 ℃，若换成"冰水 5 ℃、沸水 95 ℃"这类数据，每格就不是 1 ℃ 了，一定要先把比例算出来。④ 注意"示数"和"实际"两个词不要看反。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题7 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 7 题</span><span class="tag">物态变化 · 熔化 + 沸腾综合</span><span class="stars">★★★★★</span></div>
+  <div class="qbody">
+    <p>用相同的热源给一定质量的冰加热，并记录温度随时间的变化，数据如下表：</p>
+    <table>
+      <tr><th>时间/min</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+      <tr><th>温度/℃</th><td>−20</td><td>−10</td><td>0</td><td>0</td><td>0</td><td>0</td><td>20</td><td>40</td><td>60</td><td>80</td><td>98</td><td>98</td><td>98</td><td>98</td></tr>
+    </table>
+    <div class="ask">(1) 冰的熔点是多少？熔化过程持续了几分钟？</div>
+    <div class="ask">(2) 第 4 min 时，物质处于什么状态？第 12 min 时呢？</div>
+    <div class="ask">(3) 水沸腾时温度是多少？为什么低于 100 ℃？</div>
+    <div class="ask">(4) 熔化阶段和沸腾阶段温度都不变，还需要继续加热吗？为什么？</div>
+    <div class="ask">(5) 若把冰的质量增加一倍，熔点和沸点会不会变？熔化时间会怎样？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>(1) 熔点与熔化时间</b>：2~5 min 温度停在 0 ℃ → 有固定熔点，是晶体；<b>熔点 0 ℃</b>。<br>
+        熔化从第 2 min 开始到第 5 min 结束，持续 5 − 2 = <b>3 min</b>。</div>
+      <div class="step"><b>(2) 状态判断</b>：<br>
+        第 4 min 落在熔化过程中 → <b>固液共存态</b>（冰和水同时存在）；<br>
+        第 12 min 落在沸腾过程中 → <b>液态水不断变成水蒸气，是液气共存</b>（不是纯液态）。</div>
+      <div class="step"><b>(3) 沸点 98 ℃</b>：10~13 min 温度保持 98 ℃ → 沸点为 98 ℃。<br>
+        低于 100 ℃ 说明当地<b>气压低于 1 标准大气压</b>（比如海拔较高）。液体的沸点随气压降低而降低。</div>
+      <div class="step"><b>(4) 必须继续吸热</b>：克服"温度不变＝不吸热"的直觉误区——<br>
+        熔化阶段吸热用于<b>破坏晶体结构、完成固态变液态</b>；<br>
+        沸腾阶段吸热用于<b>使液体变成气体（汽化）</b>。<br>
+        这两段吸收的热量都没有用来升高温度，所以温度保持不变；一旦停止加热，熔化或沸腾就会停止。</div>
+      <div class="step"><b>(5) 质量变化的影响</b>：<br>
+        熔点和沸点是物质的<b>特性</b>，与质量多少<b>无关</b> → 仍为 0 ℃ 和 98 ℃；<br>
+        但质量加倍，熔化需要吸收的热量加倍，在热源相同的情况下，<b>熔化时间变长</b>（约变为 2 倍）。</div>
+      <div class="ans">答：(1) 0 ℃，3 min；(2) 固液共存态，液气共存（沸腾中）；(3) 98 ℃，当地气压低于标准大气压；(4) 要继续吸热，热量用于物态变化而非升温；(5) 熔沸点不变，熔化时间变长。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 熔化时间答 5 min（那是"从开始加热到熔化结束"），正确是水平段本身的长度 5−2=3 min。② 认为"温度不变所以不吸热"——这是物态变化最经典的错。③ 把沸腾中的物质说成"液态"——沸腾时液体内部和表面同时汽化，是液、气共存。④ 认为质量越大熔点越低——熔点是物质特性，只与物质种类和气压有关。⑤ 看到 98 ℃ 就怀疑数据错了——气压低沸点就低，这是正常现象。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题8 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 8 题</span><span class="tag">光现象 · 平面镜看全身</span><span class="stars">★★★★★</span></div>
+  <div class="qbody">
+    <p>小明身高 1.7 m，眼睛位于头顶下方 0.1 m 处（即眼睛离地面 1.6 m）。他想在竖直悬挂的平面镜中看到自己的全身。</p>
+    <div class="ask">(1) 这面镜子至少要多长？</div>
+    <div class="ask">(2) 镜子的下边缘应挂在离地多高的位置？</div>
+    <div class="ask">(3) 如果他后退几米，镜子的最小长度会不会变？为什么？</div>
+    <div class="ask">(4) 若镜子只有 0.6 m 长，他后退很远能看到全身吗？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>解题原理</b>：要看到身体某部位，该部位发出的光经镜面反射后必须能进入眼睛。由平面镜成像的<b>对称性</b>，只需连接"眼睛"与"该部位的像"，连线与镜面的交点就是所需镜面的边缘位置。</div>
+      <div class="step"><b>(1) 镜子上边缘</b>：要看头顶，镜面最高点位于<b>眼睛与头顶的中点</b>高度<br>
+        h上 = (1.6 + 1.7) ÷ 2 = <b>1.65 m</b><br>
+        <b>镜子下边缘</b>：要看脚，镜面最低点位于<b>眼睛与脚底的中点</b>高度<br>
+        h下 = (1.6 + 0) ÷ 2 = <b>0.80 m</b><br>
+        镜长 = 1.65 − 0.80 = <b>0.85 m</b>（恰好是身高 1.7 m 的一半）</div>
+      <div class="step"><b>(2) 悬挂高度</b>：下边缘离地 <b>0.80 m</b>（上边缘离地 1.65 m）。</div>
+      <div class="step"><b>(3) 后退后不变</b>：平面镜成像<b>像与物等大、像距等于物距</b>。人后退时，人和像都离镜更远，但眼睛与身体各部位像的<b>相对位置比例不变</b>，所需镜面仍为身高的一半 → <b>0.85 m 不变</b>。<br>
+        （常见错觉："站远了镜子可以小一点"——错，站远只是看起来像变小，所需镜长不变。）</div>
+      <div class="step"><b>(4) 不能</b>：0.6 m &lt; 0.85 m，<b>无论站多远都看不到完整全身</b>。因为镜长不够，头顶或脚反射的光无法进入眼睛；后退只会让像看起来更小，并不能改变所需镜面的比例。解决办法是换更长的镜子，或借助另一面镜子多次反射。</div>
+      <div class="ans">答：(1) 至少 0.85 m；(2) 下边缘离地 0.80 m；(3) 不变，仍为 0.85 m；(4) 不能，站多远都看不到全身。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 把镜长算成身高 1.7 m——那是"人站在镜前看自己的像"最常见的错，正确是<b>身高的一半</b>。② 认为后退可以省镜子——不能。③ 忽略眼睛不在头顶（本题眼睛离地 1.6 m），直接把镜子上边缘挂在 1.7 m 处——要用中点公式。④ 记结论：<b>看全身，镜长 = 身高的一半，与距离无关</b>。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题9 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 9 题</span><span class="tag">透镜 · 焦距范围 + 动态成像</span><span class="stars">★★★★★</span></div>
+  <div class="qbody">
+    <p>用一个凸透镜做成像实验。</p>
+    <div class="ask">(1) 把物体放在距透镜 20 cm 处，光屏上得到<b>放大的实像</b>。求焦距 f 的取值范围。</div>
+    <div class="ask">(2) 若此时光屏距透镜 30 cm，求焦距 f 的具体数值，并说明像的性质。</div>
+    <div class="ask">(3) 保持透镜和光屏位置不动，把物体移到距透镜 15 cm 处，光屏上还能得到清晰的像吗？若不能，光屏应向哪个方向移动、移到多远？</div>
+    <div class="ask">(4) 若把物体移到距透镜 10 cm 处，成什么像？能否用光屏承接？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>工具</b>：成像公式 <span class="kv">1/f = 1/u + 1/v</span>；性质判断：<br>
+        u &gt; 2f → 倒立缩小实像；u = 2f → 倒立等大实像；f &lt; u &lt; 2f → 倒立放大实像；u = f → 不成像；u &lt; f → 正立放大虚像。</div>
+      <div class="step"><b>(1) 焦距范围</b>：成放大实像要求 f &lt; u &lt; 2f，这里 u = 20 cm<br>
+        即 f &lt; 20 且 20 &lt; 2f → f &lt; 20 且 f &gt; 10<br>
+        所以 <b>10 cm &lt; f &lt; 20 cm</b></div>
+      <div class="step"><b>(2) 具体焦距</b>：1/f = 1/20 + 1/30 = 3/60 + 2/60 = 5/60 = 1/12 → <b>f = 12 cm</b><br>
+        检验：f=12，2f=24，u=20 满足 12 &lt; 20 &lt; 24 → <b>倒立、放大的实像</b> ✓（与题设一致）</div>
+      <div class="step"><b>(3) 物距变为 15 cm</b>：1/v = 1/f − 1/u = 1/12 − 1/15 = 5/60 − 4/60 = 1/60 → v = <b>60 cm</b><br>
+        原来光屏在 30 cm 处，现在像成在 60 cm 处 → <b>光屏上不清晰</b>；应将光屏<b>向远离透镜的方向移动，移到距透镜 60 cm 处</b>。<br>
+        这正体现了规律：<b>成实像时，物近像远像变大</b>（物距 20→15 减小，像距 30→60 增大）。</div>
+      <div class="step"><b>(4) u = 10 cm</b>：正好等于焦距 f = 10 cm → 物体在焦点上，折射光线<b>平行射出，不能成像</b>，光屏上接不到像。（若 u &lt; f 则成正立放大虚像，同样不能用光屏承接。）</div>
+      <div class="ans">答：(1) 10 cm &lt; f &lt; 20 cm；(2) f=12 cm，倒立放大实像；(3) 不清晰，光屏需远离透镜移到 60 cm 处；(4) 不成像，光屏接不到。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 第 (1) 问只写 f &lt; 20，漏掉 f &gt; 10——放大实像必须同时满足两个不等式。② 第 (3) 问把"物近像远"记反，答成光屏靠近透镜。③ 第 (3) 问靠"猜"移动方向而不算 v——凡是能算的题都要算出来验证。④ 混淆 u = f（不成像）与 u &lt; f（成虚像）：焦点上不成像，焦点以内成虚像。⑤ 公式计算时忘记统一单位（本题都是 cm，可以直接算）。</div>
+    </div>
+  </details>
+</div>
+
+<!-- ================= 题10 ================= -->
+<div class="qcard">
+  <div class="qhead"><span class="no">第 10 题</span><span class="tag">透镜 · 近视镜矫正模拟</span><span class="stars">★★★★☆</span></div>
+  <div class="qbody">
+    <p>在"探究凸透镜成像规律"的实验中，小明用焦距 10 cm 的凸透镜模拟眼睛的晶状体，用光屏模拟视网膜。他把蜡烛放在距透镜 25 cm 处，在光屏上得到了清晰的像。</p>
+    <div class="ask">(1) 此时像距约是多少？像的性质是什么？</div>
+    <div class="ask">(2) 保持蜡烛和透镜不动，在蜡烛和透镜之间放一副<b>近视眼镜</b>（凹透镜），光屏上的像变模糊了。应将光屏向哪个方向移动才能重新得到清晰的像？为什么？</div>
+    <div class="ask">(3) 若改放一副<b>老花镜</b>（凸透镜），光屏又该向哪个方向移动？</div>
+    <div class="ask">(4) 结合实验说明：近视眼是怎么形成的？用什么透镜矫正？</div>
+  </div>
+  <details class="sol"><summary>解题思路与答案</summary>
+    <div class="sbody">
+      <div class="step"><b>(1) 像距与性质</b>：1/v = 1/f − 1/u = 1/10 − 1/25 = 5/50 − 2/50 = 3/50<br>
+        v = 50/3 ≈ <b>16.7 cm</b><br>
+        u = 25 cm &gt; 2f = 20 cm → <b>倒立、缩小的实像</b></div>
+      <div class="step"><b>(2) 加近视镜（凹透镜）</b>：凹透镜对光线有<b>发散作用</b>。原本会聚在 16.7 cm 处的光，经过凹透镜发散后，会聚点被<b>推迟</b>到更远处 → 像距变大。<br>
+        所以光屏要<b>向远离透镜的方向移动</b>，才能重新接到清晰的像。</div>
+      <div class="step"><b>(3) 加老花镜（凸透镜）</b>：凸透镜对光线有<b>会聚作用</b>，使光线提前会聚，像距变小 → 光屏要<b>向靠近透镜的方向移动</b>。</div>
+      <div class="step"><b>(4) 近视眼</b>：晶状体太厚（折光能力太强）或眼球前后径过长，导致远处物体的像落在视网膜<b>前方</b>，看不清远处。<br>
+        矫正方法：戴<b>凹透镜</b>眼镜，先把光线适当发散，使像后移，正好落在视网膜上。<br>
+        （联系实验：第 (2) 问中"像落到光屏后方"就相当于不戴镜时像落到视网膜前方；加凹透镜让像后移到光屏上，正是矫正原理。）</div>
+      <div class="ans">答：(1) 约 16.7 cm，倒立缩小实像；(2) 光屏远离透镜，因凹透镜发散使像距变大；(3) 光屏靠近透镜；(4) 晶状体过厚或眼球过长使像成在视网膜前，用凹透镜矫正。</div>
+      <div class="caution"><b>⚠️ 易错：</b>① 把凹透镜的作用记成"会聚"——<b>凹透镜发散、凸透镜会聚</b>，这是根。② 第 (2)(3) 问把光屏移动方向说反：记住<b>发散→像远移，会聚→像近移</b>。③ 把近视眼的像成在视网膜"后方"——近视成在<b>前方</b>（远视才在后方）。④ 混淆矫正镜片：近视用<b>凹</b>透镜，远视（老花）用<b>凸</b>透镜。⑤ 第 (1) 问只写性质不算像距，或拿 1/10 + 1/25 去算——公式是 1/f = 1/u + 1/v，求 v 时要<b>减</b>。</div>
+    </div>
+  </details>
+</div>
+
+<div class="card" style="margin-top:26px">
+  <b>📌 做完后的自检清单（让李思源自己打勾）</b>
+  <table>
+    <tr><th style="width:52px">题</th><th>做完必须能说出的一句话</th></tr>
+    <tr><td>1</td><td>来回跑的小狗不用逐段算，总路程 = 它的速度 × 两人相遇的总时间</td></tr>
+    <tr><td>2</td><td>同向追及速度相减、相向相遇速度相加；求某人路程要用他对地的速度</td></tr>
+    <tr><td>3</td><td>s-t 图斜率是速度，水平是静止，向下倾斜是反向；平均速度用总路程</td></tr>
+    <tr><td>4</td><td>同一距离不同介质：L/v慢 − L/v快 = 两次声音的时间差</td></tr>
+    <tr><td>5</td><td>听到回声至少要离障碍物 17 m；车背离时声程 = 2L + 车程</td></tr>
+    <tr><td>6</td><td>不准温度计按比例换算，先减零点偏移再乘每格实际值</td></tr>
+    <tr><td>7</td><td>熔化和沸腾都吸热但温度不变；熔点是物质特性，与质量无关</td></tr>
+    <tr><td>8</td><td>看全身镜长 = 身高的一半，与站位远近无关</td></tr>
+    <tr><td>9</td><td>放大实像要求 f&lt;u&lt;2f；成实像时物近像远像变大；u=f 不成像</td></tr>
+    <tr><td>10</td><td>凹透镜发散使像远移→近视镜；凸透镜会聚使像近移→老花镜</td></tr>
+  </table>
+</div>
+
+<div class="foot">
+  资料说明：本套为第二套拔高题，依据人教版八年级上册物理<b>已学内容</b>（机械运动 / 声现象 / 物态变化 / 光现象 / 透镜及其应用）编制，共 10 题，题型与第一套不重复；「质量与密度」因尚未学习未纳入。答案与解析为参考，若有版本或进度差异以课本为准。建议限时 75 分钟闭卷完成，再对照解析订正。
+</div>
+
+</div>
+</body>
+</html>
