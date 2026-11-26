@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源 · 八上生物「框架学习法」配套测试卷</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--blue);}
+  h2{font-size:20px;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .wrong{color:var(--red);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  .scorebar{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0;}
+  .scorebar div{flex:1 1 200px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 14px;text-align:center;font-size:14px;}
+  .scorebar b{font-size:18px;color:var(--blue);}
+  .total{background:#fef2f2!important;border-color:#fecaca!important;}
+  .total b{color:var(--red);}
+  .info{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;}
+  .info span{border-bottom:1px solid var(--line);min-width:150px;padding-bottom:3px;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;}
+  .q .no{font-weight:800;color:var(--blue);}
+  .q .pt{float:right;color:var(--muted);font-size:12.5px;font-weight:700;}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;margin-top:6px;font-size:14px;}
+  @media(max-width:640px){.opts{grid-template-columns:1fr;}}
+  .ansbox{border:1px dashed var(--line);border-radius:8px;min-height:26px;margin-top:8px;padding:4px 8px;background:#fafafa;font-size:13.5px;color:var(--muted);}
+  .chapter{display:inline-block;background:#eef2ff;color:#4f46e5;border-radius:6px;padding:0 7px;font-size:11.5px;margin-left:6px;font-weight:700;vertical-align:middle;}
+  .svgbox{text-align:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;margin:10px 0;overflow-x:auto;}
+  .svgbox svg{max-width:100%;height:auto;}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .ptlist{font-size:13.8px;}
+  .ptlist li{margin:3px 0;}
+  .subq{margin:8px 0 8px 4px;}
+  .badge{display:inline-block;background:#fef3c7;color:#b45309;border-radius:5px;padding:0 6px;font-size:11.5px;margin-left:6px;}
+  @media print{
+    body{background:#fff;}
+    .card,.q,.svgbox,details{box-shadow:none;break-inside:avoid;}
+    h2{break-after:avoid;}
+    .ansbox{min-height:0;}
+    details{break-inside:auto;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>李思源 · 八上生物「框架学习法」配套测试卷</h1>
+<div class="sub">北师大版 ｜ 覆盖第15~21章 ｜ 满分90分 ｜ 建议用时60分钟 ｜ 难度分布：基础约60% · 中档约20% · 拔高约20%</div>
+
+<div class="scorebar">
+  <div>第Ⅰ卷 选择题<br><b>25 × 2 = 50分</b></div>
+  <div>第Ⅱ卷 非选择题<br><b>6小题（26~31）= 40分</b></div>
+  <div class="total">全卷满分<br><b>50 + 40 = 90分</b></div>
+</div>
+
+<div class="card info">
+  <div>姓名：<span>李思源</span></div>
+  <div>班级：<span>&nbsp;</span></div>
+  <div>得分：<span>&nbsp;</span></div>
+</div>
+
+<div class="tip">🧭 答题提醒：先判断题目落在哪一章，再调用「结构—功能—过程—意义」四要素。特别留意易混对：<b>孢子≠芽孢</b>、<b>关节囊/关节腔/关节软骨</b>、<b>胚盘才是发育部位</b>、<b>AA/Aa显显性</b>、<b>生男生女由父亲精子决定</b>。请独立作答，卷末可折叠查看参考答案。</div>
+
+<!-- ===== 第Ⅰ卷 ===== -->
+<h2>第Ⅰ卷　选择题（本题共25小题，每小题2分，共50分。每小题只有一个选项最符合题意）</h2>
+
+<div class="q"><span class="no">1.</span><span class="pt">2分</span><span class="chapter">15章</span><br>
+动物运动系统的组成是
+<div class="opts">
+  <div>A. 骨、骨连接、骨骼肌</div><div>B. 骨、关节、肌肉</div>
+  <div>C. 骨骼、肌肉、神经</div><div>D. 骨、软骨、肌腱</div>
+</div></div>
+
+<div class="q"><span class="no">2.</span><span class="pt">2分</span><span class="chapter">15章</span><br>
+把相邻两骨牢固地联系在一起、其内表面还能分泌滑液的结构是
+<div class="opts">
+  <div>A. 关节软骨</div><div>B. 关节腔</div>
+  <div>C. 关节囊</div><div>D. 关节头</div>
+</div></div>
+
+<div class="q"><span class="no">3.</span><span class="pt">2分</span><span class="chapter">15章</span><br>
+在运动中，骨、关节、骨骼肌所起的作用依次是
+<div class="opts">
+  <div>A. 动力、杠杆、支点</div><div>B. 支点、动力、杠杆</div>
+  <div>C. 动力、支点、杠杆</div><div>D. 杠杆、支点、动力</div>
+</div></div>
+
+<div class="q"><span class="no">4.</span><span class="pt">2分</span><span class="chapter">15章</span><span class="badge">拔高</span><br>
+下列动物行为中，属于<b>学习行为</b>的是
+<div class="opts">
+  <div>A. 蜘蛛结网</div><div>B. 蜜蜂采蜜</div>
+  <div>C. 大山雀偷喝牛奶</div><div>D. 鸟类迁徙</div>
+</div></div>
+
+<div class="q"><span class="no">5.</span><span class="pt">2分</span><span class="chapter">16章</span><br>
+家蚕的发育属于完全变态，其正确的发育时期是
+<div class="opts">
+  <div>A. 受精卵→若虫→成虫</div><div>B. 受精卵→幼虫→成虫</div>
+  <div>C. 受精卵→蛹→幼虫→成虫</div><div>D. 受精卵→幼虫→蛹→成虫</div>
+</div></div>
+
+<div class="q"><span class="no">6.</span><span class="pt">2分</span><span class="chapter">16章</span><br>
+蝗虫的发育过程不经过下列哪个时期
+<div class="opts">
+  <div>A. 受精卵</div><div>B. 若虫</div>
+  <div>C. 蛹</div><div>D. 成虫</div>
+</div></div>
+
+<div class="q"><span class="no">7.</span><span class="pt">2分</span><span class="chapter">16章</span><br>
+关于青蛙的生殖和发育，下列叙述正确的是
+<div class="opts">
+  <div>A. 体内受精，卵生</div><div>B. 体外受精、卵生，发育为变态发育</div>
+  <div>C. 成蛙用鳃呼吸</div><div>D. 生殖和发育可以脱离水</div>
+</div></div>
+
+<div class="q"><span class="no">8.</span><span class="pt">2分</span><span class="chapter">16章</span><br>
+鸟卵中，能够发育成雏鸟的结构是
+<div class="opts">
+  <div>A. 卵黄</div><div>B. 卵白</div>
+  <div>C. 胚盘</div><div>D. 气室</div>
+</div></div>
+
+<div class="q"><span class="no">9.</span><span class="pt">2分</span><span class="chapter">17章</span><br>
+下列哪项<b>不属于</b>动物在生物圈中的作用
+<div class="opts">
+  <div>A. 促进生态系统的物质循环</div><div>B. 维持生态平衡</div>
+  <div>C. 帮助植物传粉、传播种子</div><div>D. 制造有机物</div>
+</div></div>
+
+<div class="q"><span class="no">10.</span><span class="pt">2分</span><span class="chapter">17章</span><br>
+保护生物多样性最有效的措施是
+<div class="opts">
+  <div>A. 易地保护（如迁入动物园）</div><div>B. 大量捕捉珍稀动物进行人工饲养</div>
+  <div>C. 建立基因库保存遗传材料</div><div>D. 就地保护，建立自然保护区</div>
+</div></div>
+
+<div class="q"><span class="no">11.</span><span class="pt">2分</span><span class="chapter">17章</span><br>
+下列关于动物在生物圈中作用的叙述，<b>错误</b>的是
+<div class="opts">
+  <div>A. 动物数量越多，对生态平衡越有利</div><div>B. 动物作为消费者，直接或间接以植物为食</div>
+  <div>C. 动物遗体、粪便经分解后，无机物可被植物利用</div><div>D. 动物能帮助植物传粉和传播种子</div>
+</div></div>
+
+<div class="q"><span class="no">12.</span><span class="pt">2分</span><span class="chapter">18章</span><br>
+细菌与真菌在细胞结构上的主要区别是
+<div class="opts">
+  <div>A. 细菌有细胞壁，真菌没有</div><div>B. 细菌没有成形的细胞核，真菌有</div>
+  <div>C. 细菌有细胞核，真菌没有</div><div>D. 二者的细胞结构完全相同</div>
+</div></div>
+
+<div class="q"><span class="no">13.</span><span class="pt">2分</span><span class="chapter">18章</span><span class="badge">拔高</span><br>
+关于细菌的芽孢，下列叙述正确的是
+<div class="opts">
+  <div>A. 芽孢是细菌的生殖细胞，一个细菌可产生多个芽孢</div><div>B. 芽孢能萌发发育成真菌</div>
+  <div>C. 芽孢是细菌的休眠体，对不良环境有较强抵抗能力</div><div>D. 芽孢是细菌的遗传物质</div>
+</div></div>
+
+<div class="q"><span class="no">14.</span><span class="pt">2分</span><span class="chapter">18章</span><br>
+病毒的结构特点是
+<div class="opts">
+  <div>A. 由蛋白质外壳和内部遗传物质组成，无细胞结构</div><div>B. 有细胞结构，但没有细胞核</div>
+  <div>C. 具有成形的细胞核</div><div>D. 由细胞壁、细胞膜、细胞质组成</div>
+</div></div>
+
+<div class="q"><span class="no">15.</span><span class="pt">2分</span><span class="chapter">18章</span><br>
+下列生物与其生殖方式的对应，正确的是
+<div class="opts">
+  <div>A. 酵母菌——孢子生殖</div><div>B. 霉菌——出芽生殖</div>
+  <div>C. 蘑菇——孢子生殖</div><div>D. 细菌——孢子生殖</div>
+</div></div>
+
+<div class="q"><span class="no">16.</span><span class="pt">2分</span><span class="chapter">19章</span><br>
+有性生殖与无性生殖的根本区别是
+<div class="opts">
+  <div>A. 是否产生新个体</div><div>B. 是否在母体内进行</div>
+  <div>C. 是否用种子繁殖</div><div>D. 是否经过两性生殖细胞的结合</div>
+</div></div>
+
+<div class="q"><span class="no">17.</span><span class="pt">2分</span><span class="chapter">19章</span><br>
+嫁接时，接穗能够成活的关键是
+<div class="opts">
+  <div>A. 接穗和砧木的树皮紧密结合</div><div>B. 接穗和砧木的木质部紧密结合</div>
+  <div>C. 嫁接后多浇水、多施肥</div><div>D. 接穗和砧木的形成层紧密结合</div>
+</div></div>
+
+<div class="q"><span class="no">18.</span><span class="pt">2分</span><span class="chapter">19章</span><br>
+植物组织培养能快速繁殖并保持优良性状，是因为组织培养
+<div class="opts">
+  <div>A. 属于有性生殖，后代变异大</div><div>B. 属于无性生殖，后代能保持母体的遗传特性</div>
+  <div>C. 必须经过两性生殖细胞的结合</div><div>D. 必须在天然土壤中培养</div>
+</div></div>
+
+<div class="q"><span class="no">19.</span><span class="pt">2分</span><span class="chapter">20章</span><br>
+基因组成为 Aa 的个体，其表现的性状是
+<div class="opts">
+  <div>A. 显性性状</div><div>B. 隐性性状</div>
+  <div>C. 介于显性与隐性之间</div><div>D. 无法判断</div>
+</div></div>
+
+<div class="q"><span class="no">20.</span><span class="pt">2分</span><span class="chapter">20章</span><br>
+人的性别遗传中，生男生女主要取决于
+<div class="opts">
+  <div>A. 父亲精子的类型（含X或Y）</div><div>B. 母亲卵细胞的类型</div>
+  <div>C. 母亲的饮食习惯</div><div>D. 受精时的环境温度</div>
+</div></div>
+
+<div class="q"><span class="no">21.</span><span class="pt">2分</span><span class="chapter">20章</span><br>
+正常人的体细胞中，染色体的数目是
+<div class="opts">
+  <div>A. 22对</div><div>B. 23条</div>
+  <div>C. 23对</div><div>D. 46对</div>
+</div></div>
+
+<div class="q"><span class="no">22.</span><span class="pt">2分</span><span class="chapter">20章</span><br>
+下列变异中，属于<b>可遗传变异</b>的是
+<div class="opts">
+  <div>A. 经常晒太阳皮肤变黑</div><div>B. 因水肥充足小麦长得高大</div>
+  <div>C. 太空椒（遗传物质发生改变）</div><div>D. 因经常锻炼而肌肉发达</div>
+</div></div>
+
+<div class="q"><span class="no">23.</span><span class="pt">2分</span><span class="chapter">21章</span><br>
+米勒实验证明的是
+<div class="opts">
+  <div>A. 原始地球条件下已经能够合成生命</div><div>B. 原始生命诞生于陆地</div>
+  <div>C. 原始地球条件下无机物能形成有机物（氨基酸）</div><div>D. 原始大气中含有丰富的氧气</div>
+</div></div>
+
+<div class="q"><span class="no">24.</span><span class="pt">2分</span><span class="chapter">21章</span><br>
+研究生物进化最直接、最重要的证据是
+<div class="opts">
+  <div>A. 化石</div><div>B. 神话传说</div>
+  <div>C. 口头语言</div><div>D. 主观想象</div>
+</div></div>
+
+<div class="q"><span class="no">25.</span><span class="pt">2分</span><span class="chapter">21章</span><span class="badge">拔高</span><br>
+用达尔文的自然选择学说解释长颈鹿长颈的形成，正确的是
+<div class="opts">
+  <div>A. 长颈鹿经常伸长脖子吃树叶，脖子越用越长</div><div>B. 长颈鹿的长颈是人工选择的结果</div>
+  <div>C. 所有长颈鹿的脖子生来就一样长</div><div>D. 变异是不定向的，颈长个体在生存斗争中更易存活繁殖，经逐代选择形成</div>
+</div></div>
+
+<!-- ===== 第Ⅱ卷 ===== -->
+<h2>第Ⅱ卷　非选择题（本题共6小题，第26~31题，共40分）</h2>
+
+<!-- 26 -->
+<div class="q">
+  <span class="no">26.</span><span class="pt">7分</span><span class="chapter">15章 · 关节结构图</span><br>
+  下图为关节结构模式图（纵剖面），图中字母代表相应结构。请据图回答问题。
+  <div class="svgbox">
+    <svg viewBox="0 0 460 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关节结构模式图">
+      <rect x="0" y="0" width="460" height="350" fill="#ffffff"/>
+      <!-- 关节腔（两软骨之间的浅蓝缝隙） -->
+      <path d="M202 92 C202 126 216 136 230 136 C244 136 258 126 258 92 L272 173 Q230 152 188 173 Z" fill="#dbeafe"/>
+      <!-- 上骨：骨干 + 关节头 -->
+      <rect x="200" y="28" width="60" height="64" fill="#ede0c8" stroke="#8a7455" stroke-width="2"/>
+      <path d="M200 90 C200 128 215 140 230 140 C245 140 260 128 260 90 Z" fill="#ede0c8" stroke="#8a7455" stroke-width="2"/>
+      <!-- 下骨：关节窝 -->
+      <path d="M185 175 Q230 150 275 175 L268 320 L192 320 Z" fill="#ede0c8" stroke="#8a7455" stroke-width="2"/>
+      <!-- 关节软骨 -->
+      <path d="M203 93 C203 126 216 135 230 135 C244 135 257 126 257 93" fill="none" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M189 172 Q230 152 271 172" fill="none" stroke="#16a34a" stroke-width="6" stroke-linecap="round"/>
+      <!-- 关节囊 -->
+      <path d="M198 92 C175 100 170 130 172 160 C174 176 182 181 190 181" fill="none" stroke="#dc2626" stroke-width="8" stroke-linecap="round" opacity="0.75"/>
+      <path d="M262 92 C285 100 290 130 288 160 C286 176 278 181 270 181" fill="none" stroke="#dc2626" stroke-width="8" stroke-linecap="round" opacity="0.75"/>
+      <!-- 标注引导线 -->
+      <g stroke="#6b7280" stroke-width="1.5">
+        <line x1="92" y1="110" x2="176" y2="130"/><line x1="92" y1="150" x2="222" y2="115"/>
+        <line x1="92" y1="190" x2="210" y2="134"/><line x1="368" y1="140" x2="248" y2="150"/>
+        <line x1="368" y1="185" x2="255" y2="170"/>
+      </g>
+      <g fill="#6b7280">
+        <circle cx="176" cy="130" r="2.6"/><circle cx="222" cy="115" r="2.6"/><circle cx="210" cy="134" r="2.6"/>
+        <circle cx="248" cy="150" r="2.6"/><circle cx="255" cy="170" r="2.6"/>
+      </g>
+      <!-- 字母标注 -->
+      <g font-family="sans-serif" font-weight="bold" font-size="17" text-anchor="middle">
+        <circle cx="80" cy="110" r="15" fill="#2563eb"/><text x="80" y="116" fill="#fff">D</text>
+        <circle cx="80" cy="150" r="15" fill="#2563eb"/><text x="80" y="156" fill="#fff">A</text>
+        <circle cx="80" cy="190" r="15" fill="#2563eb"/><text x="80" y="196" fill="#fff">C</text>
+        <circle cx="380" cy="140" r="15" fill="#2563eb"/><text x="380" y="146" fill="#fff">E</text>
+        <circle cx="380" cy="185" r="15" fill="#2563eb"/><text x="380" y="191" fill="#fff">B</text>
+      </g>
+      <text x="230" y="342" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#6b7280">关节结构模式图（字母代表相应结构）</text>
+    </svg>
+    <div class="cap">图 1　关节结构模式图</div>
+  </div>
+  <div class="subq">（1）图中 A 是<b>________</b>，B 是<b>________</b>，二者合称为<b>________</b>。<span class="pt">3分</span></div>
+  <div class="subq">（2）A 和 B 的表面覆盖着一层 [C] <b>________</b>，能减少骨与骨之间的摩擦、缓冲震动。<span class="pt">1分</span></div>
+  <div class="subq">（3）[D] <b>________</b> 把两骨牢固地联系在一起，其内表面还能分泌滑液。<span class="pt">1分</span></div>
+  <div class="subq">（4）[E] <b>________</b> 内有滑液，使关节活动灵活。<span class="pt">1分</span></div>
+  <div class="subq">（5）关节在运动中起<b>________</b>作用。<span class="pt">1分</span></div>
+</div>
+
+<!-- 27 -->
+<div class="q">
+  <span class="no">27.</span><span class="pt">6分</span><span class="chapter">15章 · 动物行为</span><br>
+  观察下列动物行为：①蜘蛛结网　②蜜蜂采蜜　③大山雀偷喝牛奶　④鹦鹉学舌　⑤鸟类迁徙。请回答：
+  <div class="subq">（1）从行为获得途径看，动物行为可分为<b>________</b>行为和<b>________</b>行为。上述行为中，属于前者的是<b>________</b>（填序号），属于后者的是<b>________</b>（填序号）。<span class="pt">4分</span></div>
+  <div class="subq">（2）学习行为是在<b>________</b>因素的基础上，通过环境的作用，由生活经验和学习而获得的。<span class="pt">1分</span></div>
+  <div class="subq">（3）白蚁群体内部形成一定组织，成员之间有明确分工，这种行为称为<b>________</b>行为。<span class="pt">1分</span></div>
+</div>
+
+<!-- 28 -->
+<div class="q">
+  <span class="no">28.</span><span class="pt">7分</span><span class="chapter">16章 · 生殖和发育</span><br>
+  <div class="subq">（1）家蚕的发育经过受精卵→幼虫→<b>________</b>→成虫四个时期，属于完全变态；蝗虫的发育没有这一时期，属于<b>________</b>变态。<span class="pt">2分</span></div>
+  <div class="subq">（2）下图为鸟卵结构模式图。鸟卵中将来发育成雏鸟的是 [D] <b>________</b>，其内含有细胞核。<span class="pt">2分</span></div>
+  <div class="subq">（3）为胚胎发育提供主要营养物质的是 [C] <b>________</b>。<span class="pt">1分</span></div>
+  <div class="subq">（4）[A] <b>________</b> 对卵起保护作用，其上有气孔；[E] <b>________</b> 内储存空气，为胚胎发育提供氧气。<span class="pt">2分</span></div>
+  <div class="svgbox">
+    <svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="鸟卵结构模式图">
+      <rect x="0" y="0" width="460" height="360" fill="#ffffff"/>
+      <!-- 卵白区域 -->
+      <ellipse cx="230" cy="180" rx="148" ry="98" fill="#eaf4fb"/>
+      <!-- 卵壳 -->
+      <ellipse cx="230" cy="180" rx="155" ry="105" fill="none" stroke="#8a7455" stroke-width="4"/>
+      <ellipse cx="230" cy="180" rx="149" ry="99" fill="none" stroke="#cbb99a" stroke-width="1.5"/>
+      <!-- 气室（钝端） -->
+      <path d="M78 180 C82 140 100 118 126 104 C111 130 106 155 106 180 C106 205 111 230 126 256 C100 242 82 220 78 180 Z" fill="#ffffff" stroke="#9ec5d6" stroke-width="2"/>
+      <!-- 系带 -->
+      <path d="M163 185 C140 176 122 190 102 181 C118 196 141 193 163 185 Z" fill="#f0e6d2" stroke="#cbb99a" stroke-width="1.5"/>
+      <path d="M307 185 C330 176 348 190 368 181 C352 196 329 193 307 185 Z" fill="#f0e6d2" stroke="#cbb99a" stroke-width="1.5"/>
+      <!-- 卵黄 -->
+      <ellipse cx="235" cy="185" rx="72" ry="62" fill="#f7bb1a" stroke="#d99a00" stroke-width="2"/>
+      <!-- 胚盘 -->
+      <circle cx="235" cy="132" r="10" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+      <!-- 标注引导线 -->
+      <g stroke="#6b7280" stroke-width="1.5">
+        <line x1="410" y1="105" x2="322" y2="116"/><line x1="410" y1="160" x2="322" y2="152"/>
+        <line x1="235" y1="45" x2="235" y2="120"/><line x1="410" y1="238" x2="268" y2="216"/>
+        <line x1="50" y1="130" x2="98" y2="145"/><line x1="50" y1="205" x2="108" y2="188"/>
+      </g>
+      <g fill="#6b7280">
+        <circle cx="322" cy="116" r="2.6"/><circle cx="322" cy="152" r="2.6"/><circle cx="235" cy="120" r="2.6"/>
+        <circle cx="268" cy="216" r="2.6"/><circle cx="98" cy="145" r="2.6"/><circle cx="108" cy="188" r="2.6"/>
+      </g>
+      <g font-family="sans-serif" font-weight="bold" font-size="17" text-anchor="middle">
+        <circle cx="422" cy="105" r="15" fill="#2563eb"/><text x="422" y="111" fill="#fff">A</text>
+        <circle cx="422" cy="160" r="15" fill="#2563eb"/><text x="422" y="166" fill="#fff">B</text>
+        <circle cx="235" cy="33" r="15" fill="#2563eb"/><text x="235" y="39" fill="#fff">D</text>
+        <circle cx="422" cy="238" r="15" fill="#2563eb"/><text x="422" y="244" fill="#fff">C</text>
+        <circle cx="38" cy="130" r="15" fill="#2563eb"/><text x="38" y="136" fill="#fff">E</text>
+        <circle cx="38" cy="205" r="15" fill="#2563eb"/><text x="38" y="211" fill="#fff">F</text>
+      </g>
+      <text x="230" y="350" text-anchor="middle" font-family="sans-serif" font-size="12.5" fill="#6b7280">鸟卵结构模式图（字母代表相应结构）</text>
+    </svg>
+    <div class="cap">图 2　鸟卵结构模式图</div>
+  </div>
+</div>
+
+<!-- 29 -->
+<div class="q">
+  <span class="no">29.</span><span class="pt">7分</span><span class="chapter">18章 · 微生物</span><br>
+  下图甲、乙、丙分别为细菌、酵母菌（真菌）、病毒的结构模式图。请据图回答：
+  <div class="svgbox">
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="细菌、真菌、病毒结构对比图">
+      <rect x="0" y="0" width="680" height="300" fill="#ffffff"/>
+      <!-- 甲 细菌 -->
+      <text x="115" y="32" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0d9488">甲　细菌</text>
+      <ellipse cx="112" cy="120" rx="50" ry="29" fill="#a7f3d0" stroke="#0d9488" stroke-width="3"/>
+      <ellipse cx="112" cy="120" rx="44" ry="23" fill="none" stroke="#0d9488" stroke-width="1.5"/>
+      <path d="M92 118 C100 108 124 110 132 120 C124 132 100 130 92 118 Z" fill="#0f766e" opacity="0.8"/>
+      <path d="M162 120 C180 110 190 130 208 118" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="115" y="176" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">细胞壁、细胞膜、细胞质</text>
+      <text x="115" y="196" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">DNA集中区</text>
+      <text x="115" y="216" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">鞭毛</text>
+      <!-- 乙 酵母菌 -->
+      <text x="340" y="32" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ca8a04">乙　酵母菌（真菌）</text>
+      <ellipse cx="328" cy="122" rx="43" ry="37" fill="#fde68a" stroke="#ca8a04" stroke-width="3"/>
+      <circle cx="322" cy="118" r="13" fill="#fbbf24" stroke="#92400e" stroke-width="2"/>
+      <ellipse cx="374" cy="86" rx="16" ry="14" fill="#fde68a" stroke="#ca8a04" stroke-width="2.5"/>
+      <text x="340" y="186" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">细胞核</text>
+      <text x="340" y="206" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">单细胞真菌</text>
+      <!-- 丙 病毒（噬菌体） -->
+      <text x="560" y="32" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#7c3aed">丙</text>
+      <polygon points="560,62 586,77 586,107 560,122 534,107 534,77" fill="#c4b5fd" stroke="#7c3aed" stroke-width="3"/>
+      <path d="M548 78 C562 88 552 100 566 108" fill="none" stroke="#4c1d95" stroke-width="2.5"/>
+      <rect x="553" y="122" width="14" height="42" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2.5"/>
+      <g stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round">
+        <line x1="553" y1="164" x2="538" y2="182"/><line x1="560" y1="164" x2="560" y2="184"/><line x1="567" y1="164" x2="582" y2="182"/>
+      </g>
+      <text x="560" y="212" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">蛋白质外壳 + 内部遗传物质</text>
+    </svg>
+    <div class="cap">图 3　三种微生物结构对比简图</div>
+  </div>
+  <div class="subq">（1）细菌与真菌相比，细菌没有成形的<b>________</b>，属于原核生物；细菌靠<b>________</b>生殖。<span class="pt">2分</span></div>
+  <div class="subq">（2）图乙中酵母菌的生殖方式是<b>________</b>生殖；霉菌和蘑菇则靠<b>________</b>生殖。<span class="pt">2分</span></div>
+  <div class="subq">（3）细菌在不良环境中能形成一个<b>________</b>，它是细菌的<b>________</b>体，<b>不是</b>生殖细胞。<span class="pt">2分</span></div>
+  <div class="subq">（4）图中没有细胞结构的是[<b>________</b>]，它由蛋白质外壳和内部遗传物质组成，只能<b>________</b>在活细胞内。<span class="pt">1分</span></div>
+</div>
+
+<!-- 30 -->
+<div class="q">
+  <span class="no">30.</span><span class="pt">7分</span><span class="chapter">20章 · 遗传和变异</span><br>
+  <div class="subq">（1）基因控制生物的<b>________</b>；在体细胞中，基因通常是<b>________</b>存在的。<span class="pt">2分</span></div>
+  <div class="subq">（2）人的体细胞有23对染色体，男性性染色体组成为<b>________</b>，女性为<b>________</b>；生男生女取决于父亲产生的<b>________</b>类型，男女概率各约50%。<span class="pt">3分</span></div>
+  <div class="subq">（3）基因组成为 AA、Aa 的个体表现<b>________</b>性状，只有基因组成为 aa 时才表现<b>________</b>性状。<span class="pt">2分</span></div>
+</div>
+
+<!-- 31 -->
+<div class="q">
+  <span class="no">31.</span><span class="pt">6分</span><span class="chapter">21章 · 实验探究</span><br>
+  阅读下列材料，回答问题。<br>
+  <b>材料一</b>　1953年，米勒把甲烷、氨、氢气、水蒸气等气体泵入一个密闭装置内（模拟原始大气，其中不含氧气），通过火花放电（模拟雷电），合成了多种氨基酸。<br>
+  <b>材料二</b>　达尔文认为，长颈鹿群体中存在着颈长和颈短的个体差异，这些差异可以遗传给后代。在食物缺乏时，颈长的个体更容易吃到高处的树叶而生存下来，并繁殖后代；颈短的个体则被淘汰。
+  <div class="subq">（1）材料一中，米勒实验模拟的原始大气中不含<b>________</b>；实验合成了氨基酸等有机物，证明了原始地球条件下<b>________</b>可以形成有机物。<span class="pt">2分</span></div>
+  <div class="subq">（2）材料二中，长颈鹿颈长与颈短的个体差异属于<b>________</b>（填"定向"或"不定向"）变异；颈长个体容易生存并繁殖，体现了<b>________</b>；自然选择是<b>________</b>（填"定向"或"不定向"）的。<span class="pt">3分</span></div>
+  <div class="subq">（3）研究生物进化最直接、最重要的证据是<b>________</b>。<span class="pt">1分</span></div>
+</div>
+
+<!-- ===== 答案 ===== -->
+<h2>参考答案与评分要点（点击展开）</h2>
+
+<details>
+  <summary>一、选择题答案表（1~25题，每题2分，共50分）+ 一句话解析</summary>
+  <div class="a">
+    <table>
+      <tr><th style="width:60px">题号</th><th style="width:60px">答案</th><th>一句话解析</th></tr>
+      <tr><td>1</td><td class="right">A</td><td>运动系统由骨、骨连接和骨骼肌组成，关节只是骨连接的主要形式。</td></tr>
+      <tr><td>2</td><td class="right">C</td><td>关节囊由结缔组织构成，包绕关节把两骨牢固相连，其内表面能分泌滑液。</td></tr>
+      <tr><td>3</td><td class="right">D</td><td>运动中骨起杠杆作用、关节起支点作用、骨骼肌提供动力。</td></tr>
+      <tr><td>4</td><td class="right">C</td><td>大山雀偷喝牛奶是后天通过学习获得的学习行为；蜘蛛结网、蜜蜂采蜜、鸟类迁徙均为遗传物质决定的先天性行为。</td></tr>
+      <tr><td>5</td><td class="right">D</td><td>完全变态经过受精卵→幼虫→蛹→成虫四个时期，家蚕是其代表。</td></tr>
+      <tr><td>6</td><td class="right">C</td><td>蝗虫为不完全变态，经过受精卵→若虫→成虫，没有蛹期。</td></tr>
+      <tr><td>7</td><td class="right">B</td><td>青蛙体外受精、卵生，发育为变态发育（受精卵→蝌蚪→幼蛙→成蛙），生殖和发育离不开水。</td></tr>
+      <tr><td>8</td><td class="right">C</td><td>胚盘内含细胞核，是鸟卵中发育成雏鸟的部位。</td></tr>
+      <tr><td>9</td><td class="right">D</td><td>动物是消费者，能促进物质循环、维持生态平衡、帮助传粉播种；制造有机物是绿色植物（生产者）的作用。</td></tr>
+      <tr><td>10</td><td class="right">D</td><td>就地保护（建立自然保护区）是保护生物多样性最有效的措施。</td></tr>
+      <tr><td>11</td><td class="right">A</td><td>动物数量并非越多越好，数量过多会破坏生态平衡，该项说法错误。</td></tr>
+      <tr><td>12</td><td class="right">B</td><td>细菌无成形的细胞核（原核生物），真菌有成形的细胞核（真核生物）。</td></tr>
+      <tr><td>13</td><td class="right">C</td><td>芽孢是细菌的休眠体，对不良环境抵抗力强，不是生殖细胞，一个细菌只形成一个芽孢。</td></tr>
+      <tr><td>14</td><td class="right">A</td><td>病毒无细胞结构，由蛋白质外壳和内部遗传物质组成，只能寄生生活。</td></tr>
+      <tr><td>15</td><td class="right">C</td><td>蘑菇靠孢子生殖；酵母菌出芽生殖，霉菌孢子生殖，细菌分裂生殖。</td></tr>
+      <tr><td>16</td><td class="right">D</td><td>有性生殖与无性生殖的根本区别在于是否经过两性生殖细胞的结合。</td></tr>
+      <tr><td>17</td><td class="right">D</td><td>嫁接成活的关键是使接穗与砧木的形成层紧密结合。</td></tr>
+      <tr><td>18</td><td class="right">B</td><td>组织培养属于无性生殖，后代能保持母体的优良遗传特性，且能快速繁殖。</td></tr>
+      <tr><td>19</td><td class="right">A</td><td>只要含一个显性基因A（AA或Aa）就表现显性性状，Aa不是中间性状。</td></tr>
+      <tr><td>20</td><td class="right">A</td><td>生男生女取决于父亲的哪种精子（含X或Y）与卵细胞结合，概率各约50%。</td></tr>
+      <tr><td>21</td><td class="right">C</td><td>正常人体细胞有23对（46条）染色体，包括22对常染色体和1对性染色体。</td></tr>
+      <tr><td>22</td><td class="right">C</td><td>太空椒由遗传物质改变引起，属于可遗传变异；晒黑、水肥、锻炼均由环境引起，不可遗传。</td></tr>
+      <tr><td>23</td><td class="right">C</td><td>米勒实验证明原始地球条件下无机物能形成有机物（氨基酸），并未合成生命。</td></tr>
+      <tr><td>24</td><td class="right">A</td><td>化石是研究生物进化最直接、最重要的证据，越古老的地层中化石越简单、低等。</td></tr>
+      <tr><td>25</td><td class="right">D</td><td>变异是不定向的，自然选择是定向的；颈长个体在生存斗争中更易存活繁殖，逐代积累形成长颈。</td></tr>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary>二、非选择题采分点（26~31题，共40分）</summary>
+  <div class="a ptlist">
+    <p><b>26题（7分）关节结构</b></p>
+    <ul>
+      <li>（1）A <b>关节头</b>、B <b>关节窝</b>、二者合称<b>关节面</b>（每空1分，共3分）。</li>
+      <li>（2）[C] <b>关节软骨</b>（1分）。</li>
+      <li>（3）[D] <b>关节囊</b>（1分）。</li>
+      <li>（4）[E] <b>关节腔</b>（1分）。</li>
+      <li>（5）<b>支点</b>（1分）。</li>
+    </ul>
+    <p><b>27题（6分）动物行为</b></p>
+    <ul>
+      <li>（1）<b>先天性</b>行为、<b>学习</b>行为；先天性行为填<b>①②⑤</b>，学习行为填<b>③④</b>（每空1分，共4分）。</li>
+      <li>（2）<b>遗传</b>（1分）——学习行为以遗传因素为基础。</li>
+      <li>（3）<b>社会</b>（社群）行为（1分）。</li>
+    </ul>
+    <p><b>28题（7分）生殖和发育</b></p>
+    <ul>
+      <li>（1）<b>蛹</b>、<b>不完全</b>（每空1分，共2分）。</li>
+      <li>（2）[D] <b>胚盘</b>（字母与名称都正确给2分；仅答对名称或字母给1分）。</li>
+      <li>（3）[C] <b>卵黄</b>（1分）。</li>
+      <li>（4）[A] <b>卵壳</b>、[E] <b>气室</b>（每空1分，共2分）。</li>
+    </ul>
+    <p><b>29题（7分）微生物</b></p>
+    <ul>
+      <li>（1）<b>细胞核</b>、<b>分裂</b>（每空1分，共2分）。</li>
+      <li>（2）<b>出芽</b>、<b>孢子</b>（每空1分，共2分）——酵母菌出芽生殖，霉菌蘑菇孢子生殖。</li>
+      <li>（3）<b>芽孢</b>、<b>休眠</b>（每空1分，共2分）——强调芽孢是休眠体而非生殖细胞。</li>
+      <li>（4）<b>丙（病毒）</b>、<b>寄生</b>（答出两点给1分，只答一点不给分）。</li>
+    </ul>
+    <p><b>30题（7分）遗传和变异</b></p>
+    <ul>
+      <li>（1）<b>性状</b>、<b>成对</b>（每空1分，共2分）。</li>
+      <li>（2）<b>XY</b>、<b>XX</b>、<b>精子</b>（每空1分，共3分）——生男生女由父亲的精子类型决定。</li>
+      <li>（3）<b>显性</b>、<b>隐性</b>（每空1分，共2分）。</li>
+    </ul>
+    <p><b>31题（6分）实验探究</b></p>
+    <ul>
+      <li>（1）<b>氧气</b>（或"游离氧"）、<b>无机物</b>（每空1分，共2分）。</li>
+      <li>（2）<b>不定向</b>、<b>适者生存</b>（或"生存斗争中适者生存，不适者被淘汰"）、<b>定向</b>（每空1分，共3分）。</li>
+      <li>（3）<b>化石</b>（1分）。</li>
+    </ul>
+    <p class="right">合计：26题7分 + 27题6分 + 28题7分 + 29题7分 + 30题7分 + 31题6分 = 40分；全卷 50 + 40 = 90分。</p>
+  </div>
+</details>
+
+<div class="foot">
+  试卷说明：本卷依据北师大版八年级上册生物 第15–21章 命题，覆盖七章且每章不少于2题，紧扣「框架学习法」的四要素与对比表思路，重点辨析孢子与芽孢、关节结构、鸟卵胚盘、基因显隐性与性别决定等易混点。全卷满分90分。事实表述以教材为准，如需调整难度或题量可在此基础上增删。
+</div>
+
+</div>
+</body>
+</html>
