@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源 · 八上道法「框架学习法」配套测试卷</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--blue);}
+  h2{font-size:20px;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .kbd{background:#1f2937;color:#fff;border-radius:6px;padding:1px 7px;font-size:12px;}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .wrong{color:var(--red);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+  .meth{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:16px 18px;margin:12px 0;}
+
+  /* ===== 试卷专用 ===== */
+  .paper-head{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--blue);border-radius:12px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .paper-head h1{font-size:23px;line-height:1.4;}
+  .badge{display:inline-block;background:var(--blue);color:#fff;border-radius:6px;padding:1px 9px;font-size:12px;margin-left:6px;vertical-align:middle;}
+  .score-tab td,.score-tab th{text-align:center;vertical-align:middle;}
+  .score-tab .tot{background:#fef2f2;color:var(--red);font-weight:800;}
+  .rules{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;font-size:13px;color:#1e3a8a;margin:12px 0;}
+  .section-tag{display:inline-block;background:var(--blue);color:#fff;border-radius:6px;padding:2px 10px;font-size:13px;margin-right:8px;}
+  .section-tag.b{background:var(--orange);}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:14.5px;}
+  .qstem{margin-bottom:6px;}
+  .qnum{font-weight:800;color:var(--purple);margin-right:4px;}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;padding-left:22px;font-size:14px;}
+  .material{background:#fff7ed;border-left:4px solid var(--orange);border-radius:8px;padding:10px 14px;margin:8px 0 10px;font-size:14px;}
+  .subq{padding:7px 0 7px 4px;border-top:1px dashed var(--line);}
+  .subq:first-of-type{border-top:none;}
+  .pt{color:var(--red);font-weight:700;font-size:13px;}
+  .tag{display:inline-block;background:#eef2ff;color:var(--purple);border-radius:5px;padding:0 7px;font-size:12px;margin-right:6px;font-weight:700;}
+  .ans-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:5px 12px;font-size:12.5px;cursor:pointer;}
+  .btn:hover{opacity:.85;}
+  .ans-table td,.ans-table th{font-size:13px;vertical-align:top;}
+  .ans-table .k{white-space:nowrap;text-align:center;width:52px;}
+  .ans-table .v{white-space:nowrap;text-align:center;width:46px;color:var(--green);font-weight:800;}
+  .point{font-size:14px;padding:4px 0;}
+  .point b{color:var(--blue);}
+  @media(max-width:640px){
+    .opts{grid-template-columns:1fr;}
+    h1{font-size:20px;}
+  }
+  @media print{
+    body{background:#fff;}
+    .card,.paper-head,.q{box-shadow:none;}
+    .btn,.rules{display:none;}
+    .answers{display:none;}
+    .q{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="paper-head">
+  <h1>李思源 · 八上道法「框架学习法」配套测试卷 <span class="badge">人教版</span></h1>
+  <div class="sub">人教版 ｜ 覆盖四单元十课 ｜ 满分100分 ｜ 建议用时60分钟</div>
+  <table class="score-tab">
+    <tr><th>题型</th><th>题号</th><th>题量</th><th>分值</th><th>合计</th></tr>
+    <tr><td>一、选择题</td><td>1—25</td><td>25题</td><td>每题2分</td><td>50分</td></tr>
+    <tr><td>二、非选择题</td><td>26—29</td><td>4题</td><td>12＋12＋14＋12分</td><td>50分</td></tr>
+    <tr><td colspan="4" style="text-align:right;font-weight:800;">全卷总分</td><td class="tot">100分</td></tr>
+  </table>
+  <div class="rules">答题要求：选择题每题只有一个正确答案，请将答案填在题号前；非选择题请运用<span class="kbd">是什么 → 为什么 → 怎么做</span>框架作答，分点表述、核心关键词要写准。卷末附参考答案与评分要点（折叠）。</div>
+</div>
+
+<div class="ok">💡 框架提示：拿到材料先判断它落在生活逻辑链哪一站——<span class="mn">走进社会 → 遵守规则 → 承担责任 → 维护国家利益</span>，再按"三要素"组织答案。</div>
+
+<!-- ===================== 一、选择题 ===================== -->
+<h2><span class="section-tag">一</span>选择题（25题，每题2分，共50分）</h2>
+
+<div class="q"><div class="qstem"><span class="qnum">1.</span> 人的身份是在 ____ 中确定的。</div>
+  <div class="opts"><div>A．天生具有的禀赋</div><div>B．社会关系</div><div>C．个人的想象</div><div>D．血缘关系一种</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">2.</span> 下列行为属于亲社会行为的是</div>
+  <div class="opts"><div>A．沉迷网络游戏、熬夜刷视频</div><div>B．考试时给同学传答案</div><div>C．主动帮助他人、关心社会发展</div><div>D．事不关己、高高挂起</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">3.</span> 人的成长是不断 ____ 的过程，这一过程使我们从"生物人"成长为"社会人"。</div>
+  <div class="opts"><div>A．现代化</div><div>B．个性化</div><div>C．自由化</div><div>D．社会化</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">4.</span> "网络是把双刃剑"，下列能体现网络"弊"的一面的是</div>
+  <div class="opts"><div>A．网络购物方便快捷</div><div>B．网络谣言、暴力色情等不良信息污染</div><div>C．网课打破时空限制</div><div>D．网络推动科技创新</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">5.</span> 对"信息节食"的正确理解是</div>
+  <div class="opts"><div>A．完全不接触网络</div><div>B．只看自己喜欢的信息</div><div>C．不沉溺网络，有选择地摄取有益信息</div><div>D．每天固定上网八小时</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">6.</span><span class="pt">【拔高】</span> 网络推动社会进步主要体现在</div>
+  <div class="opts"><div>A．经济、政治、文化传播、科技创新四个方面</div><div>B．只是让生活更便利</div><div>C．只是购物和娱乐</div><div>D．只是聊天和交友</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">7.</span> 关于社会规则与社会秩序的关系，正确的是</div>
+  <div class="opts"><div>A．社会秩序与社会规则无关</div><div>B．有了秩序就不需要规则</div><div>C．规则只会破坏秩序</div><div>D．社会规则明确秩序内容、保障秩序实现</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">8.</span> 关于自由与规则的关系，正确的是</div>
+  <div class="opts"><div>A．规则只是限制自由</div><div>B．二者不可分，规则划定自由边界，也保障自由</div><div>C．自由就是随心所欲</div><div>D．有规则就没有自由</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">9.</span> 遵守社会规则，更需要</div>
+  <div class="opts"><div>A．只靠他律（外部监督）</div><div>B．只靠自律</div><div>C．他律和自律相结合，并发自内心敬畏规则</div><div>D．靠运气和习惯</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">10.</span> 在人际交往中，"尊重"的地位是</div>
+  <div class="opts"><div>A．交往的起点</div><div>B．立身处世的前提</div><div>C．安身立命之本</div><div>D．企业的无形资产</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">11.</span> "文明有礼"的地位，表述正确的是</div>
+  <div class="opts"><div>A．交往的起点</div><div>B．一个人立身处世的前提</div><div>C．安身立命之本</div><div>D．财富和幸福的源泉</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">12.</span> "诚实守信"的地位，表述正确的是</div>
+  <div class="opts"><div>A．交往的起点</div><div>B．立身处世的前提</div><div>C．最刚性的社会规则</div><div>D．一个人安身立命之本</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">13.</span> 按照违反法律的类别，违法行为可分为</div>
+  <div class="opts"><div>A．民事违法、行政违法、刑事违法（犯罪）</div><div>B．一般违法和严重违法两类</div><div>C．违法行为和犯罪行为两类</div><div>D．故意违法和过失违法两类</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">14.</span> 犯罪的最本质特征是</div>
+  <div class="opts"><div>A．刑事违法性</div><div>B．应受刑罚处罚性</div><div>C．严重社会危害性</div><div>D．违反一切法律</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">15.</span> 预防犯罪，青少年应该</div>
+  <div class="opts"><div>A．只要不犯大错就行</div><div>B．杜绝不良行为，依法自律，从小事做起</div><div>C．等到成年后再守法</div><div>D．只要远离坏人即可</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">16.</span><span class="pt">【拔高】</span> 维护合法权益最正规、最权威、最后的屏障是</div>
+  <div class="opts"><div>A．协商</div><div>B．调解</div><div>C．诉讼</div><div>D．忍让</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">17.</span> 责任主要来自</div>
+  <div class="opts"><div>A．对他人的承诺、职业要求、道德规范、法律规定</div><div>B．只有法律规定</div><div>C．只有道德规范</div><div>D．凭个人喜好</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">18.</span> 关于承担责任的代价与回报，正确的是</div>
+  <div class="opts"><div>A．只有代价，没有回报</div><div>B．只有回报，没有代价</div><div>C．二者并存，要不言代价与回报、敢于担当</div><div>D．先算清回报再决定承担</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">19.</span> 关爱他人，应该做到</div>
+  <div class="opts"><div>A．一味付出、不顾一切</div><div>B．心怀善意、尽己所能、讲究策略</div><div>C．只关爱自己的家人</div><div>D．不必考虑对方感受</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">20.</span> 服务社会的意义在于</div>
+  <div class="opts"><div>A．只是为了赚钱</div><div>B．没有任何实际意义</div><div>C．只是为了完成任务</div><div>D．体现人生价值，促进自身全面发展</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">21.</span> 国家利益与人民利益的关系，正确的是</div>
+  <div class="opts"><div>A．根本上一致、相辅相成、统一</div><div>B．完全对立、不可调和</div><div>C．二者毫无关系</div><div>D．人民利益必然损害国家利益</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">22.</span> 当个人利益与国家利益发生矛盾时，我们应该</div>
+  <div class="opts"><div>A．以个人利益为重</div><div>B．以国家利益为重，把国家利益放在第一位</div><div>C．两者都不顾</div><div>D．视心情而定</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">23.</span> 总体国家安全观以 ____ 为宗旨。</div>
+  <div class="opts"><div>A．人民安全</div><div>B．政治安全</div><div>C．经济安全</div><div>D．国际安全</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">24.</span><span class="pt">【拔高】</span> 总体国家安全观五要素对应正确的是</div>
+  <div class="opts"><div>A．根本——人民安全</div><div>B．基础——政治安全</div><div>C．保障——军事、文化、社会安全</div><div>D．依托——经济安全</div></div></div>
+
+<div class="q"><div class="qstem"><span class="qnum">25.</span> "天下兴亡，匹夫有责"，劳动是</div>
+  <div class="opts"><div>A．财富的结果</div><div>B．财富和幸福的源泉</div><div>C．幸福的结果</div><div>D．可有可无的</div></div></div>
+
+<!-- ===================== 二、非选择题 ===================== -->
+<h2><span class="section-tag b">二</span>非选择题（第26—29题，共50分）</h2>
+<div class="tip">答题要求：阅读材料，运用教材观点，按<span class="kbd">是什么 / 为什么 / 怎么做</span>框架分点作答；核心关键词要写准，多角度合理答案同样给分。</div>
+
+<!-- 26 -->
+<div class="q">
+  <div class="qstem"><span class="qnum">26.</span> <b>走进社会 ＋ 网络生活</b>（12分）</div>
+  <div class="material">材料：八年级学生小宇，在家里是父母的子女，在学校是老师和同学眼中的学生，周末常到社区做志愿服务，帮老人打扫卫生、和同学分享学习资料。最近，他在班级微信群里看到一条"某品牌牛奶致癌"的消息，没有核实就转发了，引起部分同学恐慌。事后老师及时提醒，小宇认识到错误，主动在群里澄清辟谣，并提醒大家理性上网、明辨信息。</div>
+  <div class="subq"><span class="tag">是什么</span>（1）小宇的不同身份是通过什么确定的？请写出材料中涉及的社会关系，并指出他参与志愿服务属于什么行为。<span class="pt">（3分）</span></div>
+  <div class="subq"><span class="tag">为什么</span>（2）运用"网络是把双刃剑"的知识，说明为什么不能轻信和随意转发网络谣言。<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">怎么做</span>（3）青少年应怎样理性参与网络生活，并传播网络正能量？<span class="pt">（5分）</span></div>
+</div>
+
+<!-- 27 -->
+<div class="q">
+  <div class="qstem"><span class="qnum">27.</span> <b>遵守规则 ＋ 讲道德</b>（12分）</div>
+  <div class="material">材料：某校运动会期间，小明观看比赛时随意穿越跑道、翻越护栏，造成秩序混乱。经班主任教育，他认识到要自觉遵守规则。此后，小明待人谦和、用语文明，耐心倾听同学发言，答应同学的事情一定做到，还主动向老师承认自己曾经抄过作业的错误。</div>
+  <div class="subq"><span class="tag">是什么</span>（1）结合材料，说明社会规则与社会秩序的关系，以及自由与规则的关系。<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">为什么</span>（2）小明"待人谦和、用语文明""耐心倾听同学发言""信守承诺、承认错误"分别体现了哪些道德要求？请分别写出它们的地位。<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">怎么做</span>（3）我们应如何自觉遵守规则、做一个讲道德的人？<span class="pt">（4分）</span></div>
+</div>
+
+<!-- 28 -->
+<div class="q">
+  <div class="qstem"><span class="qnum">28.</span> <b>违法犯罪 ＋ 善用法律</b>（14分）</div>
+  <div class="material">材料：15岁的小航原本经常旷课、沉迷网络，后来开始小偷小摸，曾被公安机关批评教育。但他不知悔改，为弄到钱去网吧，多次拦截低年级同学强行索要钱财，最终因抢劫罪被人民法院判处有期徒刑。其间，受害者小林曾被同学怂恿"找人教训小航"，但小林选择了报警；小林家长也主动找小航父母协商赔偿事宜。</div>
+  <div class="subq"><span class="tag">是什么</span>（1）违法行为分为哪几类？小航的"小偷小摸"和"抢劫"分别属于什么违法行为？<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">为什么</span>（2）犯罪有哪三个基本特征？其中最主要的特征是什么？法院为什么对小航判处刑罚？<span class="pt">（5分）</span></div>
+  <div class="subq"><span class="tag">怎么做</span>（3）结合小林的做法，说明公民在合法权益受到侵害时应如何依法求助、善用法律。<span class="pt">（5分）</span></div>
+</div>
+
+<!-- 29 -->
+<div class="q">
+  <div class="qstem"><span class="qnum">29.</span> <b>责任 ＋ 国家利益 ＋ 国家安全</b>（12分）</div>
+  <div class="material">材料：某科研团队扎根边疆，为国家重大工程默默奉献，有的科研人员为了工作常年与家人两地分居，他们放弃个人安逸，把国家利益放在首位。与此同时，边境村民老李发现有人在军事禁区附近偷拍，及时向国家安全机关举报。八年级学生小敏听说了这些事迹后，决心努力学习，将来用诚实的劳动报效祖国。</div>
+  <div class="subq"><span class="tag">为什么</span>（1）结合科研人员的事迹，说明国家利益与人民利益的关系，以及我们应如何坚持国家利益至上。<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">是什么</span>（2）老李的行为履行了公民的什么义务？请写出总体国家安全观的基本内容。<span class="pt">（4分）</span></div>
+  <div class="subq"><span class="tag">怎么做</span>（3）"劳动是财富和幸福的源泉"，青少年应如何以实际行动建设美好祖国？<span class="pt">（4分）</span></div>
+</div>
+
+<!-- ===================== 参考答案 ===================== -->
+<h2>参考答案与评分要点 <span class="badge">点击展开</span></h2>
+<div class="answers">
+<div class="meth ans-head">
+  <b>说明：答案依据人教版八上《道德与法治》教材规范表述；非选择题允许多角度合理答案，核心关键词（采分点）写出即可给分。</b>
+  <button class="btn" onclick="toggleAll()">展开 / 收起全部</button>
+</div>
+
+<details open>
+  <summary>一、选择题答案表（1—25）</summary>
+  <div class="a">
+    <table class="ans-table">
+      <tr><th style="width:52px">题号</th><th style="width:46px">答案</th><th>一句话解析</th></tr>
+      <tr><td class="k">1</td><td class="v">B</td><td>人的身份是在社会关系中确定的，并非天生，社会关系含血缘、地缘、业缘。</td></tr>
+      <tr><td class="k">2</td><td class="v">C</td><td>谦让、分享、帮助他人、关心社会发展属于亲社会行为。</td></tr>
+      <tr><td class="k">3</td><td class="v">D</td><td>人的成长是不断社会化的过程，由此从"生物人"成长为"社会人"。</td></tr>
+      <tr><td class="k">4</td><td class="v">B</td><td>网络信息良莠不齐，谣言、暴力色情等是网络弊端的体现。</td></tr>
+      <tr><td class="k">5</td><td class="v">C</td><td>"信息节食"指不沉溺网络、有选择地摄取有益信息，不是不碰网络。</td></tr>
+      <tr><td class="k">6</td><td class="v">A</td><td>网络推动社会进步体现在经济、政治、文化传播、科技创新四方面。</td></tr>
+      <tr><td class="k">7</td><td class="v">D</td><td>社会规则明确社会秩序的内容，并保障社会秩序的实现。</td></tr>
+      <tr><td class="k">8</td><td class="v">B</td><td>自由与规则不可分：规则划定自由边界，也保障人们真正享有自由。</td></tr>
+      <tr><td class="k">9</td><td class="v">C</td><td>遵守规则需要他律与自律相结合，更要发自内心敬畏规则。</td></tr>
+      <tr><td class="k">10</td><td class="v">A</td><td>尊重是交往的起点（前提是礼貌，安身立命之本是诚信）。</td></tr>
+      <tr><td class="k">11</td><td class="v">B</td><td>文明有礼是一个人立身处世的前提，还促进社会和谐、体现国家形象。</td></tr>
+      <tr><td class="k">12</td><td class="v">D</td><td>诚信是一个人安身立命之本，也是企业的无形资产。</td></tr>
+      <tr><td class="k">13</td><td class="v">A</td><td>违法行为分民事违法、行政违法、刑事违法（犯罪）三类。</td></tr>
+      <tr><td class="k">14</td><td class="v">C</td><td>严重社会危害性是犯罪的最本质特征，刑事违法性是法律标志。</td></tr>
+      <tr><td class="k">15</td><td class="v">B</td><td>预防犯罪要杜绝不良行为、依法自律、从小事做起，防患于未然。</td></tr>
+      <tr><td class="k">16</td><td class="v">C</td><td>诉讼是处理纠纷、应对侵害最正规最权威的手段，是最后的屏障。</td></tr>
+      <tr><td class="k">17</td><td class="v">A</td><td>责任来自对他人的承诺、职业要求、道德规范和法律规定四方面。</td></tr>
+      <tr><td class="k">18</td><td class="v">C</td><td>承担责任的代价与回报并存，要做不言代价与回报的负责任的人。</td></tr>
+      <tr><td class="k">19</td><td class="v">B</td><td>关爱他人要心怀善意、尽己所能、讲究策略（保护自尊、注意方式）。</td></tr>
+      <tr><td class="k">20</td><td class="v">D</td><td>服务社会体现人生价值，也能促进自身全面发展。</td></tr>
+      <tr><td class="k">21</td><td class="v">A</td><td>国家利益与人民利益在根本上一致、相辅相成、统一，并非对立。</td></tr>
+      <tr><td class="k">22</td><td class="v">B</td><td>坚持国家利益至上，矛盾时以国家利益为重、放在第一位。</td></tr>
+      <tr><td class="k">23</td><td class="v">A</td><td>总体国家安全观以人民安全为宗旨、政治安全为根本、经济安全为基础。</td></tr>
+      <tr><td class="k">24</td><td class="v">C</td><td>总体国家安全观：宗旨人民、根本政治、基础经济、保障军文社、依托国际安全。</td></tr>
+      <tr><td class="k">25</td><td class="v">B</td><td>劳动是财富和幸福的源泉，实干创造未来。</td></tr>
+    </table>
+  </div>
+</details>
+
+<details>
+  <summary>26．走进社会 ＋ 网络生活（12分）</summary>
+  <div class="a">
+    <div class="point"><b>（1）（3分）</b>答出"人的身份是在<span class="mn">社会关系</span>中确定的"给1分；写出两种社会关系（如"子女"属<span class="mn">血缘关系</span>、"学生"属<span class="mn">业缘关系</span>，或地缘关系）给1分；答出参加志愿服务属于<span class="mn">亲社会行为</span>给1分。</div>
+    <div class="point"><b>（2）（4分）</b>答出"网络是把双刃剑，丰富生活、推动社会进步，但信息良莠不齐"给2分；答出"谣言等不良信息会误导他人、制造恐慌、扰乱秩序"给1分；答出"要学会辨析网络信息、让谣言止于智者"给1分。</div>
+    <div class="point"><b>（3）（5分）</b>每点1分，共5分：①提高<span class="mn">媒介素养</span>，利用互联网获取新知；②学会<span class="mn">信息节食</span>，不沉溺网络；③学会<span class="mn">辨析网络信息</span>，自觉抵制谣言；④遵守<span class="mn">道德和法律</span>；⑤传播网络正能量（为社会发展建言献策、弘扬社会主义核心价值观）。</div>
+    <div class="point warn" style="font-size:13px;">⚠️ 核心关键词：社会关系（血缘/地缘/业缘）、亲社会行为、双刃剑、媒介素养、信息节食、辨别谣言、正能量。</div>
+  </div>
+</details>
+
+<details>
+  <summary>27．遵守规则 ＋ 讲道德（12分）</summary>
+  <div class="a">
+    <div class="point"><b>（1）（4分）</b>答出"社会规则<span class="mn">明确社会秩序的内容、保障社会秩序的实现</span>"给2分；答出"自由与规则<span class="mn">不可分</span>，规则划定自由边界，也<span class="mn">保障自由</span>"给2分（只写"限制自由"不给后半分）。</div>
+    <div class="point"><b>（2）（4分）</b>"待人谦和、用语文明"体现<span class="mn">文明有礼</span>，是<span class="mn">立身处世的前提</span>给1分；"耐心倾听"体现<span class="mn">尊重他人</span>，尊重是<span class="mn">交往的起点</span>给1分；"信守承诺、承认错误"体现<span class="mn">诚实守信</span>，诚信是<span class="mn">安身立命之本</span>给1分；答出"诚信既是价值准则，也是道德与法律规范"给1分（三个地位不得串位）。</div>
+    <div class="point"><b>（3）（4分）</b>每点1分，共4分：①遵守规则需要<span class="mn">他律和自律</span>相结合；②发自内心<span class="mn">敬畏规则</span>，将规则内化于心、外化于行；③学会尊重他人、以礼待人、诚实守信；④从小事做起，不断提升道德修养。</div>
+    <div class="point warn" style="font-size:13px;">⚠️ 核心关键词：明确内容/保障实现、不可分、划定边界且保障自由、他律＋自律、敬畏规则；起点＝尊重、前提＝礼貌、安身立命之本＝诚信。</div>
+  </div>
+</details>
+
+<details>
+  <summary>28．违法犯罪 ＋ 善用法律（14分）</summary>
+  <div class="a">
+    <div class="point"><b>（1）（4分）</b>答出违法行为分<span class="mn">民事违法、行政违法、刑事违法（犯罪）</span>三类给2分；"小偷小摸"属<span class="mn">一般违法</span>（行政违法，危害较轻）给1分；"抢劫"属<span class="mn">刑事违法（犯罪）</span>给1分。</div>
+    <div class="point"><b>（2）（5分）</b>答出犯罪三特征——<span class="mn">严重社会危害性、刑事违法性、应受刑罚处罚性</span>给3分；答出最本质特征是<span class="mn">严重社会危害性</span>给1分；答出"小航的行为具有严重社会危害性、触犯刑法，因此应受刑罚处罚"给1分。</div>
+    <div class="point"><b>（3）（5分）</b>每点1分，共5分：①合法权益受侵害时要<span class="mn">及时寻求法律救助</span>、依靠法律维权；②可通过<span class="mn">法律服务机构</span>、寻求国家法律救济；③<span class="mn">诉讼</span>是最正规、最权威、最后的屏障，要敢于并善于诉讼；④不能"私了"或"以暴制暴"（小林拒绝怂恿、选择报警值得肯定），要依法维权；⑤从小事做起，<span class="mn">杜绝不良行为</span>，预防犯罪。</div>
+    <div class="point warn" style="font-size:13px;">⚠️ 核心关键词：三类违法、一般违法/犯罪、三特征、最本质＝严重社会危害性、刑罚、诉讼（最后屏障）、依法维权。</div>
+  </div>
+</details>
+
+<details>
+  <summary>29．责任 ＋ 国家利益 ＋ 国家安全（12分）</summary>
+  <div class="a">
+    <div class="point"><b>（1）（4分）</b>答出国家利益与人民利益<span class="mn">根本上一致、相辅相成、统一</span>给2分；答出"坚持<span class="mn">国家利益至上</span>，当个人利益与国家利益发生矛盾时以国家利益为重、把国家利益放在第一位"给2分。</div>
+    <div class="point"><b>（2）（4分）</b>答出老李履行了<span class="mn">维护国家安全</span>的义务（检举、制止危害国家安全的行为，保守国家秘密）给1分；总体国家安全观基本内容给3分：以<span class="mn">人民安全</span>为宗旨、<span class="mn">政治安全</span>为根本、<span class="mn">经济安全</span>为基础、<span class="mn">军事文化社会安全</span>为保障、<span class="mn">促进国际安全</span>为依托，走中国特色国家安全道路（答出其中要点即可）。</div>
+    <div class="point"><b>（3）（4分）</b>每点1分，共4分：①<span class="mn">关心国家发展</span>，既为成就自豪，也正视问题，对未来充满信心；②<span class="mn">尊重劳动者</span>，发扬实干精神；③<span class="mn">努力学习</span>，担负历史重任；④积极参与社会实践、服务社会，用诚实劳动报效祖国。</div>
+    <div class="point warn" style="font-size:13px;">⚠️ 核心关键词：根本上一致、国家利益至上、人民利益高于一切、检举制止/保守国家秘密、五要素口诀（宗旨人民·根本政治·基础经济·保障军文社·依托国际安全）、劳动是源泉、实干。</div>
+  </div>
+</details>
+
+</div>
+
+<div class="foot">
+  命题说明：本卷依据人教版八年级上册《道德与法治》4单元10课命题，覆盖"走进社会生活—遵守社会规则—勇担社会责任—维护国家利益"全部内容，按"基础—中档—拔高"梯度设计（拔高题约20%）。事实与表述严格依据教材要点，未作编造；参考答案为主观参考答案，阅卷时请按采分点从宽给分、鼓励多角度合理作答。若学校教学进度或教材版本有差异，请以课本为准。
+</div>
+
+</div>
+<script>
+  function toggleAll(){
+    var ds=document.querySelectorAll('.answers details');
+    var shouldOpen=Array.prototype.some.call(ds,function(d){return !d.open;});
+    ds.forEach(function(d){d.open=shouldOpen;});
+  }
+</script>
+</body>
+</html>
