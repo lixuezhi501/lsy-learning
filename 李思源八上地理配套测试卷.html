@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李思源 · 八上地理「框架学习法」配套测试卷</title>
+<style>
+  :root{
+    --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#ea580c;
+    --purple:#7c3aed; --teal:#0d9488; --pink:#db2777; --ink:#1f2937;
+    --bg:#f8fafc; --card:#ffffff; --line:#e5e7eb; --muted:#6b7280;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px;}
+  h1{font-size:24px;margin:0 0 4px;color:var(--blue);line-height:1.35;}
+  h2{font-size:20px;margin:34px 0 12px;padding-left:10px;border-left:5px solid var(--blue);}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--ink);}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:14px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warn{background:#fef2f2;border-left:4px solid var(--red);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .ok{background:#f0fdf4;border-left:4px solid var(--green);padding:12px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eff6ff;color:var(--blue);font-weight:700;}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;}
+  summary{cursor:pointer;font-weight:700;color:var(--blue);}
+  details .a{margin-top:8px;font-size:14px;}
+  .right{color:var(--green);font-weight:700;}
+  .mn{font-weight:800;color:var(--purple);}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted);}
+
+  /* ===== 试卷专用样式 ===== */
+  .exam{background:#fff;border:2px solid var(--blue);border-radius:12px;padding:18px 18px 10px;margin:14px 0;}
+  .exam-title{text-align:center;font-size:23px;font-weight:800;color:var(--blue);letter-spacing:1px;}
+  .exam-sub{text-align:center;font-size:13px;color:var(--muted);margin-top:6px;}
+  .stu{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px;margin-top:14px;color:var(--ink);}
+  .stu span{border-bottom:1px solid var(--ink);min-width:150px;display:inline-block;padding:0 6px;}
+  .scorebar{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px;}
+  .scorebar th,.scorebar td{text-align:center;padding:7px 6px;}
+  .scorebar th{background:#eff6ff;color:var(--blue);}
+  .scorebar tr.total td{background:#f0fdf4;font-weight:800;color:var(--green);}
+  .sec-title{font-size:18px;font-weight:800;color:var(--ink);margin:26px 0 8px;padding:8px 12px;background:#eef2ff;border-left:5px solid var(--purple);border-radius:6px;}
+  .q{margin:14px 0;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:10px;}
+  .q .stem{font-size:15px;margin-bottom:8px;}
+  .qn{font-weight:800;color:var(--blue);margin-right:4px;}
+  .score{color:var(--red);font-weight:700;font-size:13px;white-space:nowrap;}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:14.5px;padding-left:24px;}
+  @media(max-width:560px){.opts{grid-template-columns:1fr;padding-left:10px;}}
+  .opt{cursor:default;}
+  .blank{display:inline-block;border-bottom:1.5px solid var(--ink);min-width:90px;text-align:center;color:transparent;}
+  .fig{text-align:center;margin:12px 0;}
+  .fig svg{max-width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff;}
+  .figcap{font-size:13px;color:var(--muted);margin-top:6px;}
+  .subq{margin:8px 0 8px 4px;font-size:14.5px;}
+  .answrap{margin-top:26px;}
+  .ansgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:14px;text-align:center;}
+  .ansgrid div{border:1px solid var(--line);border-radius:6px;padding:5px 2px;}
+  .ansgrid .h{background:#eff6ff;color:var(--blue);font-weight:700;}
+  .exp{margin:8px 0;font-size:13.5px;line-height:1.6;}
+  .exp b{color:var(--blue);}
+  .pt{font-size:13.5px;line-height:1.7;}
+  .pt li{margin:4px 0;}
+  .tag{display:inline-block;background:#fef3c7;color:#92400e;border-radius:4px;padding:0 6px;font-size:12px;margin-left:6px;}
+  @media print{
+    body{background:#fff;}
+    .card,.exam,.q,details{box-shadow:none;}
+    .exam{border:2px solid #000;}
+    .qn,.q .qn{color:#000;}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .q,.exam,details{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="exam">
+  <div class="exam-title">李思源 · 八上地理「框架学习法」配套测试卷</div>
+  <div class="exam-sub">湘教版 ｜ 覆盖全册四章 ｜ 满分100分 ｜ 建议用时60分钟</div>
+  <div class="stu">
+    <div>姓名：<span></span></div>
+    <div>班级：<span></span></div>
+    <div>得分：<span></span></div>
+  </div>
+  <table class="scorebar">
+    <tr><th>题型</th><th>题号</th><th>题数</th><th>分值</th><th>小计</th></tr>
+    <tr><td>一、选择题</td><td>1—25</td><td>25题</td><td>每题2分</td><td>50分</td></tr>
+    <tr><td>二、非选择题</td><td>26—30</td><td>5题</td><td>见各小题</td><td>50分</td></tr>
+    <tr class="total"><td>合计</td><td colspan="3">选择题50分 + 非选择题50分</td><td>100分</td></tr>
+  </table>
+  <div class="tip">答题提醒：先判断题目落在"疆域人口 → 自然环境 → 自然资源 → 主要产业"哪一块，再回忆对应细节；读图题看清字母位置再作答。</div>
+</div>
+
+<h2>一、选择题（本大题共25小题，每小题2分，共50分。每小题只有一个正确答案）</h2>
+
+<div class="q">
+  <div class="stem"><span class="qn">1.</span>我国陆地面积约为多少万平方千米，居世界第几位？<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 960万，第二位</div>
+    <div class="opt">B. 960万，第三位</div>
+    <div class="opt">C. 997万，第三位</div>
+    <div class="opt">D. 1200万，第二位</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">2.</span>从海陆位置看，我国位于（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 亚欧大陆西部、大西洋东岸</div>
+    <div class="opt">B. 亚欧大陆内部，是内陆国</div>
+    <div class="opt">C. 亚欧大陆东部、太平洋西岸，海陆兼备</div>
+    <div class="opt">D. 太平洋东岸，是岛国</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">3.</span>我国的两个内海是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 渤海、黄海</div>
+    <div class="opt">B. 黄海、东海</div>
+    <div class="opt">C. 渤海、琼州海峡</div>
+    <div class="opt">D. 东海、南海</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">4.</span>我国人口地理分界线（胡焕庸线）是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 秦岭—淮河一线</div>
+    <div class="opt">B. 黑河—腾冲一线</div>
+    <div class="opt">C. 长城一线</div>
+    <div class="opt">D. 大兴安岭—阴山一线</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">5.</span>我国34个省级行政区的构成，正确的是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 23省、5自治区、4直辖市、2特别行政区</div>
+    <div class="opt">B. 24省、5自治区、4直辖市、1特别行政区</div>
+    <div class="opt">C. 22省、5自治区、5直辖市、2特别行政区</div>
+    <div class="opt">D. 23省、4自治区、5直辖市、2特别行政区</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">6.</span>我国人口最多的少数民族是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 满族</div>
+    <div class="opt">B. 回族</div>
+    <div class="opt">C. 壮族</div>
+    <div class="opt">D. 蒙古族</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">7.</span>我国地势的基本特征是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 东高西低，呈三级阶梯状分布</div>
+    <div class="opt">B. 西高东低，呈三级阶梯状分布</div>
+    <div class="opt">C. 中间高、四周低</div>
+    <div class="opt">D. 南高北低，呈阶梯状分布</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">8.</span>我国地势第一、二级阶梯之间的分界山脉是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 昆仑山—祁连山—横断山脉</div>
+    <div class="opt">B. 大兴安岭—太行山—巫山—雪峰山</div>
+    <div class="opt">C. 大兴安岭—阴山—贺兰山</div>
+    <div class="opt">D. 天山—昆仑山—阿尔泰山</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">9.</span>我国地势第二、三级阶梯之间的分界山脉是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 昆仑山—祁连山—横断山脉</div>
+    <div class="opt">B. 大兴安岭—太行山—巫山—雪峰山</div>
+    <div class="opt">C. 大兴安岭—阴山—贺兰山—巴颜喀拉山—冈底斯山</div>
+    <div class="opt">D. 巫山—雪峰山—武夷山</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">10.</span>四大盆地中，因矿产资源丰富而被称为"聚宝盆"的是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 塔里木盆地</div>
+    <div class="opt">B. 四川盆地</div>
+    <div class="opt">C. 柴达木盆地</div>
+    <div class="opt">D. 准噶尔盆地</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">11.</span>我国1月0℃等温线和800毫米年等降水量线大致沿哪条线分布？<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 秦岭—淮河一线</div>
+    <div class="opt">B. 长城一线</div>
+    <div class="opt">C. 大兴安岭—阴山一线</div>
+    <div class="opt">D. 黑河—腾冲一线</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">12.</span>我国季风区与非季风区的分界线是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 大兴安岭—太行山—巫山—雪峰山</div>
+    <div class="opt">B. 昆仑山—祁连山—横断山脉</div>
+    <div class="opt">C. 大兴安岭—阴山—贺兰山—巴颜喀拉山—冈底斯山</div>
+    <div class="opt">D. 秦岭—淮河一线</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">13.</span>我国最大的内流河是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 长江</div>
+    <div class="opt">B. 黄河</div>
+    <div class="opt">C. 塔里木河</div>
+    <div class="opt">D. 珠江</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">14.</span>黄河下游形成"地上河"的主要原因是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 下游水量特别大</div>
+    <div class="opt">B. 中游流经黄土高原，含沙量大，下游泥沙淤积抬高河床</div>
+    <div class="opt">C. 下游降水特别多</div>
+    <div class="opt">D. 上游冰雪融水特别丰富</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">15.</span>我国自然资源的基本特征是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 总量丰富，人均充足</div>
+    <div class="opt">B. 总量贫乏，人均不足</div>
+    <div class="opt">C. 总量丰富，人均不足</div>
+    <div class="opt">D. 总量贫乏，人均充足</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">16.</span>我国土地资源的基本国策是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 十分珍惜、合理利用土地和切实保护耕地</div>
+    <div class="opt">B. 实行计划生育</div>
+    <div class="opt">C. 保护环境，绿色发展</div>
+    <div class="opt">D. 节约用水，防治水污染</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">17.</span>解决我国水资源空间（地区）分布不均的主要措施是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 兴修水库</div>
+    <div class="opt">B. 跨流域调水（如南水北调）</div>
+    <div class="opt">C. 节约用水</div>
+    <div class="opt">D. 防治水污染</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">18.</span>南水北调中线工程的引水源地是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 三峡水库</div>
+    <div class="opt">B. 丹江口水库</div>
+    <div class="opt">C. 京杭运河</div>
+    <div class="opt">D. 长江入海口</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">19.</span>下列属于非可再生资源的是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 太阳能</div>
+    <div class="opt">B. 森林</div>
+    <div class="opt">C. 煤炭</div>
+    <div class="opt">D. 水资源</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">20.</span>我国"南稻北麦"的耕地与粮食作物分界线是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 秦岭—淮河一线</div>
+    <div class="opt">B. 长城一线</div>
+    <div class="opt">C. 黑河—腾冲一线</div>
+    <div class="opt">D. 大兴安岭一线</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">21.</span>我国最大的综合性工业基地是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 辽中南工业基地</div>
+    <div class="opt">B. 京津唐工业基地</div>
+    <div class="opt">C. 沪宁杭工业基地</div>
+    <div class="opt">D. 珠江三角洲工业基地</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">22.</span>我国以重工业为主的工业基地是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 辽中南工业基地</div>
+    <div class="opt">B. 京津唐工业基地</div>
+    <div class="opt">C. 沪宁杭工业基地</div>
+    <div class="opt">D. 珠江三角洲工业基地</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">23.</span>被称为经济发展"先行官"的产业是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 农业</div>
+    <div class="opt">B. 工业</div>
+    <div class="opt">C. 交通运输业</div>
+    <div class="opt">D. 商业</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">24.</span>运量最大、运费最低，但速度最慢的运输方式是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 铁路运输</div>
+    <div class="opt">B. 公路运输</div>
+    <div class="opt">C. 水路运输</div>
+    <div class="opt">D. 航空运输</div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="stem"><span class="qn">25.</span>下列铁路干线中，属于南北方向"五纵"之一的是（　）<span class="score">（2分）</span></div>
+  <div class="opts">
+    <div class="opt">A. 陇海线</div>
+    <div class="opt">B. 京九线</div>
+    <div class="opt">C. 沪杭—浙赣线</div>
+    <div class="opt">D. 京包—包兰线</div>
+  </div>
+</div>
+
+<h2>二、非选择题（本大题共5小题，第26—30题，共50分）</h2>
+
+<!-- 26题 -->
+<div class="q">
+  <div class="stem"><span class="qn">26.</span><b>读图填图：中国的疆域与行政区划（共10分）</b></div>
+  <div class="fig">
+    <svg viewBox="0 0 520 400" width="520" height="400" role="img" aria-label="中国疆域与省级行政区示意图">
+      <rect x="0" y="0" width="520" height="400" fill="#f0f9ff"/>
+      <!-- 海域标注 -->
+      <text x="372" y="180" font-size="13" fill="#0284c7" opacity="0.8">黄海</text>
+      <text x="352" y="245" font-size="13" fill="#0284c7" opacity="0.8">东海</text>
+      <text x="300" y="345" font-size="13" fill="#0284c7" opacity="0.8">南海</text>
+      <!-- 中国轮廓（示意） -->
+      <path d="M70,95 L130,70 L200,55 L270,45 L330,40 L360,55 L395,75 L388,105 L368,130 L345,150 L356,166 L335,186 L320,215 L315,240 L295,270 L265,295 L235,300 L200,285 L165,265 L130,250 L95,220 L75,185 L65,150 Z"
+            fill="#e8f0fe" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round"/>
+      <!-- 台湾岛 -->
+      <ellipse cx="345" cy="272" rx="9" ry="20" fill="#e8f0fe" stroke="#2563eb" stroke-width="2"/>
+      <!-- 海南岛 -->
+      <ellipse cx="252" cy="312" rx="12" ry="9" fill="#e8f0fe" stroke="#2563eb" stroke-width="2"/>
+      <!-- 字母A：东北（黑龙江省） -->
+      <circle cx="372" cy="92" r="13" fill="#dc2626"/>
+      <text x="372" y="97" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">A</text>
+      <!-- 字母B：西北（新疆） -->
+      <circle cx="112" cy="125" r="13" fill="#dc2626"/>
+      <text x="112" y="130" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+      <!-- 字母C：台湾岛（引线指向岛屿） -->
+      <circle cx="378" cy="288" r="13" fill="#dc2626"/>
+      <text x="378" y="293" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+      <line x1="366" y1="282" x2="351" y2="274" stroke="#dc2626" stroke-width="1.6"/>
+      <!-- 字母D：渤海（内海） -->
+      <circle cx="352" cy="157" r="13" fill="#dc2626"/>
+      <text x="352" y="162" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">D</text>
+      <!-- 指北针 -->
+      <g transform="translate(475,60)">
+        <line x1="0" y1="18" x2="0" y2="-14" stroke="#1f2937" stroke-width="2"/>
+        <polygon points="0,-20 -5,-8 5,-8" fill="#1f2937"/>
+        <text x="0" y="34" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">N</text>
+      </g>
+      <text x="260" y="382" font-size="12" fill="#6b7280" text-anchor="middle">（中国疆域示意图，非精确比例地图）</text>
+    </svg>
+    <div class="figcap">图 26　中国疆域与省级行政区示意图（字母为待填地理事物）</div>
+  </div>
+  <div class="subq">(1) 写出图中字母代表的地理事物名称。（4分）</div>
+  <div class="subq" style="padding-left:18px">A：<span class="blank">疏</span>（我国纬度最高的省级行政区）　　B：<span class="blank">疏</span>（我国面积最大的省级行政区）</div>
+  <div class="subq" style="padding-left:18px">C：<span class="blank">疏</span>（我国第一大岛）　　D：<span class="blank">疏</span>（我国位置最北的内海）</div>
+  <div class="subq">(2) 我国陆地面积约<span class="blank">疏</span>万平方千米，居世界第<span class="blank">疏</span>位。（2分）</div>
+  <div class="subq">(3) 我国人口地理分界线是<span class="blank">疏</span>—<span class="blank">疏</span>一线，该线东南人口稠密、西北人口稀疏。（4分）</div>
+</div>
+
+<!-- 27题 -->
+<div class="q">
+  <div class="stem"><span class="qn">27.</span><b>读图分析：中国的地势与地形（共10分）</b></div>
+  <div class="fig">
+    <svg viewBox="0 0 660 330" width="660" height="330" role="img" aria-label="中国地势三级阶梯剖面示意图">
+      <rect x="0" y="0" width="660" height="330" fill="#f8fafc"/>
+      <!-- 海拔参考虚线 -->
+      <line x1="40" y1="70" x2="560" y2="70" stroke="#cbd5e1" stroke-dasharray="5 4"/>
+      <line x1="40" y1="130" x2="560" y2="130" stroke="#cbd5e1" stroke-dasharray="5 4"/>
+      <line x1="40" y1="215" x2="560" y2="215" stroke="#cbd5e1" stroke-dasharray="5 4"/>
+      <text x="30" y="74" font-size="11" fill="#6b7280" text-anchor="end">4000m</text>
+      <text x="30" y="134" font-size="11" fill="#6b7280" text-anchor="end">1000m</text>
+      <text x="30" y="219" font-size="11" fill="#6b7280" text-anchor="end">500m</text>
+      <!-- 地形剖面 -->
+      <polygon points="40,70 200,70 200,130 400,130 400,215 560,215 560,248 640,248 640,300 40,300"
+               fill="#dbeafe" stroke="#ea580c" stroke-width="3" stroke-linejoin="round"/>
+      <!-- 阶梯着色 -->
+      <rect x="42" y="72" width="156" height="56" fill="#93c5fd" opacity="0.35"/>
+      <rect x="202" y="132" width="196" height="81" fill="#6ee7b7" opacity="0.35"/>
+      <rect x="402" y="217" width="156" height="31" fill="#fcd34d" opacity="0.4"/>
+      <!-- 阶梯名称 -->
+      <text x="120" y="105" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">第一级阶梯</text>
+      <text x="120" y="126" font-size="11" fill="#1e3a8a" text-anchor="middle">青藏高原</text>
+      <text x="300" y="172" font-size="14" font-weight="bold" fill="#065f46" text-anchor="middle">第二级阶梯</text>
+      <text x="300" y="193" font-size="11" fill="#065f46" text-anchor="middle">高原、盆地</text>
+      <text x="480" y="238" font-size="13" font-weight="bold" fill="#92400e" text-anchor="middle">第三级阶梯（平原丘陵）</text>
+      <!-- 界山A -->
+      <circle cx="200" cy="100" r="13" fill="#dc2626"/>
+      <text x="200" y="105" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">A</text>
+      <text x="200" y="55" font-size="12.5" fill="#dc2626" text-anchor="middle">第一、二级阶梯界山</text>
+      <!-- 界山B -->
+      <circle cx="400" cy="172" r="13" fill="#dc2626"/>
+      <text x="400" y="177" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+      <text x="400" y="285" font-size="12.5" fill="#dc2626" text-anchor="middle">第二、三级阶梯界山</text>
+      <!-- 海洋 -->
+      <rect x="560" y="248" width="80" height="52" fill="#bfdbfe"/>
+      <text x="600" y="278" font-size="13" fill="#1e40af" text-anchor="middle">海洋</text>
+      <!-- 方向 -->
+      <text x="50" y="318" font-size="13" font-weight="bold" fill="#1f2937">西（高）</text>
+      <text x="600" y="318" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="end">东（低）</text>
+      <line x1="115" y1="314" x2="470" y2="314" stroke="#1f2937" stroke-width="1.5" marker-end="url(#ar)"/>
+      <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0,0 7,3 0,6" fill="#1f2937"/></marker></defs>
+    </svg>
+    <div class="figcap">图 27　中国地势三级阶梯剖面示意图（自西向东）</div>
+  </div>
+  <div class="subq">(1) 我国地势总特征：西<span class="blank">疏</span>东<span class="blank">疏</span>，呈<span class="blank">疏</span>级阶梯状分布。（3分）</div>
+  <div class="subq">(2) 图中字母代表阶梯分界山脉：A是<span class="blank">疏</span>山—祁连山—横断山脉；B是<span class="blank">疏</span>—太行山—巫山—雪峰山。（4分）</div>
+  <div class="subq">(3) 请任答两点说明这种地势特点对我国的影响：（3分）</div>
+  <div class="subq" style="padding-left:18px">① <span class="blank">疏</span></div>
+  <div class="subq" style="padding-left:18px">② <span class="blank">疏</span></div>
+</div>
+
+<!-- 28题 -->
+<div class="q">
+  <div class="stem"><span class="qn">28.</span><b>气候与河流：秦岭—淮河、长江与黄河（共12分）</b></div>
+  <div class="fig">
+    <svg viewBox="0 0 580 360" width="580" height="360" role="img" aria-label="长江黄河流域示意图">
+      <rect x="0" y="0" width="580" height="360" fill="#f0f9ff"/>
+      <!-- 青藏高原示意 -->
+      <path d="M20,70 Q60,50 100,80 Q140,60 160,120 Q170,200 150,280 Q100,300 30,280 Z" fill="#e0e7ff" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="85" y="185" font-size="13" fill="#4338ca" text-anchor="middle" transform="rotate(-90 85 185)">青藏高原</text>
+      <!-- 海洋 -->
+      <rect x="520" y="100" width="60" height="170" fill="#bfdbfe"/>
+      <text x="550" y="190" font-size="13" fill="#1e40af" text-anchor="middle" transform="rotate(90 550 190)">海洋</text>
+      <!-- 黄河（几字形，红色） -->
+      <path d="M60,105 Q120,95 175,90 L205,62 L278,62 Q292,92 300,122 L320,150 L400,158 L520,148"
+            fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="335" y="140" font-size="13" font-weight="bold" fill="#dc2626">黄河</text>
+      <!-- 长江（蓝色） -->
+      <path d="M60,235 Q150,220 240,212 L320,205 L380,200 L430,196 L520,190"
+            fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="330" y="228" font-size="13" font-weight="bold" fill="#2563eb">长江</text>
+      <!-- 字母标记 -->
+      <circle cx="320" cy="205" r="12" fill="#0d9488"/>
+      <text x="320" y="210" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">A</text>
+      <circle cx="430" cy="196" r="12" fill="#0d9488"/>
+      <text x="430" y="201" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+      <circle cx="292" cy="90" r="12" fill="#ea580c"/>
+      <text x="292" y="95" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+      <circle cx="400" cy="158" r="12" fill="#ea580c"/>
+      <text x="400" y="163" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">D</text>
+      <text x="290" y="330" font-size="12" fill="#6b7280" text-anchor="middle">（长江、黄河流域示意图，字母为分界城市）</text>
+    </svg>
+    <div class="figcap">图 28　长江与黄河流域简图（字母为河流上中下游分界城市）</div>
+  </div>
+  <div class="subq">(1) 秦岭—淮河一线是我国重要地理分界线：1月<span class="blank">疏</span>℃等温线、<span class="blank">疏</span>毫米年等降水量线大致经过，也是我国<span class="blank">疏</span>方与<span class="blank">疏</span>方的分界线。（4分）</div>
+  <div class="subq">(2) 图中字母代表河流分界城市：长江上中游分界A是<span class="blank">疏</span>，中下游分界B是<span class="blank">疏</span>；黄河上中游分界C是<span class="blank">疏</span>，中下游分界D是<span class="blank">疏</span>。（4分）</div>
+  <div class="subq">(3) 长江下游江阔水深、航运价值高，有"<span class="blank">疏</span>"之称；黄河下游因泥沙淤积形成"<span class="blank">疏</span>河"，治理黄河的关键是加强中游黄土高原的<span class="blank">疏</span>。（4分）</div>
+</div>
+
+<!-- 29题 -->
+<div class="q">
+  <div class="stem"><span class="qn">29.</span><b>中国的自然资源：土地、水与南水北调（共8分）</b></div>
+  <div class="subq">(1) 我国自然资源的基本特征是总量<span class="blank">疏</span>、人均<span class="blank">疏</span>。（2分）</div>
+  <div class="subq">(2) 我国土地资源类型齐全，但耕地、林地比重小，难利用土地比重大。为此我国把"<span class="blank">疏</span>"作为一项基本国策。（2分）</div>
+  <div class="subq">(3) 我国水资源空间分布南多北少，为缓解北方缺水，实施了南水北调工程：东线利用<span class="blank">疏</span>输水，中线从<span class="blank">疏</span>水库引水，西线从长江<span class="blank">疏</span>调水。（3分）</div>
+  <div class="subq">(4) 解决水资源时间（季节）分布不均的主要措施是<span class="blank">疏</span>。（1分）</div>
+</div>
+
+<!-- 30题 -->
+<div class="q">
+  <div class="stem"><span class="qn">30.</span><b>中国的主要产业：农业、工业与交通运输（共10分）</b></div>
+  <div class="subq">(1) 农业是国民经济的基础。"南稻北麦"以<span class="blank">疏</span>—<span class="blank">疏</span>一线为界；西部四大牧区是内蒙古、新疆、青海、<span class="blank">疏</span>。（4分）</div>
+  <div class="subq">(2) 四大工业基地中，以重工业为主的是<span class="blank">疏</span>工业基地，我国最大的综合性工业基地是<span class="blank">疏</span>工业基地。（2分）</div>
+  <div class="subq">(3) 根据货物特点选择合适的运输方式（填运输方式）：（3分）</div>
+  <div class="subq" style="padding-left:18px">① 100吨煤炭从山西运往上海，量大、路远、不急，宜选<span class="blank">疏</span>运输；</div>
+  <div class="subq" style="padding-left:18px">② 急救药品从北京运往乌鲁木齐，量小、急需，宜选<span class="blank">疏</span>运输；</div>
+  <div class="subq" style="padding-left:18px">③ 郊区新鲜蔬菜运往市区，短途、量小，宜选<span class="blank">疏</span>运输。</div>
+  <div class="subq">(4) 交通运输业被称为经济发展的"<span class="blank">疏</span>"。（1分）</div>
+</div>
+
+<!-- ===== 答案 ===== -->
+<div class="answrap">
+  <h2>参考答案与评分要点</h2>
+  <details>
+    <summary>一、选择题答案表（1—25题，每题2分，共50分）+ 逐题解析</summary>
+    <div class="a">
+      <table style="width:auto;min-width:60%;">
+        <tr><th>题号</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+        <tr><td>答案</td><td>B</td><td>C</td><td>C</td><td>B</td><td>A</td></tr>
+      </table>
+      <table style="width:auto;min-width:60%;">
+        <tr><th>题号</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+        <tr><td>答案</td><td>C</td><td>B</td><td>A</td><td>B</td><td>C</td></tr>
+      </table>
+      <table style="width:auto;min-width:60%;">
+        <tr><th>题号</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr>
+        <tr><td>答案</td><td>A</td><td>C</td><td>C</td><td>B</td><td>C</td></tr>
+      </table>
+      <table style="width:auto;min-width:60%;">
+        <tr><th>题号</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th></tr>
+        <tr><td>答案</td><td>A</td><td>B</td><td>B</td><td>C</td><td>A</td></tr>
+      </table>
+      <table style="width:auto;min-width:60%;">
+        <tr><th>题号</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr>
+        <tr><td>答案</td><td>C</td><td>A</td><td>C</td><td>C</td><td>B</td></tr>
+      </table>
+      <div class="exp"><b>1.</b> 我国陆地面积约960万平方千米，仅次于俄罗斯、加拿大，居世界第三位。</div>
+      <div class="exp"><b>2.</b> 我国位于亚欧大陆东部、太平洋西岸，是一个海陆兼备的国家。</div>
+      <div class="exp"><b>3.</b> 渤海和琼州海峡是我国的两个内海。</div>
+      <div class="exp"><b>4.</b> 黑河—腾冲线是我国人口地理分界线，其东南人口稠密、西北稀疏。</div>
+      <div class="exp"><b>5.</b> 我国有23个省、5个自治区、4个直辖市、2个特别行政区，共34个省级行政区。</div>
+      <div class="exp"><b>6.</b> 壮族是我国人口最多的少数民族。</div>
+      <div class="exp"><b>7.</b> 我国地势西高东低，呈三级阶梯状分布。</div>
+      <div class="exp"><b>8.</b> 第一、二级阶梯的分界山脉是昆仑山—祁连山—横断山脉。</div>
+      <div class="exp"><b>9.</b> 第二、三级阶梯的分界山脉是大兴安岭—太行山—巫山—雪峰山。</div>
+      <div class="exp"><b>10.</b> 柴达木盆地因矿产资源丰富而被称为"聚宝盆"。</div>
+      <div class="exp"><b>11.</b> 秦岭—淮河一线大致是1月0℃等温线和800毫米年等降水量线经过的地方。</div>
+      <div class="exp"><b>12.</b> 季风区与非季风区的分界线是大兴安岭—阴山—贺兰山—巴颜喀拉山—冈底斯山。</div>
+      <div class="exp"><b>13.</b> 塔里木河位于西北内陆，是我国最大的内流河。</div>
+      <div class="exp"><b>14.</b> 黄河中游流经黄土高原，含沙量大，下游泥沙淤积抬高河床，形成"地上河"。</div>
+      <div class="exp"><b>15.</b> 我国自然资源总量丰富，但人均占有量不足。</div>
+      <div class="exp"><b>16.</b> 我国土地基本国策是"十分珍惜、合理利用土地和切实保护耕地"。</div>
+      <div class="exp"><b>17.</b> 解决水资源空间分布不均靠跨流域调水（南水北调），时间分布不均靠兴修水库。</div>
+      <div class="exp"><b>18.</b> 南水北调中线从丹江口水库引水，东线利用京杭运河输水。</div>
+      <div class="exp"><b>19.</b> 煤炭属于矿产资源，形成缓慢、用一点少一点，是非可再生资源。</div>
+      <div class="exp"><b>20.</b> "南稻北麦"以秦岭—淮河为界，以南种水稻、以北种小麦。</div>
+      <div class="exp"><b>21.</b> 沪宁杭工业基地是我国最大的综合性工业基地。</div>
+      <div class="exp"><b>22.</b> 辽中南工业基地是我国以重工业为主的工业基地。</div>
+      <div class="exp"><b>23.</b> 交通运输业是经济发展的"先行官"。</div>
+      <div class="exp"><b>24.</b> 水路运输运量最大、运费最低，但速度最慢。</div>
+      <div class="exp"><b>25.</b> 京九线属于南北"五纵"之一，陇海线、京包—包兰线、沪杭—浙赣线属"三横"。</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>二、非选择题答案与评分要点（26—30题，共50分）</summary>
+    <div class="a">
+      <div class="pt">
+        <h3>26题（共10分）—— 中国疆域与行政区划（对应图26字母）</h3>
+        <ul>
+          <li>(1) 每空1分，共4分：A <b>黑龙江省</b>（图中东北、纬度最高）；B <b>新疆维吾尔自治区</b>（图中西北、面积最大）；C <b>台湾岛</b>（图中东南海域岛屿，我国第一大岛）；D <b>渤海</b>（图中辽东半岛与山东半岛之间的内海）。</li>
+          <li>(2) 共2分：面积约 <b>960</b> 万平方千米给1分；居世界第 <b>三</b> 位给1分。</li>
+          <li>(3) 共4分：答出"<b>黑河</b>"给2分，"<b>腾冲</b>"给2分（写"黑河—腾冲线"完整给满分）。</li>
+        </ul>
+      </div>
+      <div class="pt">
+        <h3>27题（共10分）—— 地势与地形（对应图27字母）</h3>
+        <ul>
+          <li>(1) 共3分：<b>西</b>高<b>东</b>低给2分（各1分）；<b>三</b>级阶梯给1分。</li>
+          <li>(2) 共4分：A 答出"<b>昆仑山</b>"给2分；B 答出"<b>大兴安岭</b>"给2分（图中A位于第一二级阶梯界、B位于第二三级阶梯界）。</li>
+          <li>(3) 共3分：每答出一点影响给1.5分，满分3分。参考要点：①有利于海洋湿润气流深入内陆，形成降水；②使许多大河滚滚东流，沟通东西交通；③阶梯交界处落差大，<b>水能</b>资源丰富。（答出任意两点即可）</li>
+        </ul>
+      </div>
+      <div class="pt">
+        <h3>28题（共12分）—— 秦岭—淮河、长江与黄河（对应图28字母）</h3>
+        <ul>
+          <li>(1) 每空1分，共4分：<b>0</b>℃、<b>800</b>毫米、<b>南</b>方、<b>北</b>方。</li>
+          <li>(2) 每空1分，共4分：A <b>宜昌</b>、B <b>湖口</b>、C <b>河口</b>、D <b>桃花峪</b>（字母均标在对应河流沿线位置）。</li>
+          <li>(3) 共4分：长江下游航运价值高，有"<b>黄金水道</b>"之称给1分；黄河下游因含沙量大、泥沙淤积形成"<b>地上</b>河"给1分；治理关键是加强中游黄土高原的"<b>水土保持</b>"给2分。</li>
+        </ul>
+      </div>
+      <div class="pt">
+        <h3>29题（共8分）—— 自然资源</h3>
+        <ul>
+          <li>(1) 每空1分，共2分：总量<b>丰富</b>、人均<b>不足</b>。</li>
+          <li>(2) 共2分：完整答出"<b>十分珍惜、合理利用土地和切实保护耕地</b>"给2分，答出核心"珍惜、合理利用土地，保护耕地"给1分。</li>
+          <li>(3) 每空1分，共3分：东线利用<b>京杭运河</b>；中线从<b>丹江口</b>水库引水；西线从长江<b>上游</b>调水。</li>
+          <li>(4) 共1分：答出"<b>兴修水库</b>"给1分。</li>
+        </ul>
+      </div>
+      <div class="pt">
+        <h3>30题（共10分）—— 主要产业</h3>
+        <ul>
+          <li>(1) 共4分：<b>秦岭</b>给1分、<b>淮河</b>给1分；四大牧区最后一空答出"<b>西藏</b>"给2分（或完整写出内蒙古、新疆、青海、西藏给2分）。</li>
+          <li>(2) 每空1分，共2分：以重工业为主的是<b>辽中南</b>工业基地；最大的综合性工业基地是<b>沪宁杭</b>工业基地。</li>
+          <li>(3) 每空1分，共3分：① <b>铁路</b>运输（大宗、远程、不急；答水运或铁路—海运联运亦可）给1分；② <b>航空</b>运输给1分；③ <b>公路</b>运输给1分。</li>
+          <li>(4) 共1分：答出"<b>先行官</b>"给1分。</li>
+        </ul>
+      </div>
+      <div class="warn">评分说明：非选择题意思相近、关键词正确即可酌情给分；图中字母须与题干所指位置一致才计分。全卷数据与表述依据湘教版八年级上册教材要点。</div>
+    </div>
+  </details>
+</div>
+
+<div class="foot">
+  试卷说明：本卷依据湘教版八年级上册地理四章结构（第一章 中国的疆域和人口、第二章 中国的自然环境、第三章 中国的自然资源、第四章 中国的主要产业）编写，与《李思源八上地理「框架学习法」全套资料》配套使用。数据均依据教材要点，若学校教学进度或教材版本有差异，请以课本为准。
+</div>
+
+</div>
+</body>
+</html>
